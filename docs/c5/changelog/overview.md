@@ -10,7 +10,9 @@ Every version of C5 is listed here, newest first, with what you can now do, what
 broken and now works, and what got faster. Only changes you would actually notice are
 listed — the rest is left out on purpose.
 
-To get the newest version, run `growther update`, or take the file for your computer
-from [Downloads](/c5/getting-started/downloads).
+Ways to get the newest version:
+* **C5**: Click "Update to…" when it appears, or via Settings > System > Check for updates.
+* **CLI**: Run `growther update` in Terminal / Command Prompt / PowerShell.
+* **Website**: Click the Download button above, or go to the [Downloads](/c5/getting-started/downloads) page.
 
 <!-- CHANGELOG -->
