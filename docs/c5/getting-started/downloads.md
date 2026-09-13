@@ -46,11 +46,14 @@ the one for your Mac — `arm64` for Apple silicon, `x64` for an Intel Mac. macO
 install the wrong one, and it says so only quietly, so it can look as though nothing
 happened.
 
-The plain macOS and Linux files are the program itself rather than an installer. They work,
-but you have to run them from a terminal. **Double-clicking one of _those_ in Finder will
-not work** — macOS treats a double-clicked program file as a document and refuses to open
-it, whoever published it. That is not a sign anything is wrong with the download. It does
-not apply to the `.pkg` above, which is built to be double-clicked.
+**On Windows and Linux, the file is a `.zip`** with the program inside it. Unzip it first.
+On Windows, double-click the program to start it. On Linux, run it from a terminal — your
+file manager will not start it for you.
+
+Unzipping on a Mac and double-clicking the program inside **will not work**, which is why
+the Mac download is the `.pkg` instead: macOS treats a double-clicked program file as a
+document and refuses to open it, whoever published it. That is not a sign anything is
+wrong with your download.
 
 ## Check your download
 
@@ -72,16 +75,16 @@ pkgutil --check-signature growther-c5-<version>-arm64.pkg
 It should say it is signed by a certificate issued by Apple for distribution, and trusted
 by Apple's notary service.
 
-**macOS and Linux** (the plain program file)
+**Linux** (check the `.zip` you downloaded, before unzipping it)
 
 ```bash
-shasum -a 256 growther-node22-linux-x64.tar.gz
+sha256sum growther-c5-linux-x64-<version>.zip
 ```
 
 **Windows** (PowerShell)
 
 ```powershell
-Get-FileHash growther-node22-win-x64.zip -Algorithm SHA256
+Get-FileHash growther-c5-win-x64-<version>.zip -Algorithm SHA256
 ```
 
 If the two strings match, your download is genuine and undamaged. If they do not match,
