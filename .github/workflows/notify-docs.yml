@@ -7,13 +7,23 @@ name: Notify docs site
 # `repository_dispatch` of type `docs-updated`; this is the thing that sends it.
 #
 # WHY THE FILTER IS NARROW, AND WHY IT IS NOT ONLY docs/
-# The site prerenders TWO things out of this repository: the markdown under
-# `docs/`, and the release catalog `dist/c5/releases.json`, which supplies the
-# version, the download URLs and the SHA-256 checksums baked into the built
+# The site prerenders more out of this repository than its markdown: the pages
+# under `docs/`, and the release catalog `dist/c5/releases.json`, which supplies
+# the version, the download URLs and the SHA-256 checksums baked into the built
 # bundle. Filtering on `docs/**` alone was wrong for exactly that reason — a
 # release updates the catalog and nothing else the site reads, so the site would
 # have kept serving the PREVIOUS version's downloads and checksums until the
 # next unrelated documentation edit happened to rebuild it.
+#
+# `dist/c5/changelog.json` is the third thing it reads, and it needs the same
+# treatment. It is not needed for the release path — the release pipeline writes
+# the ledger in the SAME commit as `releases.json`, so that push already matches
+# the line above. It is here for the other path: an entry approved, or a
+# published line corrected, out of band. Such a commit touches `changelog.json`
+# and nothing else, and without this line it would not rebuild the site at all —
+# the correction would sit in this repo looking landed while the site kept
+# serving the old text, until some unrelated documentation edit happened to
+# trigger a build.
 #
 # Everything else growther-c5's release.yml stages here — the per-version asset
 # folders under `dist/c5/<tag>/`, `install.sh`, `install.ps1`, `README.md` — is
@@ -25,6 +35,7 @@ on:
     paths:
       - "docs/**"
       - "dist/c5/releases.json"
+      - "dist/c5/changelog.json"
   workflow_dispatch: {}
 
 permissions:

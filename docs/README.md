@@ -50,6 +50,14 @@ sizes, and checksums, kept in step with the release pipeline automatically. It i
 used on `c5/getting-started/downloads.md`. Before the first release is published
 it renders an explanatory placeholder, so the page is never broken.
 
+Put `<!-- CHANGELOG -->` on a line by itself and the website replaces it with the
+release ledger — one block per version, its changes grouped into what is new, what
+is fixed, and what is faster, built from `dist/c5/changelog.json`. It is used on
+`c5/changelog/overview.md`. Each line is written once, read by a person before it
+reaches this repository, and then frozen: a rebuild never rewords a version that
+has already been published. The generated block carries no links of its own, so
+anything the page needs to link to belongs in the prose above the marker.
+
 ## Writing style
 
 - Write so a fifth grader can follow along. Short sentences. Common words.

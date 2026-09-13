@@ -1,0 +1,23 @@
+[
+  {
+    "tag": "v2026.9.13-v283",
+    "version": "2026.9.13-v283",
+    "build": 283,
+    "releasedAt": "2026-09-13T03:54:06.758Z",
+    "bullets": [
+      {
+        "kind": "new",
+        "text": "You can now restart or quit C5 straight from the side menu."
+      },
+      {
+        "kind": "fixed",
+        "text": "When C5 is off, the buttons tell you how to start it again."
+      },
+      {
+        "kind": "fixed",
+        "text": "A slow shutdown no longer looks like a crash or stops partway."
+      }
+    ],
+    "more": 4
+  }
+]

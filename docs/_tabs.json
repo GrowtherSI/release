@@ -18,8 +18,12 @@
   { "label": "CLI", "path": "/c5/cli/commands", "match": ["cli"] },
   {
     "label": "Changelog",
-    "path": "https://github.com/growtherai/release/releases",
-    "match": [],
-    "external": true
+    "path": "/c5/changelog/overview",
+    "match": ["changelog"],
+    "fallback": {
+      "path": "https://github.com/growtherai/release/releases",
+      "external": true,
+      "whenEmpty": "changelog"
+    }
   }
 ]
