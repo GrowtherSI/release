@@ -21,9 +21,15 @@ Optionally supercharged by **Mothership**, the Growther.ai cloud.
 
 <br>
 
-**Growther.ai Comprehensive Platform Suite**&nbsp; [![Full Platform Tests](https://img.shields.io/badge/30%2C593%20passed-success?style=plastic&logo=vitest&logoColor=white&color=FFD700)](https://github.com/growther/growther-release)
+**Growther.ai Comprehensive Platform Suite**&nbsp; [![Full Platform Tests](https://img.shields.io/badge/30%2C593%20passed-success?style=plastic&logo=vitest&logoColor=white&color=FFD700)](#)
 
-[![API & Server Tests](https://img.shields.io/badge/All%20APIs%20%2B%20Servers%20%2B%20Cloud-21%2C235%20passed-green?style=plastic&logo=node.js)](https://github.com/growther/growther-release) &nbsp;&nbsp; [![App Tests](https://img.shields.io/badge/All%20Apps-9%2C358%20passed-blue?style=plastic&logo=react)](https://github.com/growther/growther-release)
+[![API & Server Tests](https://img.shields.io/badge/All%20APIs%20%2B%20Servers%20%2B%20Cloud-21%2C235%20passed-green?style=plastic&logo=node.js)](#) &nbsp;&nbsp; [![App Tests](https://img.shields.io/badge/All%20Apps-9%2C358%20passed-blue?style=plastic&logo=react)](#)
+
+<br>
+
+**Official Software Signing Certifications**
+
+[![Certified macOS Developer](https://img.shields.io/badge/Certified%20macOS%20Developer-%23000000.svg?style=for-the-badge&logo=apple&logoColor=white)](https://developer.apple.com/developer-id/) <!--[![MS Azure Trusted Artifact](https://img.shields.io/badge/MS%20Azure%20Trusted%20Artifact-%230078D4.svg?logo=data:image/svg+xml;base64,PHN2ZyBhcmlhLWhpZGRlbj0idHJ1ZSIgdmlld0JveD0iMCAwIDI1IDI1IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGl0ZW1wcm9wPSJsb2dvIiBpdGVtc2NvcGU9Iml0ZW1zY29wZSI+PHBhdGggZD0iTTExLjUyMTYgMC41SDBWMTEuOTA2N0gxMS41MjE2VjAuNVoiIGZpbGw9IiNmMjUwMjIiPjwvcGF0aD48cGF0aCBkPSJNMjQuMjQxOCAwLjVIMTIuNzIwMlYxMS45MDY3SDI0LjI0MThWMC41WiIgZmlsbD0iIzdmYmEwMCI+PC9wYXRoPjxwYXRoIGQ9Ik0xMS41MjE2IDEzLjA5MzNIMFYyNC41SDExLjUyMTZWMTMuMDkzM1oiIGZpbGw9IiMwMGE0ZWYiPjwvcGF0aD48cGF0aCBkPSJNMjQuMjQxOCAxMy4wOTMzSDEyLjcyMDJWMjQuNUgyNC4yNDE4VjEzLjA5MzNaIiBmaWxsPSIjZmZiOTAwIj48L3BhdGg+PC9zdmc+&style=for-the-badge&logoColor=white)](https://azure.microsoft.com/en-us/products/artifact-signing)-->
 
 <br>
 
