@@ -1,5 +1,26 @@
 [
   {
+    "tag": "v2026.9.14-v289",
+    "version": "2026.9.14-v289",
+    "build": 289,
+    "releasedAt": "2026-09-14T11:21:35-07:00",
+    "bullets": [
+      {
+        "kind": "new",
+        "text": "Backups - GitHub connects when token is set in config."
+      },
+      {
+        "kind": "new",
+        "text": "Backups - adds override toggle to allow you to backup secret files."
+      },
+      {
+        "kind": "fixed",
+        "text": "Backups - auto-backups will pause if your GitHub account disconnects."
+      }
+    ],
+    "more": 6
+  },
+  {
     "tag": "v2026.9.13-v286",
     "version": "2026.9.13-v286",
     "build": 286,
