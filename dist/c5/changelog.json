@@ -1,5 +1,21 @@
 [
   {
+    "tag": "v2026.9.13-v286",
+    "version": "2026.9.13-v286",
+    "build": 286,
+    "releasedAt": "2026-09-13T19:45:22.000Z",
+    "bullets": [
+      {
+        "kind": "fixed",
+        "text": "C5 now recovers a stuck gateway on Windows, and says what happened."
+      },
+      {
+        "kind": "new",
+        "text": "Tasks no longer wait indefinitely for their turn to start."
+      }
+    ]
+  },
+  {
     "tag": "v2026.9.13-v283",
     "version": "2026.9.13-v283",
     "build": 283,
