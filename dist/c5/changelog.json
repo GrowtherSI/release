@@ -1,5 +1,26 @@
 [
   {
+    "tag": "v2026.9.15-v292",
+    "version": "2026.9.15-v292",
+    "build": 292,
+    "releasedAt": "2026-09-14T23:20:53-07:00",
+    "bullets": [
+      {
+        "kind": "new",
+        "text": "Analytics - Autonomy tab shows live data enhacements."
+      },
+      {
+        "kind": "new",
+        "text": "Analytics - Agents tab gets 2 more telemetry charts."
+      },
+      {
+        "kind": "fixed",
+        "text": "Analytics - Tools activity charts reflect realtime usage."
+      }
+    ],
+    "more": 5
+  },
+  {
     "tag": "v2026.9.14-v290",
     "version": "2026.9.14-v290",
     "build": 290,
