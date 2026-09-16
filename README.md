@@ -9,11 +9,11 @@ Optionally supercharged by **Mothership**, the Growther.ai cloud.
 
 <!-- RELEASE-STATUS:START -->
 
-### 📦 Latest stable :: [`v2026.9.16-v295`](dist/c5/v2026.9.16-v295/)
+### 📦 Latest stable :: [`v2026.9.16-v297`](dist/c5/v2026.9.16-v297/)
 
 ![build](https://img.shields.io/badge/build-passing-brightgreen?style=plastic)
 ![tests](https://img.shields.io/badge/tests-passing-brightgreen?style=plastic)
-&nbsp;**client** <code>6909</code> · **server** <code>20357</code> tests passing
+&nbsp;**client** <code>6923</code> · **server** <code>20358</code> tests passing
 
 <sub>↻ Written automatically by the C5 Release pipeline on every build.</sub>
 
