@@ -135,15 +135,17 @@ Without alerts you will find out when you next open C5, which might be tomorrow.
 
 ## Starting, restarting and quitting C5
 
-**Settings → System** carries the two controls that act on the running server,
-and the same pair sits at the bottom of the sidebar **Options** menu (the `⋯`
-button) so you can reach them without leaving what you are doing. Both ask you
-to confirm first — they act on the server everyone on this machine is using.
+**Settings → System** carries the controls that act on the server,
+and the same options sit at the bottom of the sidebar **Options** menu (the `⋯`
+button) so you can reach them without leaving what you are doing. Both Restart
+and Quit ask you to confirm first — they act on the server everyone on this
+machine is using.
 
 | Control | What happens |
 | --- | --- |
 | **Restart C5** | C5 finishes its writes, closes its databases and starts fresh. Your browser tab reconnects on its own; you do not need to reload it. |
 | **Quit C5** | C5 shuts down cleanly and stays down. |
+| **Start C5** | When C5 is offline, launches C5 on your computer and reconnects this tab. |
 
 Two settings sit beside them and are often confused:
 
@@ -156,18 +158,14 @@ Two settings sit beside them and are often confused:
 
 ### When C5 is not running
 
-Both controls grey out, and hovering either one tells you why and what to do:
+When the server is stopped or offline, the interface adjusts automatically:
 
-> C5 is not running. Start it from the "Growther.ai C5" shortcut, or run
-> `growther` in a terminal.
+- In **Settings → System**, **Restart** is disabled, and the Quit panel transforms into a green **Start C5** panel.
+- In the sidebar **Options** menu (`⋯`), **Restart** and **Quit** are replaced by a centered green **Start C5** button.
 
-They stay visible rather than disappearing, so the panel does not rearrange
-itself while you are looking at it. Neither can work in this state — they ask
-the server to act, and there is no server — and a web page cannot start a
-program on your computer, so the two things that *can* are named instead.
+Clicking **Start C5** invokes your computer's built-in `growther://start` protocol link to launch C5 (or wake its background service). While it starts, the button shows a spinning indicator with **Starting…**. Once C5 is running, your tab reconnects on its own within a few seconds and the online controls return.
 
-Nothing needs clicking once C5 is back. The page notices by itself, usually
-within a few seconds, and the controls become available again.
+You can also start C5 at any time from the "Growther.ai C5" desktop shortcut, or by running `growther start` in a terminal.
 
 ## Saving changes
 

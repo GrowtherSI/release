@@ -64,6 +64,13 @@ The [Library](/c5/using-c5/library). Everything has a Download button.
 Usually it split into many smaller pieces, or it is waiting on you. Open
 [Productivity](/c5/using-c5/productivity) and click the task to see exactly where it is.
 
+### How do I start C5 if it is stopped?
+
+You have three easy ways:
+1. **From your browser:** Click the green **Start C5** button in the sidebar menu or in **Settings → System**.
+2. **From your desktop:** Double-click the **Growther.ai C5** icon in your Applications folder or Start menu.
+3. **From your terminal:** Run `growther start` (or `growther`).
+
 ## Models and money
 
 ### Which model should I use?

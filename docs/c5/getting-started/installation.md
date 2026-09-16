@@ -114,6 +114,10 @@ would rather it kept running in the background, use "Keep growther running" in S
 > and it will appear. On Linux it also needs a desktop environment with an applications
 > menu and a terminal program installed; on a server without one, use the command.
 
+### Start directly from your browser
+
+If C5 was stopped while your browser tab is still open, you do not even need to find the icon or open a terminal. The page displays a green **Start C5** button in the sidebar menu and in **Settings → System**. Clicking it triggers your operating system's built-in `growther://start` link, launching C5 and reconnecting the page automatically.
+
 ## Supported platforms
 
 | System  | Chips supported            |

@@ -100,14 +100,16 @@ started, the boot log says so:
 Use the address that line names. See
 [Why C5 listens on two addresses](../configuration/network.md).
 
-### Restart and Quit are greyed out
+### Restart is greyed out or C5 is offline
 
-C5 is not running, so there is nothing for those buttons to act on. Start it
-from the "Growther.ai C5" shortcut or by running `growther` in a terminal; the
-page reconnects by itself within a few seconds and the controls come back.
+When C5 is not running, **Restart** is disabled because there is no running server to reboot.
 
-A web page cannot start a program on your computer, which is why there is no
-button here that would do it.
+To start C5 again:
+- Click the green **Start C5** button in the sidebar menu or on the **Settings → System** page.
+- Double-click the **Growther.ai C5** shortcut on your desktop or Applications folder.
+- Run `growther start` (or `growther`) in your terminal.
+
+Once C5 starts, your browser tab reconnects on its own within a few seconds and the controls become active again.
 
 ## Models
 

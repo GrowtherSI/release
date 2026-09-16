@@ -26,6 +26,16 @@ This starts the C5 server and prints the address it is running on — open that 
 your browser to use the app. The first time you run it, C5 sets itself up and asks you to
 activate.
 
+You can also run:
+
+```bash
+growther start
+```
+
+If C5 is already running, `growther start` focuses the open app in your browser and exits cleanly. If C5 is registered as a background service, it starts that service.
+
+You can also start C5 directly from links or desktop shortcuts using the `growther://start` address.
+
 ### Interactive log filtering
 
 When started interactively, C5 displays a startup banner and an interactive log filter. All
@@ -40,6 +50,7 @@ See [Log filtering](/c5/cli/log-filtering) for the full list of hotkeys and conf
 | Command             | What it does                                                   |
 | ------------------- | -------------------------------------------------------------- |
 | `growther`          | Start C5. First run sets itself up.                             |
+| `growther start`    | Start C5 (or focus your browser if already running).            |
 | `growther stop`     | Stop C5 gently, letting it finish what it is doing.             |
 | `growther status`   | Say whether C5 is running, and how it is set to start.          |
 | `growther service`  | Manage starting C5 automatically. See below.                    |
@@ -69,6 +80,18 @@ See [Log filtering](/c5/cli/log-filtering) for the full list of hotkeys and conf
 | `growther help`     | Show the list of commands.                                      |
 
 ## Commands in detail
+
+### `growther start`
+
+Starts C5, or opens the app in your browser if it is already running.
+
+```bash
+growther start
+```
+
+If C5 is already running, `growther start` opens or focuses your browser tab at `http://localhost:4299` and exits without creating a second instance. If you have registered C5 as a background service with `growther service install`, `growther start` starts that service. Otherwise, it boots C5 directly.
+
+You can also trigger this command from web links and browser buttons using the `growther://start` protocol link.
 
 ### `growther status`
 
