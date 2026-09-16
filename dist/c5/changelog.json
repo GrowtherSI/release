@@ -1,5 +1,26 @@
 [
   {
+    "tag": "v2026.9.16-v295",
+    "version": "2026.9.16-v295",
+    "build": 295,
+    "releasedAt": "2026-09-15T19:19:53-07:00",
+    "bullets": [
+      {
+        "kind": "new",
+        "text": "C5 shows a Start button when it's offline or reconnecting."
+      },
+      {
+        "kind": "fixed",
+        "text": "C5 now shows a fresh alert when a new update is found."
+      },
+      {
+        "kind": "fixed",
+        "text": "Starting C5 is more reliable and shows a spinner."
+      }
+    ],
+    "more": 2
+  },
+  {
     "tag": "v2026.9.15-v292",
     "version": "2026.9.15-v292",
     "build": 292,
