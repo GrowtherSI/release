@@ -19,6 +19,9 @@ growther
 C5 prints the address it is running on. Open `http://localhost:4299` in your browser to
 use the app.
 
+> **Tip — Controlling C5 from your browser**
+> Once running, you rarely need to return to your terminal. Click the **Options** menu (`⋯`) at the bottom of the left sidebar to **Restart** or **Quit** C5 anytime. If the server is ever stopped or offline, that same menu (and the offline recovery screen) gives you a green **Start C5** button to wake or launch C5 back up in one click.
+
 ## Step 2 — Connect a model
 
 C5 needs a **model** to think with. A model is the AI brain behind your agents. C5 does

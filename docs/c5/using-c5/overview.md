@@ -50,6 +50,15 @@ In the top-right corner of the app, clicking your avatar opens the profile menu:
 | **Lock**     | Invalidate your active session immediately and return to the sign-in card in place, keeping running tasks active while securing your station. |
 | **Sign out** | Sign out of C5 and return to the sign-in card.                                                                                     |
 
+## The sidebar options menu
+
+At the bottom of the left navigation sidebar, the **Options** menu (`⋯`) provides quick access to server lifecycle controls:
+
+| Option | What it is for |
+| --- | --- |
+| **Restart** | Reboots the C5 backend server cleanly. Dirty buffers are flushed and your browser reconnects automatically without needing a manual reload. |
+| **Quit** | Gracefully shuts down the C5 backend server and closes active connections. |
+| **Start C5** | When the server is offline or shut down, replaces Restart and Quit with a green **Start C5** button to launch or wake the server in one click. |
 
 ## Overview: your home screen
 

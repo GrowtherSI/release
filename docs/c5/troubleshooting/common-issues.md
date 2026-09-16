@@ -105,7 +105,7 @@ Use the address that line names. See
 When C5 is not running, **Restart** is disabled because there is no running server to reboot.
 
 To start C5 again:
-- Click the green **Start C5** button in the sidebar menu or on the **Settings → System** page.
+- Click the green **Start C5** button in the sidebar menu, on the **Settings → System** page, or on the offline recovery screen.
 - Double-click the **Growther.ai C5** shortcut on your desktop or Applications folder.
 - Run `growther start` (or `growther`) in your terminal.
 

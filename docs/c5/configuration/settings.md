@@ -162,6 +162,7 @@ When the server is stopped or offline, the interface adjusts automatically:
 
 - In **Settings → System**, **Restart** is disabled, and the Quit panel transforms into a green **Start C5** panel.
 - In the sidebar **Options** menu (`⋯`), **Restart** and **Quit** are replaced by a centered green **Start C5** button.
+- On the offline fallback page and connection error modal, an emerald **Start C5** button appears below the details view.
 
 Clicking **Start C5** invokes your computer's built-in `growther://start` protocol link to launch C5 (or wake its background service). While it starts, the button shows a spinning indicator with **Starting…**. Once C5 is running, your tab reconnects on its own within a few seconds and the online controls return.
 
