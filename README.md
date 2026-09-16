@@ -83,7 +83,7 @@ irm https://growther.ai/install.ps1 | iex
 **Homebrew** (macOS / Linux)
 
 ```bash
-brew install growther/tap/growther-c5
+brew install growtherai/tap/growther-c5
 ```
 
 The installer detects your OS/arch, downloads the matching binary, **verifies its

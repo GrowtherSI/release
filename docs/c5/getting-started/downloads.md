@@ -30,7 +30,7 @@ irm https://growther.ai/install.ps1 | iex
 **Homebrew**
 
 ```bash
-brew install growther/tap/growther-c5
+brew install growtherai/tap/growther-c5
 ```
 
 ## Direct downloads

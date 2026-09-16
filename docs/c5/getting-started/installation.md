@@ -33,7 +33,7 @@ irm https://growther.ai/install.ps1 | iex
 If you already use Homebrew, you can install C5 this way instead:
 
 ```bash
-brew install growther/tap/growther-c5
+brew install growtherai/tap/growther-c5
 ```
 
 ## What the installer does
