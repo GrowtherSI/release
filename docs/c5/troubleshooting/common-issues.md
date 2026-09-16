@@ -111,6 +111,9 @@ To start C5 again:
 
 Once C5 starts, your browser tab reconnects on its own within a few seconds and the controls become active again.
 
+> **Self-help: Missing "Start C5" button on offline screens?**
+> The green **Start C5** button on the offline screen and sidebar menu is governed by an administrative RBAC toggle. If your organization has disabled **Sidebar: Restart, Quit, Start C5** in [Settings → Access](/c5/configuration/settings#access--user-permissions-rbac), this button remains hidden for standard users. Ask your administrator to enable the permission for your account.
+
 ## Models
 
 ### "No model configured"

@@ -11,6 +11,10 @@ you first.
 
 This is the most important setting in C5. It is worth ten minutes.
 
+> **Human teammate access & user permissions (RBAC)**
+> Looking to control what human team members can see, edit, or execute in the C5 interface?
+> This page covers autonomous **agent** permissions. To configure role-based access control (RBAC), feature locks, and server controls for human teammates, see [Access & user permissions (RBAC)](/c5/configuration/settings#access--user-permissions-rbac) in Settings.
+
 ## The ladder
 
 Think of it as a ladder, from safest to most powerful:
