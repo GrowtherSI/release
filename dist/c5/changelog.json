@@ -1,5 +1,37 @@
 [
   {
+    "tag": "v2026.9.17-v301",
+    "version": "2026.9.17-v301",
+    "build": 301,
+    "releasedAt": "2026-09-17T09:12:38Z",
+    "bullets": [
+      {
+        "kind": "fixed",
+        "text": "Tasks run much faster, with routine reads no longer held up by checks."
+      },
+      {
+        "kind": "fixed",
+        "text": "Editing a task now shows the panels in the same order as viewing it."
+      },
+      {
+        "kind": "fixed",
+        "text": "Task AI swarm UI is no longer cut off at the column edge."
+      },
+      {
+        "kind": "fixed",
+        "text": "C5 no longer breaks where the browser cannot speak."
+      },
+      {
+        "kind": "fixed",
+        "text": "A re-sent step no longer stalls work that is running unattended."
+      },
+      {
+        "kind": "fixed",
+        "text": "Tags now fall back to defaults instead of failing to load."
+      }
+    ]
+  },
+  {
     "tag": "v2026.9.16-v297",
     "version": "2026.9.16-v297",
     "build": 297,
