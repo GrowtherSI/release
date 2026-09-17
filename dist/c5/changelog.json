@@ -1,5 +1,17 @@
 [
   {
+    "tag": "v2026.9.16-v297",
+    "version": "2026.9.16-v297",
+    "build": 297,
+    "releasedAt": "2026-09-16T00:40:01-07:00",
+    "bullets": [
+      {
+        "kind": "new",
+        "text": "Access control for sidebar restart, quit, and start buttons."
+      }
+    ]
+  },
+  {
     "tag": "v2026.9.16-v295",
     "version": "2026.9.16-v295",
     "build": 295,
