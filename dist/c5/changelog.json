@@ -1,5 +1,42 @@
 [
   {
+    "tag": "v2026.9.17-v304",
+    "version": "2026.9.17-v304",
+    "build": 304,
+    "releasedAt": "2026-09-17T15:37:02-07:00",
+    "bullets": [
+      {
+        "kind": "new",
+        "text": "Assigning a model to many agents now works for every provider."
+      },
+      {
+        "kind": "new",
+        "text": "Model pickers now warn when a model or its provider is unavailable."
+      },
+      {
+        "kind": "new",
+        "text": "The roster now shows accurate model info and blocks bad saves."
+      },
+      {
+        "kind": "new",
+        "text": "Streaming replies now follow your chosen complexity routing."
+      },
+      {
+        "kind": "fixed",
+        "text": "Manually added agents no longer disappear after a restart."
+      },
+      {
+        "kind": "fixed",
+        "text": "The chat coordinator choice is remembered and explains any reroute."
+      },
+      {
+        "kind": "fixed",
+        "text": "Long model names no longer overflow the roster window."
+      }
+    ],
+    "more": 2
+  },
+  {
     "tag": "v2026.9.17-v301",
     "version": "2026.9.17-v301",
     "build": 301,
