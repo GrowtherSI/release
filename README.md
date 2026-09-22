@@ -9,11 +9,11 @@ Optionally supercharged by **Mothership**, the Growther.ai cloud.
 
 <!-- RELEASE-STATUS:START -->
 
-### 📦 Latest stable :: [`v2026.9.17-v304`](dist/c5/v2026.9.17-v304/)
+### 📦 Latest stable :: [`v2026.9.22-v306`](dist/c5/v2026.9.22-v306/)
 
 ![build](https://img.shields.io/badge/build-passing-brightgreen?style=plastic)
 ![tests](https://img.shields.io/badge/tests-passing-brightgreen?style=plastic)
-&nbsp;**client** <code>7058</code> · **server** <code>20555</code> tests passing
+&nbsp;**client** <code>7474</code> · **server** <code>21294</code> tests passing
 
 <sub>↻ Written automatically by the C5 Release pipeline on every build.</sub>
 
@@ -21,9 +21,9 @@ Optionally supercharged by **Mothership**, the Growther.ai cloud.
 
 <br>
 
-**Growther.ai Comprehensive Platform Suite**&nbsp; [![Full Platform Tests](https://img.shields.io/badge/31%2C678%20passed-success?style=plastic&logo=vitest&logoColor=white&color=FFD700)](#)
+**Growther.ai Comprehensive Platform Suite**&nbsp; [![Full Platform Tests](https://img.shields.io/badge/32%2C839%20passed-success?style=plastic&logo=vitest&logoColor=white&color=FFD700)](#)
 
-[![API & Server Tests](https://img.shields.io/badge/All%20APIs%20%2B%20Servers%20%2B%20Cloud-21%2C643%20passed-green?style=plastic&logo=node.js)](#) &nbsp;&nbsp; [![App Tests](https://img.shields.io/badge/All%20Apps-10%2C035%20passed-blue?style=plastic&logo=react)](#)
+[![API & Server Tests](https://img.shields.io/badge/All%20APIs%20%2B%20Servers%20%2B%20Cloud-22%2C488%20passed-green?style=plastic&logo=node.js)](#) &nbsp;&nbsp; [![App Tests](https://img.shields.io/badge/All%20Apps-10%2C351%20passed-blue?style=plastic&logo=react)](#)
 
 <br>
 
