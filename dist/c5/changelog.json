@@ -1,5 +1,42 @@
 [
   {
+    "tag": "v2026.9.22-v309",
+    "version": "2026.9.22-v309",
+    "build": 309,
+    "releasedAt": "2026-09-21T22:43:00-07:00",
+    "bullets": [
+      {
+        "kind": "new",
+        "text": "You can now open Remote Control from the sidebar menu."
+      },
+      {
+        "kind": "new",
+        "text": "Remote Control will set up its own tunnel and address."
+      },
+      {
+        "kind": "new",
+        "text": "You can now add files to your Library from any device."
+      },
+      {
+        "kind": "new",
+        "text": "C5 can now read your documents, not just your pictures."
+      },
+      {
+        "kind": "new",
+        "text": "Voice on a remote device is now off until you allow it."
+      },
+      {
+        "kind": "new",
+        "text": "Choose how long each rc device stays signed in."
+      },
+      {
+        "kind": "new",
+        "text": "Paired devices are listed and can be revoked in the Remote Control tab."
+      }
+    ],
+    "more": 136
+  },
+  {
     "tag": "v2026.9.17-v304",
     "version": "2026.9.17-v304",
     "build": 304,
