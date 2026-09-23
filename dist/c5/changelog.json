@@ -1,5 +1,34 @@
 [
   {
+    "tag": "v2026.9.22-v310",
+    "version": "2026.9.22-v310",
+    "build": 310,
+    "releasedAt": "2026-09-22T17:41:00-07:00",
+    "bullets": [
+      {
+        "kind": "new",
+        "text": "Side menus on phones can now collapse into a full-screen view."
+      },
+      {
+        "kind": "new",
+        "text": "Page header descriptions now fill more room before showing dots."
+      },
+      {
+        "kind": "new",
+        "text": "Header buttons and badges now fit better on phone screens."
+      },
+      {
+        "kind": "new",
+        "text": "Chat numbers and metrics now sit neatly below the conversation on phones."
+      },
+      {
+        "kind": "fixed",
+        "text": "Tag names and labels no longer overlap on smaller screens."
+      }
+    ],
+    "more": 1
+  },
+  {
     "tag": "v2026.9.22-v309",
     "version": "2026.9.22-v309",
     "build": 309,
