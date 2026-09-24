@@ -1,5 +1,22 @@
 [
   {
+    "tag": "v2026.9.24-v313",
+    "version": "2026.9.24-v313",
+    "build": 313,
+    "releasedAt": "2026-09-24T10:52:41-07:00",
+    "bullets": [
+      {
+        "kind": "new",
+        "text": "Remote Control asks you to accept its terms before it turns on."
+      },
+      {
+        "kind": "new",
+        "text": "A device you remove is disconnected right away, with a clear message."
+      }
+    ],
+    "more": 1
+  },
+  {
     "tag": "v2026.9.23-v311",
     "version": "2026.9.23-v311",
     "build": 311,
