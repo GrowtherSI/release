@@ -27,16 +27,16 @@ Remote Control on again later, after the terms have already been accepted.
 ### The acceptance dialog
 
 The dialog shows the Terms version and its effective date, and the full text of Section 14,
-Remote Control, of the [Growther Terms of Service](https://growther.ai/t=remote-control). It
+Remote Control, of the [Growther.ai Terms of Service](https://growther.ai/t=remote-control). It
 also links to [Cloudflare's terms](https://www.cloudflare.com/terms/) and
 [Cloudflare's privacy policy](https://www.cloudflare.com/privacypolicy/), because the address
-Growther issues is carried by Cloudflare under Cloudflare's own agreements.
+Growther.ai issues is carried by Cloudflare under Cloudflare's own agreements.
 
 To accept:
 
 1. Scroll to the end of the text. The checkbox stays disabled until you have.
 2. Tick **I have read Section 14 and I accept it, including that Cloudflare carries sessions
-   through the address Growther issues**.
+   through the address Growther.ai issues**.
 3. Press **Agree**.
 
 **Cancel** leaves the switch off. Once accepted, the dialog is not shown again unless the
@@ -64,8 +64,8 @@ C5 confirms with a brief message — _Remote Control on. This machine will publi
 address shortly._ Behind that:
 
 - the machine starts serving a secure (https) address on your own network;
-- unless you supplied your own tunnel under Advanced, C5 asks Growther for an address and
-  Growther creates a Cloudflare Tunnel for this install. **Reach this machine from anywhere**
+- unless you supplied your own tunnel under Advanced, C5 asks Growther.ai for an address and
+  Growther.ai creates a Cloudflare Tunnel for this install. **Reach this machine from anywhere**
   shows _Connected_ and the address, of the form `https://<label>.rc.growther.ai`, once the
   tunnel is up;
 - the machine reports its name and addresses to your account, so
@@ -144,24 +144,24 @@ account and, in the same dashboard, give it a public hostname in a zone you own 
 record is what makes the name reach the tunnel, and only you can create it. Copy the tunnel's
 token, paste it here, enter that hostname as the **Public address** above, and Save. C5 runs
 the connector and sends the tunnel's traffic to this machine. While a token you pasted is
-saved, Growther issues nothing for this install and holds no credential for your tunnel. The
+saved, Growther.ai issues nothing for this install and holds no credential for your tunnel. The
 token is stored on this machine and never shown again; leave the field blank later to keep
 the one already saved. Your tunnel provider is in the path in the same way Cloudflare is for
-an issued address, under your agreement with them rather than Growther's.
+an issued address, under your agreement with them rather than Growther.ai's.
 
 Turning Remote Control off **keeps** the pasted token. Everything else is torn down as usual —
 the connector stops and its credential files are removed, every device is signed out, and your
 addresses are withdrawn (see
 [What turning off does](/c5/remote-control/managing-devices#what-turning-off-does)) — but the
-token stays saved on this machine, and Growther is not asked to release anything, because it
-holds nothing for your tunnel. Only an address Growther issued is given back when you turn off.
+token stays saved on this machine, and Growther.ai is not asked to release anything, because it
+holds nothing for your tunnel. Only an address Growther.ai issued is given back when you turn off.
 When you turn it back on, C5 runs your tunnel again from the saved token, with no request to
-Growther; there is nothing to paste again.
+Growther.ai; there is nothing to paste again.
 
 Your tunnel answers for the host of the **Public address** you set above. If you set none, it
 answers for the hostname you gave the tunnel in your Cloudflare dashboard, which is then the
 only place that knows the name. It never answers for a `<label>.rc.growther.ai` address — that
-name points at a tunnel on Growther's account, not yours.
+name points at a tunnel on Growther.ai's account, not yours.
 
 **Your own certificate (optional).** Give the paths to a certificate chain and its private
 key — `/etc/letsencrypt/live/box.example.com/fullchain.pem` and

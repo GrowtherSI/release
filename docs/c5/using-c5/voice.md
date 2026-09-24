@@ -117,7 +117,7 @@ only in C5 on the machine, under **Settings › Voice**. A paired device cannot 
 for itself.
 
 When it is on, one tap on the phone records live microphone audio and sends it to the
-machine — through the address Growther issues, if that is how the phone is connected — and
+machine — through the address Growther.ai issues, if that is how the phone is connected — and
 the machine passes it on to whichever speech provider you configured, or transcribes it
 itself if your chain starts with the built-in option. Nothing about the recording goes to
 Growther. You are responsible for any consent the people being recorded are entitled to.

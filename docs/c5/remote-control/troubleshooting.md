@@ -52,10 +52,10 @@ The symptom: the line under **Reach this machine from anywhere** says _Connected
 while, then drops to _The connection stopped. It will be retried._ and stays there — and on
 another machine the same address has just come up.
 
-The address Growther issues is derived from your install's identity, and a copy of an
+The address Growther.ai issues is derived from your install's identity, and a copy of an
 install shares that identity: a second copy restored from a backup, a cloned virtual
 machine, or the old machine still running after you moved to a new one. When a copy asks for
-its address, Growther treats it as the same install asking again: the tunnel the other copy
+its address, Growther.ai treats it as the same install asking again: the tunnel the other copy
 was using is deleted, a fresh one is created under the same name, and the address now points
 at the copy that asked last. The other copy loses it — its connector keeps retrying a tunnel
 that no longer exists — and takes it back the next time Remote Control is turned off and on
@@ -71,7 +71,7 @@ Occasionally a Save is refused with _public name already in use_. Most of the ti
 install racing itself — two asks for the address in flight at once, such as a Save landing
 while the tunnel was still coming up — and it clears on its own: save the Remote Control tab
 again and the name is issued. Only a refusal that persists across saves means the name derived
-for this install is held by a different install on Growther's side — a coincidence, not a
+for this install is held by a different install on Growther.ai's side — a coincidence, not a
 copy — and that needs support to resolve. See
 [Getting help](/c5/troubleshooting/getting-help).
 
@@ -94,7 +94,7 @@ C5 does not fall back to plain `http://` on a network address: pairing needs a s
 ## Chat replies arrive late, or in larger pieces, through the tunnel
 
 Through the issued address, replies can arrive later or in larger pieces than at the
-machine, because the path is longer and is not under Growther's control. The reply itself is
+machine, because the path is longer and is not under Growther.ai's control. The reply itself is
 the same. On your own network, or over `growther connect`, it streams as it does at the
 machine.
 
