@@ -12,11 +12,11 @@ are optional. Neither does anything until you turn it on.
 Look for the small microphone at the left of the box where you type. It appears wherever you
 would write something in your own words:
 
-| Where            | Which boxes                            |
-| ---------------- | -------------------------------------- |
-| **Chat**         | The message box                        |
-| **Schedules**    | Title, description, and instructions   |
-| **Tasks**        | Title, description, and your reasoning |
+| Where         | Which boxes                            |
+| ------------- | -------------------------------------- |
+| **Chat**      | The message box                        |
+| **Schedules** | Title, description, and instructions   |
+| **Tasks**     | Title, description, and your reasoning |
 
 Click the microphone, say what you want, and click it again to stop. Your words appear in the box
 as text, where you can read them and fix anything before you send.
@@ -109,6 +109,19 @@ useful when you change your mind mid-sentence.
 > meaningful sense, so pressing space or enter on the microphone still starts and stops the way it
 > always did. Nothing becomes unreachable if you turn this on.
 
+## Voice from a paired phone
+
+A phone or tablet you have paired through [Remote Control](/c5/remote-control/overview)
+shows the same microphone, but it is **off until you turn it on**, and it can be turned on
+only in C5 on the machine, under **Settings › Voice**. A paired device cannot switch it on
+for itself.
+
+When it is on, one tap on the phone records live microphone audio and sends it to the
+machine — through the address Growther issues, if that is how the phone is connected — and
+the machine passes it on to whichever speech provider you configured, or transcribes it
+itself if your chain starts with the built-in option. Nothing about the recording goes to
+Growther. You are responsible for any consent the people being recorded are entitled to.
+
 ## Adding a key for a paid provider
 
 Voice keys live in your configuration file rather than being typed into the app:
@@ -133,9 +146,9 @@ See [Configuration files](/c5/configuration/config-files) for more about `c5.yam
 This is worth being clear about, because the answer depends entirely on which option you
 picked.
 
-| Option                      | What leaves your computer                                   |
-| --------------------------- | ----------------------------------------------------------- |
-| **Built-in (on-device)**      | Nothing at all                                               |
+| Option                      | What leaves your computer                                    |
+| --------------------------- | ------------------------------------------------------------ |
+| **Built-in (on-device)**    | Nothing at all                                               |
 | **Built-in (this browser)** | Nothing at all                                               |
 | Any paid provider           | The audio you recorded, or the text you asked to be read out |
 
@@ -179,7 +192,7 @@ chat reads every new reply aloud as it arrives. It is **off** to begin with, and
 choice in this browser — turning it off in one window turns it off everywhere.
 
 > **Note**
-> Auto-speak starts from the *next* reply, not the one already on screen. Turning it on and
+> Auto-speak starts from the _next_ reply, not the one already on screen. Turning it on and
 > waiting at a finished conversation will look like nothing happened; send something and it will
 > speak.
 

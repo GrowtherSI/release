@@ -1,0 +1,142 @@
+---
+title: Privacy and Cloudflare
+description: What Cloudflare can see through the address Growther issues, what is signed and what is not, what Growther receives and keeps, and what it never does.
+order: 4
+---
+
+# Privacy and Cloudflare
+
+This page is the trust statement for Remote Control. It is written to be uncomfortable where
+the honest answer is uncomfortable, because a page that only lists reassurances is not one
+you could rely on.
+
+## The one line that matters
+
+**Through the address Growther issues, Cloudflare can read your session.**
+
+That address — `<label>.rc.growther.ai` — is served through a Cloudflare Tunnel that
+Growther creates for your install on Growther's Cloudflare account. Your device's
+connection is encrypted to Cloudflare's edge. There, Cloudflare decrypts it in order to
+route it through the tunnel to your machine. At that point the traffic is readable by
+Cloudflare: what you read, what you type, attachments, and anything you dictate.
+
+This is how a tunnel of this kind works, not a C5 setting. Cloudflare's handling of traffic
+in transit is governed by [Cloudflare's terms](https://www.cloudflare.com/terms/) and
+[Cloudflare's privacy policy](https://www.cloudflare.com/privacypolicy/), not by Growther,
+and you acknowledge that when you accept the terms in C5.
+
+**If that is not acceptable for your data, do not use the issued address.** Use your own
+network, your own SSH connection with `growther connect`, your own name and certificate, or
+your own tunnel. Each of those is described in [Setup](/c5/remote-control/setup), and each
+keeps working without Growther.
+
+## Signed, not encrypted
+
+C5 does one thing about the path it cannot control, and it is important to be exact about
+what that thing is.
+
+**Ordinary requests and responses are signed.** Every normal request from a paired device,
+and every normal response from the machine, carries a signature derived from that device's
+pairing. Something in the path — Cloudflare or anything else — cannot fabricate a response,
+replay one onto a different request, or change a result without the device refusing it.
+Stripping the signature is refused, not ignored.
+
+**They are not encrypted end to end.** Signing proves who said it and that it was not
+changed. It does not hide it. Anyone who can read the plaintext can still read it.
+
+**Streamed content is not signed at all.** Chat replies as they arrive, file downloads,
+audit exports, and live event feeds are delivered as streams, and streams are not signed.
+That is a gap: those responses are neither signed nor encrypted.
+
+## What Growther receives
+
+Your session content does not pass through Growther's servers, and Growther does not
+receive it. This is true on every path, including the issued address: the portal hands you
+off to your own machine with a link and is then out of the way.
+
+To make the feature work, and **only while Remote Control is on**, your install sends
+Growther's licensing service, signed with the install's own key:
+
+- your machine's name, so you can tell your installs apart;
+- up to four addresses it can be reached at, which may include addresses on your private
+  network and the issued address.
+
+These are shown only to someone signed in to your account at `rc.growther.ai`. They are
+refreshed on each licence check-in and deleted when you turn Remote Control off. When Remote
+Control is off, your install sends nothing about your network.
+
+## What Growther keeps
+
+For an issued address, Growther keeps the tunnel's identifier and its hostname, so the
+tunnel can be deleted later.
+
+**The tunnel's connection secret is generated for your install, delivered to it once, and
+not retained.** Growther holds no credential that can connect to your tunnel. If the address
+has to be issued again — after you turn Remote Control off and on, for example — a fresh
+secret is generated and the old tunnel is deleted.
+
+The hostname is kept only while Remote Control is on. Turning it off deletes the tunnel and
+the address on Growther's side; so does a licence being revoked, cancelled, paused, or shut
+off after the grace period, the deployment record being deleted, uninstalling C5, or an
+install that has not checked in for thirty days.
+
+## What Growther does not do
+
+- It does not route, log, inspect, or store the content of your remote sessions.
+- It does not place any service of its own — a proxy, an access gateway, or logging — in
+  front of an issued address.
+- It does not use the records above for anything other than operating Remote Control for
+  you.
+- It cannot revoke a paired device for you. Pairings live on your machine, not in your
+  account, and only someone at the machine can revoke one.
+
+## What Growther learns when you use the portal
+
+Signing in at `rc.growther.ai` uses the same email link as your licence account. Growther
+sees that you signed in and when, and which installs are on your account with the addresses
+each one published. It does not see what you do on your install afterwards, because the
+hand-off is a link to your own machine and the portal is not in the path after it.
+
+## Your own tunnel, your own provider
+
+If you paste your own tunnel token under Advanced, or supply your own name and certificate,
+Growther is not in the path and holds no credential for it. Your tunnel provider — Cloudflare
+on your own account, Tailscale, ngrok — is in the path instead, under your agreement with
+them, and most of them terminate TLS at their edge in the same way. Choose one you are
+content to have there. Turning Remote Control off keeps a token you pasted on your machine;
+Growther is not asked to release anything, because it holds nothing for your tunnel.
+
+## Voice
+
+Voice on a remote device is off until you turn it on, and it can be turned on only in C5 on
+the machine, under **Settings › Voice**. Every voice setting is changed at the machine: a
+paired device is refused when it tries to change any of them, including which speech provider
+the audio goes to. One tap on a phone captures live microphone audio,
+sends it to the machine — through the tunnel, if that is the path — and the machine forwards
+it to whichever speech provider you configured, or transcribes it on the machine itself if
+your chain starts with the built-in offline engine. You are responsible for any consent the
+people being recorded are entitled to.
+
+## Limits, stated plainly
+
+1. Tunnel traffic is readable by Cloudflare. Signed, not encrypted.
+2. Streamed responses are not signed.
+3. A self-signed certificate on your own network will warn, and the warning is correct.
+   Accept it only on a network you trust.
+4. Some routers block a public name resolving to a private address, and pairing needs a
+   secure (https) address, so C5 does not fall back to plain http. See
+   [Troubleshooting](/c5/remote-control/troubleshooting).
+5. Through the tunnel every caller reaches the machine from the same address, so unpaired
+   attempts share one rate-limit allowance. Paired devices each get their own.
+6. The issued address depends on Cloudflare and on capacity Growther does not control. It
+   is provided as a convenience, is not guaranteed, and may be withdrawn or replaced if
+   Cloudflare limits or suspends the service. Your own network, your own SSH connection, and
+   your own tunnel are unaffected.
+
+## The words that bind
+
+This page describes; the Terms bind. Section 14 of the Growther Terms of Service is the text
+you accept in C5, and it is at
+[growther.ai/t=remote-control](https://growther.ai/t=remote-control). Cloudflare's own
+[terms](https://www.cloudflare.com/terms/) and
+[privacy policy](https://www.cloudflare.com/privacypolicy/) govern Cloudflare's part.

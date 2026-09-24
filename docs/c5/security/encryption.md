@@ -95,3 +95,4 @@ backed up everything.
 
 - [Backups and recovery](/c5/security/backups) — do not skip this one.
 - [Privacy](/c5/mothership/privacy) — what leaves your machine, if anything.
+- [Remote Control](/c5/remote-control/overview) — reaching C5 from a phone, and who can see what on each path.

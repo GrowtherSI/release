@@ -17,6 +17,7 @@ docs/
     ├── configuration/      settings, providers, integrations
     ├── mothership/         the optional Growther.ai cloud
     ├── security/           encryption, permissions, backups
+    ├── remote-control/     reaching C5 from a phone; pairing, leases, privacy
     └── troubleshooting/    fixes, FAQ, and how to get help
 ```
 

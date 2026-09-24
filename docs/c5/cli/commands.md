@@ -47,37 +47,39 @@ See [Log filtering](/c5/cli/log-filtering) for the full list of hotkeys and conf
 
 ## All commands
 
-| Command             | What it does                                                   |
-| ------------------- | -------------------------------------------------------------- |
-| `growther`          | Start C5. First run sets itself up.                             |
-| `growther start`    | Start C5 (or focus your browser if already running).            |
-| `growther stop`     | Stop C5 gently, letting it finish what it is doing.             |
-| `growther status`   | Say whether C5 is running, and how it is set to start.          |
-| `growther service`  | Manage starting C5 automatically. See below.                    |
-| `growther activate` | Pair this computer with your license.                           |
-| `growther rekey`    | Give this computer a new key, keeping the same license.         |
-| `growther update`   | Get the newest version.                                         |
-| `growther rollback` | Go back to the version you had before.                          |
-| `growther doctor`   | Check your setup and report anything wrong.                     |
-| `growther home`     | Show, check or move where C5 keeps its files. See below.       |
-| `growther lock`     | Show or clear the single-instance lock. See below.             |
-| `growther policy`   | Managed configuration for IT: validate, sign, pin. See below.  |
-| `growther user`     | Create the first administrator on a managed install.           |
-| `growther webauthn` | Change the host name passkeys are bound to. See below.         |
-| `growther qmd-run`  | Run the memory-search engine directly. See below.               |
-| `growther verify`  | Prove a file really came from us. Works offline.                 |
-| `growther uninstall`| Remove C5 from your computer.                                   |
-| `growther version`  | Print which version you have.                                   |
-| `growther login`    | Sign in from the command line, for a machine with no browser.   |
-| `growther secrets`  | Move API keys into a keystore, and check what is stored where.  |
-| `growther key`      | Escrow, reseal or disable the device key. See below.            |
-| `growther restore`  | Restore from an encrypted backup.                               |
-| `growther evidence` | Export audit evidence for an auditor or a legal hold.           |
-| `growther cache`    | Show the caches, or move them to another disk. See below.       |
-| `growther reset-auth` | Clear a user's sign-in credentials so they can enrol again.   |
-| `growther voice`    | Manage the offline speech model.                                |
-| `growther qmd-mcp`  | Run the memory-search engine as an MCP server.                  |
-| `growther help`     | Show the list of commands.                                      |
+| Command               | What it does                                                   |
+| --------------------- | -------------------------------------------------------------- |
+| `growther`            | Start C5. First run sets itself up.                            |
+| `growther start`      | Start C5 (or focus your browser if already running).           |
+| `growther stop`       | Stop C5 gently, letting it finish what it is doing.            |
+| `growther status`     | Say whether C5 is running, and how it is set to start.         |
+| `growther service`    | Manage starting C5 automatically. See below.                   |
+| `growther activate`   | Pair this computer with your license.                          |
+| `growther rekey`      | Give this computer a new key, keeping the same license.        |
+| `growther update`     | Get the newest version.                                        |
+| `growther rollback`   | Go back to the version you had before.                         |
+| `growther doctor`     | Check your setup and report anything wrong.                    |
+| `growther home`       | Show, check or move where C5 keeps its files. See below.       |
+| `growther lock`       | Show or clear the single-instance lock. See below.             |
+| `growther policy`     | Managed configuration for IT: validate, sign, pin. See below.  |
+| `growther user`       | Create the first administrator on a managed install.           |
+| `growther webauthn`   | Change the host name passkeys are bound to. See below.         |
+| `growther qmd-run`    | Run the memory-search engine directly. See below.              |
+| `growther verify`     | Prove a file really came from us. Works offline.               |
+| `growther uninstall`  | Remove C5 from your computer.                                  |
+| `growther version`    | Print which version you have.                                  |
+| `growther login`      | Sign in from the command line, for a machine with no browser.  |
+| `growther connect`    | Reach a C5 on another machine over your own SSH connection.    |
+| `growther remote`     | Say whether Remote Control is on, and list the paired devices. |
+| `growther secrets`    | Move API keys into a keystore, and check what is stored where. |
+| `growther key`        | Escrow, reseal or disable the device key. See below.           |
+| `growther restore`    | Restore from an encrypted backup.                              |
+| `growther evidence`   | Export audit evidence for an auditor or a legal hold.          |
+| `growther cache`      | Show the caches, or move them to another disk. See below.      |
+| `growther reset-auth` | Clear a user's sign-in credentials so they can enrol again.    |
+| `growther voice`      | Manage the offline speech model.                               |
+| `growther qmd-mcp`    | Run the memory-search engine as an MCP server.                 |
+| `growther help`       | Show the list of commands.                                     |
 
 ## Commands in detail
 
@@ -149,7 +151,7 @@ Recovery asks you to confirm in your browser, and it asks you to have signed in
 required", sign out of the license portal, sign back in, and run the command
 again straight away.
 
-Do not run `growther activate` to fix a key problem. Activate creates a *new*
+Do not run `growther activate` to fix a key problem. Activate creates a _new_
 deployment; rekey keeps the one you already have.
 
 ### `growther update`
@@ -320,14 +322,14 @@ used to check the signature is built into C5 itself.
 
 What the answers mean:
 
-| You see                         | What it means                                          |
-| ------------------------------- | ------------------------------------------------------ |
-| ✓ signature is valid            | The record of how this was built really came from us.  |
-| ✓ contents match                | The file has not been changed since we built it.       |
-| ✗ has been altered              | Do not run it. Download it again from growther.ai.     |
-| ✗ signature is INVALID          | Do not run it. Download it again from growther.ai.     |
-| ? unsigned / no key / no record | Cannot tell either way — see below.                    |
-| ? this is a release archive     | Extract it, then verify the program inside.            |
+| You see                         | What it means                                         |
+| ------------------------------- | ----------------------------------------------------- |
+| ✓ signature is valid            | The record of how this was built really came from us. |
+| ✓ contents match                | The file has not been changed since we built it.      |
+| ✗ has been altered              | Do not run it. Download it again from growther.ai.    |
+| ✗ signature is INVALID          | Do not run it. Download it again from growther.ai.    |
+| ? unsigned / no key / no record | Cannot tell either way — see below.                   |
+| ? this is a release archive     | Extract it, then verify the program inside.           |
 
 A **?** is not a pass. It means the check could not be completed — usually because you
 are running a development build, because the file has no build record next to it, or
@@ -400,6 +402,39 @@ growther reset-auth <user>     # clear a user's credentials so they can enrol ag
 ```
 
 `reset-auth` is the way back in when somebody has lost the device holding their passkey.
+
+### `growther connect`
+
+Reaches a C5 running on another machine over an SSH connection you already have. It forwards
+a local port over SSH and opens C5 in your browser at `http://localhost:4399`. Nothing is
+published, no certificate is involved, and no pairing is needed: you sign in as you would at
+that machine, over a channel your SSH already secures.
+
+```bash
+growther connect user@host
+```
+
+Leave it running; press Ctrl+C to close the forward.
+
+- `--local-port N` picks another local port. `4399` is the default on purpose: it is not the
+  port a C5 on _this_ machine serves on, so the forward cannot land on the wrong C5.
+- `--remote-port N` if the far C5 is not on `4299`.
+
+`growther connect` checks that the two ends really are different machines and refuses if the
+forward has looped back to the C5 you started from.
+
+### `growther remote`
+
+Two read-only commands for a machine with no browser:
+
+```bash
+growther remote status     # whether Remote Control is on, the name it publishes, how many devices are paired
+growther remote devices    # each paired device: its label, when it was added, when it was last seen
+```
+
+Neither can turn Remote Control on or off or revoke a device. Those need the running server
+to take effect immediately, so they live only in **Settings › Remote Control** on the machine
+— see [Managing devices](/c5/remote-control/managing-devices).
 
 ### `growther uninstall`
 
