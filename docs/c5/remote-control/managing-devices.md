@@ -26,9 +26,11 @@ Everyone else sees their own.
 
 ## Revoke
 
-Press **Revoke** next to a device and it is cut off. Revocation takes effect on the device's
-next request, and any live feed it holds ends within about a minute. It does not wait for the
-lease to run out.
+Press **Revoke** next to a device and it is cut off at once. Its live connection to the
+machine is closed, and the phone is signed out on the spot and shown that it is no longer
+paired — in place of the app, so nothing it had on screen stays usable. A phone that is
+offline at that moment is refused the next time it reaches the machine. Revocation does not
+wait for the lease to run out.
 
 A revoked device cannot get back in with the key it holds. To use it again, pair it again
 from the machine.
@@ -62,11 +64,13 @@ It asks you to confirm:
 > Signs out every paired device, deletes this machine's address and tunnel, ends
 > rc.growther.ai sign-ins for your account, and turns Remote Control off.
 
-Press **Disconnect** and, in this order, C5 turns the switch off, stops serving the secure
-address, revokes every pairing, releases the tunnel and the issued address on Growther.ai's
-side, removes the tunnel connector's credential files from this machine, withdraws your
-addresses and machine name from your account, and then asks the licensing service to end
-your portal sign-ins. The tab then shows the switch off and an empty device list.
+Press **Disconnect** and, in this order, C5 turns the switch off, revokes every pairing —
+each phone is signed out immediately and shown that it is no longer paired, before the
+address it was reached through goes away — stops serving the secure address, releases the
+tunnel and the issued address on Growther.ai's side, removes the tunnel connector's credential
+files from this machine, withdraws your addresses and machine name from your account, and
+then asks the licensing service to end your portal sign-ins. The tab then shows the switch
+off and an empty device list.
 
 Ending the portal sign-ins needs the licensing service. If it cannot be reached at that
 moment, everything on this machine is still torn down and the tab says the portal sign-ins
@@ -86,9 +90,10 @@ Before saving, C5 asks you to confirm:
 > you turn it back on; you are normally issued the same address again.
 
 **Cancel** keeps it on; **Turn off** proceeds. In this order, C5 then turns the switch off,
-stops serving the secure address, revokes every pairing, releases the issued address and its
-tunnel on Growther.ai's side (when you had one), removes the tunnel connector's credential files
-from this machine, and withdraws your addresses and machine name from your account.
+revokes every pairing — each phone is signed out immediately and shown that it is no longer
+paired — stops serving the secure address, releases the issued address and its tunnel on
+Growther.ai's side (when you had one), removes the tunnel connector's credential files from
+this machine, and withdraws your addresses and machine name from your account.
 
 A tunnel token you pasted under Advanced is **not** cleared. The connector stops and its
 credential files go, but the token stays saved for the next time, and Growther.ai — which holds

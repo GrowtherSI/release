@@ -1,6 +1,6 @@
 ---
 title: Troubleshooting Remote Control
-description: The address is not reachable, certificate warnings, two copies of an install fighting over one address, DNS rebinding, replies arriving late through the tunnel, rate limits, refused sign-ins, and what to do when a lease expires.
+description: The address is not reachable, certificate warnings, two copies of an install fighting over one address, DNS rebinding, replies arriving late through the tunnel, rate limits, refused sign-ins, what to do when a lease expires, and what the no-longer-paired screen means.
 order: 5
 ---
 
@@ -130,6 +130,24 @@ If extending is not offered, or the phone still cannot get in, one of these is t
 - Remote Control was **turned off** at the machine, which revokes every device. Turn it on
   and pair again;
 - the phone's stored key is gone — a cleared browser, a reinstalled app. Pair again.
+
+## The phone says _Device No Longer Paired_
+
+Someone at the machine revoked this device, turned Remote Control off, or pressed
+**Disconnect everything**. It happens the moment they do it, not the next time the phone
+asks: the phone's live connection is closed, and the app is replaced by this screen even if
+it was in use — nothing it had on screen stays usable. A phone that was offline at the time
+sees the same screen the next time it reaches the machine.
+
+There is nothing to retry from the phone, and refreshing the page will not reconnect it. If
+it should still have access, pair it again from **Settings › Remote Control** in C5 on the
+machine, as the screen says; the key it held before is not reused. A lease that has run out
+shows a different screen, _This Device's Lease Has Ended_ — see
+[The lease expired](#the-lease-expired); there, extending the lease at the machine is enough.
+
+If the phone shows _Server disconnected — retrying…_ instead, that is a different thing: the
+machine is unreachable, not the pairing gone. See
+[The address is not reachable](#the-address-is-not-reachable).
 
 ## Sign-in at a remote-facing name is refused
 
