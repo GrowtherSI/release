@@ -1,5 +1,18 @@
 [
   {
+    "tag": "v2026.9.23-v311",
+    "version": "2026.9.23-v311",
+    "build": 311,
+    "releasedAt": "2026-09-23T14:12:43-07:00",
+    "bullets": [
+      {
+        "kind": "fixed",
+        "text": "Fixed the breakroom TV so its video shows up on mobile."
+      }
+    ],
+    "more": 2
+  },
+  {
     "tag": "v2026.9.22-v310",
     "version": "2026.9.22-v310",
     "build": 310,
