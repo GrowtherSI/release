@@ -7,11 +7,11 @@
     "bullets": [
       {
         "kind": "new",
-        "text": "Remote Control asks you to accept its terms before it turns on."
+        "text": "Remote Control revoked devices are evicted at once."
       },
       {
         "kind": "new",
-        "text": "A device you remove is disconnected right away, with a clear message."
+        "text": "Remote Control asks you to accept its terms before it turns on."
       }
     ],
     "more": 1
