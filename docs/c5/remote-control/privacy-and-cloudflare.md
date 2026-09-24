@@ -1,39 +1,42 @@
 ---
 title: Privacy and Cloudflare
-description: What Cloudflare can see through the address Growther.ai issues, what is signed and what is not, what Growther.ai receives and keeps, and what it never does.
+description: What is encrypted and what is signed, who is in the path on each address, what Growther.ai receives and keeps, and what it never does.
 order: 4
 ---
 
 # Privacy and Cloudflare
 
-This page is the trust statement for Remote Control. It is written to be uncomfortable where
-the honest answer is uncomfortable, because a page that only lists reassurances is not one
-you could rely on.
+This page is the trust statement for Remote Control: what is encrypted, what is signed, who
+is in the path on each address, and what Growther.ai receives, keeps, and never does. It is
+exact where exactness matters, so that it is a page you can rely on.
 
-## The one line that matters
+## Who is in the path
 
-**Through the address Growther.ai issues, Cloudflare can read your session.**
+**Every hop is encrypted. Through the address Growther.ai issues, Cloudflare is in the path.**
 
 That address — `<label>.rc.growther.ai` — is served through a Cloudflare Tunnel that
-Growther.ai creates for your install on Growther.ai's Cloudflare account. Your device's
-connection is encrypted to Cloudflare's edge. There, Cloudflare decrypts it in order to
-route it through the tunnel to your machine. At that point the traffic is readable by
-Cloudflare: what you read, what you type, attachments, and anything you dictate.
+Growther.ai creates for your install on Growther.ai's Cloudflare account. Your device
+connects to Cloudflare over HTTPS, and Cloudflare connects to your machine over an encrypted
+tunnel; nothing travels the internet unencrypted. Cloudflare operates the address, and, as
+for any site served through Cloudflare, the connection is decrypted within Cloudflare's
+network in order to be routed to your machine. So the session is not end-to-end encrypted
+between your device and your machine, and Cloudflare is in a position to see it as it passes
+through. Growther.ai is not.
 
 This is how a tunnel of this kind works, not a C5 setting. Cloudflare's handling of traffic
-in transit is governed by [Cloudflare's terms](https://www.cloudflare.com/terms/) and
-[Cloudflare's privacy policy](https://www.cloudflare.com/privacypolicy/), not by Growther.ai,
-and you acknowledge that when you accept the terms in C5.
+passing through its network is governed by [Cloudflare's terms](https://www.cloudflare.com/terms/)
+and [Cloudflare's privacy policy](https://www.cloudflare.com/privacypolicy/), not by
+Growther.ai, and you acknowledge that when you accept the terms in C5.
 
-**If that is not acceptable for your data, do not use the issued address.** Use your own
-network, your own SSH connection with `growther connect`, your own name and certificate, or
-your own tunnel. Each of those is described in [Setup](/c5/remote-control/setup), and each
-keeps working without Growther.
+**If you would rather have no third party in the path**, use your own network, your own SSH
+connection with `growther connect`, your own name and certificate, or your own tunnel. Each
+of those is described in [Setup](/c5/remote-control/setup), and each keeps working without
+Growther.ai.
 
-## Signed, not encrypted
+## Encrypted in transit, signed against tampering
 
-C5 does one thing about the path it cannot control, and it is important to be exact about
-what that thing is.
+C5 adds its own protection on top of the encrypted connections, and it is worth being exact
+about what it does.
 
 **Ordinary requests and responses are signed.** Every normal request from a paired device,
 and every normal response from the machine, carries a signature derived from that device's
@@ -41,12 +44,15 @@ pairing. Something in the path — Cloudflare or anything else — cannot fabric
 replay one onto a different request, or change a result without the device refusing it.
 Stripping the signature is refused, not ignored.
 
-**They are not encrypted end to end.** Signing proves who said it and that it was not
-changed. It does not hide it. Anyone who can read the plaintext can still read it.
+**Signing is in addition to encryption; it is not end-to-end encryption.** The connections
+are encrypted hop by hop; signing proves who said something and that it was not changed on
+the way. What it does not do is hide the content from the service that terminates the
+connection, which through the issued address is Cloudflare.
 
-**Streamed content is not signed at all.** Chat replies as they arrive, file downloads,
-audit exports, and live event feeds are delivered as streams, and streams are not signed.
-That is a gap: those responses are neither signed nor encrypted.
+**Streamed content travels over the same encrypted connections but is not signed.** Chat
+replies as they arrive, file downloads, audit exports, and live event feeds are delivered as
+streams, and streams are not signed. A change to a stream in transit would not be detected
+the way it is for an ordinary response.
 
 ## What Growther.ai receives
 
@@ -102,9 +108,10 @@ hand-off is a link to your own machine and the portal is not in the path after i
 If you paste your own tunnel token under Advanced, or supply your own name and certificate,
 Growther.ai is not in the path and holds no credential for it. Your tunnel provider — Cloudflare
 on your own account, Tailscale, ngrok — is in the path instead, under your agreement with
-them, and most of them terminate TLS at their edge in the same way. Choose one you are
-content to have there. Turning Remote Control off keeps a token you pasted on your machine;
-Growther.ai is not asked to release anything, because it holds nothing for your tunnel.
+them, and most operate the way Cloudflare does: encrypted to and from them, with the
+connection handled within their network. Choose one you are content to have there. Turning
+Remote Control off keeps a token you pasted on your machine; Growther.ai is not asked to
+release anything, because it holds nothing for your tunnel.
 
 ## Voice
 
@@ -119,7 +126,8 @@ people being recorded are entitled to.
 
 ## Limits, stated plainly
 
-1. Tunnel traffic is readable by Cloudflare. Signed, not encrypted.
+1. Through the issued address, Cloudflare is in the path: encrypted to and from it, not end
+   to end. Signed, so a change in transit is detected.
 2. Streamed responses are not signed.
 3. A self-signed certificate on your own network will warn, and the warning is correct.
    Accept it only on a network you trust.

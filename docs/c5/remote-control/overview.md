@@ -18,33 +18,35 @@ section cover [turning it on and pairing a phone](/c5/remote-control/setup),
 
 ## Three ways to reach your install
 
-| Way in                                                           | How your device gets there                                            | Who is in the path             |
-| ---------------------------------------------------------------- | --------------------------------------------------------------------- | ------------------------------ |
-| **Your own network**, or a name and certificate you supply       | Straight to the machine                                               | Nobody but you and the machine |
-| **Your own SSH connection**, with `growther connect`             | Through a channel your SSH already secures                            | Nobody but you and the machine |
-| **An address Growther.ai issues**, like `<label>.rc.growther.ai` | Through a Cloudflare Tunnel that Growther.ai creates for your install | Cloudflare                     |
+| Way in                                                           | How your device gets there                                            | Who is in the path                    |
+| ---------------------------------------------------------------- | --------------------------------------------------------------------- | ------------------------------------- |
+| **Your own network**, or a name and certificate you supply       | Straight to the machine                                               | Nobody but you and the machine        |
+| **Your own SSH connection**, with `growther connect`             | Through a channel your SSH already secures                            | Nobody but you and the machine        |
+| **An address Growther.ai issues**, like `<label>.rc.growther.ai` | Through a Cloudflare Tunnel that Growther.ai creates for your install | Cloudflare (encrypted to and from it) |
 
 The first two need nothing from Growther.ai and keep working without it. The third is the one
-that works from anywhere without touching your router, and it is the one with a real
-disclosure attached: Cloudflare carries the session and can read it in transit. That is
-explained plainly in [Privacy and Cloudflare](/c5/remote-control/privacy-and-cloudflare),
-and you accept it in C5 before the address is issued.
+that works from anywhere without touching your router, and it is the one where a third party
+is in the path: Cloudflare carries the session, encrypted to and from it, and handles it
+within its network on the way through. That is explained plainly in
+[Privacy and Cloudflare](/c5/remote-control/privacy-and-cloudflare), and you accept it in C5
+before the address is issued.
 
 ## Who can see what
 
-| Path                                               | Who can read your session         | Who can change it without you noticing                        |
-| -------------------------------------------------- | --------------------------------- | ------------------------------------------------------------- |
-| On the machine itself                              | Nobody                            | Nobody                                                        |
-| Your own network, or your own name and certificate | Nobody                            | Nobody                                                        |
-| Your own SSH connection                            | Nobody                            | Nobody                                                        |
-| The address Growther.ai issues                     | **Cloudflare**                    | Nobody, for ordinary requests. Streamed content is not signed |
-| Signing in at `rc.growther.ai`                     | Growther.ai sees the sign-in only | Nobody                                                        |
+| Path                                               | Who else is in the path                                                     | Who can change it without you noticing                        |
+| -------------------------------------------------- | --------------------------------------------------------------------------- | ------------------------------------------------------------- |
+| On the machine itself                              | Nobody                                                                      | Nobody                                                        |
+| Your own network, or your own name and certificate | Nobody                                                                      | Nobody                                                        |
+| Your own SSH connection                            | Nobody                                                                      | Nobody                                                        |
+| The address Growther.ai issues                     | **Cloudflare** (the connection is encrypted to and from it, not end to end) | Nobody, for ordinary requests. Streamed content is not signed |
+| Signing in at `rc.growther.ai`                     | Growther.ai sees the sign-in only                                           | Nobody                                                        |
 
 "Streamed content" means chat replies as they arrive, file downloads, audit exports, and live
-event feeds. C5 signs ordinary requests and responses so that a change made in transit is
-detected; it does not sign streams, and it does not encrypt any of it end to end. Nothing
-here changes what your AI providers see: they receive whatever you send them, on your own
-account, with or without Remote Control.
+event feeds. Every path is encrypted in transit. C5 also signs ordinary requests and
+responses so that a change made in transit is detected; streams are not signed, and through
+the issued address the session is not end-to-end encrypted between your device and your
+machine. Nothing here changes what your AI providers see: they receive whatever you send
+them, on your own account, with or without Remote Control.
 
 ## What Growther.ai receives
 
