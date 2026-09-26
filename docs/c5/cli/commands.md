@@ -340,7 +340,7 @@ Checking a downloaded archive tells you its build record is genuine but says not
 about the bytes inside it, so extract it first and verify the program:
 
 ```bash
-tar -xzf growther-c5-macos-arm64.tar.gz
+tar -xzf growther-c5-macos-arm64-node24.tar.gz
 growther verify ./growther-c5-macos-arm64
 ```
 

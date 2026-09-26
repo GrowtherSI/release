@@ -98,7 +98,7 @@ same as the command does.
 
 | System  | Where the icon is                                                            |
 | ------- | ---------------------------------------------------------------------------- |
-| macOS   | Your **Applications** folder. It also appears in Launchpad and in Spotlight.  |
+| macOS   | Your **Applications** folder. It also appears in Launchpad and in Spotlight. |
 | Windows | The **Start menu**. Type "Growther" to find it.                              |
 | Linux   | Your applications menu, if your desktop has one.                             |
 
@@ -120,11 +120,14 @@ If C5 was stopped while your browser tab is still open, you do not even need to 
 
 ## Supported platforms
 
-| System  | Chips supported            |
-| ------- | -------------------------- |
-| macOS   | Apple Silicon and Intel    |
-| Windows | x86_64 and ARM64           |
-| Linux   | x86_64                     |
+| System  | Chips supported         | Oldest version supported                                        |
+| ------- | ----------------------- | --------------------------------------------------------------- |
+| macOS   | Apple Silicon and Intel | macOS 13.5 Ventura                                              |
+| Windows | x86_64 and ARM64        | Windows 10 (Windows Server 2016)                                |
+| Linux   | x86_64                  | glibc 2.28 — Ubuntu 20.04, Debian 10, RHEL 8 and anything newer |
+
+If your system is older than this, C5 will not start on it. `growther update` checks first,
+and it will not install a version your system cannot run. It keeps the one you have.
 
 ## If the command is not found
 

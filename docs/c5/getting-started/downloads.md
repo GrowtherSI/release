@@ -40,6 +40,10 @@ install command above instead — it works this out for you.
 
 <!-- RELEASES -->
 
+Every file is named the same way: `growther-c5-<system>-<chip>-node24`, then the version.
+`node24` is the version of Node.js built into the program. You do not need Node.js
+installed. It is in the name so you can see what each file carries.
+
 **On a Mac, take the `.pkg`.** It is an installer: double-click it, enter your password,
 and C5 sets itself up and starts, with its log in a Terminal window. Make sure you take
 the one for your Mac — `arm64` for Apple silicon, `x64` for an Intel Mac. macOS will not
@@ -69,7 +73,7 @@ file, so the Installer verifies it before it will open — even with no internet
 need to compare anything by hand. To see who signed it:
 
 ```bash
-pkgutil --check-signature growther-c5-<version>-arm64.pkg
+pkgutil --check-signature growther-c5-macos-arm64-node24-v<version>.pkg
 ```
 
 It should say it is signed by a certificate issued by Apple for distribution, and trusted
@@ -78,13 +82,13 @@ by Apple's notary service.
 **Linux** (check the `.zip` you downloaded, before unzipping it)
 
 ```bash
-sha256sum growther-c5-linux-x64-<version>.zip
+sha256sum growther-c5-linux-x64-node24-v<version>.zip
 ```
 
 **Windows** (PowerShell)
 
 ```powershell
-Get-FileHash growther-c5-win-x64-<version>.zip -Algorithm SHA256
+Get-FileHash growther-c5-win-x64-node24-v<version>.zip -Algorithm SHA256
 ```
 
 If the two strings match, your download is genuine and undamaged. If they do not match,

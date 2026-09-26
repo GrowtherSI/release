@@ -59,7 +59,7 @@ Decide two things first:
 ## Windows: the MSI
 
 ```text
-msiexec /i growther-c5-2026.9.7-v42-x64.msi /qn MANAGEDINSTALL=1 POLICYEXPECTED=1
+msiexec /i growther-c5-win-x64-node24-v2026.9.7-v42.msi /qn MANAGEDINSTALL=1 POLICYEXPECTED=1
 ```
 
 The program lands in `C:\Program Files\Growther\C5`, which goes on the machine `PATH`. There is
@@ -114,7 +114,7 @@ sudo defaults write /Library/Preferences/ai.growther.c5.install.plist \
   MANAGEDINSTALL -string 1 \
   POLICYEXPECTED -string 1 \
   MANAGEDBY -string "Contoso IT"
-sudo installer -pkg growther-c5-2026.9.7-v42-arm64.pkg -target /
+sudo installer -pkg growther-c5-macos-arm64-node24-v2026.9.7-v42.pkg -target /
 ```
 
 The program lands at `/opt/growther/bin/growther`, and `/etc/paths.d/growther` puts it on
