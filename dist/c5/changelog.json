@@ -1,5 +1,42 @@
 [
   {
+    "tag": "v2026.9.27-v314",
+    "version": "2026.9.27-v314",
+    "build": 314,
+    "releasedAt": "2026-09-27T11:21:05-07:00",
+    "bullets": [
+      {
+        "kind": "new",
+        "text": "Task cards stay tidy; earlier attempts now sit behind a switch."
+      },
+      {
+        "kind": "new",
+        "text": "Settings now has a Schedules panel to pause and tidy scheduled work."
+      },
+      {
+        "kind": "new",
+        "text": "The Schedules page now tells you when all schedules are paused."
+      },
+      {
+        "kind": "new",
+        "text": "Admins can now review blocked actions and mark false alarms."
+      },
+      {
+        "kind": "new",
+        "text": "The single-run read carries the task's re-run history."
+      },
+      {
+        "kind": "new",
+        "text": "The schedule runner obeys a Run Schedules switch."
+      },
+      {
+        "kind": "new",
+        "text": "Record every taxonomy-router decision so it can be measured."
+      }
+    ],
+    "more": 483
+  },
+  {
     "tag": "v2026.9.24-v313",
     "version": "2026.9.24-v313",
     "build": 313,
