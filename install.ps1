@@ -224,7 +224,17 @@ $GrowtherPinnedAssets = ""
 if (-not $ProfileOnly) {
   # Arch detection (handles ARM64 under x64 emulation).
   $arch = if ($env:PROCESSOR_ARCHITECTURE -eq "ARM64" -or $env:PROCESSOR_ARCHITEW6432 -eq "ARM64") { "arm64" } else { "x64" }
-  $asset = "growther-node22-win-$arch.zip"
+  # growther-c5-win-<arch>-<runtime>: the executable's name, then the Node
+  # runtime it embeds. A pinned installer takes the exact name from the SIGNED
+  # manifest instead.
+  $assetCandidates = @("growther-c5-win-$arch-node24.zip")
+  if ($GrowtherPinnedAssets) {
+    foreach ($line in ($GrowtherPinnedAssets -split "`n")) {
+      $parts = $line.Trim() -split '\s+'
+      if ($parts.Length -ge 3 -and $parts[0] -eq "win-$arch") { $assetCandidates = @($parts[1]); break }
+    }
+  }
+  $asset = $assetCandidates[0]
   # Resolve the release tag (raw layout: <base>/<tag>/<asset>). 'latest' reads the
   # catalog's .stable.version; an explicit version is normalized to a v-prefixed tag.
   if ($Version -eq "latest") {
@@ -238,7 +248,6 @@ if (-not $ProfileOnly) {
   } else {
     $tag = "v" + ($Version -replace '^v','')
   }
-  $url = "$ReleaseBase/$tag/$asset"
   Write-Host "➜ target: win-$arch · version: $Version"
 }
 
@@ -248,8 +257,19 @@ $tmp = if ($ProfileOnly) { $null } else { New-Item -ItemType Directory -Path (Jo
 try {
   # ── Download, verify and place the binary (skipped by -ProfileOnly) ───────
   if (-not $ProfileOnly) {
-    Write-Host "➜ downloading $asset"
-    Invoke-WebRequest -Uri $url -OutFile "$tmp\$asset" -UseBasicParsing
+    $got = $false
+    foreach ($candidate in $assetCandidates) {
+      $asset = $candidate
+      $url = "$ReleaseBase/$tag/$asset"
+      Write-Host "➜ downloading $asset"
+      try {
+        Invoke-WebRequest -Uri $url -OutFile "$tmp\$asset" -UseBasicParsing
+        if ((Test-Path "$tmp\$asset") -and (Get-Item "$tmp\$asset").Length -gt 0) { $got = $true; break }
+      } catch {
+        Remove-Item "$tmp\$asset" -Force -ErrorAction SilentlyContinue
+      }
+    }
+    if (-not $got) { throw "download failed: $ReleaseBase/$tag/ (tried: $($assetCandidates -join ', '))" }
 
     # Fetch the checksum separately so a genuine MISMATCH hard-fails (only a missing
     # sidecar is tolerated, and only with the explicit opt-out).

@@ -223,7 +223,20 @@ if [ "$PROFILE_ONLY" != "1" ]; then
       ;;
     *) die "GROWTHER_ARCH must be arm64 or x64 (got: ${GROWTHER_ARCH})";;
   esac
-  ASSET="growther-node22-${OS}-${ARCH}.tar.gz"
+  # growther-c5-<os>-<arch>-<runtime>: the executable's name, then the Node
+  # runtime it embeds. A pinned installer takes the exact name from the SIGNED
+  # manifest instead.
+  PINNED_ASSET=""
+  if [ -n "$GROWTHER_PINNED_ASSETS" ]; then
+    PINNED_ASSET="$(printf '%s\n' "$GROWTHER_PINNED_ASSETS" \
+      | awk -v k="${OS}-${ARCH}" '$1 == k { print $2; exit }')"
+  fi
+  if [ -n "$PINNED_ASSET" ]; then
+    ASSET_CANDIDATES="$PINNED_ASSET"
+  else
+    ASSET_CANDIDATES="growther-c5-${OS}-${ARCH}-node24.tar.gz"
+  fi
+  ASSET="${ASSET_CANDIDATES%% *}"
   info "target: ${c_b}${OS}-${ARCH}${c_reset} · version: ${c_b}${VERSION}${c_reset}"
 
   # ── Resolve the release tag + URL (raw mirror layout: <base>/<tag>/<asset>) ───
@@ -251,12 +264,20 @@ if [ "$PROFILE_ONLY" != "1" ]; then
   else
     TAG="v${VERSION#v}"
   fi
-  URL="${RELEASE_BASE}/${TAG}/${ASSET}"
   info "resolved ${c_b}${TAG}${c_reset}"
 
   TMP="$(mktemp -d)"; trap 'rm -rf "$TMP"; ' EXIT
-  info "downloading ${ASSET}"
-  "${DL[@]}" "$TMP/$ASSET" "$URL" || die "download failed: $URL"
+  got=""
+  for ASSET in $ASSET_CANDIDATES; do
+    URL="${RELEASE_BASE}/${TAG}/${ASSET}"
+    info "downloading ${ASSET}"
+    if "${DL[@]}" "$TMP/$ASSET" "$URL" 2>/dev/null && [ -s "$TMP/$ASSET" ]; then
+      got=1
+      break
+    fi
+    rm -f "$TMP/$ASSET"
+  done
+  [ -n "$got" ] || die "download failed: ${RELEASE_BASE}/${TAG}/ (tried: ${ASSET_CANDIDATES})"
   # The PINNED hash wins when present. It came from a signature-verified manifest,
   # whereas <asset>.sha256 is unsigned and served from the SAME origin as the
   # binary — so the sidecar proves transit integrity, not authenticity.
@@ -310,7 +331,9 @@ if [ "$PROFILE_ONLY" != "1" ]; then
     die "refusing archive: contains absolute or parent-relative paths"
   fi
   tar -xzf "$TMP/$ASSET" -C "$TMP" --no-same-owner
-  BIN_SRC="$(find "$TMP" -maxdepth 2 -type f -name "growther-c5-${OS}-${ARCH}*" | head -1)"
+  # The downloaded archive sits in $TMP too, and its name STARTS with the
+  # executable's — exclude archives and sidecars or the tarball itself matches.
+  BIN_SRC="$(find "$TMP" -maxdepth 2 -type f -name "growther-c5-${OS}-${ARCH}*" ! -name '*.tar.gz' ! -name '*.zip' ! -name '*.sha256' ! -name '*.json' | head -1)"
   [ -n "$BIN_SRC" ] || BIN_SRC="$(find "$TMP" -maxdepth 2 -type f -name 'growther-c5-*' ! -name '*.json' ! -name '*.sha256' ! -name '*.tar.gz' | head -1)"
   [ -n "$BIN_SRC" ] && [ -f "$BIN_SRC" ] || die "binary not found in archive"
 
