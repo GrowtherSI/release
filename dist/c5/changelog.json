@@ -1,5 +1,22 @@
 [
   {
+    "tag": "v2026.9.29-v316",
+    "version": "2026.9.29-v316",
+    "build": 316,
+    "releasedAt": "2026-09-29T07:30:39-07:00",
+    "bullets": [
+      {
+        "kind": "fixed",
+        "text": "Fixed the 3D gravity animation so galaxies no longer collapse."
+      },
+      {
+        "kind": "fixed",
+        "text": "Attachments now show thumbnails in chat and confirmation cards."
+      }
+    ],
+    "more": 4
+  },
+  {
     "tag": "v2026.9.27-v314",
     "version": "2026.9.27-v314",
     "build": 314,
