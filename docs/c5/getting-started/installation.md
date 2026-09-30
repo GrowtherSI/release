@@ -1,6 +1,6 @@
 ---
 title: Installation
-description: Install Growther.ai C5 on macOS, Linux, or Windows.
+description: Install Growther.si C5 on macOS, Linux, or Windows.
 order: 2
 ---
 
@@ -17,7 +17,7 @@ C5 is a single program file. Pick the way you like to install it below.
 Open your terminal and run:
 
 ```bash
-curl -fsSL https://growther.ai/install.sh | bash
+curl -fsSL https://growther.si/install.sh | bash
 ```
 
 ## Windows
@@ -25,7 +25,7 @@ curl -fsSL https://growther.ai/install.sh | bash
 Open PowerShell and run:
 
 ```powershell
-irm https://growther.ai/install.ps1 | iex
+irm https://growther.si/install.ps1 | iex
 ```
 
 ## Homebrew (macOS and Linux)
@@ -33,7 +33,7 @@ irm https://growther.ai/install.ps1 | iex
 If you already use Homebrew, you can install C5 this way instead:
 
 ```bash
-brew install growtherai/tap/growther-c5
+brew install GrowtherSI/tap/growther-c5
 ```
 
 ## What the installer does
@@ -66,7 +66,7 @@ growther activate
 This pairs your computer with your license. C5 will show you a code and open a page
 where you confirm it. This only happens once per computer.
 
-You need a license first — get one from [growther.ai](https://growther.ai). If you do not
+You need a license first — get one from [growther.si](https://growther.si). If you do not
 have one yet, do that before running this step. Someone sent you a referral link or
 a discount code? See [Referrals and discount codes](/c5/getting-started/referrals).
 
@@ -93,7 +93,7 @@ Open that address in your browser to use the app.
 ## Start C5 without using the terminal
 
 You do not have to type anything to start C5. Installing it also adds an icon named
-**Growther.ai C5**, and double-clicking that opens a window showing C5 starting up, the
+**Growther.si C5**, and double-clicking that opens a window showing C5 starting up, the
 same as the command does.
 
 | System  | Where the icon is                                                            |

@@ -1,6 +1,6 @@
-# Growther.ai Documentation
+# Growther.si Documentation
 
-This folder holds the source for [docs.growther.ai](https://docs.growther.ai).
+This folder holds the source for [docs.growther.si](https://docs.growther.si).
 
 Every page is a Markdown file. The docs website reads this folder at build time and
 turns it into a searchable site. You can read the docs right here on GitHub, or read
@@ -15,7 +15,7 @@ docs/
     ├── using-c5/           a page for each area of the app
     ├── cli/                the growther command
     ├── configuration/      settings, providers, integrations
-    ├── mothership/         the optional Growther.ai cloud
+    ├── mothership/         the optional Growther.si cloud
     ├── security/           encryption, permissions, backups
     ├── remote-control/     reaching C5 from a phone; pairing, leases, privacy
     └── troubleshooting/    fixes, FAQ, and how to get help

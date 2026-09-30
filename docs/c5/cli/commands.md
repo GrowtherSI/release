@@ -326,8 +326,8 @@ What the answers mean:
 | ------------------------------- | ----------------------------------------------------- |
 | ✓ signature is valid            | The record of how this was built really came from us. |
 | ✓ contents match                | The file has not been changed since we built it.      |
-| ✗ has been altered              | Do not run it. Download it again from growther.ai.    |
-| ✗ signature is INVALID          | Do not run it. Download it again from growther.ai.    |
+| ✗ has been altered              | Do not run it. Download it again from growther.si.    |
+| ✗ signature is INVALID          | Do not run it. Download it again from growther.si.    |
 | ? unsigned / no key / no record | Cannot tell either way — see below.                   |
 | ? this is a release archive     | Extract it, then verify the program inside.           |
 

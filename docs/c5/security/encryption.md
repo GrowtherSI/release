@@ -71,7 +71,7 @@ is not a safe you can lock and walk away from.
 > `config/device-master-key` separately from the rest.
 
 > **Warning**
-> Lose the key and your data cannot be recovered. Not by you, not by Growther.ai. There
+> Lose the key and your data cannot be recovered. Not by you, not by Growther.si. There
 > is no master key and no back door. See
 > [Backups and recovery](/c5/security/backups).
 

@@ -6,22 +6,22 @@ order: 6
 
 # Referrals and discount codes
 
-Growther.ai has two referral programmes. Both live on your account at
-[license.growther.ai](https://license.growther.ai/account), not inside C5, and both
-are described in full in the [Terms of Service](https://license.growther.ai/terms)
+Growther.si has two referral programmes. Both live on your account at
+[license.growther.si](https://license.growther.si/account), not inside C5, and both
+are described in full in the [Terms of Service](https://license.growther.si/terms)
 under **Referrals**.
 
 | | Free-days referral | Special referral link |
 | --- | --- | --- |
 | Who shares it | Anyone with an account | A referrer we have validated |
-| What it looks like | A code and a link on your Account page | `growther.ai/<name>` |
+| What it looks like | A code and a link on your Account page | `growther.si/<name>` |
 | What the buyer gets | Free days added when they make their first purchase | A discount at checkout — a percentage or an amount off, for a set number of months on recurring plans (some offers add free days too) |
 | What the sharer gets | The same free days, when the referred purchase clears | A share of what their buyers pay, through Stripe |
 | Can they combine? | Yes — a special discount and a free-days referral can be used in the same checkout | |
 
 ## Free-days referral
 
-1. Open your [Account page](https://license.growther.ai/account) and click
+1. Open your [Account page](https://license.growther.si/account) and click
    **Create referral code** under *Refer a friend*. You get a code, a link and a QR
    code.
 2. A friend opens the link, signs in and redeems the code. Nothing is granted yet.
@@ -34,7 +34,7 @@ redeemed, the purchase has to happen before that promotion ends.
 
 ## Using a special referral link
 
-Someone you know may send you a link of the form `growther.ai/<name>`. Opening it
+Someone you know may send you a link of the form `growther.si/<name>`. Opening it
 takes you to the licence portal, where a banner shows who sent it and what it is
 worth, for example *"jane sent you 20% off C5 licences and Mothership — on recurring
 plans for the first 6 months"*.
@@ -63,17 +63,17 @@ plans for the first 6 months"*.
   and use it here*, which puts the discount back on your next attempt. (If that checkout left you an invoice that is still due, the offer stays on the invoice until you pay it or it lapses.)
 
 The link sets one strictly necessary cookie (`gw_ref`, 30 days) on
-`license.growther.ai` that carries only the code. The person who sent the link
+`license.growther.si` that carries only the code. The person who sent the link
 never learns who you are; they see only how many people opened it and bought.
 
 ## Becoming a referrer
 
 If you would like a personal link that pays you a share of what your buyers spend:
 
-1. Open your [Account page](https://license.growther.ai/account) → **Referral
+1. Open your [Account page](https://license.growther.si/account) → **Referral
    Program** → *Apply to the Referral Program*.
 2. Give your name (kept private), a public handle (what buyers see), the email we
-   should use, your country, and the link you would like — `growther.ai/your-name` —
+   should use, your country, and the link you would like — `growther.si/your-name` —
    or let us generate one. The form checks live whether a name is free.
 3. Your application shows as **Pending**. We review every application and email
    you the current rates. Once terms are agreed we validate it, email you, and

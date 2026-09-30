@@ -106,7 +106,7 @@ When C5 is not running, **Restart** is disabled because there is no running serv
 
 To start C5 again:
 - Click the green **Start C5** button in the sidebar menu, on the **Settings → System** page, or on the offline recovery screen.
-- Double-click the **Growther.ai C5** shortcut on your desktop or Applications folder.
+- Double-click the **Growther.si C5** shortcut on your desktop or Applications folder.
 - Run `growther start` (or `growther`) in your terminal.
 
 Once C5 starts, your browser tab reconnects on its own within a few seconds and the controls become active again.
@@ -211,7 +211,7 @@ simple work. Set a budget so it cannot happen again.
 ### "Integrity check failed"
 
 > **Danger**
-> The program on disk is not the one Growther.ai signed. Stop using it, reinstall from
+> The program on disk is not the one Growther.si signed. Stop using it, reinstall from
 > the official installer, and if it fails again ask for help before running it. See
 > [Verifying releases](/c5/security/verifying-releases).
 

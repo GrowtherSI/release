@@ -69,7 +69,7 @@ with the install script instead.
 | Property         | Default              | What it does                                                                               |
 | ---------------- | -------------------- | ------------------------------------------------------------------------------------------ |
 | `MANAGEDINSTALL` | `1`                  | Marks the install as managed: no self-install, and `growther update` only checks           |
-| `MANAGEDBY`      | `Growther.ai C5 MSI` | The name `growther update` gives when it declines to update                                |
+| `MANAGEDBY`      | `Growther.si C5 MSI` | The name `growther update` gives when it declines to update                                |
 | `POLICYEXPECTED` | `0`                  | Treats a missing policy as a fault, and turns off the anonymous first-user setup           |
 | `NOACTIVATE`     | `0`                  | First run opens no browser                                                                 |
 | `INSTALLSERVICE` | `0`                  | Starts C5 automatically at sign-in (Windows Startup registration)                          |
@@ -99,7 +99,7 @@ management tool drops **before** the install:
 | Key              | Default              | What it does                                                                     |
 | ---------------- | -------------------- | -------------------------------------------------------------------------------- |
 | `MANAGEDINSTALL` | `1`                  | Marks the install as managed: no self-install, and `growther update` only checks |
-| `MANAGEDBY`      | `Growther.ai C5 PKG` | The name `growther update` gives when it declines to update                      |
+| `MANAGEDBY`      | `Growther.si C5 PKG` | The name `growther update` gives when it declines to update                      |
 | `POLICYEXPECTED` | `0`                  | Treats a missing policy as a fault, and turns off the anonymous first-user setup |
 | `NOACTIVATE`     | `0`                  | First run opens no browser                                                       |
 | `INSTALLSERVICE` | `0`                  | Starts C5 automatically at sign-in (a launchd user agent)                        |

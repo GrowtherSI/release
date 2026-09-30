@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # ─────────────────────────────────────────────────────────────────────────────
-# Growther.ai C5 installer  ·  curl -fsSL https://growther.ai/install.sh | bash
+# Growther.si C5 installer  ·  curl -fsSL https://growther.si/install.sh | bash
 #
 # Downloads the self-contained V8-bytecode binary for this OS/arch from GitHub
 # Releases, verifies its SHA-256, installs it on PATH, and seeds ~/.growther with
@@ -13,7 +13,7 @@ set -euo pipefail
 #   GROWTHER_VERSION        release tag to install (default: latest)
 #   GROWTHER_INSTALL_DIR    where the binary goes    (default: ~/.local/bin)
 #   GROWTHER_HOME           data dir                 (default: ~/.growther)
-#   GROWTHER_RELEASE_BASE   release host base URL    (default: growtherai/release raw mirror)
+#   GROWTHER_RELEASE_BASE   release host base URL    (default: GrowtherSI/release raw mirror)
 #   GROWTHER_ARCH           arm64|x64, overriding detection (Rosetta, cross-provisioning)
 #   GROWTHER_INSTALL_SERVICE=1   install a launchd/systemd user service
 #   GROWTHER_NO_MODIFY_PATH=1    don't touch shell rc files
@@ -61,10 +61,10 @@ set -euo pipefail
 #       not for interactive use; on its own it does nothing at all.
 # ─────────────────────────────────────────────────────────────────────────────
 
-# THIS FILE IS CANONICAL. growther.ai serves it (marketing repo, public/install.sh)
-# and growtherai/release publishes it — both are mirrors checked against this
+# THIS FILE IS CANONICAL. growther.si serves it (marketing repo, public/install.sh)
+# and GrowtherSI/release publishes it — both are mirrors checked against this
 # copy by hash. There used to be three hand-maintained variants: the one people
-# actually ran (growther.ai) had the signed-release pin but not the icon stamp;
+# actually ran (growther.si) had the signed-release pin but not the icon stamp;
 # this one had the icon stamp but not the pin. One file now carries both.
 
 # ── Enterprise profile flags ────────────────────────────────────────────────
@@ -84,9 +84,9 @@ PROFILE_ONLY="${GROWTHER_PROFILE_ONLY:-0}"
 # `curl … | bash` there is no script on disk to read $0 from.
 usage() {
   cat <<'USAGE'
-Growther.ai C5 installer
+Growther.si C5 installer
 
-  bash install.sh [options]        curl -fsSL https://growther.ai/install.sh | bash -s -- [options]
+  bash install.sh [options]        curl -fsSL https://growther.si/install.sh | bash -s -- [options]
 
 Options (each has a GROWTHER_* environment equivalent):
   --policy-expected     mark this install as centrally managed (policy is coming)
@@ -104,7 +104,7 @@ Environment: GROWTHER_VERSION, GROWTHER_ARCH, GROWTHER_INSTALL_DIR,
 GROWTHER_HOME, GROWTHER_DATA_DIR, GROWTHER_RELEASE_BASE, GROWTHER_NO_MODIFY_PATH,
 GROWTHER_POLICY_EXPECTED, GROWTHER_MANAGED_INSTALL, GROWTHER_MANAGED_BY,
 GROWTHER_NO_ACTIVATE, GROWTHER_INSTALL_SERVICE, GROWTHER_PROFILE_ONLY.
-See https://docs.growther.ai/c5/getting-started/installation
+See https://docs.growther.si/c5/getting-started/installation
 USAGE
 }
 need_value() {
@@ -139,9 +139,9 @@ GROWTHER_HOME="${HOME_FLAG:-${GROWTHER_HOME:-$HOME/.growther}}"
 # DEFAULT home even when the home moves: it is the one location every launch can
 # find without being told where to look.
 DEFAULT_HOME="$HOME/.growther"
-# Public distribution is the raw growtherai/release mirror (dist/c5/<tag>/<asset>),
+# Public distribution is the raw GrowtherSI/release mirror (dist/c5/<tag>/<asset>),
 # NOT the private source repo's GitHub Releases (which aren't anonymously downloadable).
-DEFAULT_RELEASE_BASE="https://raw.githubusercontent.com/growtherai/release/main/dist/c5"
+DEFAULT_RELEASE_BASE="https://raw.githubusercontent.com/GrowtherSI/release/main/dist/c5"
 RELEASE_BASE="$DEFAULT_RELEASE_BASE"
 # A custom mirror redirects BOTH the binary and its checksum, so it is the whole
 # trust root for this install. Require an explicit second opt-in rather than
@@ -158,7 +158,7 @@ fi
 VERSION="${GROWTHER_VERSION:-latest}"
 
 # >>> GROWTHER_PINNED_RELEASE >>>
-# Replaced at serve time by growther.ai with hashes taken from an Ed25519-VERIFIED
+# Replaced at serve time by growther.si with hashes taken from an Ed25519-VERIFIED
 # release manifest. Verification happens on the server because Ed25519 is not
 # reliably available in a portable shell (macOS ships LibreSSL, whose pkeyutl has
 # no -rawin). Left as-is, this file is UNPINNED and says so before installing.
@@ -305,7 +305,7 @@ if [ "$PROFILE_ONLY" != "1" ]; then
       [ "$side" = "$pinned_sha" ] || warn "the published .sha256 disagrees with the signed manifest — using the signed value"
     fi
   elif "${DL[@]}" "$TMP/$ASSET.sha256" "${URL}.sha256" 2>/dev/null && [ -s "$TMP/$ASSET.sha256" ]; then
-    # Unpinned: this installer was not served by growther.ai (saved copy, mirror,
+    # Unpinned: this installer was not served by growther.si (saved copy, mirror,
     # or a preview without the verification key). The sidecar is same-origin and
     # unsigned, so say what it does and does not prove.
     warn "unpinned installer — the checksum below is unsigned and comes from the same host as the download"
@@ -591,7 +591,7 @@ if [ "$PROFILE_ONLY" != "1" ]; then
           [ "${SHELL##*/}" = "fish" ] && line="fish_add_path $INSTALL_DIR"
           mkdir -p "$(dirname "$rc")" 2>/dev/null || true   # fish: ~/.config/fish may not exist
           if ! grep -qF "$INSTALL_DIR" "$rc" 2>/dev/null; then
-            if printf '\n# Growther.ai C5\n%s\n' "$line" >> "$rc" 2>/dev/null; then
+            if printf '\n# Growther.si C5\n%s\n' "$line" >> "$rc" 2>/dev/null; then
               ok "added $INSTALL_DIR to PATH in $rc (restart your shell)"
             else
               warn "could not update PATH in $rc — add $INSTALL_DIR to your PATH manually"
@@ -623,7 +623,7 @@ fi
 
 # ── Done ─────────────────────────────────────────────────────────────────────
 say ""
-ok "${c_b}Growther.ai C5 installed.${c_reset}"
+ok "${c_b}Growther.si C5 installed.${c_reset}"
 say ""
 say "Next steps:"
 if [ "$NO_ACTIVATE" = "1" ]; then
@@ -639,5 +639,5 @@ else
   say "  2. Update later:  ${c_b}${BIN_NAME} update${c_reset}"
 fi
 say ""
-say "  Installing offline or air-gapped? See ${c_b}https://docs.growther.ai/c5/getting-started/installation${c_reset}"
+say "  Installing offline or air-gapped? See ${c_b}https://docs.growther.si/c5/getting-started/installation${c_reset}"
 say ""

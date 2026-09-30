@@ -22,9 +22,9 @@ section cover [turning it on and pairing a phone](/c5/remote-control/setup),
 | ---------------------------------------------------------------- | --------------------------------------------------------------------- | ------------------------------------- |
 | **Your own network**, or a name and certificate you supply       | Straight to the machine                                               | Nobody but you and the machine        |
 | **Your own SSH connection**, with `growther connect`             | Through a channel your SSH already secures                            | Nobody but you and the machine        |
-| **An address Growther.ai issues**, like `<label>.rc.growther.ai` | Through a Cloudflare Tunnel that Growther.ai creates for your install | Cloudflare (encrypted to and from it) |
+| **An address Growther.si issues**, like `<label>.rc.growther.si` | Through a Cloudflare Tunnel that Growther.si creates for your install | Cloudflare (encrypted to and from it) |
 
-The first two need nothing from Growther.ai and keep working without it. The third is the one
+The first two need nothing from Growther.si and keep working without it. The third is the one
 that works from anywhere without touching your router, and it is the one where a third party
 is in the path: Cloudflare carries the session, encrypted to and from it, and handles it
 within its network on the way through. That is explained plainly in
@@ -38,8 +38,8 @@ before the address is issued.
 | On the machine itself                              | Nobody                                                                      | Nobody                                                        |
 | Your own network, or your own name and certificate | Nobody                                                                      | Nobody                                                        |
 | Your own SSH connection                            | Nobody                                                                      | Nobody                                                        |
-| The address Growther.ai issues                     | **Cloudflare** (the connection is encrypted to and from it, not end to end) | Nobody, for ordinary requests. Streamed content is not signed |
-| Signing in at `rc.growther.ai`                     | Growther.ai sees the sign-in only                                           | Nobody                                                        |
+| The address Growther.si issues                     | **Cloudflare** (the connection is encrypted to and from it, not end to end) | Nobody, for ordinary requests. Streamed content is not signed |
+| Signing in at `rc.growther.si`                     | Growther.si sees the sign-in only                                           | Nobody                                                        |
 
 "Streamed content" means chat replies as they arrive, file downloads, audit exports, and live
 event feeds. Every path is encrypted in transit. C5 also signs ordinary requests and
@@ -48,17 +48,17 @@ the issued address the session is not end-to-end encrypted between your device a
 machine. Nothing here changes what your AI providers see: they receive whatever you send
 them, on your own account, with or without Remote Control.
 
-## What Growther.ai receives
+## What Growther.si receives
 
-Your session content never passes through Growther.ai's servers. While Remote Control is on,
+Your session content never passes through Growther.si's servers. While Remote Control is on,
 your install sends the licensing service — signed with the install's own key — your
 machine's name and up to four addresses it can be reached at. They are shown only to
-someone signed in to your account at `rc.growther.ai`, and they are deleted when you turn
+someone signed in to your account at `rc.growther.si`, and they are deleted when you turn
 Remote Control off. When it is off, your install sends nothing about your network.
 
 ## The portal, in one paragraph
 
-`rc.growther.ai` signs you in with the same email link as your licence account, lists the
+`rc.growther.si` signs you in with the same email link as your licence account, lists the
 installs on your account with the addresses each one published, and hands you off to your
 own machine with a link. After that hand-off the portal is out of the path. It is a
 directory, not a relay.
@@ -83,4 +83,4 @@ directory, not a relay.
 - [Turning it on and pairing a phone](/c5/remote-control/setup)
 - [Privacy and Cloudflare](/c5/remote-control/privacy-and-cloudflare) — read this before
   you use an issued address for anything sensitive.
-- The Terms section you accept: [Section 14, Remote Control](https://growther.ai/t=remote-control)
+- The Terms section you accept: [Section 14, Remote Control](https://growther.si/t=remote-control)

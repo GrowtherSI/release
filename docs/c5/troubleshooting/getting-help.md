@@ -18,8 +18,8 @@ Two things solve most problems and save you a wait:
 
 | Where | Best for |
 | --- | --- |
-| [Help & Feedback](https://growther.ai/#modal=help) | Questions, problems, and feature ideas. |
-| [GitHub](https://github.com/growtherai) | Release notes and public discussion. |
+| [Help & Feedback](https://growther.si/#modal=help) | Questions, problems, and feature ideas. |
+| [GitHub](https://github.com/GrowtherSI) | Release notes and public discussion. |
 
 ## What to include
 
@@ -75,12 +75,12 @@ That gives someone everything they need to start looking, with no back and forth
 
 ## Feature ideas
 
-Send them to [Help & Feedback](https://growther.ai/#modal=help). Say what you are trying
+Send them to [Help & Feedback](https://growther.si/#modal=help). Say what you are trying
 to achieve, not only what feature you want — often there is already a way, and if there
 is not, knowing the goal makes for a better feature.
 
 ## Something security-related
 
 If you think you have found a security problem, please report it privately through
-[Help & Feedback](https://growther.ai/#modal=help) rather than posting it publicly, so it
+[Help & Feedback](https://growther.si/#modal=help) rather than posting it publicly, so it
 can be fixed before it is widely known.

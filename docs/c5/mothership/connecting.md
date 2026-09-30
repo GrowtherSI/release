@@ -42,8 +42,8 @@ dashboards.
 ## If activation fails
 
 **"Cannot reach the activation service"**
-A network or firewall problem. Activation goes to `license.growther.ai`, which is a
-different host from the platform's `api.growther.ai` — allow both. C5 keeps working
+A network or firewall problem. Activation goes to `license.growther.si`, which is a
+different host from the platform's `api.growther.si` — allow both. C5 keeps working
 offline; you just cannot activate until it can connect. See
 [Network and egress](/c5/configuration/network) for the full host list.
 

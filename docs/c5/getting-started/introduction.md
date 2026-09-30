@@ -1,12 +1,12 @@
 ---
 title: Introduction
-description: What Growther.ai C5 is, what it does, and who it is for.
+description: What Growther.si C5 is, what it does, and who it is for.
 order: 1
 ---
 
 # Introduction
 
-Growther.ai C5 is an AI agent platform that runs on your own computer.
+Growther.si C5 is an AI agent platform that runs on your own computer.
 
 An **agent** is an AI helper that can do real work for you. It does not just answer
 questions. It can plan a job, break it into steps, use tools, and keep going until the
@@ -60,7 +60,7 @@ If you ever want your data out, you can unlock and export it with one click. You
 
 C5 works completely on its own. You never have to connect it to anything.
 
-**Mothership** is the Growther.ai cloud. It is optional. Connecting to it lets your setup
+**Mothership** is the Growther.si cloud. It is optional. Connecting to it lets your setup
 learn from what works well across the whole Growther community, and gives you shared
 dashboards and managed updates. You can read more in [Mothership](/c5/mothership/overview).
 

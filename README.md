@@ -1,9 +1,9 @@
-# Growther.ai C5
+# Growther.si C5
 
 **A self‑hosted, single‑binary AI agent platform.** Autonomous multi‑agent
 orchestration, harness driven, safe tool use, and a self‑improving workflow — running entirely on
 your machine, with encrypted local storage and zero required external dependencies.
-Optionally supercharged by **Mothership**, the Growther.ai cloud.
+Optionally supercharged by **Mothership**, the Growther.si cloud.
 
 ---
 
@@ -21,7 +21,7 @@ Optionally supercharged by **Mothership**, the Growther.ai cloud.
 
 <br>
 
-**Growther.ai Comprehensive Platform Suite**&nbsp; [![Full Platform Tests](https://img.shields.io/badge/48%2C841%20passed-success?style=plastic&logo=vitest&logoColor=white&color=FFD700)](#)
+**Growther.si Comprehensive Platform Suite**&nbsp; [![Full Platform Tests](https://img.shields.io/badge/48%2C841%20passed-success?style=plastic&logo=vitest&logoColor=white&color=FFD700)](#)
 
 [![API & Server Tests](https://img.shields.io/badge/All%20APIs%20%2B%20Servers%20%2B%20Cloud-23%2C909%20passed-green?style=plastic&logo=node.js)](#) &nbsp;&nbsp; [![App Tests](https://img.shields.io/badge/All%20Apps-24%2C932%20passed-blue?style=plastic&logo=react)](#)
 
@@ -35,9 +35,9 @@ Optionally supercharged by **Mothership**, the Growther.ai cloud.
 
 <br>
 
-## What is Growther.ai C5?
+## What is Growther.si C5?
 
-Growther.ai C5 is a complete AI‑agent runtime that ships as **one self‑contained
+Growther.si C5 is a complete AI‑agent runtime that ships as **one self‑contained
 executable** — no Node, no Docker, no dependency chase. Drop the binary on macOS,
 Windows, or Linux and you have:
 
@@ -71,19 +71,19 @@ The CLI is `growther`. One binary, batteries included.
 **macOS / Linux**
 
 ```bash
-curl -fsSL https://growther.ai/install.sh | bash
+curl -fsSL https://growther.si/install.sh | bash
 ```
 
 **Windows** (PowerShell)
 
 ```powershell
-irm https://growther.ai/install.ps1 | iex
+irm https://growther.si/install.ps1 | iex
 ```
 
 **Homebrew** (macOS / Linux)
 
 ```bash
-brew install growtherai/tap/growther-c5
+brew install growthersi/tap/growther-c5
 ```
 
 The installer detects your OS/arch, downloads the matching binary, **verifies its
@@ -112,7 +112,7 @@ Or update the way you installed:
 
 <br>
 
-## Growther.ai C5 alone vs. C5 + Mothership
+## Growther.si C5 alone vs. C5 + Mothership
 
 C5 is fully functional on its own — a private, powerful agent platform you own end
 to end. **Mothership** is the Growther cloud that turns a collection of private
@@ -156,8 +156,8 @@ built and signed by the release pipeline.
 
 ## Links
 
-- 🌐 [Growther.ai](https://Growther.ai) — home
-- 🌐 [docs.Growther.ai](https://docs.Growther.ai) — docs & resources
+- 🌐 [Growther.si](https://Growther.si) — home
+- 🌐 [docs.Growther.si](https://docs.Growther.si) — docs & resources
 - 📦 [Release archive](dist/c5/) — every published version, with digests
 - 🧾 [`releases.json`](dist/c5/releases.json) — versions catalog the
   installer and the in‑app auto‑updater read
@@ -166,7 +166,7 @@ built and signed by the release pipeline.
 
 ---
 
-The **Growther.ai** platform is built around best-practices in software
+The **Growther.si** platform is built around best-practices in software
   architecture and development with enterprise-grade security and
   reliability standards, and automated deployment & quality control.
   The status block at the top is written automatically by the **C5** Release
@@ -182,4 +182,4 @@ The **Growther.ai** platform is built around best-practices in software
 
 ### Patent Notice
 
-Growther.ai C5 and Mothership mechanisms are covered by U.S. Patent Application No. 64/130,388.
+Growther.si C5 and Mothership mechanisms are covered by U.S. Patent Application No. 64/130,388.

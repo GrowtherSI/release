@@ -1,12 +1,12 @@
 ---
 title: What Mothership is
-description: The optional Growther.ai cloud, what it adds, and why you might skip it.
+description: The optional Growther.si cloud, what it adds, and why you might skip it.
 order: 1
 ---
 
 # What Mothership is
 
-**Mothership** is the Growther.ai cloud. It is optional. C5 is complete without it.
+**Mothership** is the Growther.si cloud. It is optional. C5 is complete without it.
 
 ## C5 works fine alone
 
@@ -49,7 +49,7 @@ gives you one place to see them all, and one place to manage updates and billing
 Connecting does **not**:
 
 - Move your work to the cloud. Your data stays on your computer.
-- Give Growther.ai your prompts, files, or results.
+- Give Growther.si your prompts, files, or results.
 - Require internet to keep working. Lose your connection and C5 carries on.
 - Lock you in. You can disconnect at any time and keep everything.
 

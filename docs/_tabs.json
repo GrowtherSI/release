@@ -22,7 +22,7 @@
     "path": "/c5/changelog/overview",
     "match": ["changelog"],
     "fallback": {
-      "path": "https://github.com/growtherai/release/releases",
+      "path": "https://github.com/GrowtherSI/release/releases",
       "external": true,
       "whenEmpty": "changelog"
     }

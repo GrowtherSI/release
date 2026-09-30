@@ -14,7 +14,7 @@ check ever fails.
 Software gets downloaded over networks you do not control. Somewhere between the
 publisher and your computer, a file could be swapped or altered.
 
-You want to know that the program you are about to run is exactly the one Growther.ai
+You want to know that the program you are about to run is exactly the one Growther.si
 built — not a modified copy.
 
 ## Two checks
@@ -31,9 +31,9 @@ written.
 ### A signature
 
 Every release also ships with a **signed build manifest** — a small record of how the
-build was made, stamped in a way only Growther.ai can produce. Growther.ai holds a
+build was made, stamped in a way only Growther.si can produce. Growther.si holds a
 private key; the stamp can be checked by anyone but created by no one else. So a valid
-stamp proves the build came from Growther.ai and has not been altered since.
+stamp proves the build came from Growther.si and has not been altered since.
 
 ## Where the checking happens
 
@@ -81,7 +81,7 @@ See [Running doctor](/c5/cli/doctor).
 ## If a check fails
 
 > **Danger**
-> A failed integrity check means the program on disk is not the one Growther.ai signed.
+> A failed integrity check means the program on disk is not the one Growther.si signed.
 > Do not ignore it and do not work around it.
 
 What to do:
@@ -99,5 +99,5 @@ treats every failure the same way. That is the correct behavior.
 ## Where releases come from
 
 Published releases and their fingerprints live in the public
-[release repository](https://github.com/growtherai/release). Every version is listed with
+[release repository](https://github.com/GrowtherSI/release). Every version is listed with
 its digest, so you can check any file by hand if you want to.

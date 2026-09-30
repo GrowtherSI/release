@@ -108,13 +108,13 @@ answered.
 
 | Host | Why |
 | --- | --- |
-| `api.growther.ai` | The signed version manifest and update catalog, the licence check-in clock, the flywheel catalogue and artefact downloads, and anonymous error reports |
-| `license.growther.ai` | Device-code activation, licence refresh and key rotation. Verification is Ed25519 against a pinned key — the host is only the transport |
+| `api.growther.si` | The signed version manifest and update catalog, the licence check-in clock, the flywheel catalogue and artefact downloads, and anonymous error reports |
+| `license.growther.si` | Device-code activation, licence refresh and key rotation. Verification is Ed25519 against a pinned key — the host is only the transport |
 | `raw.githubusercontent.com` | The release mirror: installer scripts and self-update binary assets. Every asset is SHA-256 checked against the signed manifest |
 | `huggingface.co` | Model pulls: the QMD embedding, reranker and query-expansion models, and the offline speech model |
 | `api-inference.huggingface.co` | The default Hugging Face inference endpoint — only when you have configured that provider |
-| `growther.ai` | The canonical installer scripts, and product documentation linked from the console |
-| `docs.growther.ai` | Documentation, reached only when someone clicks a link |
+| `growther.si` | The canonical installer scripts, and product documentation linked from the console |
+| `docs.growther.si` | Documentation, reached only when someone clicks a link |
 
 If you point C5 at a relay or mirror with **Platform address**
 (`GROWTHER_PLATFORM_BASE_URL`), that host is listed first and the default is

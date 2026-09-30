@@ -62,7 +62,7 @@ Every release is published with a fingerprint and a signature. Before C5 install
 update, it checks both. If either one does not match, the update stops and nothing is
 installed.
 
-This means you can only ever end up running a version that Growther.ai actually built
+This means you can only ever end up running a version that Growther.si actually built
 and signed. See [Verify what you run](/c5/security/verifying-releases).
 
 ## Release channels

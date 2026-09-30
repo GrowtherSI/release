@@ -62,12 +62,12 @@ covered in [Troubleshooting](/c5/remote-control/troubleshooting).
 It asks you to confirm:
 
 > Signs out every paired device, deletes this machine's address and tunnel, ends
-> rc.growther.ai sign-ins for your account, and turns Remote Control off.
+> rc.growther.si sign-ins for your account, and turns Remote Control off.
 
 Press **Disconnect** and, in this order, C5 turns the switch off, revokes every pairing —
 each phone is signed out immediately and shown that it is no longer paired, before the
 address it was reached through goes away — stops serving the secure address, releases the
-tunnel and the issued address on Growther.ai's side, removes the tunnel connector's credential
+tunnel and the issued address on Growther.si's side, removes the tunnel connector's credential
 files from this machine, withdraws your addresses and machine name from your account, and
 then asks the licensing service to end your portal sign-ins. The tab then shows the switch
 off and an empty device list.
@@ -83,7 +83,7 @@ when you simply want a clean slate. It is not offered on a paired device.
 
 Before saving, C5 asks you to confirm:
 
-> Turning Remote Control off signs out every paired device, gives back any address Growther.ai
+> Turning Remote Control off signs out every paired device, gives back any address Growther.si
 > issued and deletes its tunnel, removes your addresses and machine name from your account,
 > and deletes the connector's credential files here. A tunnel token you pasted yourself is
 > kept, and your tunnel runs again when you turn back on. Devices must be paired again if
@@ -92,22 +92,22 @@ Before saving, C5 asks you to confirm:
 **Cancel** keeps it on; **Turn off** proceeds. In this order, C5 then turns the switch off,
 revokes every pairing — each phone is signed out immediately and shown that it is no longer
 paired — stops serving the secure address, releases the issued address and its tunnel on
-Growther.ai's side (when you had one), removes the tunnel connector's credential files from
+Growther.si's side (when you had one), removes the tunnel connector's credential files from
 this machine, and withdraws your addresses and machine name from your account.
 
 A tunnel token you pasted under Advanced is **not** cleared. The connector stops and its
-credential files go, but the token stays saved for the next time, and Growther.ai — which holds
-nothing for your tunnel — is not asked to release anything. Only an address Growther.ai issued is
+credential files go, but the token stays saved for the next time, and Growther.si — which holds
+nothing for your tunnel — is not asked to release anything. Only an address Growther.si issued is
 given back.
 
 The one thing the switch does not do on its own is end your sign-in at
-[rc.growther.ai](https://rc.growther.ai). That portal sign-in lasts seven days regardless of
+[rc.growther.si](https://rc.growther.si). That portal sign-in lasts seven days regardless of
 the switch; **Disconnect everything** ends it, and so does **Sign out everywhere** on the
 portal.
 
 The switch flips even if one of the cleanup steps cannot complete at that moment — if the
 licensing service cannot be reached, for example, the tunnel is still stopped and its
-credential removed here, and the address is removed on Growther.ai's side by its own
+credential removed here, and the address is removed on Growther.si's side by its own
 housekeeping. The addresses are withdrawn from your account immediately rather than at the
 next scheduled check-in.
 
@@ -123,9 +123,9 @@ The same teardown happens on its own when:
 
 Turn the switch on again and press **Save**. The acceptance dialog is not shown again unless
 the terms have changed since you accepted them; if it is, agreeing turns Remote Control on
-without a Save. Growther.ai normally issues the same address as before, with a fresh tunnel
+without a Save. Growther.si normally issues the same address as before, with a fresh tunnel
 behind it. If you were running your own tunnel, the token you pasted is still saved: C5 runs
-your tunnel again and asks Growther.ai for nothing. Your tunnel answers for the host of your
+your tunnel again and asks Growther.si for nothing. Your tunnel answers for the host of your
 **Public address**, or for the hostname you gave it in your own dashboard when none is set.
 
 Every device has to be paired again, because turning off revoked every pairing. There is no

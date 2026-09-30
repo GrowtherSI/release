@@ -18,19 +18,19 @@ to check a download you already have.
 **macOS and Linux**
 
 ```bash
-curl -fsSL https://growther.ai/install.sh | bash
+curl -fsSL https://growther.si/install.sh | bash
 ```
 
 **Windows** (PowerShell)
 
 ```powershell
-irm https://growther.ai/install.ps1 | iex
+irm https://growther.si/install.ps1 | iex
 ```
 
 **Homebrew**
 
 ```bash
-brew install growtherai/tap/growther-c5
+brew install GrowtherSI/tap/growther-c5
 ```
 
 ## Direct downloads
@@ -96,7 +96,7 @@ delete the file and download it again.
 
 > **Danger**
 > Do not run a file whose SHA-256 does not match. A mismatch means the file is not the
-> one Growther.ai published.
+> one Growther.si published.
 
 The install commands do this check for you automatically, and so does `growther update`.
 See [Verifying releases](/c5/security/verifying-releases) for the full picture.
@@ -115,7 +115,7 @@ time — see [Updating C5](/c5/getting-started/updating).
 ## Older versions
 
 Every version ever published is kept, along with its checksums, in the
-[release archive](https://github.com/growtherai/release/tree/main/dist/c5).
+[release archive](https://github.com/GrowtherSI/release/tree/main/dist/c5).
 
 You do not normally need an old version. If a new one causes trouble, `growther rollback`
 puts back the one you had before, which is easier and safer than downloading by hand.

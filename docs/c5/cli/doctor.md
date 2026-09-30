@@ -42,7 +42,7 @@ enterprise checks are silent unless the feature is configured.
 | **Install** | The program is where it should be |
 | **`growther` on PATH** | You can run `growther` from any shell |
 | **Build manifest** | The record of how this build was made is present |
-| **Manifest signature** | That record really was signed by Growther.ai |
+| **Manifest signature** | That record really was signed by Growther.si |
 | **Binary integrity** | The program file matches what was installed |
 | **OpenSSL 1.1 (SQLCipher)** | The library the encrypted databases need is available |
 | **SOC2 change-mgmt** | Internal build and release change-control checks |
@@ -123,7 +123,7 @@ The program file does not match what was published.
 
 > **Danger**
 > Do not ignore an integrity failure. It means the program on disk is not the one
-> Growther.ai signed. Reinstall from the official installer, and see
+> Growther.si signed. Reinstall from the official installer, and see
 > [Verifying releases](/c5/security/verifying-releases).
 
 ## When you ask for help

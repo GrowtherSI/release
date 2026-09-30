@@ -1,5 +1,5 @@
 # ─────────────────────────────────────────────────────────────────────────────
-# Growther.ai C5 installer (Windows)  ·  irm https://growther.ai/install.ps1 | iex
+# Growther.si C5 installer (Windows)  ·  irm https://growther.si/install.ps1 | iex
 #
 # Downloads the self-contained V8-bytecode binary for this arch from GitHub
 # Releases, verifies SHA-256, installs it on PATH, and seeds %USERPROFILE%\.growther
@@ -113,7 +113,7 @@ $ManagedBy      = if ($env:GROWTHER_MANAGED_BY) { $env:GROWTHER_MANAGED_BY } els
 $ProfileOnly    = ($env:GROWTHER_PROFILE_ONLY -eq "1")
 function Show-GrowtherUsage {
   Write-Host @'
-Growther.ai C5 installer (Windows)
+Growther.si C5 installer (Windows)
 
   .\install.ps1 [options]
 
@@ -137,7 +137,7 @@ Environment: GROWTHER_VERSION, GROWTHER_INSTALL_DIR, GROWTHER_HOME,
 GROWTHER_DATA_DIR, GROWTHER_RELEASE_BASE, GROWTHER_NO_MODIFY_PATH,
 GROWTHER_POLICY_EXPECTED, GROWTHER_MANAGED_INSTALL, GROWTHER_MANAGED_BY,
 GROWTHER_NO_ACTIVATE, GROWTHER_INSTALL_SERVICE, GROWTHER_PROFILE_ONLY.
-See https://docs.growther.ai/c5/getting-started/installation
+See https://docs.growther.si/c5/getting-started/installation
 '@
 }
 for ($i = 0; $i -lt $args.Count; $i++) {
@@ -188,14 +188,14 @@ $GrowtherHome = if ($HomeFlag) { $HomeFlag } elseif ($env:GROWTHER_HOME) { Forma
 # The pointer and the policy-expected marker live in the DEFAULT home even when
 # the home moves: it is the one location every launch finds without being told.
 $DefaultHome  = "$env:USERPROFILE\.growther"
-# THIS FILE IS CANONICAL. growther.ai serves it and growtherai/release publishes
+# THIS FILE IS CANONICAL. growther.si serves it and GrowtherSI/release publishes
 # it — both are mirrors checked against this copy by hash. It used to exist as
-# three divergent variants (this repo, the release repo, growther.ai's fork);
+# three divergent variants (this repo, the release repo, growther.si's fork);
 # only the fork had the signed-release pin. One file now carries everything.
 #
-# Public distribution is the raw growtherai/release mirror (dist/c5/<tag>/<asset>),
+# Public distribution is the raw GrowtherSI/release mirror (dist/c5/<tag>/<asset>),
 # NOT the private source repo's GitHub Releases (not anonymously downloadable).
-$DefaultReleaseBase = "https://raw.githubusercontent.com/growtherai/release/main/dist/c5"
+$DefaultReleaseBase = "https://raw.githubusercontent.com/GrowtherSI/release/main/dist/c5"
 $ReleaseBase  = $DefaultReleaseBase
 # A custom mirror supplies BOTH the binary and its checksum, so it is the whole
 # trust root. Require an explicit second opt-in rather than letting one env var
@@ -210,7 +210,7 @@ if ($env:GROWTHER_RELEASE_BASE -and $env:GROWTHER_RELEASE_BASE -ne $DefaultRelea
 }
 
 # >>> GROWTHER_PINNED_RELEASE >>>
-# Replaced at serve time by growther.ai with hashes from an Ed25519-VERIFIED
+# Replaced at serve time by growther.si with hashes from an Ed25519-VERIFIED
 # release manifest. Left as-is, this file is UNPINNED and says so before installing.
 $GrowtherPinnedVersion = ""
 $GrowtherPinnedAssets = ""
@@ -305,7 +305,7 @@ try {
         }
       }
     } elseif ($haveChecksum) {
-      # Unpinned: not served by growther.ai (saved copy, mirror, or a preview
+      # Unpinned: not served by growther.si (saved copy, mirror, or a preview
       # without the verification key). Say what the sidecar does and does not prove.
       Write-Warning "unpinned installer — the checksum below is unsigned and comes from the same host as the download"
       $expected = ((Get-Content "$tmp\$asset.sha256") -split '\s+')[0].ToLower()
@@ -535,7 +535,7 @@ try {
   }
 
   Write-Host ""
-  Write-Host "✓ Growther.ai C5 installed." -ForegroundColor Green
+  Write-Host "✓ Growther.si C5 installed." -ForegroundColor Green
   Write-Host ""
   Write-Host "Next steps:"
   if ($NoActivate) {

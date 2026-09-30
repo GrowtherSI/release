@@ -68,7 +68,7 @@ Usually it split into many smaller pieces, or it is waiting on you. Open
 
 You have three easy ways:
 1. **From your browser:** Click the green **Start C5** button in the sidebar menu or in **Settings → System**.
-2. **From your desktop:** Double-click the **Growther.ai C5** icon in your Applications folder or Start menu.
+2. **From your desktop:** Double-click the **Growther.si C5** icon in your Applications folder or Start menu.
 3. **From your terminal:** Run `growther start` (or `growther`).
 
 ## Models and money
@@ -101,7 +101,7 @@ so someone with the drive has both. Turn on full-disk encryption — FileVault o
 BitLocker on Windows, LUKS on Linux. That is the tool that protects a lost laptop. See
 [Local encryption](/c5/security/encryption).
 
-### Can Growther.ai see my work?
+### Can Growther.si see my work?
 
 No — your prompts, files, and results never leave your computer. If you connect to
 Mothership, what is shared is limited to measurements — the full list is at
@@ -123,13 +123,13 @@ time.
 
 ### How do I get a license?
 
-Get one from [growther.ai](https://growther.ai). Then run `growther activate` on each
+Get one from [growther.si](https://growther.si). Then run `growther activate` on each
 computer to pair it — see [Connecting](/c5/mothership/connecting).
 
 ### I have a referral link or discount code — how do I use it?
 
 Open the link and sign in when asked, or — if you only have the code — sign in to
-[license.growther.ai](https://license.growther.ai) and enter it under *Have a
+[license.growther.si](https://license.growther.si) and enter it under *Have a
 referral code?* in the cart on the Plans page. The cart shows what comes off before
 you pay. Everything else — time limits, who gets what, and how to become a
 referrer yourself — is on the

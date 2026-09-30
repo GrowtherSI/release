@@ -20,8 +20,8 @@ Connected or not, these stay on your machine:
 - **Your chats.** Whole conversations and their history.
 - **Your context.** The standing instructions you wrote.
 
-These are stored encrypted in your data folder. Growther.ai cannot read them, because
-Growther.ai never receives them.
+These are stored encrypted in your data folder. Growther.si cannot read them, because
+Growther.si never receives them.
 
 ## What is shared when you connect
 
@@ -74,7 +74,7 @@ Your work is stored in encrypted databases in your data folder. See
 ## Questions this page does not answer
 
 For formal terms — the legal agreement, the data processing agreement, and the privacy
-policy — see the links in the footer of [growther.ai](https://growther.ai).
+policy — see the links in the footer of [growther.si](https://growther.si).
 
 If something here is unclear, ask before you connect. See
 [Getting help](/c5/troubleshooting/getting-help).

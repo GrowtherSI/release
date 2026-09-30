@@ -269,7 +269,7 @@ When the server is stopped or offline, the interface adjusts automatically:
 
 Clicking **Start C5** invokes your computer's built-in `growther://start` protocol link to launch C5 (or wake its background service). While it starts, the button shows a spinning indicator with **Starting…**. Once C5 is running, your tab reconnects on its own within a few seconds and the online controls return.
 
-You can also start C5 at any time from the "Growther.ai C5" desktop shortcut, or by running `growther start` in a terminal.
+You can also start C5 at any time from the "Growther.si C5" desktop shortcut, or by running `growther start` in a terminal.
 
 ## Saving changes
 
