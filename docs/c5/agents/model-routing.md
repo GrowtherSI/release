@@ -1,12 +1,12 @@
 ---
 title: Choosing models
-description: Match the right AI model to the right job to balance quality, speed, and cost.
+description: Match the right SI model to the right job to balance quality, speed, and cost.
 order: 4
 ---
 
 # Choosing models
 
-A **model** is the AI brain an agent thinks with. C5 does not lock you into one. You can
+A **model** is the SI brain an agent thinks with. C5 does not lock you into one. You can
 use several, and let different jobs use different ones.
 
 ## Why this matters

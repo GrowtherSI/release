@@ -80,4 +80,4 @@ Nothing is hidden. If you want to know why C5 did something, the record is there
 
 - [Your agent fleet](/c5/agents/fleet) — running more agents at once.
 - [Context](/c5/agents/context) — giving your agents standing instructions.
-- [Choosing models](/c5/agents/model-routing) — which AI brain does what.
+- [Choosing models](/c5/agents/model-routing) — which SI brain does what.

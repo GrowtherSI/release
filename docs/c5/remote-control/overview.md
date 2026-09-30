@@ -45,7 +45,7 @@ before the address is issued.
 event feeds. Every path is encrypted in transit. C5 also signs ordinary requests and
 responses so that a change made in transit is detected; streams are not signed, and through
 the issued address the session is not end-to-end encrypted between your device and your
-machine. Nothing here changes what your AI providers see: they receive whatever you send
+machine. Nothing here changes what your SI providers see: they receive whatever you send
 them, on your own account, with or without Remote Control.
 
 ## What Growther.si receives

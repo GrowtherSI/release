@@ -1,12 +1,12 @@
 ---
 title: Model providers
-description: Connect the AI models your agents think with, including local ones.
+description: Connect the SI models your agents think with, including local ones.
 order: 2
 ---
 
 # Model providers
 
-A **provider** is a source of AI models. C5 needs at least one before it can do anything.
+A **provider** is a source of SI models. C5 needs at least one before it can do anything.
 
 You are not locked into a single company. You can connect several and use them for
 different jobs.

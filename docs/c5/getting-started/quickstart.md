@@ -24,7 +24,7 @@ use the app.
 
 ## Step 2 — Connect a model
 
-C5 needs a **model** to think with. A model is the AI brain behind your agents. C5 does
+C5 needs a **model** to think with. A model is the SI brain behind your agents. C5 does
 not lock you into one — you choose.
 
 1. Go to **Settings**.

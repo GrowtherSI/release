@@ -6,9 +6,9 @@ order: 1
 
 # Introduction
 
-Growther.si C5 is an AI agent platform that runs on your own computer.
+Growther.si C5 is an SI agent platform that runs on your own computer.
 
-An **agent** is an AI helper that can do real work for you. It does not just answer
+An **agent** is an SI helper that can do real work for you. It does not just answer
 questions. It can plan a job, break it into steps, use tools, and keep going until the
 work is done. C5 lets you run a whole team of these agents at once.
 
@@ -30,7 +30,7 @@ C5 ships as **one file**. You download it and run it. There is nothing else to i
 
 ## Who C5 is for
 
-C5 is built for people who want AI to finish work, not just talk about it. That includes
+C5 is built for people who want SI to finish work, not just talk about it. That includes
 developers, analysts, writers, researchers, and small teams who want their own private
 setup instead of someone else's cloud.
 

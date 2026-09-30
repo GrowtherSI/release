@@ -6,7 +6,7 @@ order: 2
 
 # MCP servers
 
-**MCP** stands for Model Context Protocol. It is an open standard for giving AI agents
+**MCP** stands for Model Context Protocol. It is an open standard for giving SI agents
 new abilities.
 
 Because it is a standard, tools built for it work with C5 without anyone writing special

@@ -43,7 +43,7 @@ task waiting for your approval.
 ## Self-healing
 
 C5 is built to fix itself where it can. If your browser closes, your internet drops, an
-AI provider goes down, or the power goes out, C5 keeps track of what it was doing and
+SI provider goes down, or the power goes out, C5 keeps track of what it was doing and
 picks up where it left off when things come back.
 
 Its data storage repairs, backs up, and recovers itself too. Monitor is where you can

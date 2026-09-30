@@ -15,7 +15,7 @@ install and updates, but the app itself is a normal website in your browser.
 
 ### Do I need internet?
 
-Only for a few things: installing, updating, activating, and using AI models hosted by
+Only for a few things: installing, updating, activating, and using SI models hosted by
 other companies.
 
 If you run models on your own computer, C5 works with no internet at all.
@@ -27,7 +27,7 @@ No. Your prompts, files, and results stay on your computer, encrypted. See
 
 ### What does it cost to run?
 
-C5 itself is licensed software. On top of that you pay whichever AI provider you use,
+C5 itself is licensed software. On top of that you pay whichever SI provider you use,
 based on how much you use it. Running models locally costs nothing per use.
 
 Set a budget on day one — see [Budgets](/c5/using-c5/ops).

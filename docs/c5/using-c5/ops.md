@@ -11,7 +11,7 @@ costing me, and where is it going?
 
 ## Why budgets matter
 
-Agents use AI models, and most models cost money per use. An agent working on a big job
+Agents use SI models, and most models cost money per use. An agent working on a big job
 can make many calls. Without a limit, a runaway task could spend more than you meant to.
 
 Budgets stop that. You set a ceiling, and C5 will not go past it.
@@ -63,7 +63,7 @@ The Ops charts break spending down by:
 
 - **Time** — today, this week, this month
 - **Task** — which jobs cost the most
-- **Model** — which AI models you are paying for
+- **Model** — which SI models you are paying for
 
 If a number looks wrong, click into it. You can follow the cost all the way down to the
 task that caused it.
