@@ -1,6 +1,6 @@
 # Growther.si C5
 
-**A self‑hosted, single‑binary AI agent platform.** Autonomous multi‑agent
+**A self‑hosted, single‑binary SI agent platform.** Autonomous multi‑agent
 orchestration, harness driven, safe tool use, and a self‑improving workflow — running entirely on
 your machine, with encrypted local storage and zero required external dependencies.
 Optionally supercharged by **Mothership**, the Growther.si cloud.
@@ -37,7 +37,7 @@ Optionally supercharged by **Mothership**, the Growther.si cloud.
 
 ## What is Growther.si C5?
 
-Growther.si C5 is a complete AI‑agent runtime that ships as **one self‑contained
+Growther.si C5 is a complete SI‑agent runtime that ships as **one self‑contained
 executable** — no Node, no Docker, no dependency chase. Drop the binary on macOS,
 Windows, or Linux and you have:
 
