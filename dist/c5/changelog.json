@@ -1,5 +1,30 @@
 [
   {
+    "tag": "v2026.10.1-v319",
+    "version": "2026.10.1-v319",
+    "build": 319,
+    "releasedAt": "2026-09-30T17:09:02-07:00",
+    "bullets": [
+      {
+        "kind": "fixed",
+        "text": "Tasks no longer get blocked by unrequested secondary files."
+      },
+      {
+        "kind": "fixed",
+        "text": "Active runs and gate reviews are no longer suspended prematurely."
+      },
+      {
+        "kind": "fixed",
+        "text": "Tasks with passed review gates now advance to completion automatically."
+      },
+      {
+        "kind": "fixed",
+        "text": "Scheduled requests reset to todo now re-execute properly."
+      }
+    ],
+    "more": 6
+  },
+  {
     "tag": "v2026.9.29-v316",
     "version": "2026.9.29-v316",
     "build": 316,
