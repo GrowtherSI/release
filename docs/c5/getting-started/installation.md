@@ -78,13 +78,15 @@ Run the command by itself to start C5:
 growther
 ```
 
-C5 starts and prints the address it is running on:
+C5 starts, prints the addresses it listens on, and opens the app in your browser:
 
 ```text
-C5 API running on http://localhost:4299
+[bootstrap] C5 API running on http://127.0.0.1:4299
+[bootstrap] C5 API also on http://[::1]:4299
 ```
 
-Open that address in your browser to use the app.
+If the browser does not open, go to `http://localhost:4299` yourself. Use that name rather
+than the numbers: passkeys are tied to `localhost`.
 
 > **Tip**
 > Want a different port? Set the `PORT` value before you start:

@@ -31,6 +31,12 @@ within its network on the way through. That is explained plainly in
 [Privacy and Cloudflare](/c5/remote-control/privacy-and-cloudflare), and you accept it in C5
 before the address is issued.
 
+A tunnel — the issued address, or one of your own — needs Cloudflare's small connector
+program, `cloudflared`, running on the machine. C5 does not ship it inside its download.
+It fetches one pinned version from Cloudflare's own releases the first time a tunnel
+starts, through your proxy settings, and checks it before running it. See
+[The connector C5 runs](/c5/remote-control/privacy-and-cloudflare#the-connector-c5-runs).
+
 ## Who can see what
 
 | Path                                               | Who else is in the path                                                     | Who can change it without you noticing                        |
@@ -83,4 +89,5 @@ directory, not a relay.
 - [Turning it on and pairing a phone](/c5/remote-control/setup)
 - [Privacy and Cloudflare](/c5/remote-control/privacy-and-cloudflare) — read this before
   you use an issued address for anything sensitive.
-- The Terms section you accept: [Section 14, Remote Control](https://growther.si/t=remote-control)
+- The Terms section you accept: [Section 15, Remote Control](https://growther.si/t=remote-control).
+  It was Section 14 until Terms version 1.8 added a new Section 14 before it.

@@ -77,6 +77,7 @@ task that caused it.
 | **Errors**   | Problems that came up, grouped so you can spot patterns.            |
 | **Audit**    | A record of what happened and when.                                 |
 | **Memory**   | What C5 has remembered from your past work.                         |
+| **Classifier** | How the [local classifier](/c5/tools/local-classifier) is doing: its decisions, its speed, the calls it replaced and the labels waiting. Only accounts that may view Settings see it. |
 
 ## Self-improvement milestones
 

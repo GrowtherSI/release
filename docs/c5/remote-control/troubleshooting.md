@@ -1,6 +1,6 @@
 ---
 title: Troubleshooting Remote Control
-description: The address is not reachable, certificate warnings, two copies of an install fighting over one address, DNS rebinding, replies arriving late through the tunnel, rate limits, refused sign-ins, what to do when a lease expires, and what the no-longer-paired screen means.
+description: The address is not reachable, the tunnel program will not download, certificate warnings, two copies of an install fighting over one address, DNS rebinding, replies arriving late through the tunnel, rate limits, refused sign-ins, what to do when a lease expires, and what the no-longer-paired screen means.
 order: 5
 ---
 
@@ -22,6 +22,10 @@ Read the status line under **Reach this machine from anywhere**:
 | _The connection stopped. It will be retried._                   | The machine lost its outbound connection. It reconnects on its own; check the machine's own internet access                                                               |
 | _Not connected. Only addresses on your own network work today._ | No tunnel is running. Remote Control was just turned on, or the request for an address was refused. Save the tab to ask again immediately                                 |
 | _Automatic setup is not available from your licence service._   | Your licensing service does not issue addresses. Run your own tunnel under Advanced                                                                                       |
+| _Could not download the tunnel program. Check this machine's internet access._ | C5 could not fetch Cloudflare's connector, `cloudflared`, which every tunnel needs. It retries on its own. See [The tunnel program will not download](#the-tunnel-program-will-not-download) |
+| _The tunnel program downloaded with the wrong contents, so it was not run — a proxy or security product on this network may be altering it. Once that is fixed, save Remote Control's settings to try again._ | The download arrived, but was not the exact file C5 pins. C5 does not run it, and does not retry on its own. See [The download did not match](#the-download-did-not-match) |
+| _The tunnel program would not start on this machine._ | The connector was downloaded but would not run. C5 retries; if it keeps failing, check that security software is not blocking `~/.growther/config/rc-tunnel/cloudflared` |
+| _Tunnels are not available on …_ | Cloudflare publishes no connector for this platform. Use your own network, `growther connect`, or your own address |
 
 Two things outside the tab:
 
@@ -34,6 +38,46 @@ Two things outside the tab:
 
 If nothing helps, `growther doctor` on the machine and `growther remote status` say what the
 install believes its state to be.
+
+## The tunnel program will not download
+
+Every tunnel — the issued address or your own — runs Cloudflare's connector, `cloudflared`,
+which C5 downloads the first time a tunnel starts. It fetches one pinned version from
+Cloudflare's releases on GitHub and checks its size and sha256 before running it. When that
+fails, the status line reads _Could not download the tunnel program. Check this machine's
+internet access._ The usual causes:
+
+- **The egress posture is Offline** (**Settings › Enterprise › Network**). C5 downloads
+  nothing while offline, so no tunnel can start. Your own network addresses and
+  `growther connect` still work.
+- **A proxy or firewall blocks GitHub.** The download goes through the proxy and certificate
+  authorities set under **Settings › Enterprise › Network**, to `github.com`, which
+  redirects to GitHub's file-download host, `release-assets.githubusercontent.com`
+  (GitHub has also used `objects.githubusercontent.com` for this). Ask for `github.com`
+  and that host to be allowed; both are on the list **Test connectivity** checks under
+  **Settings › Enterprise › Network**. If your proxy inspects TLS, C5 needs its root
+  certificate — see [Network and egress](/c5/configuration/network).
+
+C5 records the reason in its error log, with a line ending `the tunnel program did not
+download — retrying in …s`, and tries again on its own — soon at first, then once a minute.
+Once the cause is fixed, the tunnel comes up without anything further from you.
+
+### The download did not match
+
+When the download arrives but is not the exact file C5 pins — its fingerprint differs, the
+server sent more than the published size, the archive does not hold the program, or the
+program fails C5's own check — C5 throws it away and never runs it. That nearly always means
+something on the network altered it: a proxy, or a security product that inspects downloads.
+
+Retrying would fetch the same wrong file again, so C5 does not: the tunnel stays off, and
+the status line reads _The tunnel program downloaded with the wrong contents, so it was not
+run — a proxy or security product on this network may be altering it. Once that is fixed,
+save Remote Control's settings to try again._ The error log has a line reading
+`not retrying the cloudflared download automatically: …`, followed by the exact reason.
+
+Ask your network team to let the download from `github.com` and
+`release-assets.githubusercontent.com` through unaltered, then press **Save** on the Remote
+Control tab (or turn Remote Control off and on) to try again.
 
 ## The phone warns that the certificate is not trusted
 
@@ -61,18 +105,31 @@ at the copy that asked last. The other copy loses it — its connector keeps ret
 that no longer exists — and takes it back the next time Remote Control is turned off and on
 there.
 
-Two copies cannot share one address. Give one of them an identity of its own: run
-`growther activate` on it, which pairs it with your licence as a new install, and turn Remote
-Control on again there. It gets an address of its own, and the two stop fighting. Turn
-Remote Control off on any copy you are retiring, so its record is withdrawn from your
-account at once rather than by housekeeping thirty days later.
+Two copies cannot share one address, and `growther activate` does not separate them: on a
+machine that already has an identity, it resumes as that same install, with the same
+address. To settle it:
 
-Occasionally a Save is refused with _public name already in use_. Most of the time it is this
-install racing itself — two asks for the address in flight at once, such as a Save landing
-while the tunnel was still coming up — and it clears on its own: save the Remote Control tab
-again and the name is issued. Only a refusal that persists across saves means the name derived
-for this install is held by a different install on Growther.si's side — a coincidence, not a
-copy — and that needs support to resolve. See
+1. Stop C5 on the copy you are retiring (`growther stop`), and do not start it again. If it
+   starts on its own, also run `growther service uninstall` there.
+2. On the machine you keep, turn Remote Control off and on to take the address back.
+   Turning it off unpairs every device, so pair your devices again afterwards.
+
+Do not turn Remote Control off on the copy you are retiring while the other one is in use,
+and do not run `growther uninstall` there, which turns it off too. The two share one
+identity, so that would release the address the other machine is using.
+If both machines must stay in use, contact support; see
+[Getting help](/c5/troubleshooting/getting-help).
+
+Occasionally the request for the address is refused with _public name already in use_. The
+Save itself succeeds: the address is asked for in the background afterwards. The tab stays at
+_Not connected…_, and the error log (`logs/errors.log` in your C5 folder) has a line such as
+`could not get an address (HTTP 409): public name already in use. This will be retried in 60s.`
+Most of the time it is this install racing itself — two asks for the address in flight at
+once, such as a Save landing while the tunnel was still coming up — and it clears on its
+own: C5 asks again twice, a minute apart, and saving the Remote Control tab asks again at
+once. Only a refusal that persists across saves means the name derived for this install is
+held by a different install on Growther.si's side — a coincidence, not a copy — and that
+needs support to resolve. See
 [Getting help](/c5/troubleshooting/getting-help).
 
 ## The name works on mobile data but not on home Wi-Fi

@@ -47,6 +47,13 @@ Each key is written to the keystore, read back, and only then replaced in the fi
 read-back does not return exactly what was written, nothing is changed. `growther secrets
 revert` brings the plaintext values back.
 
+**The SCIM token moves too.** When you generate a SCIM token on a machine with no keystore,
+C5 keeps it in `c5.yaml` in plain text (the **Provisioning** panel says where it went).
+`growther secrets migrate` moves it into the keystore like any other secret, and `revert`
+brings it back. Sign-in *settings* are not secrets, so they stay in the file: name one with
+`--keys` (an issuer, an administrator role) and it is skipped with *an identity setting, not
+a secret: an administrator sets it in Settings › Enterprise › Identity*.
+
 On a locked-down Windows fleet there is a second route to the keystore. See below.
 
 ## Locked-down Windows fleets

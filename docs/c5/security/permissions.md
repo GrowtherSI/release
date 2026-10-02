@@ -13,7 +13,7 @@ This is the most important setting in C5. It is worth ten minutes.
 
 > **Human teammate access & user permissions (RBAC)**
 > Looking to control what human team members can see, edit, or execute in the C5 interface?
-> This page covers autonomous **agent** permissions. To configure role-based access control (RBAC), feature locks, and server controls for human teammates, see [Access & user permissions (RBAC)](/c5/configuration/settings#access--user-permissions-rbac) in Settings.
+> This page covers autonomous **agent** permissions. To configure role-based access control (RBAC), feature locks, and server controls for human teammates, see [Access & user permissions (RBAC)](/c5/configuration/settings#access-user-permissions-rbac) in Settings.
 
 ## The ladder
 
@@ -33,11 +33,12 @@ Reading is safe: worst case, an agent wastes time. Deleting and sending are not:
 case, something is gone or something private went somewhere public.
 
 > **Note**
-> Writing asks you by default, wherever the file is. The one way a write happens without
-> asking is if you have listed the folder yourself under **Settings → Extensions**, in the
-> write-allowed paths — that list is empty until you add to it. An orchestrated run you
-> have given filesystem autonomy can also write inside its own task workspace without
-> asking, and only there.
+> Writing asks you by default, wherever the file is. A write goes ahead without asking only
+> where you have said so: a folder you listed under the write-allowed paths in
+> **Settings → Extensions** (empty until you add to it), an **Always Allow** you gave that
+> agent for that tool, or the tool set to **On** in **Settings → Extensions**. An
+> orchestrated run you have given filesystem autonomy can also write inside its own task
+> workspace without asking, and only there.
 >
 > **Settings → Locations** is a different setting and does not grant anything. See the
 > warning further down this page.
@@ -47,31 +48,36 @@ case, something is gone or something private went somewhere public.
 You get a clear message saying exactly what it wants to do — which file, which address,
 which command. Then you choose:
 
-- **Allow once** — just this time.
-- **Allow always** — do not ask again for this kind of action.
-- **Deny** — no, and the agent finds another way or stops.
+- **Approve Once** — just this time.
+- **Deny** — not this time; the agent finds another way or stops.
+- **Always Allow** — do not ask again for this agent and this tool. Where the prompt offers
+  it, you can limit this to the one file or address it asked about. Under **"Always" lasts**
+  you pick how long it holds: **Forever**, **1 hour** or **10 uses**.
+- **Always Deny** — refuse this agent and this tool from now on, without asking (or only that
+  file or address, if you chose that).
 
 > **Tip**
-> Be slow with "allow always". It is the setting people regret. "Allow once" costs you
+> Be slow with **Always Allow**. It is the choice people regret. **Approve Once** costs you
 > two seconds and keeps you in the loop.
 
 ## Setting the level
 
-1. Go to **Settings**.
-2. Open **Autonomy**.
-3. Choose how much freedom your agents have.
-4. Save.
-
-Each kind of action has its own setting, so you can be strict about the things that
-worry you and relaxed about the rest.
-
-Separately, **Settings → Extensions** gives every tool one of three master positions:
+Which tools ask you first is set per tool, in **Settings → Extensions**, and by your answers
+to the approval prompt above. **Settings → Extensions** gives every tool one of three master
+positions:
 
 | Position   | What it means                                  |
 | ---------- | ---------------------------------------------- |
-| **On**     | Agents may use this tool without asking.       |
-| **Prompt** | Agents must ask you each time.                 |
-| **Off**    | Agents cannot use this tool at all.            |
+| **On**     | Every agent may use this tool without asking.  |
+| **Prompt** | Agents must ask you each time, even an agent you gave **Always Allow** for the whole tool. An **Always** answer for one file or address still applies to that file or address. |
+| **Off**    | No override: the tool's own per-agent rules decide, and anything you have not answered with an **Always** still asks you. It is not a block. To stop a tool, choose **Always Deny** when it asks. |
+
+**Settings → Autonomy** (headed **Autonomy Policies**) sets how far agents may go without
+you for each type of work: under **Work Type Thresholds**, the minimum autonomy level that
+work needs, from **Level 1 (Tools)** to **Level 5 (Deploy)**, and what happens when an agent's
+level is too low (**Downgrade** or **Block Task**). **Agent Overrides** forces that choice for
+one agent and type of work, and **Escalation Notifications** lists the tasks that were
+blocked or downgraded this way.
 
 Between the two, you decide exactly how much rope your agents get.
 

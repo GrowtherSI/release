@@ -1,6 +1,6 @@
 ---
 title: Voice
-description: Talk to C5 instead of typing, and have it read replies back to you.
+description: Talk to C5 instead of typing, have it read replies back to you, and how the offline speech model is downloaded, checked and placed by hand.
 order: 10
 ---
 
@@ -44,19 +44,22 @@ indicator goes out at that point, and the next time you click, C5 picks it up ag
 The two built-in options are **already on**. You only need the **Voice** tab if you want a paid
 provider, or if you want to turn the built-in ones off.
 
-Nothing listens until you press a microphone. Being switched on only means the free engine is
+Nothing listens until you press a microphone. Being switched on only means the built-in option is
 there when you do.
 
 ### The built-in option
 
-**Built-in (on-device)** turns your speech into text using your own computer. Nothing is
-sent anywhere. It works with no internet connection at all — it is the only option that
-does.
+**Built-in (on-device)** — the offline option — turns your speech into text using your
+own computer. Your audio is not sent anywhere. Once its model is on your machine it works with no internet
+connection at all — it is the only option that does.
 
-It needs a one-time download of about 60 MB, and **C5 starts fetching it in the background the
-first time it boots after an update**. You do not have to do anything, and you can carry on
-working while it downloads. The built-in row on the **Voice** tab shows the progress, and says
-when the model is ready.
+It needs a one-time download of a file, the offline speech model, about 60 MB. **Each time
+C5 starts with Built-in (on-device) switched on and the model missing, it fetches the model
+in the background.** You do not have to do anything, and you can carry on working while it
+downloads. The **Built-in (on-device)** row on the **Voice** tab shows the progress, and
+says when the model is ready. How the model is
+fetched, checked and placed by hand is in
+[The offline speech model](#the-offline-speech-model) below.
 
 If you would rather fetch it yourself, or the automatic download could not reach the network:
 
@@ -79,7 +82,7 @@ provider that is down, out of credit, or simply switched off is skipped rather t
 error you have to deal with.
 
 Put the built-in option last and you have a free fallback that works with no internet. Put it
-first and nothing you say ever leaves the machine unless the offline engine fails outright.
+first and nothing you say ever leaves the machine unless Built-in (on-device) fails outright.
 
 ### The paid options
 
@@ -88,6 +91,118 @@ built-in option, and all of them handle many languages. They are more accurate, 
 voices sound far more natural.
 
 They work by sending your audio to that company. You will need an account with them.
+
+## The offline speech model
+
+Built-in (on-device) uses OpenAI's Whisper **base.en** model, in the version
+converted for whisper.cpp by Georgi Gerganov. It is released under the MIT License. Section
+14 of the Growther.si Terms of Service, [Models C5 downloads and runs on your
+machine](https://growther.si/t=models), covers it, and its licence text is in C5 under
+**About › Copyright & Legal** and in `growther licenses` (see [Open-source licences and
+downloaded models](../security/open-source-and-models.md#check-which-models-c5-downloads)).
+
+| | |
+| --- | --- |
+| File | `ggml-base.en-q5_1.bin` |
+| Exact size | 59,721,011 bytes (about 60 MB) |
+| sha256 | `4baf70dd0d7c4247ba2b81fafd9c01005ac77c2f9ef064e00dcf195d0e2fdd2f` |
+| Downloaded from | `https://huggingface.co/ggerganov/whisper.cpp/resolve/5359861c739e955e79d9a303bcbc70fb988958b1/ggml-base.en-q5_1.bin` |
+| Kept at | `~/.growther/speech/ggml-base.en-q5_1.bin` (`%USERPROFILE%\.growther\speech\…` on Windows) |
+
+If you moved C5's caches with `growther cache relocate`, `GROWTHER_CACHE_DIR` or an
+organisation's policy, the `speech` folder is under the new location instead. See
+[Where your data lives](../configuration/data-location.md).
+
+### How C5 fetches and checks it
+
+- **One exact file.** The address above names one commit of the repository, so every C5 of
+  this release fetches the same bytes.
+- **Checked before use.** Built-in (on-device) uses the file only once its size and sha256 match the
+  values above. C5 records that it checked the file in `ggml-base.en-q5_1.bin.verified.json`
+  beside it, so the full check happens once, not at every start.
+- **Never over a file.** C5 downloads only when nothing is at the model's name, and never
+  deletes or replaces a model file.
+- **Through your network settings.** The automatic download and `growther voice pull` both
+  go through the proxy and certificate authorities set under **Settings › Enterprise ›
+  Network**. The request goes to `huggingface.co`, which redirects to Hugging Face's
+  download servers; see
+  [Hugging Face redirects to a download network](../configuration/network.md#hugging-face-redirects-to-a-download-network)
+  for the hosts to allow.
+- **Nothing goes to Growther.si.** The download is a request from your machine to Hugging
+  Face, and nothing about the model or your use of it is sent to Growther.si.
+
+The automatic download does not run when any of these is true:
+
+- Built-in (on-device) is switched off on the **Voice** tab;
+- the **Egress posture** is **Offline** under **Settings › Enterprise › Network** —
+  `growther voice pull` is refused too, and tells you where to place the file;
+- C5 was started with `GROWTHER_VOICE_NO_AUTO_DOWNLOAD=1` (exactly `1`) — `growther voice
+  pull` still works, because you asked for it. See
+  [Stop C5 downloading models on its own](../cli/environment.md#stop-c5-downloading-models-on-its-own)
+  for where to set it when C5 starts at sign-in;
+- C5 is running on a CI server (the `CI` environment variable is set).
+
+### A file that is not the model
+
+If the file at the model's name is not the one above — a different upload, a cut-off copy —
+C5 renames it to `ggml-base.en-q5_1.bin.rejected` (or `.rejected.1`, … if that name is
+taken). It is **never deleted**, and Built-in (on-device) never loads it. With the name free again,
+C5 fetches the right file, unless automatic downloads are off; `growther voice pull` does
+the same. Delete the `.rejected` file once you no longer need it.
+
+A file that was written within the last minute is left where it is rather than renamed, so
+a copy that is still arriving is not moved half-way. Built-in (on-device) does not use it
+meanwhile.
+It is checked again at the next start, or when you run `growther voice status`.
+
+### Placing it by hand
+
+On a machine that cannot reach Hugging Face:
+
+1. On a machine that can, download the file from the address in the table above.
+2. Check its fingerprint matches (`shasum -a 256` on macOS, `sha256sum` on Linux,
+   `Get-FileHash -Algorithm SHA256` in PowerShell).
+3. Copy it to the **Kept at** path, under exactly that file name.
+4. Restart C5. To confirm the file first, run `growther voice status`, which checks it
+   straight away.
+
+### What you see in the log
+
+C5's lines about the model are tagged `[voice]` and belong to the **voice** log category,
+which is off by default — warnings included. Press `v` in the terminal running C5 to see
+them (see [Log filtering](../cli/log-filtering.md)). `growther voice status` answers the
+same questions without the log.
+
+```text
+[voice] built-in engine on, model missing — fetching ~60 MB in the background
+[voice] offline speech model 10%
+[voice] offline speech model ready
+[voice] offline speech model not fetched: <why>
+[voice] built-in engine off — nothing to fetch
+```
+
+When a file was set aside, the warning names it and the `.rejected` name it now has.
+
+### From a terminal
+
+To see whether voice is ready, run:
+
+```bash
+growther voice status
+```
+
+It prints two lines: whether Built-in (on-device) can run on this computer, and whether
+the model is present and checked. It exits with `1` if either is not.
+
+To download the model now, run:
+
+```bash
+growther voice pull
+```
+
+It prints its progress in 5% steps and ends with `✓ downloaded and checked — <path>`. If
+the right file is already there, it says `✓ already present and checked` and downloads
+nothing.
 
 ## Two switches that change how the microphone behaves
 
@@ -148,7 +263,7 @@ picked.
 
 | Option                      | What leaves your computer                                    |
 | --------------------------- | ------------------------------------------------------------ |
-| **Built-in (on-device)**    | Nothing at all                                               |
+| **Built-in (on-device)**    | None of your audio or words. The model's one-time download is a request to Hugging Face |
 | **Built-in (this browser)** | Nothing at all                                               |
 | Any paid provider           | The audio you recorded, or the text you asked to be read out |
 
@@ -228,7 +343,7 @@ it. Connect through an SSH tunnel and open `http://localhost` instead.
 
 **C5 says no speech-to-text provider is set up.**
 
-If you have just updated, the built-in engine is probably still downloading — it is switched on,
+If you have just updated, Built-in (on-device) is probably still downloading — it is switched on,
 but its model has not arrived yet. C5 will say so rather than this if it knows a download is in
 flight; check the **Voice** tab, which shows the progress. Wait for it to finish and try again.
 
@@ -258,13 +373,33 @@ speaker button on a reply is unaffected, because pressing it is itself the inter
 Run this and read both lines:
 
 ```bash
-growther doctor
+growther voice status
 ```
 
-It tells you two separate things: whether the offline engine can run on your computer,
-and whether the model has been downloaded. They are different problems with different
-fixes.
+It tells you two separate things: whether Built-in (on-device) can run on your computer,
+and whether the model is present and checked. They are different problems with different
+fixes. `growther doctor` reports the same in its **Offline speech** row, including the
+download address and fingerprint if the model is missing.
+
+**C5 says a file "is not the offline speech model this build records".**
+
+The file at the model's name is not the right one, so Built-in (on-device) will not use it. C5 has
+renamed it to `ggml-base.en-q5_1.bin.rejected` beside the model's path, or will once the
+file stops changing. Run `growther voice pull` to fetch the right file, or place it by hand
+— see [Placing it by hand](#placing-it-by-hand). If C5 says it could not
+set the file aside, stop C5 and move the file away yourself.
+
+**The model never downloads.**
+
+Run `growther voice pull` in a terminal: it tries the same download and prints the reason
+if it fails. (C5's own attempt at startup logs `[voice] offline speech model not fetched:`
+and the reason, in the **voice** log category — press `v` in C5's terminal to show it.) If your network allows only named hosts, allow the Hugging Face hosts listed in
+[Network and egress](../configuration/network.md). If the egress posture is **Offline**,
+or C5 runs with `GROWTHER_VOICE_NO_AUTO_DOWNLOAD=1`, nothing is fetched automatically —
+place the model by hand, or (when not offline) run `growther voice pull`.
 
 **You want to remove the downloaded model.**
 
-`growther uninstall --purge-data` removes it along with everything else C5 stores.
+Turn Built-in (on-device) off on the **Voice** tab first; otherwise C5 downloads
+the model again at its next start. Then delete the `speech` folder (see the **Kept at** row
+above). `growther uninstall --purge-data` removes it along with everything else C5 stores.

@@ -41,10 +41,16 @@ stamp proves the build came from Growther.si and has not been altered since.
 | ------------------- | ------------------------------------------------------------ |
 | **Installing**      | The SHA-256 of the download. A mismatch stops the install.    |
 | **Updating**        | The signature and the file's hash, before anything replaces your copy. |
+| **Rolling back**    | The kept older program against the SHA-256 recorded when it was kept, and that it starts. Its signed build manifest goes back with it. |
 | **On demand**       | `growther doctor` checks the signature and the program file.  |
 
-The first two happen on their own — you do not have to do anything. Together they mean a
+The first three happen on their own — you do not have to do anything. Together they mean a
 tampered file cannot get onto your machine through the installer or the updater.
+
+C5 also never makes a checksum vouch for bytes it cannot vouch for. When `growther update`
+finds the program already current, it rewrites a `<program>.sha256` beside it only if the
+signed build manifest on this machine names that program's fingerprint; otherwise it leaves
+the file as it is and tells you to run `growther verify`.
 
 > **Tip**
 > To confirm at any point that the copy on disk is still the one that was installed, run
@@ -101,3 +107,25 @@ treats every failure the same way. That is the correct behavior.
 Published releases and their fingerprints live in the public
 [release repository](https://github.com/GrowtherSI/release). Every version is listed with
 its digest, so you can check any file by hand if you want to.
+
+## What C5 downloads later, and the notices
+
+The checks above cover the program. C5 also downloads a few things after you install it, and
+checks each of them in the same spirit. They are covered in more detail on
+[Open-source licences and downloaded models](/c5/security/open-source-and-models).
+
+- **The models**, for memory search, voice and the local classifier. Each is pinned to one exact
+  version, and C5 compares its size and SHA-256 with values built into C5 before it uses the
+  file. A model that does not match is never loaded. That is not a reason to reinstall C5: C5
+  sets the file aside or downloads it again. See
+  [What C5 checks, and what it sends](/c5/security/open-source-and-models#what-c5-checks-and-what-it-sends).
+- **The cloudflared connector**, which C5 downloads only when
+  [Remote Control](/c5/remote-control/overview) starts a Cloudflare tunnel — the issued
+  address or a tunnel of your own. It is pinned to one release and held to
+  that release's exact size and SHA-256 before it runs.
+- **`THIRD-PARTY-NOTICES.txt`** lists the open-source software and models C5 uses, with their
+  licences. The release archives, the website zip, the MSI and the PKG installed by MDM carry a
+  copy beside the program. The copy of C5 in `~/.local/bin` (Windows:
+  `%LOCALAPPDATA%\Growther\bin`), where the install commands and the program's first run put
+  it, has the notices inside the program only. On every install you can read them under
+  **About › Copyright & Legal** or print them with `growther licenses`.

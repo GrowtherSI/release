@@ -34,6 +34,13 @@ Each server adds a set of abilities. There are servers for things like:
 C5 connects and lists the abilities the server offers. You then choose which ones your
 agents may use.
 
+The keys and settings a server needs are kept in C5's configuration file, `c5.yaml`, and
+removed with the server. A server cannot use that to change how C5 itself is run: C5
+refuses any key that would change its network settings (the proxy, certificate
+authorities, the platform address) or who may sign in (the identity provider, which group
+becomes an administrator, whether single sign-on is required, the SCIM token). Removing a
+server never removes your own values for those keys.
+
 ## Checking it worked
 
 After adding a server, C5 shows its state:

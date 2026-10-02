@@ -177,9 +177,19 @@ have approved it.
 - It never mints a session from the provider's redirect. The redirect is verified and
   parked; a one-time code is exchanged over the signed channel, so the one place a session
   is created stays the one place.
-- It never stores your client secret, bind password, SCIM token or Graph secret in a
-  configuration file. All four are keystore references. See
+- It never stores your client secret, bind password or Graph secret in a configuration
+  file: all three are keystore references. The SCIM token C5 generates goes into this
+  machine's keystore or vault when it has one. On a machine with none (or when the keystore
+  refuses it), C5 keeps the token in `c5.yaml` instead and says so when it shows you the
+  token; `growther secrets migrate` moves it into a keystore later. See
   [Secrets and keys](/c5/security/secrets-and-keys).
+- Only an administrator changes who may sign in. The sign-in settings C5 keeps in `c5.yaml`
+  (the provider and its issuer, the administrator role or group, the provider's signing
+  certificate, whether single sign-on is required, SCIM and group sync) and the SCIM token
+  are written only by an administrator's save in **Settings › Enterprise**, the SCIM token
+  button, and `growther secrets migrate` / `revert`. Nothing else that writes to `c5.yaml`
+  — the keys an MCP server asks for, for example — can set or remove them. A line you edit
+  in `c5.yaml` by hand is still read.
 - It never accepts an unsigned or wrongly-signed token, a replayed one, or one issued for
   another application.
 

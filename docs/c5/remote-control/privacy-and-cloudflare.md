@@ -103,6 +103,42 @@ sees that you signed in and when, and which installs are on your account with th
 each one published. It does not see what you do on your install afterwards, because the
 hand-off is a link to your own machine and the portal is not in the path after it.
 
+## The connector C5 runs
+
+A tunnel — the address Growther.si issues, or a tunnel of your own on Cloudflare — is
+carried by Cloudflare's connector program, `cloudflared`, running on your machine. It is
+open-source software from Cloudflare under the Apache License 2.0, used only to carry
+traffic to your own install. C5 does not ship it inside its download, and does not use any
+copy already installed on your system:
+
+- **It is fetched only when needed.** The first time a tunnel starts, C5 downloads it from
+  Cloudflare's releases on GitHub (`github.com/cloudflare/cloudflared`, which redirects to
+  GitHub's file-download host, `release-assets.githubusercontent.com`). Turning Remote
+  Control on without a tunnel downloads nothing.
+- **It is one pinned version, checked before it runs.** Every C5 of this release fetches
+  `cloudflared` 2025.8.1, holds the download to its exact published size, and checks its
+  sha256 fingerprint against the one recorded in C5 before running it. On macOS the
+  archive is checked before it is unpacked, and the program inside is checked again. A
+  download that does not match is thrown away and never run.
+- **It is checked again at every start.** A copy already on disk that no longer matches —
+  replaced by something else, say — is discarded and downloaded afresh.
+- **It goes through your network settings.** The download uses the proxy and certificate
+  authorities set under **Settings › Enterprise › Network**, like everything else C5
+  fetches.
+- **Offline means no tunnel.** While the egress posture is **Offline**, C5 does not
+  download it, so no tunnel starts. Your own network addresses and `growther connect` keep
+  working.
+- **It lives with C5's own files**, at `~/.growther/config/rc-tunnel/cloudflared`
+  (`cloudflared.exe` on Windows). On Windows on ARM, C5 runs the 64-bit Intel build, which
+  Windows runs under emulation, because Cloudflare publishes no ARM build for Windows.
+
+If the download fails, **Reach this machine from anywhere** says _Could not download the
+tunnel program. Check this machine's internet access._ and C5 retries on its own. If what
+arrived was the wrong file — something on the network altered it — C5 does not run it and
+does not keep downloading it every minute; the line says _The tunnel program downloaded with
+the wrong contents, so it was not run …_ and C5 tries again when you save Remote Control's
+settings. See [Troubleshooting](/c5/remote-control/troubleshooting).
+
 ## Your own tunnel, your own provider
 
 If you paste your own tunnel token under Advanced, or supply your own name and certificate,
@@ -121,8 +157,25 @@ paired device is refused when it tries to change any of them, including which sp
 the audio goes to. One tap on a phone captures live microphone audio,
 sends it to the machine — through the tunnel, if that is the path — and the machine forwards
 it to whichever speech provider you configured, or transcribes it on the machine itself if
-your chain starts with the built-in offline engine. You are responsible for any consent the
+your chain starts with **Built-in (on-device)**. You are responsible for any consent the
 people being recorded are entitled to.
+
+## What an unpaired caller can see
+
+C5's health check, `/health`, answers anyone who can reach the machine, paired or not,
+because supervisors and `growther connect` rely on it. To a caller who is neither signed in
+nor paired, it says whether C5 is running and whether it is serving, the time, a random
+number that changes every time C5 starts (which `growther connect` uses to tell two
+machines apart), and how many AI requests C5 is running and how many are waiting, with
+the limits it sets on them. It leaves out the details: how often the local classifier is used and
+how fast it answers, and which agents those running and waiting requests belong to. Those
+go only to a signed-in session that is not a paired device, or to a check made directly on
+the machine itself (not through the issued address).
+
+**A paired device gets the short answer too**, wherever it connects from — including a
+device whose pairing was just revoked, which everything else on the machine already refuses.
+C5 on a phone never needs the details: it uses the health check only to see that the machine
+is there and serving.
 
 ## Limits, stated plainly
 
@@ -143,8 +196,9 @@ people being recorded are entitled to.
 
 ## The words that bind
 
-This page describes; the Terms bind. Section 14 of the Growther.si Terms of Service is the text
-you accept in C5, and it is at
+This page describes; the Terms bind. Section 15 of the Growther.si Terms of Service, Remote
+Control, is the text you accept in C5 (it was Section 14 before Terms version 1.8), and it is
+at
 [growther.si/t=remote-control](https://growther.si/t=remote-control). Cloudflare's own
 [terms](https://www.cloudflare.com/terms/) and
 [privacy policy](https://www.cloudflare.com/privacypolicy/) govern Cloudflare's part.

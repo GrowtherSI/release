@@ -19,6 +19,8 @@ Connected or not, these stay on your machine:
 - **Your API keys.** Passwords and keys for other services.
 - **Your chats.** Whole conversations and their history.
 - **Your context.** The standing instructions you wrote.
+- **What the local classifier does.** Its answers, what it learns from them, and how often
+  it is used.
 
 These are stored encrypted in your data folder. Growther.si cannot read them, because
 Growther.si never receives them.
@@ -50,10 +52,48 @@ seconds, that it used two retries.
 Someone reading the shared data learns that summarizing works well. They learn nothing
 about your contract.
 
+## Models C5 downloads
+
+[Memory search](/c5/tools/memory-search), [offline voice](/c5/using-c5/voice) and the
+[local classifier](/c5/tools/local-classifier) use models that run on your machine. C5
+downloads each one once, from Hugging Face, when the feature that needs it is on, and
+checks it against a size and fingerprint recorded in C5 before using it. That download is
+a request from your machine to Hugging Face. Growther.si is not part of it, and C5 sends
+Growther.si nothing about the models — not whether you have them — and nothing the
+classifier keeps: the questions it was asked, its answers, or how often it ran. This is
+true whether or not you connect to Mothership.
+
+The models, their sizes and their licences are listed in C5 under **About › Copyright &
+Legal** and in
+[Open-source licences and downloaded models](/c5/security/open-source-and-models#check-which-models-c5-downloads).
+The Terms section that covers them is
+[Models C5 downloads and runs on your machine](https://growther.si/t=models).
+
+## What C5 shows without signing in
+
+C5's health check, `/health`, answers without asking who you are, because supervisors and
+installers use it to see that C5 is running. To a caller that is not signed
+in — including someone reaching your machine through Remote Control without a paired
+device — it says whether C5 is running and serving, the time, and a random number that
+changes every time C5 starts (`growther connect` uses it to tell two machines apart; it
+identifies nothing), and how many AI requests C5 is running and how many are waiting, with
+the limits it sets on them. How often the local classifier is used, how fast it answers, and which
+agents those requests belong to are shown only to a signed-in session that is not a paired
+device, or to a check made directly on the machine itself. A phone or tablet paired through
+Remote Control gets the same short answer as anyone else.
+
 ## Fully offline
 
-If you never connect, nothing at all leaves your machine. C5 is complete this way. Some
-people run it with no network access at all, and that is a supported way to use it.
+If you never connect to Mothership, nothing about your work leaves your machine. C5 is
+complete this way. Some people run it with no network access at all, and that is a
+supported way to use it: set the egress posture to **Offline** so C5 makes no downloads
+or check-ins of its own, and place any models you want by hand. Offline also stops licence
+renewals, so your licence runs on its offline grace period; for a machine that will stay
+offline for a long time, ask us for an air-gapped licence — see
+[C5 needs internet just to stay licensed?](/c5/troubleshooting/faq#c5-needs-internet-just-to-stay-licensed).
+See
+[Network and egress](/c5/configuration/network) for everything C5 contacts and how to turn
+it off.
 
 ## Your data is yours
 
