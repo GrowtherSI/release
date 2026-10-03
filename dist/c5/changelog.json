@@ -1,5 +1,34 @@
 [
   {
+    "tag": "v2026.10.3-v320",
+    "version": "2026.10.3-v320",
+    "build": 320,
+    "releasedAt": "2026-10-02T22:07:53-07:00",
+    "bullets": [
+      {
+        "kind": "new",
+        "text": "Decide whether this machine can run the local classifier."
+      },
+      {
+        "kind": "new",
+        "text": "You can now check task categories to teach C5's local classifier."
+      },
+      {
+        "kind": "new",
+        "text": "Automatic scoring now takes over only after it matches your reviews."
+      },
+      {
+        "kind": "new",
+        "text": "The local classifier now acts only after passing its accuracy check."
+      },
+      {
+        "kind": "fixed",
+        "text": "The Local Classifier card in Settings now shows its status."
+      }
+    ],
+    "more": 625
+  },
+  {
     "tag": "v2026.10.1-v319",
     "version": "2026.10.1-v319",
     "build": 319,
