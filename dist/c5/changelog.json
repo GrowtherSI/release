@@ -1,5 +1,46 @@
 [
   {
+    "tag": "v2026.10.7-v322",
+    "version": "2026.10.7-v322",
+    "build": 322,
+    "releasedAt": "2026-10-07T03:07:50-07:00",
+    "bullets": [
+      {
+        "kind": "fixed",
+        "text": "Fixed hard-to-read text color in light mode."
+      },
+      {
+        "kind": "fixed",
+        "text": "Finished tasks now link to the right spot in your library."
+      },
+      {
+        "kind": "fixed",
+        "text": "Finished tasks no longer show blank download links."
+      },
+      {
+        "kind": "fixed",
+        "text": "C5 no longer lowers graphics quality when switching windows."
+      },
+      {
+        "kind": "fixed",
+        "text": "Help tips and config choices now load properly across sections."
+      },
+      {
+        "kind": "fixed",
+        "text": "Background animations now keep running when graphics acceleration is off."
+      },
+      {
+        "kind": "fixed",
+        "text": "Scheduled tasks now start right away without waiting."
+      },
+      {
+        "kind": "fixed",
+        "text": "Finished scheduled requests now stay on your board."
+      }
+    ],
+    "more": 1
+  },
+  {
     "tag": "v2026.10.3-v320",
     "version": "2026.10.3-v320",
     "build": 320,
