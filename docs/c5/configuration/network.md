@@ -1,6 +1,6 @@
 ---
 title: Network and egress
-description: The offline switch, corporate proxy, bypass list, private CA bundle and certificate pin; every host C5 contacts and why, including the model downloads; how to make C5 reachable from another machine.
+description: The offline switch, corporate proxy, bypass list, private CA bundle and certificate pin; where the proxy's address is shown and where it never is; every host C5 contacts and why, including the model downloads; how to make C5 reachable from another machine.
 order: 9
 ---
 
@@ -155,6 +155,10 @@ onto an offline machine, place it by hand — see
     `/etc/growther`) and a signed policy document, if you use one. Loading the
     document can mean one request to its web address, or reading the copy C5
     keeps of it. A lock set either way wins over the value in Settings.
+    `growther classifier status` does the same each time it runs while the
+    model is not here and checked, so that it does not suggest a download that
+    the posture or the policy would refuse. Either load happens even while the
+    posture is offline.
   - `growther voice pull`, `growther qmd-run pull` and `growther doctor` read
     the device's own policy (Group Policy, macOS managed preferences or
     `/etc/growther`) and the value saved in Settings. A posture the device
@@ -165,9 +169,9 @@ onto an offline machine, place it by hand — see
     policy value is not read by these commands, so lock the posture if they must
     honour it.
   - Those three commands do not read a signed policy document at all. A lock
-    delivered only in a signed document reaches the running C5, and
-    `growther classifier pull`, but not them. To cover every command, lock the
-    posture through device policy too.
+    delivered only in a signed document reaches the running C5,
+    `growther classifier pull` and `growther classifier status`, but not them.
+    To cover every command, lock the posture through device policy too.
 - On a machine where C5 has never run, these commands use the device policy
   alone and do not create a database.
 - If C5 cannot read the setting, it keeps the last value it knew. Not being able
@@ -346,8 +350,13 @@ directly instead. Every connection that proxy would carry is refused until the
 value is fixed or removed; hosts on the bypass list and the machine itself are
 still reached directly. `growther doctor` fails its proxy check and says why.
 The same goes for a proxy URL that your device policy locks but C5 cannot use.
-C5 also writes a warning to its log once for each such value:
-`[net] the configured proxy … cannot be used: …`.
+C5 also prints a warning once for each such value, naming it, to its own output:
+`[net] the configured proxy … cannot be used: …`. That output is the terminal C5
+runs in, or its service log where one is kept (see
+[The proxy address stays out of logs and alerts](#the-proxy-address-stays-out-of-logs-and-alerts)).
+When C5 starts at sign-in on Windows it is not kept, so `growther doctor` is the
+place to look. Its error log gets the same warning without the proxy's address,
+ending *growther doctor names it.*
 
 The **Network** card shows it plainly, whatever the egress posture (going back
 online does not make a broken proxy usable):
@@ -423,10 +432,20 @@ C5 started it or you ran a `pull` command) names the cause rather than only
 saying "fetch failed": the certificate pin, an untrusted certificate, or the
 proxy that refused. The local classifier's message gives the cause straight
 after *Could not download the classifier model:*; the memory-search and speech
-downloads give it after *fetch failed:*. A proxy refusal reads like this:
+downloads give it after *fetch failed:*. In a terminal — the output of
+`growther update`, a `pull` command or `growther doctor`, and memory search's
+line in C5's own output — a proxy refusal names the proxy:
 
 ```text
 the proxy http://proxy.corp.example:3128 refused to open a tunnel to api.growther.si:443: it answered CONNECT with 407 Proxy Authentication Required; it wants credentials — put them in the proxy URL (http://user:password@host:port), C5 speaks Basic proxy authentication only
+```
+
+Everywhere else — in Settings, in C5's error log, in notifications — the same
+sentence says *the proxy*, without its address (see
+[The proxy address stays out of logs and alerts](#the-proxy-address-stays-out-of-logs-and-alerts)):
+
+```text
+the proxy refused to open a tunnel to api.growther.si:443: it answered CONNECT with 407 Proxy Authentication Required; it wants credentials — put them in the proxy URL (http://user:password@host:port), C5 speaks Basic proxy authentication only
 ```
 
 Credentials in your proxy URL are never printed. The end of the line tells you
@@ -438,7 +457,7 @@ what to do:
 | The proxy answered CONNECT with `403` | Its policy does not allow this host. Ask for the host to be allowed |
 | The proxy answered CONNECT with `502`, `503` or `504` | The proxy could not reach the host itself |
 | *Mothership TLS public-key pin mismatch* | Your proxy is decrypting and re-signing the platform connection. Follow [Behind a TLS-inspecting proxy](#behind-a-tls-inspecting-proxy) above |
-| A certificate C5 does not trust, in the system's own words — for example *self-signed certificate in certificate chain* or *unable to get local issuer certificate* | Your proxy re-signs traffic with its own authority. Add its root CA with `caBundlePath` |
+| A certificate C5 does not trust, in the system's own words — for example *self-signed certificate in certificate chain* or *unable to get local issuer certificate*. Through the proxy, outside a terminal: *the certificate presented on the way to … is not trusted (…)* | Your proxy re-signs traffic with its own authority. Add its root CA with `caBundlePath` |
 | *C5 refused to connect to … the configured proxy … cannot be used* | The proxy setting is not something C5 can use (see [An unusable proxy stops traffic](#corporate-proxy) above). Fix or remove it |
 
 `growther doctor` checks the proxy from the command line. With a proxy
@@ -449,6 +468,58 @@ time-outs, not many. It warns with every host
 that failed: *Allow these hosts on the proxy, or add its CA to the CA bundle.*
 If the proxy setting is one C5 cannot use, the row fails without asking any
 host, and says the setting must be an `http://` or `https://` address.
+
+### The proxy address stays out of logs and alerts
+
+Your proxy's address — its host name, IP address and port, and any user name or
+password in its URL — describes your network, so C5 shows it only where an
+administrator works. It is kept out of these places, which anyone signed in to
+C5 can read:
+
+- C5's error log (`logs/errors.log` in your C5 folder), and the error list and
+  alerts on the **Monitor** page. C5 also sends each new line to every open
+  window, paired phones included;
+- notifications, the **New Error Cluster Detected** one included, and the emails
+  C5 sends for them;
+- the grouped errors under **Ops › Errors** and in the **Errors** tab of the HITL
+  window, and the notification rows of the audit log, on screen and in
+  **Export CSV**;
+- the status C5 shows for a download: Remote Control's tunnel line, the local
+  classifier's **Model** line, and the progress of an update started from the
+  app;
+- the error text C5 gives a model when it triages repeating errors and
+  notifications.
+
+These say *the proxy*, and what it answered and for which host — for example
+*the proxy refused to open a tunnel to github.com:443: it answered CONNECT with
+407 …*, or *the connection to huggingface.co:443 through the proxy failed
+(ECONNREFUSED)*. A proxy setting C5 cannot use reads *the configured proxy
+cannot be used*, followed by *growther doctor says why* or by the reason.
+
+**Older text.** Log lines, notifications and error groups written by v322 or
+earlier, before C5 kept the proxy out of them, or by an older version after a
+rollback, are cleaned when C5 shows them. C5 cannot know which proxy an old
+line refers to, so in those lines it hides every network address in a
+connection error except this machine's own, and shows *(address withheld)*.
+**The log file itself is not rewritten**: older lines still contain the address
+on disk, for anyone who can open `logs/errors.log` on the machine.
+
+**Where an administrator sees which proxy failed:**
+
+- `growther doctor` on the machine. Its **Proxy reachability** row starts with
+  the proxy in force, and its **Mothership** row names the proxy that refused;
+- C5's own output: the terminal it runs in, or, when C5 starts at sign-in,
+  `logs/service.out.log` and `logs/service.err.log` in your C5 folder (macOS)
+  or `journalctl --user -u growther-c5` (Linux with systemd). It carries the
+  `[net] the configured proxy … cannot be used` warning, and memory search's
+  line when its download fails. When C5 starts at sign-in on Windows, or from
+  a Linux desktop's autostart, this output is not kept, so use
+  `growther doctor` instead;
+- **Settings › Enterprise › Network**, whose **Outbound proxy** field shows it
+  with any password hidden;
+- in a terminal, `growther update`, `growther classifier pull`,
+  `growther voice pull` and `growther qmd-run pull`, which name the proxy that
+  refused, as in the first example above.
 
 ## What C5 contacts, and why
 

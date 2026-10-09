@@ -121,12 +121,13 @@ The same teardown happens on its own when:
 
 ## Turning it back on, and re-pairing
 
-Turn the switch on again and press **Save**. The acceptance dialog is not shown again unless
-the terms have changed since you accepted them; if it is, agreeing turns Remote Control on
-without a Save. Growther.si normally issues the same address as before, with a fresh tunnel
-behind it. If you were running your own tunnel, the token you pasted is still saved: C5 runs
-your tunnel again and asks Growther.si for nothing. Your tunnel answers for the host of your
-**Public address**, or for the hostname you gave it in your own dashboard when none is set.
+Turn the switch on again and press **Save**. The acceptance dialog is not shown again
+unless C5 now brings newer terms than the ones you accepted; if it is, agreeing turns
+Remote Control on without a Save. Growther.si normally issues the same address as before,
+with a fresh tunnel behind it. If you were running your own tunnel, the token you pasted
+is still saved: C5 runs your tunnel again and asks Growther.si for nothing. Your tunnel
+answers for the host of your **Public address**, or for the hostname you gave it in your
+own dashboard when none is set.
 
 Every device has to be paired again, because turning off revoked every pairing. There is no
 way to keep pairings across an off-and-on, by design: "off" has to mean off.

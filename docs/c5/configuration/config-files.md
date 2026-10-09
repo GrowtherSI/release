@@ -29,7 +29,7 @@ The file is organized into clear sections:
   Confirm what your install actually uses with `growther home show` — see
   [Where your data lives](/c5/configuration/data-location).
 - **API & MCP Services** — Search tokens (Brave), GitHub access tokens, and chat integrations.
-- **LLM Coordinators & Agent Platforms** — Base URLs and keys for local model runners like LM Studio, Ollama, and llama.cpp.
+- **LLM Coordinators & Agent Platforms** — Base URLs and keys for local model runners like LM Studio, Ollama, and llama.cpp, and, if you set them, the addresses of the OpenClaw, Hermes and PicoClaw gateways (`OPENCLAW_GATEWAY_URL`, `HERMES_GATEWAY_URL`, `HERMES_DASHBOARD_URL`, `PICOCLAW_GATEWAY_URL`). A gateway address set here wins over the **Host** and **Port** on that gateway's card, which then cannot be edited. See [Local model servers and gateways](/c5/cli/environment#local-model-servers-and-gateways).
 - **Cloud LLM Providers** — API keys for Anthropic, OpenAI, Google Gemini, AWS Bedrock, and others.
 - **Custom Keys** — Any extra environment variables you add yourself.
 
@@ -46,7 +46,7 @@ GITHUB_PERSONAL_ACCESS_TOKEN: ""
 # --- 3. LLM Coordinators & Agent Platforms ---
 LMSTUDIO_BASE_URL: "http://127.0.0.1:1234/v1"
 LMSTUDIO_API_KEY: ""
-OLLAMA_BASE_URL: "http://127.0.0.1:11434"
+OLLAMA_BASE_URL: "http://127.0.0.1:11434/v1"
 LLAMACPP_BASE_URL: "http://127.0.0.1:8080/v1"
 OPENROUTER_API_KEY: ""
 
@@ -70,6 +70,9 @@ When you update a coordinator Base URL (like moving LM Studio or Ollama to anoth
 - C5 picks up the changes **immediately**.
 - You do **not** need to restart the C5 server.
 - The model scanner instantly uses your new address to find available models.
+- Every other connection C5 makes to that server — health and latency checks, image checks — uses it too.
+- To go back to the default address, clear the address on the server's card in **Settings › Integrations** and click **Save**. Deleting the line from this file is not enough: C5 can keep using the address until it restarts, and after that it uses the address stored in Settings. Pressing **Save** there stores the address the card shows, so that is usually the one you deleted.
+- A gateway address (`OPENCLAW_GATEWAY_URL` and the others) is never stored in Settings. Delete its line, and once C5 restarts it goes back to the **Host** and **Port** on that gateway's card, or the default.
 
 When C5 writes to this file after you click **Save** in the app, it preserves your existing comments, blank lines, and custom keys.
 

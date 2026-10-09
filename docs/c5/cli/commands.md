@@ -258,7 +258,9 @@ policy, by `GROWTHER_PROXY_URL` and `GROWTHER_CA_BUNDLE`, or in `c5.yaml`. C5 do
 read `HTTPS_PROXY` or `HTTP_PROXY`. See [Network and egress](/c5/configuration/network).
 
 If the check or the download fails, the message says why rather than only "fetch
-failed":
+failed". Here in the terminal it names the proxy that refused; C5's error log, and an
+update started from the app, say *the proxy* without its address (see
+[The proxy address stays out of logs and alerts](/c5/configuration/network#the-proxy-address-stays-out-of-logs-and-alerts)):
 
 | The message says | What to do |
 | --- | --- |
@@ -329,6 +331,13 @@ keystore:
 If there is no earlier version kept, it says "no previous version to roll back to" and
 exits with code `1`.
 
+Rollback changes only the program, not your data, so the older version opens databases a
+newer one may have upgraded. If you go back to a version after v322, it says so when it
+starts, and its `growther doctor` shows it on the **Schema** row. Going back to v322 or
+earlier, nothing warns you. Going straight back to v319 from v320 or v322 also needs
+one extra step for the local classifier. Both are in
+[Go back to the older version](/c5/getting-started/updating#go-back-to-the-older-version).
+
 ### `growther doctor`
 
 Checks your whole setup and tells you what is wrong in plain words. This is the first
@@ -338,7 +347,10 @@ thing to run when something is not working.
 growther doctor
 ```
 
-See [Running doctor](/c5/cli/doctor) for what it checks.
+Doctor only reads your databases: it never upgrades, seeds or changes them, even when it
+is a newer version than the C5 that last ran. Run it as the user who runs C5; run as
+`root` over another user's C5 folder, it leaves its error log and status file out of that
+folder. See [Running doctor](/c5/cli/doctor) for what it checks.
 
 `growther doctor --json` prints one machine-readable report and nothing else on standard
 output, so `growther doctor --json | jq .` always works; any other line goes to standard
@@ -501,10 +513,14 @@ everything C5 contacts on its own. For the commands on this page the rule is:
 | | `growther classifier pull` |
 | | The **Proxy reachability** check in `growther doctor` (skipped) |
 
-The left column is about C5 itself: checking for a new version and installing it. It
-runs because you typed it. The model downloads in the right column are refused even when
-you type them, because Offline promises that this install fetches no models; each one
-tells you how to place the file by hand instead.
+The left column is about C5 itself: checking for a new version and installing it. It runs
+because you typed it. The model downloads in the right column are refused even when you
+type them, because Offline promises that this install fetches no models; each one tells you
+how to place the file by hand instead.
+
+Under Offline, `growther classifier pull` and `growther classifier status` still read your
+organisation's signed policy document, if you use one. If it is at a web address, that is
+one request to it per run (for `status`, only while the model is not here and checked).
 
 ### `growther qmd-run`
 
@@ -651,16 +667,33 @@ says why, for example:
 The model line says one of:
 
 - `✓ model present and verified` — ready.
-- `✗ model not downloaded` — run `growther classifier pull`, or place the file at the
-  path shown.
+- `` ✗ model not downloaded (run `growther classifier pull`, or place … at …) `` — run
+  `growther classifier pull`, or place the file at the path shown.
+- `✗ model not downloaded: this deployment's network posture is offline, so C5 does not
+  download it.`, followed by the address to fetch it from on a connected machine, the path
+  to put it at and its sha256 — C5 is set to **Offline**, so `pull` would be refused. Place
+  the file by hand.
+- `✗ model not downloaded: your organisation's policy keeps the local classifier off` —
+  `pull` would be refused, and a model placed by hand would not run either.
 - `✗ <path> is not the pinned model (wrong size)` (or `sha256 mismatch`, or
-  `unreadable`) — this file is never loaded. The line ends
-  `` `growther classifier pull` replaces it ``, which is true of a file but not of a symbolic
-  link: for a link, pull refuses, so point the link at the model or remove it.
+  `unreadable`) — this file is never loaded. The line ends with what to do:
+  - `` `growther classifier pull` replaces it `` — a file that a download would replace;
+  - `it is a link, and C5 does not replace a link: point it at the model (sha256 …), or
+    remove it to have C5 fetch the model` — the path is a symbolic link to the wrong file;
+  - `this deployment's network posture is offline, so C5 does not download the model.`
+    and the steps to place it by hand (after the link sentence, for a link);
+  - `your organisation's policy keeps the local classifier off`.
 - `✗ <path> is a link whose file cannot be reached (a share that is not mounted?); it is
   used once it can be, and never downloaded over` — the model's path is a symbolic link and
   the file it points to is not there right now. Mount the share, or remove the link to have
   C5 fetch the model.
+
+`status` does not suggest a download that Offline or your organisation's policy would
+refuse, nor one over a link. To check, it reads your organisation's policy whenever the
+model is not here and checked, as `pull` does (see below): the device's own policy and, if
+you use one, the signed policy document. **If that document is at a web address, each such
+`status` run makes one request to it, even while C5 is set to Offline.** `status` never
+creates, upgrades or changes a database.
 
 Checking the SHA-256 reads all 812 MB the first time, so it can take a moment. The result
 is remembered in `decider-0.8b.Q8_0.gguf.verified.json` beside the model, so later checks
@@ -671,6 +704,7 @@ supported **and** the model is verified, otherwise `1`.
 
 ```text
 decider-0.8b by Mapika (Apache-2.0), fine-tuned from Qwen3.5-0.8B-Base (Apache-2.0) …
+About 812 MB is downloaded once from Hugging Face.
 Downloading decider-0.8b-q8_0 (~812 MB) to <path>…
   0%
   5%
@@ -680,10 +714,11 @@ Downloading decider-0.8b-q8_0 (~812 MB) to <path>…
 While the classifier is on, a running C5 starts using the model when Settings › Learning is next opened, or when C5 next starts. …
 ```
 
-The `Downloading …` line appears only once the first bytes arrive. A pull that is refused
-(Offline, a policy, another download, a link) or finds the model already in place prints the
-notice and then its result, with no `Downloading` line before it. Progress is printed
-in 5% steps from where the download starts; a resumed download starts at its own percentage.
+The `About 812 MB …` and `Downloading …` lines appear only once the first bytes arrive. A
+pull that is refused (Offline, a policy, another download, a link) or finds the model
+already in place prints the notice and then its result, with neither line before it.
+Progress is printed in 5% steps from where the download starts; a resumed download starts
+at its own percentage.
 
 You do not need to restart C5 afterwards. While the classifier is on, a running C5 picks
 up the new model the next time **Settings › Learning** is opened, or at its next start.
@@ -704,9 +739,17 @@ when:
 - the download fails, or the disk fills up — the message says which, and how to place
   the file by hand. A network failure gives its cause directly:
   `✗ Could not download the classifier model: <the cause>. Fetch … and place it at … (sha256 …).`
-  The cause is the proxy's answer, a certificate C5 does not trust, a refused connection,
-  or a proxy setting C5 cannot use (see
-  [When the proxy says no](/c5/configuration/network#when-the-proxy-says-no)).
+  The cause is the proxy's answer (naming the proxy, here in the terminal), a certificate C5
+  does not trust, a refused connection, or a proxy setting C5 cannot use (see
+  [When the proxy says no](/c5/configuration/network#when-the-proxy-says-no)). When the
+  cause is the proxy or a certificate, the machine is connected and the network setting is
+  what to fix, so the message says what to do once it is fixed before it offers placing
+  the file by hand:
+  `` … Once that is fixed, turn the classifier off and on, restart C5 or run `growther classifier pull` to download it; or fetch … on a connected machine and place it at … (sha256 …). ``
+  When `GROWTHER_CLASSIFIER_NO_AUTO_DOWNLOAD=1` or `CI` is set in the terminal you run
+  `pull` from, C5 would not download the model on its own, so the message names only
+  `growther classifier pull` as the way to download once the problem is fixed, still
+  followed by placing the file by hand.
 
 A file of the wrong size or content already at the model's path is replaced by the
 verified download. Move it away first if you want to keep it.

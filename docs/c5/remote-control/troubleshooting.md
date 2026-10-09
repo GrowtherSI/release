@@ -22,7 +22,8 @@ Read the status line under **Reach this machine from anywhere**:
 | _The connection stopped. It will be retried._                   | The machine lost its outbound connection. It reconnects on its own; check the machine's own internet access                                                               |
 | _Not connected. Only addresses on your own network work today._ | No tunnel is running. Remote Control was just turned on, or the request for an address was refused. Save the tab to ask again immediately                                 |
 | _Automatic setup is not available from your licence service._   | Your licensing service does not issue addresses. Run your own tunnel under Advanced                                                                                       |
-| _Could not download the tunnel program. Check this machine's internet access._ | C5 could not fetch Cloudflare's connector, `cloudflared`, which every tunnel needs. It retries on its own. See [The tunnel program will not download](#the-tunnel-program-will-not-download) |
+| _Could not download the tunnel program: …_ or _Could not download the tunnel program. Check this machine's internet access._ | C5 could not fetch Cloudflare's connector, `cloudflared`, which every tunnel needs. The rest of the line says why. It retries on its own. See [The tunnel program will not download](#the-tunnel-program-will-not-download) |
+| _This deployment's network posture is offline, so C5 does not download the tunnel program._ | The egress posture is **Offline**, so C5 will not download the tunnel program, and the tunnel cannot start without it. See [The tunnel program will not download](#the-tunnel-program-will-not-download) |
 | _The tunnel program downloaded with the wrong contents, so it was not run — a proxy or security product on this network may be altering it. Once that is fixed, save Remote Control's settings to try again._ | The download arrived, but was not the exact file C5 pins. C5 does not run it, and does not retry on its own. See [The download did not match](#the-download-did-not-match) |
 | _The tunnel program would not start on this machine._ | The connector was downloaded but would not run. C5 retries; if it keeps failing, check that security software is not blocking `~/.growther/config/rc-tunnel/cloudflared` |
 | _Tunnels are not available on …_ | Cloudflare publishes no connector for this platform. Use your own network, `growther connect`, or your own address |
@@ -43,24 +44,41 @@ install believes its state to be.
 
 Every tunnel — the issued address or your own — runs Cloudflare's connector, `cloudflared`,
 which C5 downloads the first time a tunnel starts. It fetches one pinned version from
-Cloudflare's releases on GitHub and checks its size and sha256 before running it. When that
-fails, the status line reads _Could not download the tunnel program. Check this machine's
-internet access._ The usual causes:
+Cloudflare's releases on GitHub and checks its size and sha256 before running it. The
+download goes through the proxy and certificate authorities configured for C5, to
+`github.com`, which redirects to GitHub's file-download host,
+`release-assets.githubusercontent.com` (GitHub has also used
+`objects.githubusercontent.com` for this).
 
-- **The egress posture is Offline** (**Settings › Enterprise › Network**). C5 downloads
-  nothing while offline, so no tunnel can start. Your own network addresses and
-  `growther connect` still work.
-- **A proxy or firewall blocks GitHub.** The download goes through the proxy and certificate
-  authorities set under **Settings › Enterprise › Network**, to `github.com`, which
-  redirects to GitHub's file-download host, `release-assets.githubusercontent.com`
-  (GitHub has also used `objects.githubusercontent.com` for this). Ask for `github.com`
-  and that host to be allowed; both are on the list **Test connectivity** checks under
-  **Settings › Enterprise › Network**. If your proxy inspects TLS, C5 needs its root
-  certificate — see [Network and egress](/c5/configuration/network).
+When the download fails, the status line under **Reach this machine from anywhere** says
+why:
 
-C5 records the reason in its error log, with a line ending `the tunnel program did not
-download — retrying in …s`, and tries again on its own — soon at first, then once a minute.
-Once the cause is fixed, the tunnel comes up without anything further from you.
+| The status line says | What to do |
+| --- | --- |
+| _Could not download the tunnel program: the proxy asked for credentials (407). Add them to C5's proxy URL; C5 speaks Basic proxy authentication only._ | Put the user name and password in the proxy URL (`http://user:password@host:port`). NTLM and Kerberos are not supported |
+| _Could not download the tunnel program: the proxy refused it (403). Ask for github.com and release-assets.githubusercontent.com to be allowed._ | Ask your network team to allow both hosts. Allowing `github.com` alone fails at the redirect |
+| _Could not download the tunnel program: the proxy refused to open a tunnel (…)._ | The proxy answered with another status, given in brackets. A `502`, `503` or `504` means the proxy could not reach GitHub itself |
+| _Could not download the tunnel program: the configured proxy cannot be used, and C5 does not connect round it. Fix or remove C5's proxy URL._ | The proxy setting is not something C5 can use, such as a `socks5://` address. `growther doctor` says what is wrong with it. See [An unusable proxy stops traffic](/c5/configuration/network#corporate-proxy) |
+| _Could not download the tunnel program: this network's certificate is not trusted. If a proxy inspects HTTPS, add its root certificate to C5's CA bundle._ | Your proxy re-signs HTTPS with its own authority. Give C5 its root certificate — see [Behind a TLS-inspecting proxy](/c5/configuration/network#behind-a-tls-inspecting-proxy) |
+| _This deployment's network posture is offline, so C5 does not download the tunnel program._ | The egress posture is **Offline** (**Settings › Enterprise › Network**), so C5 does not download `cloudflared`, and the tunnel cannot start until the program is on this machine. (A tunnel whose program is already here does start while Offline — turn Remote Control off to stop it.) Your own network addresses and `growther connect` still work |
+| _Could not download the tunnel program. Check this machine's internet access._ | Anything else: no connection, a name that does not resolve, a proxy that does not answer, a dropped download. Check that the machine is online and that `github.com` and `release-assets.githubusercontent.com` are allowed. **Test connectivity** under **Settings › Enterprise › Network** asks both |
+
+The proxy URL and the CA bundle are delivered by device policy (Group Policy, macOS managed
+preferences or `/etc/growther`), by `GROWTHER_PROXY_URL` and `GROWTHER_CA_BUNDLE`, or in
+`c5.yaml`; in a shipped build the Network card only shows them. A signed policy document
+cannot set them. See [Corporate proxy](/c5/configuration/network#corporate-proxy).
+
+**Neither the status line nor C5's error log ever contains the proxy's address**, because
+anyone signed in to C5, and every paired phone, can read both. They say *the proxy*, and
+what it answered. To see which proxy C5 is using, run `growther doctor` on the machine
+(its **Proxy reachability** row), or open **Settings › Enterprise › Network** as an
+administrator. See
+[The proxy address stays out of logs and alerts](/c5/configuration/network#the-proxy-address-stays-out-of-logs-and-alerts).
+
+C5 writes the reason to its error log, with a line ending `the tunnel program did not
+download — retrying in …s`, and keeps trying on its own: soon at first, then once a minute.
+While the posture is Offline those retries contact nothing. Once you fix the cause, or
+switch back to Online, the tunnel comes up without anything more from you.
 
 ### The download did not match
 
