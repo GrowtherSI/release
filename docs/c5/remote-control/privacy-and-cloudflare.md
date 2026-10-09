@@ -125,15 +125,20 @@ copy already installed on your system:
 - **It goes through your network settings.** The download uses the proxy and certificate
   authorities set under **Settings › Enterprise › Network**, like everything else C5
   fetches.
-- **Offline means no tunnel.** While the egress posture is **Offline**, C5 does not
-  download it, so no tunnel starts. Your own network addresses and `growther connect` keep
+- **Offline stops the download, not the tunnel.** While the egress posture is **Offline**,
+  C5 does not download `cloudflared`. If the program is not on the machine yet, no tunnel
+  starts. If it is already there, the tunnel still starts and connects to Cloudflare. To
+  stop it, turn Remote Control off. Your own network addresses and `growther connect` keep
   working.
 - **It lives with C5's own files**, at `~/.growther/config/rc-tunnel/cloudflared`
   (`cloudflared.exe` on Windows). On Windows on ARM, C5 runs the 64-bit Intel build, which
   Windows runs under emulation, because Cloudflare publishes no ARM build for Windows.
 
-If the download fails, **Reach this machine from anywhere** says _Could not download the
-tunnel program. Check this machine's internet access._ and C5 retries on its own. If what
+If the download fails, **Reach this machine from anywhere** says why — for example
+_Could not download the tunnel program: the proxy asked for credentials (407). …_, or
+_Could not download the tunnel program. Check this machine's internet access._ — and C5
+retries on its own. That line never names your proxy's address, because everyone signed in
+and every paired phone can read it. If what
 arrived was the wrong file — something on the network altered it — C5 does not run it and
 does not keep downloading it every minute; the line says _The tunnel program downloaded with
 the wrong contents, so it was not run …_ and C5 tries again when you save Remote Control's

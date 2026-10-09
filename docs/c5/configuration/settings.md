@@ -40,6 +40,15 @@ You do not need to change most of these. C5 works sensibly out of the box.
 You have to set this up before anything works. Add at least one model and its key. See
 [Model providers](/c5/configuration/model-providers).
 
+A gateway's **Host** and **Port** on the **OpenClaw**, **Hermes Agent** and **PicoClaw**
+cards can also be set in `c5.yaml` or the environment (`OPENCLAW_GATEWAY_URL`,
+`HERMES_GATEWAY_URL`, `HERMES_DASHBOARD_URL`, `PICOCLAW_GATEWAY_URL`). While one is set, the
+card shows that address, the fields it sets are locked, and a note names the variable — for
+example *Host and port are set by HERMES_GATEWAY_URL (c5.yaml or the environment C5 was
+started with), which outranks these fields. Change or remove it there.* Remove the variable,
+and once C5 restarts the card's own **Host** and **Port** apply again. See
+[Local model servers and gateways](/c5/cli/environment#local-model-servers-and-gateways).
+
 ### Budget
 
 Set a spending limit on your first day. It is the cheapest mistake-insurance available.
@@ -190,7 +199,7 @@ them:
 
 | Line | What it tells you |
 | --- | --- |
-| **This Mac** (or **This Mac Studio**, **This machine**, …) | The machine as your operating system describes it — model, processor, physical cores and installed memory, for example *Apple M4 Max, 16 cores (12 performance and 4 efficiency), 64 GB memory — supported.* — then where the classifier runs and why: *Runs on the GPU (Metal).* or *Runs on the CPU (8 threads), because LM Studio is configured and the classifier leaves the GPU to your local model.* If the machine cannot run it, the reason |
+| **This Mac** (or **This Mac Studio**, **This machine**, …) | The machine as your operating system describes it — model, processor, physical cores and installed memory, for example *Apple M4 Max, 16 cores (12 performance and 4 efficiency), 64 GB memory — supported.* — then where the classifier runs and why: *Runs on the GPU (Metal).* or *Runs on the CPU (8 threads), because LM Studio is configured and the classifier leaves the GPU to your local model.* Just after you change providers, also where it is about to move: *It moves to the CPU when the classifier restarts, because …* C5 restarts it within a few seconds; you need not restart anything. If the machine cannot run it, the reason |
 | **Model** | Whether the model is here and checked, partly downloaded (*300 of 812 MB*), downloading, or not downloaded and why. It also says when the file at the model's path is not the model, or when the path is a link whose file cannot be reached |
 | **Notice** | The model's notice: who made it, its licence, and the note about its research-use training data, word for word as C5 shows it everywhere. Shown only while the classifier is on or the model is on disk |
 | **Runtime** | What its process is doing: running on the Metal GPU or the CPU, memory used, load time, or why it is not running |
@@ -216,11 +225,13 @@ downloaded.
 
 On Apple silicon it uses the Metal GPU — unless a local model server (LM Studio,
 llama.cpp, Ollama or Inferencer) is configured, in which case it uses the CPU so it does
-not compete with the model you chose. Everywhere else it uses up to eight CPU threads. A
-machine where it answers slowly (every Windows machine starts that way until a test
-answer comes back within two seconds) uses it only for decisions that do not wait on it.
-On the CPU, or on a slow machine, the most frequent kinds record one question in four
-(above).
+not compete with the model you chose. Add or remove such a server while the classifier
+runs, and C5 restarts the classifier on the new choice about two seconds later. Everywhere
+else it uses up to eight CPU threads. A machine where it answers slowly (every Windows
+machine starts that way until a test answer comes back within two seconds) uses it only
+for decisions that do not wait on it. A slow test answer is timed again two and fifteen
+minutes later, and a fast one clears the mark without a restart. On the CPU, or on a slow
+machine, the most frequent kinds record one question in four (above).
 
 #### Read the Terms that cover it
 
@@ -324,13 +335,14 @@ start, when its audit log shows nobody chose them. See
 | **Authoritative** | Asked first; a confident answer is used and the usual model is not asked. Anything less confident goes to the usual model |
 
 **Assisted** and **Authoritative** need the kind's promotion gate to pass first — the
-measurement against your own labels — and a fitted calibration. Until then they are
-shown but cannot be chosen (except by an administrator, below), with the reason beside
-them. Calibration is fitted every night once there are enough labels, or at once by an
-administrator's **Fit calibration now**. An acting mode uses only answers calibrated the
-way its gate measured them. If the nightly check finds the evidence no longer holds,
-C5 moves the kind back to **Shadow**. A kind an administrator raised anyway is not
-moved back just because its gate still has not passed; it is moved back only if the
+measurement against your own labels, which includes **Telling cases apart**: whether the
+classifier's answer actually changes when the right answer does — and a fitted calibration.
+Until then they are shown but cannot be chosen (except by an administrator, below), with
+the reason beside them. Calibration is fitted every night once there are enough labels, or
+at once by an administrator's **Fit calibration now**. An acting mode uses only answers
+calibrated the way its gate measured them. If the nightly check finds the evidence no
+longer holds, C5 moves the kind back to **Shadow**. A kind an administrator raised anyway
+is not moved back just because its gate still has not passed; it is moved back only if the
 model or its calibration changes, or its calibration error doubles.
 
 An administrator can raise a kind on a gate that has not passed, after a warning

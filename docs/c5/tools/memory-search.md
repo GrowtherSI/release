@@ -270,9 +270,10 @@ three — and C5 makes it only if that would still leave 1 GB free. Otherwise th
 [mcp] [qmd] not enough free space beside <folder> for C5's own checked copy of <path> (the embedding model, 334 MB); QMD keeps it by a link, which C5 takes out of reach within 5 s if the file changes.
 ```
 
-The copies stay from one start to the next; ones no model needs any longer are removed. On
-Windows, a swap the system refuses while the search engine has the file open waits for the
-next start.
+The copies stay from one start to the next; ones no model needs any longer are removed, and
+so are the temporary files of a copy that was cut short (a copy that fails removes its own;
+one left by a C5 that stopped part-way is removed at a later start). On Windows, a swap the
+system refuses while the search engine has the file open waits for the next start.
 
 While C5 runs, it notices a model file you place at its name. About half a minute after
 the copy stops changing, C5 checks it and restarts the search engine with it, and the log

@@ -1,6 +1,6 @@
 ---
 title: Environment variables
-description: Change where C5 stores data, which port it uses, which releases it gets, which models it downloads on its own, and which libvips it runs on.
+description: Change where C5 stores data, which port it uses, which releases it gets, which models it downloads on its own, where it finds your local model servers and gateways, and which libvips it runs on.
 order: 2
 ---
 
@@ -65,6 +65,21 @@ See [When C5 starts at sign-in](#when-c5-starts-at-sign-in) below.
 These four are explained in [Network and egress](/c5/configuration/network). C5 does
 **not** read `HTTPS_PROXY`, `HTTP_PROXY` or `NO_PROXY`; set `GROWTHER_PROXY_URL` to the
 same value if that is the proxy you want.
+
+**Local model servers and gateways**
+
+| Variable               | What it does                                     |
+| ---------------------- | ------------------------------------------------ |
+| `LMSTUDIO_BASE_URL`    | Where LM Studio is.                              |
+| `OLLAMA_BASE_URL`      | Where Ollama is.                                 |
+| `LLAMACPP_BASE_URL`    | Where llama.cpp's server is.                     |
+| `INFERENCER_BASE_URL`  | Where the Inferencer (Hugging Face) endpoint is. |
+| `OPENCLAW_GATEWAY_URL` | Where the OpenClaw gateway is.                   |
+| `HERMES_GATEWAY_URL`   | Where the Hermes gateway is.                     |
+| `HERMES_DASHBOARD_URL` | Where the Hermes dashboard is.                   |
+| `PICOCLAW_GATEWAY_URL` | Where the PicoClaw gateway is.                   |
+
+See [Local model servers and gateways](#local-model-servers-and-gateways) below.
 
 **Image library**
 
@@ -174,6 +189,67 @@ feature off and also refuses `growther classifier pull`. A *Recommended* (unlock
 classifier, the switch is already on and outranks it, and it never refuses `pull`. See
 [Managed configuration](/c5/configuration/enterprise-policy) and
 [Local classifier](/c5/tools/local-classifier#for-administrators).
+
+### Local model servers and gateways
+
+C5 looks for each model server and agent gateway at its usual address. If one runs
+somewhere else — another port, or another machine — tell C5 where:
+
+| Variable | Service | Default |
+| --- | --- | --- |
+| `LMSTUDIO_BASE_URL` | LM Studio | `http://127.0.0.1:1234/v1` |
+| `OLLAMA_BASE_URL` | Ollama | `http://127.0.0.1:11434/v1` |
+| `LLAMACPP_BASE_URL` | llama.cpp | `http://127.0.0.1:8080/v1` |
+| `INFERENCER_BASE_URL` | Inferencer | Hugging Face's cloud, `https://api-inference.huggingface.co` |
+| `OPENCLAW_GATEWAY_URL` | The OpenClaw gateway | `ws://127.0.0.1:18789` |
+| `HERMES_GATEWAY_URL` | The Hermes gateway | `http://127.0.0.1:8642` |
+| `HERMES_DASHBOARD_URL` | The Hermes dashboard | Port `9119`, on the Hermes gateway's host |
+| `PICOCLAW_GATEWAY_URL` | The PicoClaw gateway | `http://127.0.0.1:18790` |
+
+Set them in `c5.yaml` (see [Config files](/c5/configuration/config-files)) or in the
+environment C5 starts with; the environment wins over `c5.yaml`. Every connection C5 makes
+to that service follows the value in force. A value you remove from `c5.yaml` can stay in
+use until C5 next starts, because C5 keeps what it read when it started.
+
+**The model servers.** Their addresses are full URLs, such as
+`http://192.168.1.20:1234/v1`. A value C5 cannot read as a URL, or one pointing at a
+link-local or cloud-metadata address, is ignored and the default used. Their cards in
+**Settings › Integrations** show the value in force. Pressing **Save** in Settings stores
+the address each model server's card shows, both in `c5.yaml` under these same names and in
+Settings. So once anyone has saved there, removing the variable leaves C5 on the same
+address. To go back to the default, clear the address on the card and save (and remove the
+variable from the environment, if it is set there).
+
+**The gateway variables** set a gateway's address and win over the **Host** and **Port** on
+its card. Give a host and a port only — `10.0.0.4:18789`, `http://10.0.0.4:18789` or
+`ws://10.0.0.4:18789` — because C5 builds the rest of the address itself. Always include
+the port: without one, C5 uses port 80, not the gateway's usual port.
+
+C5 talks to gateways over plain `http` and `ws`, so it ignores a value that starts
+`https://` or `wss://` rather than send the gateway's token unencrypted to an address you
+meant to be encrypted. It also ignores a value with a path, a query or a user name and
+password in it, a link-local or cloud-metadata address, or a port outside 1–65535. The
+card's address, or the default, is then used instead.
+
+**To check that C5 took your value**, open the gateway's card in **Settings ›
+Integrations**. While a gateway variable is in force, the card shows the address C5 really
+uses, the **Host** and **Port** it sets cannot be edited, and a note under them names the
+variable and says to change or remove it where it is set. If the fields can still be edited
+and no note names the variable, C5 is not using your value: either C5 did not start with it,
+or it ignored it. When it ignored it, C5's own output says why, once, in a line like
+`[config] OPENCLAW_GATEWAY_URL is ignored (<why>): <value> — …`.
+
+A gateway variable is never copied into Settings, so saving the card does not keep it:
+remove the variable, and once C5 restarts the card's own **Host** and **Port** apply again,
+or the default. `HERMES_DASHBOARD_URL` moves only the dashboard: without it, the dashboard
+is on the Hermes gateway's host — the one `HERMES_GATEWAY_URL` gives, when that is set.
+
+**If you already set `OPENCLAW_GATEWAY_URL` for OpenClaw.** It is also what OpenClaw's own
+command-line tool reads to find its gateway, so the two agree when it is set. But C5 started
+from a shell that exports it uses it too, and the OpenClaw card's **Host** and **Port** lock
+(or, for a `wss://` address, C5 ignores it as above). This is new after v322: v322 and
+earlier set a gateway's address only on its card. If that is not the gateway C5 should use,
+start C5 without the variable.
 
 ### Try early versions
 

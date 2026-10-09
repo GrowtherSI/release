@@ -1,6 +1,6 @@
 ---
 title: Updating C5
-description: Keep C5 current, check for new versions, roll back if you need to, what the first start after an update does, and updating through a proxy.
+description: Keep C5 current, check for new versions, roll back if you need to (including straight back to v319), what the first start after an update does, and updating through a proxy.
 order: 4
 ---
 
@@ -103,9 +103,62 @@ model simply sits unused in the `classifier` folder; see
 [Running out of disk space](/c5/troubleshooting/common-issues#running-out-of-disk-space)
 if you want the space back.
 
+### Going straight back to v319
+
+v319 is the last version without the local classifier. If you go back to it directly from
+v320 or v322 — with `growther rollback` after updating from v319, say — v319 may treat the
+classifier's internal process as an ordinary extension and keep starting it. You see a
+**Local classifier** entry under **Settings › Extensions**. Usually it fails to start and is
+retried every minute. If the newer C5 program is still installed elsewhere on the machine,
+v319 can start it outside its own control and offer its tools to your agents.
+
+**What to do:** after going back, open **Settings › Extensions** in v319 and switch
+**Local classifier** off. Its badge then reads DISABLED, and v319 stops trying to start it.
+If you switch it back on in v319, the problem returns. Running v320 or v322 again also
+switches it back on, so do this each time you go back to v319 from one of them.
+
+**If you reach v319 some other way than `growther rollback`** — a copy from the
+[release archive](/c5/getting-started/downloads#older-versions), say — you can instead start a
+version after v322 once before you switch to v319. It switches that entry off, and
+v319 respects that. This does not help with `growther rollback`: updating to a newer version
+replaces the copy that rollback goes back to.
+
+**You can skip all this** if you are leaving a version after v322: those versions always
+leave that entry switched off, because they start the classifier another way.
+
+### The older version and your databases
+
+Your data stays as the newer version left it, and a newer version may have upgraded the
+databases. If you went back to a version after v322, it notices this when it starts: it
+carries on as usual, and prints a line like this for each such database, to its output and
+its error log:
+
+```text
+[migration] growther: the database is at schema v<N>, newer than this build knows (v<M>). It was last opened by a newer C5; upgrade, or restore a backup taken before the upgrade.
+```
+
+`growther doctor` shows the same on its **Schema** row. Update C5 again when you can, or
+restore a backup taken before the newer version first ran (see
+[Backups and recovery](/c5/security/backups)). v322 and earlier say nothing about it, so
+after going back to one of them nothing warns you.
+
+### Remote Control Terms after a rollback
+
+If a newer version brought newer Terms of Service and you accepted them, rolling back to a
+version after v322 keeps that acceptance: Remote Control does not ask again. v322 and
+earlier accept only the exact Terms version they carry, so after rolling back to one of
+them the **Settings › Remote Control** tab asks for its Terms again at the next save, and
+the newer version then asks again after you update. See
+[If the Terms changed after you accepted them](/c5/remote-control/setup#if-the-terms-changed-after-you-accepted-them).
+
 ## What happens on the first start after an update
 
 Most updates change nothing you need to act on.
+
+**If your shell exports `OPENCLAW_GATEWAY_URL` for OpenClaw's own command-line tool**,
+versions after v322 read it too: C5 started from that shell dials that gateway, and the
+OpenClaw card's **Host** and **Port** lock. See
+[Local model servers and gateways](/c5/cli/environment#local-model-servers-and-gateways).
 
 ### Updating to the release with the local classifier (Terms v1.8)
 
@@ -176,6 +229,14 @@ the classifier is on it logs
 You can set any kind's mode yourself in **Settings › Learning**. See
 [What it does at first](/c5/tools/local-classifier#what-it-does-at-first).
 
+**In versions after v322, the promotion gate also checks _Telling cases apart_**: whether
+the classifier's answer actually changes when the right answer does. If Task categories was
+set to Assisted or Authoritative before this update and fails this check, the first nightly
+re-check moves it back to **Shadow**, and administrators get a notification saying why. Its
+answers keep being recorded. If an administrator raised it even though its gate had not
+passed, this check does not move it back. See
+[When it starts to act](/c5/tools/local-classifier#when-it-starts-to-act).
+
 ## Updates through a corporate proxy
 
 The update check and the update download both go through the proxy and certificate
@@ -183,13 +244,18 @@ authorities your organisation set under **Settings › Enterprise › Network**,
 of C5. If certificate pinning is on, it still applies when the connection goes through the
 proxy.
 
-When a check or download fails, `growther update` and C5's own update check say why — a
-certificate the pin did not accept, a missing certificate authority, or a proxy that
-refused, with the answer it gave:
+When a check or download fails, `growther update` says why — a certificate the pin did
+not accept, a missing certificate authority, or a proxy that refused, with the answer it
+gave:
 
 ```text
 the proxy http://proxy.example:3128 refused to open a tunnel to raw.githubusercontent.com:443: it answered CONNECT with 407 Proxy Authentication Required; it wants credentials — put them in the proxy URL (http://user:password@host:port), C5 speaks Basic proxy authentication only
 ```
+
+C5's own background check writes the same reason to its error log, and an update started
+from the app shows it if it fails — in both, the line says *the proxy* without its address,
+because anyone signed in can read them. See
+[The proxy address stays out of logs and alerts](/c5/configuration/network#the-proxy-address-stays-out-of-logs-and-alerts).
 
 See [Network and egress](/c5/configuration/network) for the hosts updates use, and
 [Common issues](/c5/troubleshooting/common-issues#model-downloads-or-updates-fail-behind-a-corporate-proxy)

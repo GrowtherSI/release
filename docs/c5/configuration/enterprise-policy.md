@@ -228,9 +228,13 @@ restart:
 too (the part already downloaded stays, so it can resume if the policy changes). Nothing
 is downloaded afterwards: not at start, not from Settings, and not by
 `growther classifier pull`, which answers *Your organisation's policy keeps the local
-classifier off, so its model is not downloaded.* and exits with code 1. A model already
-on the machine stays there until an administrator deletes it; the **Delete the model**
-button in **Settings › Learning** still works while the classifier is off.
+classifier off, so its model is not downloaded.* and exits with code 1. While the model
+is not on the machine, `growther classifier status` says so too, rather than suggesting a
+pull: *model not downloaded: your organisation's policy keeps the local classifier off*.
+Both read a lock in a signed policy document as well as one in the device's own policy. A
+model already on the machine stays there until an administrator deletes it; the
+**Delete the model** button in **Settings › Learning** still works while the classifier is
+off.
 
 **Locked on.** Nobody on the device can turn it off or delete its model, because C5
 would only download it again. A request to turn it off is refused with *Locked by your

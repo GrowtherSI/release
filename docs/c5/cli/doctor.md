@@ -21,14 +21,25 @@ Doctor is a check, not a repair. It never downloads a model, and it never moves 
 deletes your files. On a computer where C5 has never run it says so and creates no
 databases.
 
+**It only reads your databases.** It opens them read-only: it does not upgrade them to its
+own version, does not fill in default data, and changes nothing in them — even when C5 is
+running, and even when doctor is a newer version than the C5 that last opened them. A
+database that is newer than doctor's own version, or that C5 will upgrade at its next
+start, is reported on the **Schema** row instead. If another process holds a lock on a
+database at that moment, the rows that read it say *database busy* — run doctor again in a
+moment.
+
 It does write a few things:
 
-- **Its report**, as `doctor-status.json` in your C5 folder, every time it runs. On a
-  computer where C5 has never run, doctor creates the C5 folder to hold it. Where it has
-  permission it also writes a copy for device-management tools to
+- **Its report**, as `doctor-status.json` in your C5 folder, every time it runs (except
+  as `root` over another user's folder, below). On a computer where C5 has never run,
+  doctor creates the C5 folder to hold it. Where it has permission it also writes a copy
+  for device-management tools to
   `%ProgramData%\Growther\C5\status.json` (Windows),
   `/Library/Application Support/Growther/status.json` (macOS) or
   `/var/lib/growther/status.json` (Linux).
+- **Error log lines.** A check that fails unexpectedly may add a line to C5's error log,
+  `logs/errors.log` in your C5 folder.
 - **A check result beside a model file.** If the offline speech model has never been
   checked, doctor checks it and records the result in a small `.verified.json` file next
   to it, so the check is not repeated.
@@ -44,6 +55,26 @@ It does write a few things:
   is skipped. See
   [What Offline stops](/c5/cli/commands#what-offline-stops) for the same rule across
   every command.
+
+### Run it as the user who runs C5
+
+Run as `root` (with `sudo`, say) over another user's C5 folder, doctor keeps its report,
+its error log, `c5.yaml` and the key files out of that folder, where they would belong to
+`root` and that user's C5 could not write to them: its errors go to the terminal instead of
+`logs/errors.log`, its report is not saved as `doctor-status.json` there (the machine-wide
+copies for device-management tools are still written), it does not create `c5.yaml`, and
+it reads the device key without writing any of the key files. It says so in one line
+before the report:
+
+```text
+growther doctor: running as root over /Users/ana/.growther, which belongs to uid 501 — doctor writes nothing into it: errors go to this terminal, not …/logs/errors.log, and the status document is not saved there. Run doctor as the user who runs C5.
+```
+
+Doctor changes no file's owner. Despite that line, two writes from the list above can
+still land in that folder as `root`, when the cache root is the C5 folder (as it is by
+default): the check result beside an offline speech model that has never been checked,
+and, on Linux, the OpenSSL library C5 unpacks. Run doctor as the user who runs C5 to avoid
+both.
 
 ## What it checks
 
@@ -61,6 +92,7 @@ some appear only when there is something to say.
 | **Secrets location** | Where the key set lives, and whether it is split from the home |
 | **Config (c5.yaml)** | The config file is present. Missing, it warns: the licence seed lives there |
 | **Databases** | How many of the four data files are present. "none yet" on a fresh install |
+| **Schema** | Each database's version against this copy of C5: current, waiting to be upgraded at C5's next start, or newer than this copy knows (a warning). Shown only once the databases exist |
 | **Backup target** | Where finished backups are copied, and when the last copy landed |
 | **Lock host** | Who holds the single-instance lock, and whether it is this machine |
 
@@ -342,6 +374,23 @@ than 14 days are left.
 Normal before C5's first start. If C5 has run before, your data folder may have moved;
 run `growther home show`. If the databases are there but cannot be opened, see
 [Backups and recovery](/c5/security/backups).
+
+**Schema** warns that a database is newer than this version of C5
+The line reads, for example, `growther.db: the database is at schema v<N>, newer than this
+build knows (v<M>). It was last opened by a newer C5; upgrade, or restore a backup taken
+before the upgrade.` A newer version of C5 opened this data, and you are now running an
+older one — usually after `growther rollback`. C5 still starts, and says the same in its
+start-up output and error log. Update C5 again, or restore a backup taken before that
+newer version first ran. Only versions after v322 give this warning: v322 and earlier say
+nothing. See
+[Go back to the older version](/c5/getting-started/updating#go-back-to-the-older-version).
+
+**Schema** says "migrations pending"
+Normal right after an update, before C5 has started on it: C5 upgrades its databases at
+its next start. Doctor never does.
+
+A row that says **database busy** means another process — usually the running C5 — held a
+lock on that database at that moment. Run doctor again.
 
 **Mothership** says "unreachable"
 Usually a network, proxy or firewall issue — the message in brackets says which. C5 keeps

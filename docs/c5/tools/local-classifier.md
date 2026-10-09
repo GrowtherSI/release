@@ -303,6 +303,31 @@ Under each kind it applies to, the card says so:
 On a slow machine the reason reads _the local classifier answers slowly on this machine_
 instead.
 
+### When the classifier is busy
+
+The classifier answers one question at a time. So C5 asks it only one background question
+at once — a question for a kind in **Shadow**, whose answer is only recorded — and starts
+none while it is waiting on the classifier for an answer it will use. Questions C5 is
+waiting on never queue behind a backlog of background ones.
+
+A background question that finds the classifier busy **waits for its turn** instead of
+being dropped, first come, first asked. So a burst of work still records every question
+chosen for recording (on a CPU or a slow machine, the one in four above). Up to 32 can
+wait, each for up to a minute. One that arrives when 32 are already waiting, or that waits
+longer than a minute, is given up and not recorded. Giving up is never counted as a
+failure, so it never pauses the classifier. A question that waited is checked again before
+it is asked: if the classifier, or that kind of decision, was switched off meanwhile, it
+asks nothing and records nothing.
+
+A question C5 is waiting on gets at most 1.5 seconds. One that arrives while a background
+question is being answered waits for it to finish, because an answer in progress is not
+interrupted, so on a slow processor it can run out of time. That counts as a time-out, not
+a failure, and C5 uses the usual model's answer.
+
+In the **Classifier** tab under **Ops**, background questions given up after a minute's
+wait are counted as _Shed after a minute's wait_. Those turned away because 32 were
+already waiting are counted under _Skipped: busy_.
+
 ## When it starts to act
 
 Only **Task categories** can be raised to **Assisted** or **Authoritative**, and only after the
@@ -311,13 +336,33 @@ classifier has been measured on your own install. The other four offer only Off 
 The measurement is called the **promotion gate**. It compares the classifier's recorded answers
 over the last 30 days with the usual model's, and with the answers people gave when they
 corrected or labelled tasks. Its line in Settings shows each part that has not passed yet:
-**Labels**, **Accuracy against your labels**, **Agreement with the teacher model**,
-**Calibration**, **Confident answers** and **Speed**.
+**Labels**, **Accuracy against your labels**, **Telling cases apart**, **Agreement with the
+teacher model**, **Calibration**, **Confident answers** and **Speed**.
+
+**Telling cases apart** does not compare the classifier with the usual model. It checks
+that the classifier's answer actually changes when the right answer changes. A classifier
+that gives much the same answer every time fails it, even if the usual model does no
+better. For task categories each category is checked on its own, so a classifier that gives
+each category the same confidence on every task fails too.
+
+It is measured only on answers that people's labels show to be the correct answer in at
+least 10 separate tasks (or runs), and not the correct answer in at least 10, whatever the
+classifier itself said. Until at least one answer has that many labels, this part reads
+_not enough data_ rather than passing, because a handful of tasks would decide it by
+chance. Labelling more tasks, in **Teach the classifier** or by correcting the categories C5
+gave a task, fixes that.
 
 - **Assisted** and **Authoritative** can be chosen only once the gate has passed, and once a
   **calibration** has been fitted for that kind of decision. A calibration is the adjustment
   that turns the classifier's raw confidence into a measured one. C5 fits it itself, every night
   at 23:50, from the labelled answers, once there are enough of them.
+- C5 keeps a calibration only if it is useful: once calibrated, the classifier's answers
+  must get clearly different confidences, and higher confidence must go with more right
+  answers, not fewer. A fit that fails this is not stored, and the **Calibration** line
+  under that kind says why. A calibration stored by an earlier version is checked the same
+  way, against the answers the classifier gives now. If it fails, the kind cannot be raised
+  on it, and a kind already acting on it stops acting at its next fit (nightly, or
+  **Fit calibration now**) and is fitted again.
 - Nothing raises the classifier for you. Someone with permission to change settings chooses the
   mode.
 - Even when raised, it acts only at the confidence level its gate measured, only on answers
@@ -326,7 +371,9 @@ corrected or labelled tasks. Its line in Settings shows each part that has not p
 - Every night C5 re-checks each kind of decision that acts. It moves it back to **Shadow**, and
   sends administrators a notification, **Local classifier: … moved back to shadow**, saying
   why, when:
-  - its gate now fails;
+  - its gate now fails. This includes **Telling cases apart**, which v322 and earlier did
+    not measure: a kind raised before the update is moved back the first night after it if
+    its answers do not tell cases apart;
   - the classifier now answers as a different model;
   - the calibration its confidence level was measured on has been replaced; or
   - its calibration error has more than doubled since it was raised.
@@ -399,7 +446,7 @@ few status lines and one row for each kind of decision.
 | **Loading** | The classifier is loading the model. | Nothing. |
 | **Not loaded** | The classifier's process is running; the model loads with the first question. | Nothing. |
 | **Running** | The model is loaded and answering. | Nothing. |
-| **Paused** | It failed three times in a row, so C5 is giving it a 60-second rest. The usual answers stand meanwhile. | If it keeps happening, read the **Runtime** line and run `growther doctor`. |
+| **Paused** | It failed three times in a row, so C5 is giving it a 60-second rest. The usual answers stand meanwhile. A question that ran out of time behind a background question, or a background question given up after waiting, is not a failure. | If it keeps happening, read the **Runtime** line and run `growther doctor`. |
 | **Not running** | It was started but cannot run here, or it stopped. The **Runtime** line says why. | Find that message under [Troubleshooting](#troubleshooting). |
 | **Not answering** | Its process is running but did not answer a status check in time. | It usually clears on its own. If it lasts, turn the classifier off and on, and run `growther doctor`. |
 | **Starting** | It is being started. | Nothing. |
@@ -412,7 +459,7 @@ While a change you made is being saved the badge says **Turning on…**, **Turni
 
 | Line | What it tells you |
 | --- | --- |
-| **This Mac** (on a Mac, often its model name, such as **This Mac Studio**), or **This machine** elsewhere | The machine and whether it can run the classifier, for example _Apple M4 Max, 16 cores (12 performance and 4 efficiency), 64 GB memory — supported._ Under it, where the classifier runs and why: _Runs on the GPU (Metal)._, or _Runs on the CPU (8 threads), because LM Studio is configured and the classifier leaves the GPU to your local model._ (see [GPU or CPU](#gpu-or-cpu)). On a machine that cannot run it, the line ends _— not supported._ and the reason follows. |
+| **This Mac** (on a Mac, often its model name, such as **This Mac Studio**), or **This machine** elsewhere | The machine and whether it can run the classifier, for example _Apple M4 Max, 16 cores (12 performance and 4 efficiency), 64 GB memory — supported._ Under it, where the classifier runs and why: _Runs on the GPU (Metal)._, or _Runs on the CPU (8 threads), because LM Studio is configured and the classifier leaves the GPU to your local model._ Just after you change providers, the line also says where it is about to go: _It moves to the CPU when the classifier restarts, because …_ C5 restarts it within a few seconds; you need not restart anything (see [GPU or CPU](#gpu-or-cpu)). On a machine that cannot run it, the line ends _— not supported._ and the reason follows. |
 | **Model** | Whether the model is here and checked, partly downloaded (for example _300 of 812 MB_), downloading, or not downloaded — and on a machine that will not download it, why not and what to do. It also tells you when the file at the model's path is not the model, or when the path is a link whose file cannot be reached (see [Troubleshooting](#troubleshooting)). |
 | **Notice** | The model's notice, quoted above. |
 | **Runtime** | What the classifier's process is doing: for example _Running on the Metal GPU, 742 MB in memory, loaded in 1.9 s._ This is where you read its real memory use. When the **Model** line already says why nothing was downloaded, Runtime reads only _Not running: the model is not on this machine._ |
@@ -479,7 +526,10 @@ Under each setting you see:
   shows _Unvalidated: an administrator raised it on a gate that had not passed …_
 - **Calibration** — the one stored, when it was fitted and by what. An administrator on the
   machine can press **Fit calibration now** for task categories, tool-call safety and alert
-  triage while the classifier is on.
+  triage while the classifier is on. When the last fit was not stored because it could not
+  tell answers apart, the line says so, for example _Its last fit, on 2026-10-08, was not
+  stored: calibrated, every answer would get about the same probability, so no confidence
+  level could tell them apart._ (see [When it starts to act](#when-it-starts-to-act)).
 - **Last 7 days** — how many decisions were recorded and how many by the local classifier, and
   how many labels people gave.
 - For task categories, **Saved, last 7 days** — how many calls to the usual model its
@@ -491,7 +541,10 @@ Under each setting you see:
 
 The **Classifier** tab on the **Ops** page shows the classifier as it runs: whether it is on
 and acting, how many decisions it made and how fast, the calls to the usual model it replaced,
-the labels still waiting, and where each learning loop stands. Only accounts that may view
+the labels still waiting, and where each learning loop stands. Its **Since the server
+started** chart counts every question by outcome, including the background questions
+given up after a minute's wait (see
+[When the classifier is busy](#when-the-classifier-is-busy)). Only accounts that may view
 Settings see this tab. It only reports; the switch and the modes are in **Settings ›
 Learning**.
 
@@ -552,12 +605,24 @@ machine**) says why. (Only
 
 ### Slow machines
 
-The first time the model loads, C5 times how long it takes to answer one question about a text
-of about a page. If that takes more than two seconds, the machine is marked slow: the first status line adds _This machine is slow for it, so its
+Each time the classifier starts, once the model has loaded, C5 times how long the model
+takes to answer one question about a text of about a page. It times the model's own work,
+not how long C5 waited: a question that had to wait behind others, or behind the model
+loading, says nothing about the machine. If the answer takes more than two seconds, the
+machine is marked slow: the first status line adds _This machine is slow for it, so its
 answers may arrive late._ On a slow machine only kinds of decision set to Shadow run; one set
-to Assisted or Authoritative is not asked at all, and records nothing either. Step quality, Tool-call safety and Skill
-routing also record only one question in four there (see
+to Assisted or Authoritative is not asked at all, and records nothing either. Step quality,
+Tool-call safety and Skill routing also record only one question in four there (see
 [On a machine where it runs on the CPU](#on-a-machine-where-it-runs-on-the-cpu)).
+
+**A slow result is measured again.** A machine busy with something else at that moment —
+other programs starting, say — can time ten times slower than it is. So when the first
+timing is slow, C5 times it again, quietly, two minutes and fifteen minutes later. Each
+retiming waits until the classifier has nothing to answer and its model is loaded, and it
+never loads the model just to time it. The machine stays marked slow only while the
+fastest timing is over two seconds: a fast one clears the mark at once, with no restart,
+and kinds set to Assisted or Authoritative start acting again. Every restart of the
+classifier times it afresh.
 
 **Windows starts out marked slow**, because the classifier has not yet been timed on Windows
 hardware. So until that first timing, task categories can only be recorded (Shadow) on Windows.
@@ -573,8 +638,17 @@ provider runs its model on this machine's GPU, so the classifier gives way and u
 C5 decides this by the provider's name, not by its address: Inferencer pointed at Hugging
 Face's cloud, or LM Studio on another machine, also moves the classifier to the CPU. To give
 the GPU back to the classifier, remove that provider from C5's providers there. Everywhere
-else the classifier uses the CPU, with up to 8 threads, leaving two cores free. A Mac with no usable GPU, such as a virtual
-machine, is moved to the CPU automatically the first time the classifier loads.
+else the classifier uses the CPU, with up to 8 threads, leaving two cores free. A Mac with no
+usable GPU, such as a virtual machine, is moved to the CPU automatically the first time the
+classifier loads.
+
+**A change of providers applies by itself.** When you add or remove such a provider while
+the classifier runs, C5 restarts the classifier on the new choice about two seconds after
+your last change; several changes in a row make one restart. The restart unloads the model,
+and C5 loads it again straight away, timing one answer on the new choice (loading takes
+about a second on Apple silicon). A change that does not move it between GPU and CPU
+restarts nothing. With the classifier off, or without its model, nothing restarts and
+nothing is downloaded; the choice applies when it next starts.
 
 The card says which, and why, under the machine line. The thread count is the classifier's
 own, not your machine's:
@@ -585,11 +659,20 @@ own, not your machine's:
 | _Runs on the CPU (8 threads), because LM Studio is configured and the classifier leaves the GPU to your local model._ | A local model runner is configured; the line names it (or them) |
 | _… because C5 could not read which models are configured, and a local one may be using the GPU._ | C5 could not read which model runners are configured, so it leaves the GPU alone to be safe |
 | _… because this Mac has no Metal GPU it can use (a virtual machine looks like this)._ | No usable GPU |
+| _… because Metal could not be used when the model loaded._ | The GPU was chosen, but the model could not use it and loaded on the CPU. Restarting would not change that, so the card does not say it will move |
 | _… because this is C5's Intel build running under Rosetta; the Apple-silicon build uses the GPU._ | You are running the Intel build on an Apple-silicon Mac. Install the Apple-silicon build to use the GPU |
 | _Runs on the CPU (8 threads); the classifier uses the GPU only on Apple silicon._ | An Intel Mac, Windows or Linux |
 
+The card describes where the classifier runs now. Just after you change providers, it also
+says where it is about to go, for example _Runs on the GPU (Metal). It moves to the CPU
+when the classifier restarts, because LM Studio is configured and the classifier leaves the
+GPU to your local model._, or _… It moves to the GPU (Metal) when the classifier restarts._
+You do not need to restart anything: C5 restarts the classifier itself within a few
+seconds, and the line then shows where it runs.
+
 On the CPU, Step quality, Tool-call safety and Skill routing record only one question in four
-(see [On a machine where it runs on the CPU](#on-a-machine-where-it-runs-on-the-cpu)).
+(see [On a machine where it runs on the CPU](#on-a-machine-where-it-runs-on-the-cpu)). That
+goes by where the classifier runs now, not where it moves next.
 
 ### Languages
 
@@ -688,10 +771,10 @@ match_), followed by the placement step.
   about the model, or your use of it, to Growther.si.
 - C5's status address, `GET /health`, answers without any sign-in, so that supervisors can
   see C5 is up. It includes the classifier's details (use counts, answer times, how many
-  questions are in progress, whether it is paused) only for someone signed in to C5 on this
-  machine or its network, or for a request made directly on the machine itself. Everyone else
-  gets `"classifier": null`, including a phone or tablet paired through Remote Control and
-  anyone reaching C5 through a Remote Control address.
+  questions are in progress or waiting, whether it is paused) only for someone signed in
+  to C5 on this machine or its network, or for a request made directly on the machine
+  itself. Everyone else gets `"classifier": null`, including a phone or tablet paired
+  through Remote Control and anyone reaching C5 through a Remote Control address.
 
 ## For administrators
 
@@ -746,17 +829,37 @@ that allows only `huggingface.co` makes every model download fail:
 - `cdn-lfs-eu-1.hf.co`
 - `cdn-lfs.huggingface.co`
 
-When the download fails on the network, the message gives the cause itself, then the steps to
-place the file by hand:
+When the download fails on the network, the message gives the cause itself. The **Model**
+line in **Settings › Learning** reads, after _The download failed:_
 
 ```text
-Could not download the classifier model: the proxy http://proxy.corp.example:3128 refused to open a tunnel to huggingface.co:443: it answered CONNECT with 407 Proxy Authentication Required; it wants credentials — put them in the proxy URL (http://user:password@host:port), C5 speaks Basic proxy authentication only. Fetch https://huggingface.co/… on a connected machine and place it at … (sha256 …).
+Could not download the classifier model: the proxy refused to open a tunnel to huggingface.co:443: it answered CONNECT with 407 Proxy Authentication Required; it wants credentials — put them in the proxy URL (http://user:password@host:port), C5 speaks Basic proxy authentication only. Once that is fixed, turn the classifier off and on, restart C5 or run `growther classifier pull` to download it; or fetch https://huggingface.co/… on a connected machine and place it at … (sha256 …).
 ```
 
-Other causes read the same way: a certificate C5 does not trust (_self-signed certificate in
-certificate chain_), a host that refused the connection (_connect ECONNREFUSED …_), or a proxy
-setting C5 cannot use (_C5 refused to connect to huggingface.co: the configured proxy … cannot
-be used (…)_). See [When the proxy says no](../configuration/network.md#when-the-proxy-says-no).
+The card never shows your proxy's address. `growther classifier pull` prints the same
+message in your terminal with the proxy named (_the proxy http://proxy.corp.example:3128
+refused …_), and `growther doctor` shows which proxy is configured. See
+[The proxy address stays out of logs and alerts](../configuration/network.md#the-proxy-address-stays-out-of-logs-and-alerts).
+
+When the cause is the proxy (it refused, or its setting cannot be used) or a certificate,
+the machine is connected and a network setting is what to fix. So the message says what
+starts the download again once it is fixed — C5 does not retry on its own until it next
+starts — and offers placing the file by hand as the alternative. (From
+`growther classifier pull` run with `GROWTHER_CLASSIFIER_NO_AUTO_DOWNLOAD=1` or `CI` set —
+most build servers set `CI` — it names only running the pull again as the way to download,
+because C5 would not download on its own there, and still offers placing the file by hand.)
+The other causes end with the steps to place the file by hand. How each cause reads:
+
+- the proxy's answer, as above;
+- a certificate C5 does not trust: _the certificate presented on the way to
+  huggingface.co:443 is not trusted (…)_ through a proxy, or the system's own words, such
+  as _self-signed certificate in certificate chain_, without one;
+- a proxy setting C5 cannot use: _C5 refused to connect to huggingface.co:443: the
+  configured proxy cannot be used (growther doctor says why). …_;
+- a host that refused the connection: _connect ECONNREFUSED …_, or _the connection to
+  huggingface.co:443 through the proxy failed (ECONNREFUSED)_.
+
+See [When the proxy says no](../configuration/network.md#when-the-proxy-says-no).
 
 With the Egress posture set to Offline, C5 logs this line, at most once an hour, when it skips
 the download:
@@ -800,19 +903,33 @@ and with how many threads, for example
 
 The model line can also say:
 
+- `` ✗ model not downloaded (run `growther classifier pull`, or place … at …) ``
+- `✗ model not downloaded: this deployment's network posture is offline, so C5 does not
+  download it.`, then the address, path and fingerprint to place it by hand — the Egress
+  posture is **Offline**.
+- `✗ model not downloaded: your organisation's policy keeps the local classifier off`
 - `✗ <path> is a link whose file cannot be reached (a share that is not mounted?); it is used
   once it can be, and never downloaded over`
-- `✗ <path> is not the pinned model (wrong size)` (or `sha256 mismatch`) —
-  `growther classifier pull` replaces a file, but not a link: for a link, point it at the model
-  or remove it.
+- `✗ <path> is not the pinned model (wrong size)` (or `sha256 mismatch`), followed by what
+  happens to it: `` `growther classifier pull` replaces it `` for a file; for a link to the
+  wrong file, _it is a link, and C5 does not replace a link: point it at the model …, or
+  remove it to have C5 fetch the model_; under Offline or a policy that keeps the classifier
+  off, the same reason as the lines above.
+
+`status` does not suggest a pull that Offline, your organisation's policy or a link would
+refuse. To check, it reads your organisation's policy whenever the model is not here and
+checked, as `pull` does: the device's own policy and, if you use one, the signed policy
+document. **If that document is at a web address, each such `status` run makes one request
+to it, even while C5 is set to Offline.** `status` never creates or changes a database.
 
 It exits with `0` when the machine is supported and the model is verified, and `1` otherwise.
 
-`pull` downloads the model now. It prints the model's notice, then — only once the first bytes
-arrive — `Downloading decider-0.8b-q8_0 (~812 MB) to <path>…`, progress in 5% steps, and finally
-`✓ downloaded and verified — <path>`. A pull that is refused, or finds the model already here,
-prints no `Downloading` line. If the model is already here and checked, it says
-`✓ already present and verified — <path>` and downloads nothing.
+`pull` downloads the model now. It prints the model's notice, then, once the first bytes
+arrive, _About 812 MB is downloaded once from Hugging Face._ and
+`Downloading decider-0.8b-q8_0 (~812 MB) to <path>…`, then progress in 5% steps, and
+finally `✓ downloaded and verified — <path>`. A pull that is refused, or finds the model
+already here, prints neither of those two lines. If the model is already here and checked,
+it says `✓ already present and verified — <path>` and downloads nothing.
 
 - It exits with `0` when the checked model is in place (downloaded now or already there) and
   `1` when it is refused or fails. The reason is printed on one line starting with `✗`.
@@ -833,7 +950,8 @@ prints no `Downloading` line. If the model is already here and checked, it says
   do: make the file reachable, point the link at the model, or remove the link.
 - If C5 itself is downloading the model at the same time, `pull` says another C5 process is
   downloading and stops; C5's download carries on.
-- When the download fails, the `✗` line gives the cause itself (see [Network](#network)).
+- When the download fails, the `✗` line gives the cause itself, naming the proxy if one
+  refused (see [Network](#network)).
 
 While the classifier is on, a running C5 starts using a model you pulled the next time
 **Settings › Learning** is opened, or at its next start.
@@ -922,15 +1040,16 @@ back. Free space in the folder named, then restart C5, turn the classifier off a
 `growther classifier pull`.
 
 **_The download failed: Could not download the classifier model (HTTP 403). …_ or _The download failed: Could not download the classifier model: \<reason\>. …_**
-C5 could not reach Hugging Face. The reason is the network's own: the proxy that refused and
-what it answered (a `407` wants credentials in the proxy URL), a certificate C5 does not trust
-(add your proxy's root certificate to the CA bundle), a host that refused the connection, or a
-proxy setting C5 cannot use (_C5 refused to connect to huggingface.co: the configured proxy …
-cannot be used_ — fix or remove the proxy URL) — see
-[When the proxy says no](../configuration/network.md#when-the-proxy-says-no). Otherwise check
-your proxy, and that it allows the [Hugging Face hosts](#network). The message ends with the
-address, path and fingerprint to place the file by hand. To retry, turn the classifier off and
-on, or run `growther classifier pull`.
+C5 could not reach Hugging Face. The reason is the network's own: what the proxy answered (a
+`407` wants credentials in the proxy URL), a certificate C5 does not trust (add your proxy's
+root certificate to the CA bundle), a host that refused the connection, or a proxy setting C5
+cannot use (_… the configured proxy cannot be used …_ — fix or remove the proxy URL; run
+`growther doctor` to see why) — see
+[When the proxy says no](../configuration/network.md#when-the-proxy-says-no). The card says
+_the proxy_ without its address; `growther doctor` shows which proxy is configured. Otherwise
+check your proxy, and that it allows the [Hugging Face hosts](#network). The message ends
+with the address, path and fingerprint to place the file by hand. To retry, turn the
+classifier off and on, restart C5, or run `growther classifier pull`.
 
 **_The download failed: The downloaded classifier model does not match its pinned sha256 (got …); nothing was installed._**
 What arrived was not the model, often because a proxy changed or cut it. Nothing was kept. Try
@@ -1001,13 +1120,31 @@ The option says why. Usually one of these:
 - It is a setting other than **Task categories**. Those offer only Off and Shadow.
 - The promotion gate has not passed. Its line names each part that has not. Keep answering in
   **Teach the classifier**. An administrator on the machine running C5 can raise it anyway,
-  after a warning; from a paired device they cannot.
+  after a warning; from a paired device they cannot. When the part is **Telling cases
+  apart**, either the classifier's answer does not change when the right answer does, or no
+  answer has yet been the correct one in 10 labelled tasks and not the correct one in 10.
+  Labelling more tasks fixes the second, not the first.
 - No calibration is fitted yet. C5 fits one at 23:50 once there are enough labels, or an
-  administrator can press **Fit calibration now**.
+  administrator can press **Fit calibration now**. A fit that cannot tell answers apart is
+  not stored; the **Calibration** line says so when that happened.
 
 If you can choose it but the line reads _Set to Assisted, but not running: this machine is too
 slow …_, see [Slow machines](#slow-machines). On Windows this lasts until the model's first
 timing.
+
+**Task categories went back to Shadow after an update.**
+The nightly re-check measures every part of the promotion gate, including **Telling cases
+apart**, which v322 and earlier did not measure. If the classifier's answers do not tell
+cases apart on your install, the kind goes back to **Shadow** and administrators get the
+**Local classifier: … moved back to shadow** notification saying why. Its answers keep being
+recorded; once the gate passes again, raise it again. A kind that was acting on a
+calibration from an earlier version that cannot tell its answers apart stops acting too, and
+is fitted again.
+
+**After going back to v319, a _Local classifier_ entry appears under Settings › Extensions.**
+v319 does not know the classifier and treats it as an ordinary extension. Switch **Local
+classifier** off there and v319 leaves it alone. See
+[Going straight back to v319](../getting-started/updating.md#going-straight-back-to-v319).
 
 **The switch is greyed out.**
 Hover or tap it. _Changing this needs permission to edit settings._ means you need that

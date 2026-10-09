@@ -42,11 +42,11 @@ To accept:
    through the address Growther.si issues**.
 3. Press **Agree**.
 
-**Cancel** leaves the switch off. Once accepted, the dialog is not shown again unless the
-Terms change; the tab shows a line like _Terms v1.8 accepted by Ana Ruiz on Oct 2, 2026_ — the name of
-whoever accepted, your own included — with a **View** link that reopens the text. Only when
-that account no longer exists on the install — deleted since — does the line fall back to
-the account id.
+**Cancel** leaves the switch off. Once accepted, the dialog is not shown again unless C5
+brings newer Terms than the ones accepted. The tab shows a line like _Terms v1.8 accepted
+by Ana Ruiz on Oct 2, 2026_ — the name of whoever accepted, your own included — with a
+**View** link that reopens the text. Only when that account no longer exists on the
+install — deleted since — does the line fall back to the account id.
 
 If you want Remote Control without the issued address — on your own network only, or with a
 tunnel or certificate you supply — you still accept the same Section, because it is the one
@@ -54,10 +54,10 @@ that describes all three ways in.
 
 ### If the Terms changed after you accepted them
 
-An acceptance counts for one version of the Terms. When an update brings a new version —
-as the update to version 1.8 does — an install that already had Remote Control on keeps
-working: nothing is torn down, no device is signed out, and the address stays up. What
-changes is on the tab:
+An acceptance counts for the version accepted and any older one. When an update brings a
+newer version — as the update to version 1.8 does — an install that already had Remote
+Control on keeps working: nothing is torn down, no device is signed out, and the address
+stays up. What changes is on the tab:
 
 - the _accepted_ line adds _— v1.8 now needs accepting_;
 - a warning reads _Remote Control is on, but Terms v1.8 have not been accepted on this
@@ -70,6 +70,13 @@ error log, that Remote Control is on without the current Terms accepted.
 
 An install that had Remote Control on before C5 recorded acceptances at all is treated the
 same way; its tab shows no _accepted_ line until someone agrees.
+
+**After a rollback.** If you go back to a version after v322, an acceptance of newer
+Terms still counts there: Remote Control keeps running and the tab asks nothing. If you go
+back to v322 or earlier (v319, for example, which carries Terms v1.6), that version wants
+its own Terms exactly. Remote Control keeps running, and the tab asks you to accept the
+older Terms at the next save. Agreeing there records the older version, so once you update
+again, the newer version asks you to accept its Terms once more.
 
 ### What happens next
 
@@ -85,8 +92,10 @@ address shortly._ Behind that:
   `cloudflared`, which carries the tunnel. It takes one pinned version (2025.8.1) from
   Cloudflare's releases on GitHub, through the proxy and certificate authorities set under
   **Settings › Enterprise › Network**, and checks its exact size and sha256 before running
-  it. While the egress posture is **Offline**, nothing is downloaded and no tunnel starts;
-  your own network addresses still work. See
+  it. While the egress posture is **Offline**, C5 does not download it: with no program on
+  the machine yet, no tunnel starts, but a tunnel whose program is already there still
+  starts and connects to Cloudflare (turn Remote Control off to stop it). Your own network
+  addresses still work. See
   [The connector C5 runs](/c5/remote-control/privacy-and-cloudflare#the-connector-c5-runs);
 - the machine reports its name and addresses to your account, so
   [rc.growther.si](https://rc.growther.si) can list it.

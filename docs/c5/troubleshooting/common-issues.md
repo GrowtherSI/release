@@ -242,8 +242,8 @@ C5 sends update checks, update downloads, Mothership calls, the Remote Control t
 program and every model download through the proxy and certificate authorities your
 organisation configured under **Settings › Enterprise › Network**.
 
-**Updates.** When `growther update` or C5's own update check fails, the message says why.
-A proxy that refuses reads like this:
+**Updates.** When `growther update` fails, the message says why. In your terminal, a proxy
+that refuses reads like this:
 
 ```text
 the proxy http://proxy.example:3128 refused to open a tunnel to api.growther.si:443: it answered CONNECT with 403 Forbidden; its policy does not allow this host — ask for it to be allowed
@@ -255,17 +255,28 @@ the proxy http://proxy.example:3128 refused to open a tunnel to api.growther.si:
 | `403 Forbidden` | Ask for the host named in the message to be allowed |
 | `502`, `503` or `504` | The proxy could not reach the host itself; try again later or ask your network team |
 
+C5's own background check writes the same reason to its error log, and an update started
+from the app shows it — there, the line says *the proxy* without its address. To see which
+proxy C5 uses, run `growther doctor` (its **Proxy reachability** row) or, as an
+administrator, open **Settings › Enterprise › Network**. See
+[The proxy address stays out of logs and alerts](/c5/configuration/network#the-proxy-address-stays-out-of-logs-and-alerts).
+
 **Model downloads.** A model download that fails on the network says why in the same
-way: it names the proxy that refused and what it answered, or the certificate C5 does not
-trust. Memory search and voice give it after `fetch failed:`; the local classifier gives
-it straight after `Could not download the classifier model:`. For example:
+way: what the proxy answered, or the certificate C5 does not trust. Memory search and voice
+give it after `fetch failed:`; the local classifier gives it straight after
+`Could not download the classifier model:`. Memory search's line in C5's own output names
+the proxy, and so do `growther qmd-run pull`, `growther voice pull` and
+`growther classifier pull` in a terminal:
 
 ```text
 [mcp] QMD model download did not complete (embedding: fetch failed: the proxy http://proxy.example:3128 refused to open a tunnel to huggingface.co:443: it answered CONNECT with 403 Forbidden; …). …
 ```
 
+The card in **Settings › Learning** leaves the proxy's address out, and says what starts
+the download again once the proxy is fixed:
+
 ```text
-The download failed: Could not download the classifier model: the proxy http://proxy.example:3128 refused to open a tunnel to huggingface.co:443: it answered CONNECT with 403 Forbidden; its policy does not allow this host — ask for it to be allowed. Fetch … on a connected machine and place it at … (sha256 …).
+The download failed: Could not download the classifier model: the proxy refused to open a tunnel to huggingface.co:443: it answered CONNECT with 403 Forbidden; its policy does not allow this host — ask for it to be allowed. Once that is fixed, turn the classifier off and on, restart C5 or run `growther classifier pull` to download it; or fetch … on a connected machine and place it at … (sha256 …).
 ```
 
 If the reason says *C5 refused to connect … the configured proxy … cannot be used*, the
@@ -381,6 +392,11 @@ Go back to the previous version:
 ```bash
 growther rollback
 ```
+
+If you are going straight back to v319 from v320 or v322, also switch off **Local
+classifier** under **Settings › Extensions** in v319. After any rollback, the older version
+may warn that a database is newer than it knows. That is expected. See
+[Go back to the older version](/c5/getting-started/updating#go-back-to-the-older-version).
 
 Then tell us what happened — see [Getting help](/c5/troubleshooting/getting-help).
 
