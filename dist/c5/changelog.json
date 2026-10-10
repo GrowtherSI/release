@@ -1,5 +1,42 @@
 [
   {
+    "tag": "v2026.10.10-v324",
+    "version": "2026.10.10-v324",
+    "build": 324,
+    "releasedAt": "2026-10-09T23:51:25-07:00",
+    "bullets": [
+      {
+        "kind": "new",
+        "text": "C5 now warns when its database is newer than this version."
+      },
+      {
+        "kind": "fixed",
+        "text": "Turning the classifier off now keeps startup logs quiet."
+      },
+      {
+        "kind": "fixed",
+        "text": "The classifier command won't offer downloads when C5 is offline."
+      },
+      {
+        "kind": "fixed",
+        "text": "Older C5 versions won't run the classifier after a rollback."
+      },
+      {
+        "kind": "fixed",
+        "text": "Classifier status reads the posture as read-only and opens no database."
+      },
+      {
+        "kind": "fixed",
+        "text": "A checked copy is stamped only while unwritten since its hash."
+      },
+      {
+        "kind": "faster",
+        "text": "C5 won't poll system metrics when no window is open."
+      }
+    ],
+    "more": 95
+  },
+  {
     "tag": "v2026.10.7-v322",
     "version": "2026.10.7-v322",
     "build": 322,
