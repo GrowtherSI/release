@@ -1,5 +1,25 @@
 [
   {
+    "tag": "v2026.10.11-v326",
+    "version": "2026.10.11-v326",
+    "build": 326,
+    "releasedAt": "2026-10-10T20:49:54-07:00",
+    "bullets": [
+      {
+        "kind": "new",
+        "text": "Web images now group with their headline, summary, and source link."
+      },
+      {
+        "kind": "new",
+        "text": "Agents can now render slide videos with captions and request missing tools."
+      },
+      {
+        "kind": "new",
+        "text": "Master tool permissions now include file creation and web image downloads."
+      }
+    ]
+  },
+  {
     "tag": "v2026.10.10-v324",
     "version": "2026.10.10-v324",
     "build": 324,
