@@ -198,7 +198,8 @@ decision in **Shadow**.
 quality — asked for every graded step, often in bursts — records only one question in four,
 always the same ones, so the classifier does not compete with your agents for the processor.
 The card says so under it: _Sampling 1 in 4 on this machine: …_ Every other kind, Tool-call
-safety and Skill routing included, is recorded every time, on every machine. See [On a machine where it runs on the CPU](../tools/local-classifier.md#on-a-machine-where-it-runs-on-the-cpu).
+safety and Skill routing included, is recorded every time, on every machine. See
+[On a machine where it runs on the CPU](../tools/local-classifier.md#on-a-machine-where-it-runs-on-the-cpu).
 
 **What off means.** Off, it stops learning and C5 answers those questions exactly as it
 did before; nothing else changes. (With a model from your providers chosen, that model
