@@ -194,11 +194,11 @@ on your own install, against the answers people gave and the outcomes that follo
 mode allows it (below). Turning it on or off never changes what C5 does for a kind of
 decision in **Shadow**.
 
-**How much it records.** On a machine where it runs on the CPU, or answers slowly, the three
-kinds asked most often — Step quality, Tool-call safety and Skill routing — record only one
-question in four, always the same ones, so the classifier does not compete with your agents
-for the processor. The card says so under each of them: _Sampling 1 in 4 on this machine: …_
-See [On a machine where it runs on the CPU](../tools/local-classifier.md#on-a-machine-where-it-runs-on-the-cpu).
+**How much it records.** On a machine where it runs on the CPU, or answers slowly, Step
+quality — asked for every graded step, often in bursts — records only one question in four,
+always the same ones, so the classifier does not compete with your agents for the processor.
+The card says so under it: _Sampling 1 in 4 on this machine: …_ Every other kind, Tool-call
+safety and Skill routing included, is recorded every time, on every machine. See [On a machine where it runs on the CPU](../tools/local-classifier.md#on-a-machine-where-it-runs-on-the-cpu).
 
 **What off means.** Off, it stops learning and C5 answers those questions exactly as it
 did before; nothing else changes. (With a model from your providers chosen, that model
@@ -245,7 +245,7 @@ else it uses up to eight CPU threads. A machine where it answers slowly (every W
 machine starts that way until a test answer comes back within two seconds) uses it only
 for decisions that do not wait on it. A slow test answer is timed again two and fifteen
 minutes later, and a fast one clears the mark without a restart. On the CPU, or on a slow
-machine, the most frequent kinds record one question in four (above).
+machine, Step quality records one question in four (above).
 
 #### Read the Terms that cover it
 

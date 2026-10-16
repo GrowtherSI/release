@@ -190,6 +190,12 @@ is chosen, and **Models allowed from** starts at **This machine**. See
 these models off across a fleet, or to allow them while the built-in model stays off, see
 [Classifier models from your providers](/c5/configuration/enterprise-policy#classifier-models-from-your-providers).
 
+**Tool-call safety and Skill routing are recorded every time.** On a machine where the
+built-in model runs on the CPU, or is marked slow, versions v320 to v326 recorded only one
+question in four for these two kinds as well as for Step quality. Now only Step quality is
+sampled there; see
+[On a machine where it runs on the CPU](/c5/tools/local-classifier#on-a-machine-where-it-runs-on-the-cpu).
+
 **Going back to an earlier version.** An earlier version does not know about a model from
 your providers: it ignores the choice, and the built-in model answers as it did there. An
 acceptance of version 1.9 for Remote Control also counts in any version after v322, so

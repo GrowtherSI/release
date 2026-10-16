@@ -40,8 +40,8 @@ means the built-in model.
 - Want a model you already run to answer instead — on llama.cpp, Ollama, LM Studio, vLLM or a
   cloud API? An administrator can choose one; see
   [A model from your providers](#a-model-from-your-providers).
-- On a machine where it runs on the CPU, it records only one in four of its most frequent
-  questions, so it stays out of your agents' way; see
+- On a machine where it runs on the CPU, it records only one in four Step quality questions,
+  so it stays out of your agents' way; see
   [On a machine where it runs on the CPU](#on-a-machine-where-it-runs-on-the-cpu).
 - To stop it, see [Turn the classifier off](#turn-the-classifier-off).
 - Managing many machines? Lock `classifier_enabled` to `false` in your organisation's policy before
@@ -298,30 +298,30 @@ Learning** shows every kind's mode, so you can check the result and change any o
 
 ### On a machine where it runs on the CPU
 
-Three kinds of decision are asked as often as C5 works: **Step quality** once for each step
-that is graded, **Tool-call safety** once for each tool call the guardian checks, and **Skill
-routing** once for each specialist step. On an Apple-silicon Mac's GPU, one answer takes a
-fraction of a second. On a CPU it takes a second or more, on the same cores your agents'
-builds, tests and local models use.
+**Step quality** is asked as often as C5 works, once for each step that is graded, and it
+arrives in bursts: a busy install can grade 20 or 30 steps in one minute. On an Apple-silicon
+Mac's GPU, one answer takes a fraction of a second. On a CPU it takes a second or more, on the
+same cores your agents' builds, tests and local models use.
 
 So on a machine where the classifier runs on the CPU (see [GPU or CPU](#gpu-or-cpu)), or is
-marked slow (see [Slow machines](#slow-machines)), these three kinds record only **one question
-in four** while they are in Shadow:
+marked slow (see [Slow machines](#slow-machines)), Step quality records only **one question
+in four** while it is in Shadow:
 
 - **The question decides, not the timing.** Whether a question is recorded depends on the
   question itself, so the same question is always recorded, or never. A label you give later
   always finds the classifier's answer beside it, and **Teach the classifier** only asks about
   recorded questions.
-- **For Step quality, a step outside the sample leaves nothing in the classifier's records**:
-  neither the classifier's grade nor the copy of C5's usual grade it is compared with. C5
-  still grades the step and uses that grade exactly as before. Only the comparison record is
-  skipped.
-- **Task categories and Alert triage are never sampled.** Each is asked far less often. A kind
-  set to **Assisted** or **Authoritative** is never sampled either.
-- **There is nothing to set.** It applies on its own, and the **Last 7 days** counts of these
-  kinds are about a quarter of what they would otherwise be.
+- **A step outside the sample leaves nothing in the classifier's records**: neither the
+  classifier's grade nor the copy of C5's usual grade it is compared with. C5 still grades
+  the step and uses that grade exactly as before. Only the comparison record is skipped.
+- **Every other kind is recorded every time, on every machine.** That includes **Tool-call
+  safety**, asked once for each tool call the guardian checks, and **Skill routing**, asked
+  once for each specialist step. Task categories and Alert triage are asked far less often.
+  A kind set to **Assisted** or **Authoritative** is never sampled either.
+- **There is nothing to set.** It applies on its own, and the **Last 7 days** count of Step
+  quality is about a quarter of what it would otherwise be.
 
-Under each kind it applies to, the card says so:
+Under Step quality, the card says so:
 
 > Sampling 1 in 4 on this machine: the local classifier runs on this machine's CPU, so it
 > records only one in 4 of these questions, always the same ones, to keep the rest of C5 fast.
@@ -338,9 +338,9 @@ waiting on never queue behind a backlog of background ones.
 
 A background question that finds the classifier busy **waits for its turn** instead of
 being dropped, first come, first asked. So a burst of work still records every question
-chosen for recording (on a CPU or a slow machine, the one in four above). Up to 32 can
-wait, each for up to a minute. One that arrives when 32 are already waiting, or that waits
-longer than a minute, is given up and not recorded. Giving up is never counted as a
+chosen for recording (for Step quality on a CPU or a slow machine, the one in four above).
+Up to 32 can wait, each for up to a minute. One that arrives when 32 are already waiting, or
+that waits longer than a minute, is given up and not recorded. Giving up is never counted as a
 failure, so it never pauses the classifier. A question that waited is checked again before
 it is asked: if the classifier, or that kind of decision, was switched off meanwhile, it
 asks nothing and records nothing.
@@ -827,7 +827,7 @@ Under each setting you see:
   recorded beside: the router's choice, the rubric's score, the guardian's verdict or the
   Sense-Maker's suppress decision (see the table in
   [What it does at first](#what-it-does-at-first)).
-- On a machine where it applies, _Sampling 1 in 4 on this machine: …_ (see
+- Under Step quality, on a machine where it applies, _Sampling 1 in 4 on this machine: …_ (see
   [On a machine where it runs on the CPU](#on-a-machine-where-it-runs-on-the-cpu)).
 - **Promotion gate** — _passed_, _not passed_, _not enough evidence yet_, or _not measured
   yet_, with each part that did not pass and what was measured. C5 measures it in the
@@ -943,8 +943,8 @@ not how long C5 waited: a question that had to wait behind others, or behind the
 loading, says nothing about the machine. If the answer takes more than two seconds, the
 machine is marked slow: the first status line adds _This machine is slow for it, so its
 answers may arrive late._ On a slow machine only kinds of decision set to Shadow run; one set
-to Assisted or Authoritative is not asked at all, and records nothing either. Step quality,
-Tool-call safety and Skill routing also record only one question in four there (see
+to Assisted or Authoritative is not asked at all, and records nothing either. Step quality
+also records only one question in four there (see
 [On a machine where it runs on the CPU](#on-a-machine-where-it-runs-on-the-cpu)).
 
 **A slow result is measured again.** A machine busy with something else at that moment —
@@ -1002,9 +1002,10 @@ GPU to your local model._, or _… It moves to the GPU (Metal) when the classifi
 You do not need to restart anything: C5 restarts the classifier itself within a few
 seconds, and the line then shows where it runs.
 
-On the CPU, Step quality, Tool-call safety and Skill routing record only one question in four
-(see [On a machine where it runs on the CPU](#on-a-machine-where-it-runs-on-the-cpu)). That
-goes by where the classifier runs now, not where it moves next.
+On the CPU, Step quality records only one question in four (see
+[On a machine where it runs on the CPU](#on-a-machine-where-it-runs-on-the-cpu)); every other
+kind is recorded every time. That goes by where the classifier runs now, not where it moves
+next.
 
 ### Languages
 
@@ -1455,7 +1456,7 @@ badge reads **No model** meanwhile, and turning the classifier on offers **Turn 
 The **Model** line above it says why nothing was downloaded (Offline, opted out, a CI runner,
 or a link whose file cannot be reached); follow that line.
 
-**A kind of decision says _Sampling 1 in 4 on this machine: …_**
+**Step quality says _Sampling 1 in 4 on this machine: …_**
 Normal on a machine where the classifier runs on the CPU, or is marked slow. See
 [On a machine where it runs on the CPU](#on-a-machine-where-it-runs-on-the-cpu). There is
 nothing to fix.

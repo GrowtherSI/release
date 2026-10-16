@@ -128,16 +128,16 @@ Learning**. Until then, everything is decided the way it was before. See
 
 It is built not to. On an Apple-silicon Mac it uses the GPU and answers in a fraction of a
 second. Where it runs on the CPU — every other machine, and a Mac whose GPU is left to a
-local model such as LM Studio — the three kinds of decision it is asked most often (step
-quality, tool-call safety and skill routing) record only one question in four, always the
-same ones, so for those it uses about a quarter of the processor time it otherwise would. The card in
-**Settings › Learning** says _Sampling 1 in 4 on this machine_ where this applies. It never
-holds up your work while it only records: those questions take turns in the background, one
-at a time, and none starts while C5 is waiting for an answer it will use. The one wait is
-for a kind of decision set to act (Assisted or Authoritative): if a recorded question is
-already being answered, C5 waits at most 1.5 seconds in all for the classifier, then
-carries on with the usual model's answer. It leaves two of your processor's cores alone.
-See
+local model such as LM Studio — step quality, the kind of decision that arrives in bursts,
+records only one question in four, always the same ones, so for it the classifier uses about
+a quarter of the processor time it otherwise would. Every other kind is recorded every time.
+The card in **Settings › Learning** says _Sampling 1 in 4 on this machine_ under Step quality
+where this applies. It never holds up your work while it only records: those questions take
+turns in the background, one at a time, and none starts while C5 is waiting for an answer it
+will use. The one wait is for a kind of decision set to act (Assisted or Authoritative): if a
+recorded question is already being answered, C5 waits at most 1.5 seconds in all for the
+classifier, then carries on with the usual model's answer. It leaves two of your processor's
+cores alone. See
 [On a machine where it runs on the CPU](/c5/tools/local-classifier#on-a-machine-where-it-runs-on-the-cpu).
 
 ### Is anything sent to Growther.si?

@@ -184,7 +184,8 @@ switch on wherever nothing has set it, and then downloads the model. While it is
 every kind of decision starts in Shadow, where it only records its answers. Passing its
 measurement changes nothing by itself: only Task categories can be raised to act, and only
 when someone with permission to change settings chooses to. No policy key does it. On a
-machine where it runs on the CPU, the most frequent kinds record one question in four.
+machine where it runs on the CPU, Step quality records one question in four; every other
+kind is recorded every time.
 What it does, and what users see, is described in [Classifier](../tools/local-classifier.md) and
 under [Settings › Learning](settings.md#learning), where its switch is **Built-in model**
 on the **Classifier** card. One policy key decides it for a fleet:
