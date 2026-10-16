@@ -772,7 +772,7 @@ While a change you made is being saved the badge says **Turning on…**, **Turni
 
 | Line | What it tells you |
 | --- | --- |
-| **This Mac** (on a Mac, often its model name, such as **This Mac Studio**), or **This machine** elsewhere | The machine and whether it can run the classifier, for example _Apple M4 Max, 16 cores (12 performance and 4 efficiency), 64 GB memory — supported._ Under it, where the classifier runs and why: _Runs on the GPU (Metal)._, or _Runs on the CPU (8 threads), because LM Studio is configured and the classifier leaves the GPU to your local model._ Just after you change providers, the line also says where it is about to go: _It moves to the CPU when the classifier restarts, because …_ C5 restarts it within a few seconds; you need not restart anything (see [GPU or CPU](#gpu-or-cpu)). On a machine that cannot run it, the line ends _— not supported._ and the reason follows. |
+| **This Mac** (on a Mac, often its model name, such as **This Mac Studio**), or **This machine** elsewhere | The machine and whether it can run the classifier, for example _Apple M4 Max, 16 cores (12 performance and 4 efficiency), 64 GB memory — supported._ Under it, where the classifier runs and why: _Runs on the GPU (Metal)._, or _Runs on the CPU (8 threads), because LM Studio is configured and the built-in model leaves the GPU to your local model._ Just after you change providers, the line also says where it is about to go: _It moves to the CPU when the built-in model restarts, because …_ C5 restarts it within a few seconds; you need not restart anything (see [GPU or CPU](#gpu-or-cpu)). On a machine that cannot run it, the line ends _— not supported._ and the reason follows. |
 | **Model** | Whether the model is here and checked, partly downloaded (for example _300 of 812 MB_), downloading, or not downloaded — and on a machine that will not download it, why not and what to do. It also tells you when the file at the model's path is not the model, or when the path is a link whose file cannot be reached (see [Troubleshooting](#troubleshooting)). |
 | **Notice** | The model's notice, quoted above. |
 | **Runtime** | What the classifier's process is doing: for example _Running on the Metal GPU, 742 MB in memory, loaded in 1.9 s._ This is where you read its real memory use. When the **Model** line already says why nothing was downloaded, Runtime reads only _Not running: the model is not on this machine._ |
@@ -988,19 +988,19 @@ own, not your machine's:
 | The card says | Why |
 | --- | --- |
 | _Runs on the GPU (Metal)._ | An Apple-silicon Mac with no local model runner configured |
-| _Runs on the CPU (8 threads), because LM Studio is configured and the classifier leaves the GPU to your local model._ | A local model runner is configured; the line names it (or them) |
+| _Runs on the CPU (8 threads), because LM Studio is configured and the built-in model leaves the GPU to your local model._ | A local model runner is configured; the line names it (or them) |
 | _… because C5 could not read which models are configured, and a local one may be using the GPU._ | C5 could not read which model runners are configured, so it leaves the GPU alone to be safe |
 | _… because this Mac has no Metal GPU it can use (a virtual machine looks like this)._ | No usable GPU |
 | _… because Metal could not be used when the model loaded._ | The GPU was chosen, but the model could not use it and loaded on the CPU. Restarting would not change that, so the card does not say it will move |
 | _… because this is C5's Intel build running under Rosetta; the Apple-silicon build uses the GPU._ | You are running the Intel build on an Apple-silicon Mac. Install the Apple-silicon build to use the GPU |
-| _Runs on the CPU (8 threads); the classifier uses the GPU only on Apple silicon._ | An Intel Mac, Windows or Linux |
+| _Runs on the CPU (8 threads); the built-in model uses the GPU only on Apple silicon._ | An Intel Mac, Windows or Linux |
 
 The card describes where the classifier runs now. Just after you change providers, it also
 says where it is about to go, for example _Runs on the GPU (Metal). It moves to the CPU
-when the classifier restarts, because LM Studio is configured and the classifier leaves the
-GPU to your local model._, or _… It moves to the GPU (Metal) when the classifier restarts._
-You do not need to restart anything: C5 restarts the classifier itself within a few
-seconds, and the line then shows where it runs.
+when the built-in model restarts, because LM Studio is configured and the built-in model
+leaves the GPU to your local model._, or _… It moves to the GPU (Metal) when the built-in
+model restarts._ You do not need to restart anything: C5 restarts the classifier itself
+within a few seconds, and the line then shows where it runs.
 
 On the CPU, Step quality records only one question in four (see
 [On a machine where it runs on the CPU](#on-a-machine-where-it-runs-on-the-cpu)); every other
