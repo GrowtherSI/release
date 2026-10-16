@@ -546,7 +546,7 @@ it again.
 
 ### What each provider needs
 
-| Provider, as its card in Settings › Integrations is named | Where C5 counts it as running | What it needs |
+| Provider | Where C5 counts it as running | What it needs |
 | --- | --- | --- |
 | **llama.cpp** | On this machine when its server says it runs the model here; otherwise your network, or online, by its address | The model loaded, with at least 4,096 tokens of context. A server that applies a LoRA adapter is refused |
 | **Ollama** | On this machine for a model Ollama runs here (never a cloud model); otherwise your network, or online, by its address | Ollama 0.12.11 or newer, with the model loaded. C5 never changes how long Ollama keeps a model loaded, but its questions do reset the model's idle timer. Ollama's cloud models cannot be chosen: Ollama passes them on to its own servers |
@@ -1534,8 +1534,9 @@ The list shows only providers turned on in **Settings › Integrations**, and on
 each one lists. Turn the provider on, start it if it runs on your machine or network, and
 press **Refresh list**.
 
-**_Not listed: OpenClaw, PicoClaw and Hermes Agent. …_**
-These are agent gateways: they hand each question to an agent, which may pass it to any
+**_Not listed: … They pass questions to an agent, …_**
+The line names the agent gateways turned on in **Settings › Integrations** — OpenClaw,
+PicoClaw or Hermes Agent. A gateway hands each question to an agent, which may pass it to any
 model. The classifier needs one model's own probabilities for each answer. Choose the model
 the gateway uses from that model's own provider instead.
 
