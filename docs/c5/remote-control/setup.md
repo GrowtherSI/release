@@ -55,13 +55,17 @@ that describes all three ways in.
 ### If the Terms changed after you accepted them
 
 An acceptance counts for the version accepted and any older one. When an update brings a
-newer version — as the update to version 1.8 does — an install that already had Remote
+newer version — as the update to version 1.9 does — an install that already had Remote
 Control on keeps working: nothing is torn down, no device is signed out, and the address
 stays up. What changes is on the tab:
 
-- the _accepted_ line adds _— v1.8 now needs accepting_;
-- a warning reads _Remote Control is on, but Terms v1.8 have not been accepted on this
-  machine._ with a **Review and accept** link that opens the dialog.
+- the _accepted_ line adds _— v1.9 now needs accepting_;
+- a warning reads _Remote Control is on, but Terms v1.9 have not been accepted on this
+  machine._ with a **Review and accept** link that opens the dialog. The link works only on
+  the machine, for someone who may change settings: a paired device cannot accept.
+
+What version 1.9 changed for Remote Control is summed up in
+[The words that bind](/c5/remote-control/privacy-and-cloudflare#the-words-that-bind).
 
 The next time you press **Save** on this tab — whichever field you changed — or turn Remote
 Control off and on, the acceptance dialog opens, and the save goes through only once you
