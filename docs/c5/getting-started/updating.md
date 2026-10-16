@@ -160,6 +160,42 @@ versions after v322 read it too: C5 started from that shell dials that gateway, 
 OpenClaw card's **Host** and **Port** lock. See
 [Local model servers and gateways](/c5/cli/environment#local-model-servers-and-gateways).
 
+### Updating to the release with Terms v1.9
+
+**The Terms of Service are now version 1.9.** No section is added or renumbered. Three
+sections change:
+
+- **Section 14** also covers a classifier model from your providers, if an administrator
+  chooses one (below). The Privacy Policy says the same: those questions go to that
+  provider, not through Growther.si.
+- **Section 3** says that C5 downloads Cloudflare's `cloudflared` for any Cloudflare Tunnel
+  Remote Control runs, including one of your own.
+- **Section 15** says that a tunnel you supply yourself puts its provider in the path.
+
+The changes to Sections 3 and 15 describe what C5 already did. See
+[Privacy and Cloudflare](/c5/remote-control/privacy-and-cloudflare#the-words-that-bind).
+
+If Remote Control is on, it keeps running and nobody is signed out. The **Settings › Remote
+Control** tab says that version 1.9 has not been accepted on this machine, and the next save
+on that tab asks someone at the machine to accept it. See
+[If the Terms changed after you accepted them](/c5/remote-control/setup#if-the-terms-changed-after-you-accepted-them).
+
+**The classifier can use a model from your providers.** The section in **Settings ›
+Learning** is now called **Classifier**, and the local classifier's switch is now
+**Built-in model**. An administrator at the machine can choose a model that one of your
+providers serves — llama.cpp, Ollama, LM Studio, vLLM or a cloud API — to answer the
+classifier's questions before the built-in model. Nothing changes until someone does: none
+is chosen, and **Models allowed from** starts at **This machine**. See
+[A model from your providers](/c5/tools/local-classifier#a-model-from-your-providers). To keep
+these models off across a fleet, or to allow them while the built-in model stays off, see
+[Classifier models from your providers](/c5/configuration/enterprise-policy#classifier-models-from-your-providers).
+
+**Going back to an earlier version.** An earlier version does not know about a model from
+your providers: it ignores the choice, and the built-in model answers as it did there. An
+acceptance of version 1.9 for Remote Control also counts in any version after v322, so
+going back to one of those asks nothing (see
+[Remote Control Terms after a rollback](#remote-control-terms-after-a-rollback)).
+
 ### Updating to the release with the local classifier (Terms v1.8)
 
 If you are updating from a version that had no local classifier, the first start does
@@ -206,7 +242,7 @@ way. To turn it off, or delete its model, go to **Settings › Learning** — se
 [FAQ](/c5/troubleshooting/faq#the-local-classifier) answers what it is and what it sends
 (nothing to Growther.si).
 
-**The Terms of Service are now version 1.8.** Section 14, Models C5 downloads and runs on
+**The Terms of Service became version 1.8.** Section 14, Models C5 downloads and runs on
 your machine, is new, so Remote Control moves to Section 15. If Remote Control is on, it
 keeps running and nobody is signed out. The **Settings › Remote Control** tab says that the
 new version has not been accepted on this machine, and the next save on that tab asks you
