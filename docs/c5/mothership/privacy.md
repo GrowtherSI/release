@@ -63,6 +63,12 @@ Growther.si nothing about the models — not whether you have them — and nothi
 classifier keeps: the questions it was asked, its answers, or how often it ran. This is
 true whether or not you connect to Mothership.
 
+An administrator can also choose a model from your providers to answer the classifier's
+questions ([A model from your providers](/c5/tools/local-classifier#a-model-from-your-providers)).
+C5 does not download that model. Its questions go from your machine to that provider like
+any other work you send it, under your agreement with the provider, and never to
+Growther.si.
+
 The models, their sizes and their licences are listed in C5 under **About › Copyright &
 Legal** and in
 [Open-source licences and downloaded models](/c5/security/open-source-and-models#check-which-models-c5-downloads).

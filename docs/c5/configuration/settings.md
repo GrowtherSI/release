@@ -1,6 +1,6 @@
 ---
 title: Settings
-description: A map of every settings area and what it controls, including the Learning tab and its local classifier.
+description: A map of every settings area and what it controls, including the Learning tab and its classifier.
 order: 1
 ---
 
@@ -26,7 +26,7 @@ You do not need to change most of these. C5 works sensibly out of the box.
 | **Alerts**        | When and how C5 tells you something happened.                 |
 | **Communications**| How C5 reaches you — email and other channels.                |
 | **Voice**         | Speech-to-text and text-to-speech providers, including the built-in ones. |
-| **Learning**      | How much C5 adapts from your usage, and the local classifier (on by default). |
+| **Learning**      | How much C5 adapts from your usage, and the classifier (its built-in model is on by default). |
 | **Locations**     | Folders C5 brings documents in from and writes results into.  |
 | **Storage**       | Your data, its encryption, and export.                        |
 | **System**        | Ports, paths, and how C5 runs on this machine.                |
@@ -156,17 +156,29 @@ itself from your work. It has six sections:
 | **Prompt Self-Improvement** | Prompt telemetry, and whether better prompt variants are promoted automatically |
 | **Quality vs Efficiency Balance** | How much C5 weighs answer quality against cost |
 | **Reward Pipeline Automation** | Which roles use the learned reward model, and the retrospective loop's frequency and token limits |
-| **Local Classifier** | The small model C5 runs on this machine (below) |
+| **Classifier** | The small model that answers C5's routine questions: the built-in one on this machine, or one you choose from your providers (below) |
 
-The first five save together with the tab's **Save** button. **Local Classifier** is
+The first five save together with the tab's **Save** button. **Classifier** is
 different: each change there saves the moment you make it, and never needs **Save**.
+(Before C5 could use a model from your providers, this section was called **Local
+Classifier**.)
 
-### The local classifier
+### The classifier
 
-The local classifier is a small model, about 812 MB, that runs on this machine in its
-own process. It answers some of the routine questions C5 asks itself while it works —
+The classifier answers some of the routine questions C5 asks itself while it works —
 starting with which categories a new task belongs to — beside the model that answers
-them today. It needs no provider and no account, and nothing it sees leaves the machine.
+them today. It has two rows, under **Classifier models**:
+
+- **Built-in model** — the local classifier: a small model, about 812 MB, that runs on
+  this machine in its own process. It needs no provider and no account, and nothing it
+  sees leaves the machine. The rest of this section is about it.
+- **A model from your providers** — a model one of your providers serves (llama.cpp,
+  Ollama, LM Studio, vLLM, or a cloud API), which an administrator at the machine can
+  choose. None is chosen by default. Once chosen it is asked first; the built-in model
+  answers when it cannot, while the built-in model is on. Its own setting, **Models allowed
+  from** (**This machine**, **Your network** or **Anywhere**), says how far away the chosen
+  model may run. See
+  [A model from your providers](../tools/local-classifier.md#a-model-from-your-providers).
 
 **It is on by default.** The first time a version of C5 with the classifier starts — a
 new install, or an update — it turns the switch on wherever nobody has set it, downloads
@@ -189,13 +201,15 @@ for the processor. The card says so under each of them: _Sampling 1 in 4 on this
 See [On a machine where it runs on the CPU](../tools/local-classifier.md#on-a-machine-where-it-runs-on-the-cpu).
 
 **What off means.** Off, it stops learning and C5 answers those questions exactly as it
-did before; nothing else changes. Off is also silent: the classifier's process is not
-started, nothing is downloaded, and it prints nothing to the log.
+did before; nothing else changes. (With a model from your providers chosen, that model
+keeps answering on its own, and when it cannot, C5 answers as it did before.) Off is also
+silent: the built-in model's process is not started, nothing is downloaded, and it prints
+nothing to the log.
 
 #### The card
 
-The card's header has a **Terms** button, a short status badge and the switch. Under
-them:
+The card's header has a **Terms** button and a short status badge. The **Built-in model**
+row has the switch. Under it:
 
 | Line | What it tells you |
 | --- | --- |
@@ -244,12 +258,15 @@ on a machine that will not download it, a line under the notice says so and why.
 open the **Full Terms of Service** (<https://growther.si/t=models>) and the
 **Third-party notices** for everything C5 is built from — the same notices as
 **About › Copyright & Legal** in the sidebar's **Options** menu (`⋯`). If you may change
-settings and the classifier is on, it also offers **Turn off the local classifier…**.
-Nothing in the dialog asks you to accept anything.
+settings and the classifier is on, it also offers **Turn off the local classifier…**
+(**Turn off the built-in model…** while a model from your providers is chosen). Nothing in
+the dialog asks you to accept anything. Since Terms v1.9, Section 14 also covers a model
+from your providers, if you choose one.
 
 #### Turn the classifier off
 
-1. Turn the switch off, or select **Turn off the local classifier…** in the Terms dialog.
+1. Turn the **Built-in model** switch off, or select **Turn off the local classifier…** in
+   the Terms dialog.
 2. C5 asks first, because nobody chose to turn it on. The question says what off means
    and what is on the disk.
 3. Choose **Turn off**. The model stays on the machine, so turning it back on costs no
@@ -350,8 +367,9 @@ An administrator can raise a kind on a gate that has not passed, after a warning
 gate that had not passed*. This is not offered from a device paired through Remote
 Control, and never without a fitted calibration. Lowering a mode never needs a gate.
 
-The full guide — what it records, when it starts to act, offline installs, log lines and
-troubleshooting — is [Local classifier](../tools/local-classifier.md). For the files on
+The full guide — what it records, when it starts to act, choosing a model from your
+providers, offline installs, log lines and troubleshooting — is
+[Classifier](../tools/local-classifier.md). For the files on
 disk and the network side, see
 [Where your data lives](data-location.md#downloaded-models) and
 [Network and egress](network.md#the-models-and-programs-c5-downloads).

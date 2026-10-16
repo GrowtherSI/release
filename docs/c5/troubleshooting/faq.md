@@ -110,9 +110,10 @@ your schedules — a frequent schedule is usually the biggest line on the bill.
 A small model, decider-0.8b, that C5 runs on your own computer to answer some of the
 routine questions it asks itself while it works — for example, which categories a new task
 belongs to. Without it, C5 sends each of those questions to the AI provider you
-configured. It lives in **Settings › Learning**, on the **Local Classifier** card — see
-[Settings › Learning](/c5/configuration/settings#learning). The full guide is
-[Local classifier](/c5/tools/local-classifier).
+configured. It is the **Built-in model** on the **Classifier** card in **Settings ›
+Learning** (the card was called **Local Classifier** before C5 could also use a model from
+your providers) — see [Settings › Learning](/c5/configuration/settings#learning). The full
+guide is [Classifier](/c5/tools/local-classifier).
 
 ### Does it change what C5 does?
 
@@ -147,13 +148,17 @@ one-time download (about 812 MB), which goes from your machine to Hugging Face, 
 your proxy settings if you have them. Nothing about the model, or your use of it, goes to
 Growther.si. See [Privacy](/c5/tools/local-classifier#privacy) on the classifier's page.
 
+If an administrator chooses a [model from your providers](#can-the-classifier-use-a-model-i-already-run)
+for these questions, they go from your machine to that provider like any other work you
+send it — still not to Growther.si.
+
 ### Why is it on by default?
 
-Because it uses no provider and no account of yours, costs nothing per use, and learns
-only from what it records while it is on. When it comes on, administrators get one
-notification saying so, and what will happen on this machine — whether the model will be
-downloaded, is already there, or cannot be downloaded here and why. A machine that cannot
-run it is told nothing, and nothing is downloaded there.
+Because the built-in model uses no provider and no account of yours, costs nothing per
+use, and learns only from what it records while it is on. When it comes on, administrators
+get one notification saying so, and what will happen on this machine — whether the model
+will be downloaded, is already there, or cannot be downloaded here and why. A machine that
+cannot run it is told nothing, and nothing is downloaded there.
 
 The model's publisher says its training mixture includes datasets released for research
 use. C5 shows that notice beside the model in **Settings › Learning**. If it does not fit
@@ -162,8 +167,8 @@ your use, turn the classifier off. See
 
 ### How do I turn it off?
 
-In **Settings › Learning**, switch off **Local classifier**. C5 asks first. **Turn off**
-leaves the model on disk, so turning it back on costs no download. **Turn off and delete
+In **Settings › Learning**, on the **Classifier** card, switch off **Built-in model**. C5
+asks first. **Turn off** leaves the model on disk, so turning it back on costs no download. **Turn off and delete
 the model** also frees the space; it is offered only to an administrator signed in at the
 machine itself (not from a paired phone). Anyone with permission to change settings can
 turn the classifier off. With it off, an administrator at the machine can still press
@@ -205,6 +210,48 @@ the model there and checked) and `growther classifier pull` (download it now, ev
 automatic downloads are switched off with `GROWTHER_CLASSIFIER_NO_AUTO_DOWNLOAD=1`). The
 pull is refused while the egress posture is **Offline**, or when your organisation's policy
 keeps the classifier off.
+
+## A classifier model from your providers
+
+### Can the classifier use a model I already run?
+
+Yes, from Terms of Service v1.9. An administrator at the machine can choose a model that one
+of your providers serves — on llama.cpp, Ollama, LM Studio or vLLM, or a cloud API such as
+OpenAI, OpenRouter or DeepSeek — under **Settings › Learning › Classifier › Choose a
+model…**. C5 tests it first, and asks it before the built-in model. While the built-in
+model is on, it answers whenever the chosen model cannot; with the built-in model off, the
+chosen model is the only one, and when it cannot answer C5 answers as it did before. A new
+model only records its answers until it has been measured on your install, like the
+built-in model was. Questions about whether a tool call is safe are never sent to a model
+off this machine. See
+[A model from your providers](/c5/tools/local-classifier#a-model-from-your-providers).
+
+### Why can't I choose OpenClaw, PicoClaw or Hermes Agent?
+
+They are agent gateways, not models. A gateway hands each question to an agent, and the
+agent may pass it on to any model it likes. The classifier needs one model's own
+probabilities for each possible answer, and a gateway cannot give those. The list names
+them under _Not listed_ for that reason. Choose the model the gateway uses instead, from
+that model's own provider — for example the same model in Ollama or LM Studio.
+
+### Why does LM Studio need "Your network"?
+
+**Models allowed from** starts at **This machine**, which lets C5 ask only a model it can
+show runs on this machine. LM Studio answers at this machine's address, but it can serve a
+model that actually runs on another device (LM Studio calls this LM Link), and nothing C5 can
+read from it says which. So C5 counts every LM Studio model as on your network. To use one,
+an administrator at the machine sets **Models allowed from** to **Your network** on the
+Classifier card, then chooses the model and confirms the screen that says where it runs and
+what C5 would send. If your organisation's policy locks that setting, only the policy can
+change it. The same goes for vLLM.
+
+### Why can't I choose a model from Anthropic, Groq, Mistral, Cohere or Amazon Bedrock?
+
+Their APIs do not return the probabilities the classifier reads for each possible answer, so
+none of their models can answer its questions. The list shows each of them with the reason.
+OpenAI, MS Azure, OpenRouter, DeepSeek, xAI Grok, Alibaba Cloud Qwen, Moonshot Kimi, Meta
+and Google Gemini can be tried, with **Models allowed from** set to **Anywhere**; they bill
+your account for each question, and C5 shows what a test costs before it sends anything.
 
 ## Data and safety
 

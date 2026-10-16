@@ -39,8 +39,8 @@ Anyone signed in to C5 can open the notices, including a paired phone. They stay
 when your licence is paused, lapsed or revoked. The licences ask that their notices go with
 every copy of the software, so C5 does not lock them away.
 
-The same **Third-party notices** button is in the local classifier's Terms window
-(**Settings › Learning**, then **Terms** on the **Local Classifier** card).
+The same **Third-party notices** button is in the classifier's Terms window
+(**Settings › Learning**, then **Terms** on the **Classifier** card).
 
 **If the notices do not load:**
 
@@ -291,6 +291,20 @@ terms on unchanged. Two points to check:
   [delete the model](/c5/tools/local-classifier#delete-the-model) if you do not want it on the
   machine.
 
+### A model from your providers is not one of these
+
+From Terms of Service v1.9, an administrator can choose a model that one of your model
+providers serves to answer the classifier's questions instead
+([A model from your providers](/c5/tools/local-classifier#a-model-from-your-providers)).
+**C5 does not download that model**, does not check it against a recorded size and
+fingerprint as it does the models above, and does not list it among them or in the
+third-party notices. It runs wherever your provider runs it — llama.cpp, Ollama, LM
+Studio or vLLM on your machine or network, or a cloud provider's servers — and you obtain it
+under that provider's and that model's own terms, as you would for any other model you use
+with C5. C5 only sends it questions and reads its answers, at the address your provider is
+set up with. Those questions go to the provider under your agreement with it, not to
+Growther.si, and a cloud provider may charge you for them.
+
 ### When each one is downloaded
 
 | Model | When C5 fetches it | Where it is kept |
@@ -388,7 +402,8 @@ Without its model, a feature waits and everything else works:
 - memory search keeps working with keyword search;
 - built-in voice is unavailable;
 - the local classifier does not start, so C5 makes those small decisions with your configured
-  models, exactly as when the classifier is off.
+  models, exactly as when the classifier is off — or, if an administrator chose a model from
+  your providers for the classifier, with that model.
 
 On a machine with no internet, you can copy a model in by hand. C5 checks it exactly as it
 checks a download. The pages for
@@ -626,8 +641,8 @@ For questions about licences or notices, email [help@growther.si](mailto:help@gr
 ## Related
 
 - [Verifying releases](/c5/security/verifying-releases): how C5 checks the program itself.
-- [Local classifier](/c5/tools/local-classifier): what decider-0.8b does, turning it off, and
-  deleting it.
+- [Classifier](/c5/tools/local-classifier): what decider-0.8b does, turning it off, deleting
+  it, and choosing a model from your providers instead.
 - [Memory search](/c5/tools/memory-search) and [Voice](/c5/using-c5/voice): the other features
   that use the downloaded models.
 - [Network and egress](/c5/configuration/network): every host C5 contacts, the proxy, and the

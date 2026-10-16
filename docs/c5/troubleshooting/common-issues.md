@@ -196,10 +196,12 @@ remove it.
 
 ### The local classifier says this machine cannot run it
 
-The **Local Classifier** card under **Settings › Learning** shows **Unsupported** and a
-reason, `growther doctor` shows the same reason in its **Local classifier** row, and C5
-downloads nothing. This is not a fault: C5 works exactly as it did before the classifier
-existed. The reasons you may see:
+The **Classifier** card under **Settings › Learning** shows **Unsupported** for its
+**Built-in model** and a reason, `growther doctor` shows the same reason in its **Local
+classifier** row, and C5 downloads nothing. This is not a fault: C5 works exactly as it did
+before the classifier existed, and an administrator can still choose a
+[model from your providers](/c5/tools/local-classifier#a-model-from-your-providers) to answer
+the classifier's questions instead. The reasons you may see:
 
 | Reason | What to do |
 | --- | --- |

@@ -1,10 +1,10 @@
 ---
-title: Local classifier
-description: The small model C5 runs on your machine to answer its own routine questions — what it downloads, what it records and how much, what it does before and after it is trusted, how to turn it off or delete it, and what to do when it cannot run.
+title: Classifier
+description: How C5 answers its own routine questions with a small model — the built-in one it downloads and runs on your machine, or one you choose from your providers. What it downloads, what it records, what it sends where, when it starts to act, how to turn it off or delete it, and what to do when it cannot run.
 order: 6
 ---
 
-# Local classifier
+# Classifier
 
 While it works, C5 keeps asking itself small questions with a fixed set of answers: which
 categories a new task belongs to, which skill area a step draws on, whether a repeating error
@@ -13,19 +13,33 @@ In the rest of this page, **the usual model** means that model: the one C5 would
 the classifier. Settings also calls it the **teacher model**, because the classifier is
 measured against it.
 
-The **local classifier** is a small model, **decider-0.8b**, that answers the same kind of
-question on your own machine. It does not write a reply. It picks from the fixed answers
-directly, so an answer takes a fraction of a second and costs nothing: no provider, no
-account, no tokens.
+The **classifier** answers the same kind of question with a small model that picks from the
+fixed answers directly instead of writing a reply. It can use two kinds of model:
 
-It runs in a process of its own, apart from C5's server, so if it crashes C5 carries on. C5
-never depends on it: whenever the classifier is off, busy, slow, unsure or broken, C5 asks the
-usual model, exactly as before.
+- **The built-in model**, also called the **local classifier**: **decider-0.8b**, which C5
+  downloads once and runs on your own machine. An answer takes a fraction of a second and
+  costs nothing: no provider, no account, no tokens. It is on by default.
+- **A model from your providers**: a model that one of the model providers you set up in
+  **Settings › Integrations** serves, which an administrator chooses. None is chosen by
+  default. See [A model from your providers](#a-model-from-your-providers).
+
+The built-in model runs in a process of its own, apart from C5's server, so if it crashes C5
+carries on. C5 never depends on the classifier: whenever it is off, busy, slow, unsure or
+broken, C5 asks the usual model, exactly as before.
+
+The section in **Settings › Learning** is called **Classifier**. Before C5 could use a model
+from your providers it was called **Local Classifier**, and this page was called _Local
+classifier_; its address has not changed. Outside the section on
+[a model from your providers](#a-model-from-your-providers), **the classifier** on this page
+means the built-in model.
 
 **In short:**
 
 - You do not need to do anything. C5 downloads the model (about 812 MB) once, and at first
   only records the classifier's answers beside the usual ones, for every kind of decision.
+- Want a model you already run to answer instead — on llama.cpp, Ollama, LM Studio, vLLM or a
+  cloud API? An administrator can choose one; see
+  [A model from your providers](#a-model-from-your-providers).
 - On a machine where it runs on the CPU, it records only one in four of its most frequent
   questions, so it stays out of your agents' way; see
   [On a machine where it runs on the CPU](#on-a-machine-where-it-runs-on-the-cpu).
@@ -41,8 +55,8 @@ usual model, exactly as before.
 
 ## Why it is on by default
 
-The classifier uses none of your providers and none of your accounts. What it gains from your
-install is evidence: it records its answers beside the usual ones, C5 measures them against
+The built-in model uses none of your providers and none of your accounts. What it gains from
+your install is evidence: it records its answers beside the usual ones, C5 measures them against
 the answers people give, and fits a small calibration from them. The model file itself is
 never retrained or changed on your machine, and none of this leaves it. (Settings calls this
 "learning".) An install that never turns it on never collects that evidence, so it could
@@ -125,7 +139,8 @@ To check the training mixture, see the publisher's page for the model:
 Anyone with permission to change settings can turn it off.
 
 1. Go to **Settings › Learning**.
-2. Flip the **Local classifier** switch off.
+2. On the **Classifier** card, flip the **Built-in model** switch off. It is in the
+   **Built-in model** row, under **Classifier models**.
 3. C5 asks **Turn off the local classifier?** and explains that, while off, it stops learning and
    C5 answers those questions as it did before. Choose one:
 
@@ -141,11 +156,20 @@ that turning off leaves the file where it is. If the model's path is a link whos
 be reached, it says turning off leaves the link, and that C5 uses the model once that file can
 be reached.
 
-Turned off, the classifier is completely quiet. C5 does not start its process, load the model,
-download anything, run its nightly jobs or print anything about it in the log.
+Turned off, the built-in model is completely quiet. C5 does not start its process, load the
+model, download anything, run its nightly jobs or print anything about it in the log.
+
+**With a model from your providers chosen**, the question is **Turn off the built-in
+model?**, and it says who answers once it is off: the chosen model keeps answering, with
+nothing behind it, so whenever it does not answer, C5 answers those questions as it did
+before. It also names any kind of decision that only the built-in model answers (Tool-call
+safety, beside a model that is not on this machine), where turning it off ends the classifier,
+and any kind that acts on the built-in model's record, where acting ends and the chosen
+model's answers are only recorded. Its delete button reads **Turn off and delete the
+built-in model**. See [Who answers](#who-answers).
 
 You can also reach the same question from the **Terms** dialog: **Turn off the local
-classifier…**.
+classifier…** (**Turn off the built-in model…** while a model from your providers is chosen).
 
 ## Turn it back on
 
@@ -158,6 +182,8 @@ Flip the switch on again.
   notice. **Download and turn on** turns it on and starts the download; **Cancel** leaves it off.
 - If a file is at the model's path but C5 already knows it is not the model, the dialog says
   so, and that C5 downloads the model and replaces that file.
+- With a [model from your providers](#a-model-from-your-providers) in use, the dialog adds
+  _M stays first; the built-in model answers when it cannot._
 - On a machine that will not download the model — the Egress posture is Offline, automatic
   downloads are turned off, there is not enough disk space, or the model's path is a symbolic
   link C5 cannot use yet (one whose file cannot be reached, one it has not checked, or one to
@@ -250,8 +276,8 @@ Settings says it has measured at chance so far. If you do not want a kind record
 
 **A mode someone chose is kept.** The defaults apply only to a kind of decision nobody has
 set. If you set a kind to **Off**, it stays off. Nothing ever raises a kind into **Assisted**
-or **Authoritative** for you. With the classifier switched off, none of them is asked,
-whatever its mode says.
+or **Authoritative** for you. With the built-in model switched off and no model from your
+providers in use, none of them is asked, whatever its mode says.
 
 **After updating from an earlier version.** Earlier versions saved the mode of every kind as
 soon as anyone changed one of them. So a kind nobody chose could be saved at the old default:
@@ -409,8 +435,10 @@ If a mode cannot be chosen, the option says why; see
 
 ### Teaching it
 
-The answers people give are what the gate measures. While the classifier is on and has
-something to ask, administrators on the machine running C5 (never on a paired device) see a
+The answers people give are what the gate measures. While some model answers the classifier's
+questions — the built-in model, or a [model from your providers](#a-model-from-your-providers)
+that C5 asks — and has something to ask, administrators on the machine running C5 (never on a
+paired device) see a
 **Teach the classifier** tab in the **HITL: Human-in-the-Loop Signoffs** window, which opens
 from the HITL (clipboard) button in the sidebar. It shows a task's categories to confirm, or a
 step's output to rate. It never shows what the classifier answered, so your answer cannot lean
@@ -429,12 +457,297 @@ Two other actions count as answers too:
 Because both kinds of answer can arrive, alert triage can be measured and calibrated like
 the others.
 
+## A model from your providers
+
+From version 1.9 of the Terms of Service, an administrator can choose a model that one of
+your model providers serves — a llama.cpp or Ollama server on this machine, LM Studio, vLLM, or
+a cloud API — to answer the classifier's questions, asked before the built-in model. None
+is chosen by default, and nothing changes until someone chooses one. C5 does not download
+such a model: it asks it where your provider serves it, as set up in **Settings ›
+Integrations**.
+
+### Who answers
+
+**By default C5 uses the built-in model.** Once an administrator chooses a model from your
+providers, C5 asks that model first, and:
+
+- **while the built-in model is switched on**, the built-in model answers whenever the
+  chosen model cannot;
+- **while the built-in model is switched off** — for example because its notice does not
+  fit your use — the chosen model is the only one asked. Whenever it cannot answer, no
+  classifier answers, and C5 answers those questions as it did before.
+
+The card says which, under **Classifier models**, in these words (M is the model's name):
+
+| The built-in model | The chosen model answers | The chosen model cannot be asked now |
+| --- | --- | --- |
+| On | _C5 asks M first. If it stops answering, the built-in model answers._ | _Using the built-in model while M is unavailable._ |
+| Off | _C5 asks only M. If it stops answering, no classifier answers, and C5 answers as it did before._ | _No classifier while M is unavailable. C5 answers as it did before._ |
+
+"Cannot be asked now" covers a model that is not loaded, is busy, does not answer, is paused
+after repeated failures, is refused by a policy or by **Models allowed from**, or whose
+provider is turned off in **Settings › Integrations**. A chosen model waiting for a test
+reads _… until M passes its test again_, and one that has changed since its test _… until M is
+chosen again_. On a machine that cannot run the built-in model, the line reads _C5 asks only
+M: the built-in model cannot run here. …_
+
+The chosen model is not asked everything:
+
+- **Tool-call safety stays on this machine.** Whether a tool call is safe is asked only of a
+  model C5 can show runs on this machine — an address on this machine is not enough, because
+  a program there can pass questions on to another computer. Any other model is never sent
+  those questions: the built-in model answers them while it is on, and C5's usual checks
+  decide either way, as before. Beside such a model, Tool-call safety reads _Tool-call safety
+  stays on this machine, so M is not asked it._
+- **Questions with more choices than the model can read.** Some models read only a few
+  choices per question (10 for LM Studio, for example, and fewer for some cloud providers).
+  Skill routing offers one choice for every skill area you have turned on — 11 on a new
+  install — so such a model is not asked it. The card says why beside it, and the built-in
+  model answers it.
+
+### Choose a model
+
+Only an administrator at the machine running C5 can choose or test a model — the same people
+who can [delete the built-in model](#delete-the-model), never from a device paired through
+Remote Control.
+
+1. Make sure the provider is turned on in **Settings › Integrations**. If it runs the model
+   on your machine or network, load the model there first: C5 never loads a model itself.
+2. In **Settings › Learning**, on the **Classifier** card, under **A model from your
+   providers**, choose **Choose a model…** (**Change…** once one is chosen).
+3. Pick a model. The list has one group for each provider you turned on, in the same order
+   as the cards in Integrations, and a search box. A group's heading says where its models
+   run (_On this machine_, _At this machine's address_, _Your network_ or _Online_). A provider
+   C5 cannot ask, or a model it cannot use here, says why.
+4. For a model on this machine, choose **Test and use**. For a model on your network or
+   online, choose **Next**: C5 first shows where it runs and what it would send there, and
+   asks you to confirm (see [Before a model off this machine is asked](#before-a-model-off-this-machine-is-asked)).
+5. C5 tests the model, which can take up to a minute and a half. If it passes, it is in use
+   at once, and a message says where it starts.
+
+**The test.** The model must answer C5's test questions in a way the classifier can read: it
+must return, for each answer it could give, how likely it thinks that answer is. The list
+shows the result of a model's last test beside it:
+
+| Badge | The card then says | What happens |
+| --- | --- | --- |
+| **Worked** | _Tested <day>: it answers the classifier's questions._ | A model made for this kind of decision, or the built-in model's own weights served by your provider. It is used. |
+| **Experimental** | _Tested <day>: it answers, but it is a general model, so expect it to stay in Shadow._ | It is used; see [Experimental models](#experimental-models). |
+| **Did not work** | The reason, for example that the model gives no probabilities | Nothing is chosen, and nothing changes. |
+
+A test that could not judge the model — it was not loaded, its provider did not answer —
+changes nothing either, and says so: _M is not loaded in P. C5 never loads a model itself;
+load it there and try again. Nothing was changed._
+
+C5 tests a model only when an administrator chooses it or presses **Test again** on its row,
+never on a schedule. A model that has changed since its test — new weights at the same name,
+or a provider moved to another address — is not asked until it is chosen again, which tests
+it again.
+
+### What each provider needs
+
+| Provider, as its card in Settings › Integrations is named | Where C5 counts it as running | What it needs |
+| --- | --- | --- |
+| **llama.cpp** | On this machine when its server says it runs the model here; otherwise your network, or online, by its address | The model loaded, with at least 4,096 tokens of context. A server that applies a LoRA adapter is refused |
+| **Ollama** | On this machine, for a model Ollama runs here | Ollama 0.12.11 or newer, with the model loaded. C5 never changes how long Ollama keeps a model loaded, but its questions do reset the model's idle timer. Ollama's cloud models cannot be chosen: Ollama passes them on to its own servers |
+| **LM Studio** | Never on this machine: your network, even at this machine's address, because LM Studio can serve a model that runs on another device and cannot show C5 where it runs. At an address outside your network, online | LM Studio 0.4.0 or newer, with the model loaded with at least 4,096 tokens of context, and its reasoning switched off. C5 asks only a model LM Studio lists as loaded, so it never makes LM Studio load or swap a model |
+| **vLLM** | Never on this machine: your network, even at this machine's address. At an address outside your network, online | vLLM 0.26.0 or newer, entered as the address on the **llama.cpp** card. Its model needs at least 4,096 tokens of context |
+| **OpenAI**, **MS Azure**, **OpenRouter**, **DeepSeek**, **xAI Grok**, **Alibaba Cloud Qwen**, **Moonshot Kimi**, **Meta**, **Google Gemini** | Online | A key set up in Integrations, and a model that returns probabilities for its answers. Each question is billed; see [Models your provider bills](#models-your-provider-bills) |
+| **Anthropic**, **Groq**, **Mistral**, **Cohere**, **Amazon Bedrock** | — | Cannot be used: their APIs do not return the probabilities the classifier reads. The list says why for each |
+| **OpenClaw**, **PicoClaw**, **Hermes Agent** | — | Not listed. They pass each question to an agent, which may hand it to any model. Choose the model they use from that model's own provider instead |
+| **Hugging Face \| Inferencer** | — | Not yet: C5 cannot read the probabilities it needs from it |
+
+**Models allowed from** decides which of these places a model may run; see below.
+
+### Models allowed from
+
+**Models allowed from**, on the **A model from your providers** row, says how far away a
+model may run:
+
+| Choice | Lets C5 ask |
+| --- | --- |
+| **This machine** (the default) | Only a model C5 can show runs on this machine |
+| **Your network** | Also a model on another computer on your network, and LM Studio or vLLM |
+| **Anywhere** | Also a cloud provider's models |
+
+Under it, the card always reminds you: _LM Studio counts as Your network: C5 cannot show that
+a model it serves runs on this machine._ and _Widening this does not skip your confirmation:
+C5 still asks you before it sends questions to each model that is not on this machine._
+
+- **Who can change it.** An administrator at the machine. A paired device, or an account that
+  is not an administrator, sees it with the reason it cannot be changed. An administrator
+  without a second factor is refused and told how to add one; **Models allowed from**,
+  **Choose a model…** and **Test again** then stay unavailable until the page is opened
+  again, because each refused attempt is a critical entry in the audit log.
+- **In the list.** A model the setting does not reach says what to change, for example
+  _C5 cannot tell that it runs on this machine, and Models allowed from is This machine: set
+  it to Your network on the Classifier card to choose it._, or _Runs online through OpenAI,
+  and Models allowed from is Your network: set it to Anywhere on the Classifier card to choose
+  it._
+- **Narrowing it** stops C5 asking a chosen model that is now too far away. Its row reads
+  _Not used._ with the reason, and the built-in model answers while it is on.
+- **Your organisation's policy** comes first. A policy that locks
+  `classifier_external_allowed` shows the setting locked, with the reason and where the policy
+  is set; locked to `off`, the choice reads **Off — set by your organisation**. A value the
+  policy only recommends is the default an administrator may change. See
+  [Classifier models from your providers](../configuration/enterprise-policy.md#classifier-models-from-your-providers).
+
+### Before a model off this machine is asked
+
+A model on your network or online is sent none of your work until an administrator at the
+machine has confirmed it. After **Next** (or, if the test finds the model is not on this
+machine, after **Test and use**), C5 shows **Send these questions to another machine?**:
+
+- **Where it runs**, for example _M runs at 192.168.1.20:8080, not on this machine._, _M runs
+  online at api.openai.com, not on this machine._, or, for a program at this machine's address
+  such as LM Studio, _M is served at localhost:1234, an address on this machine, but C5 cannot
+  tell whether the program there runs it here or passes the questions on to another machine._
+- **What it would be sent**: _C5 would send it the questions it asks itself while it works:
+  the goal of each new task, the output of steps it grades, and error messages and logs it
+  triages. Tool-call safety questions are never sent there; they stay on this machine._ Where
+  the model is asked skill routing, those questions also carry the step a specialist is about
+  to take.
+- **The part of the Terms that covers it**: the paragraph of Section 14 about a provider's
+  model, word for word.
+- For a model your provider bills, **what its test costs** (below).
+
+Tick _I have read Section 14 and want C5 to send these questions to H._ (H is the model's
+address) and choose **Allow and test**. **Back** returns to the list with your choice kept.
+
+The confirmation is for that address. A model at another address asks again. The Terms
+dialog then shows the chosen model and when you allowed it, for example _M through LM Studio,
+at localhost:1234. You allowed this on 2026-10-15 under Terms v1.9._
+
+Those questions then go from your machine to that provider like any other work you send it,
+under your agreement with the provider. They do not go through Growther.si.
+
+### Models your provider bills
+
+The cloud providers bill your account for each question C5 asks their models, the test's
+included. So C5 says what a test costs before anything is sent:
+
+- Under the provider's group in the list: _P bills your account for each question C5 asks its
+  models, a test's included; C5 says what a test costs before sending it._
+- In the confirmation, with where the model runs: _Testing M sends N questions (about T
+  tokens) to H, which P bills to your account (about $0.02). Once it is in use, P bills each
+  question C5 asks it._ If **Settings › Budget** has no price for the model, the line ends
+  _…; Settings › Budget has no price for it, so C5 counts them at $0 until you add one_.
+  **Allow and test** confirms the cost and the confirmation together.
+- **Test again** asks first as well: **Test M again?**, with the same line, and **Test it**.
+
+Once a billed model is in use:
+
+- C5 adds what each question costs to **Settings › Budget**, beside your other spending.
+- While your global cost cap is reached and set to block, C5 asks the model nothing. The
+  built-in model answers meanwhile, if it is on.
+- Every question to OpenRouter carries the routing limits you set for OpenRouter in
+  **Settings › Integrations**, and asks OpenRouter to use only a provider that returns the
+  probabilities.
+- A name the provider moves to another model by itself cannot be chosen — one ending in
+  `latest`, `openrouter/auto`, or a name starting with `~`: _choose a dated or versioned model
+  instead_.
+
+Not every cloud model returns the probabilities the classifier reads, and the list says so
+where a provider's own documentation leaves it open: xAI ignores the request on grok-4.20 and
+newer models, Moonshot Kimi and Meta do not document it, and Google no longer returns them
+for most Gemini models. A test of a model that does not return them ends after its first
+question, so it costs one question.
+
+### Experimental models
+
+A general model — one not made for this kind of decision — can still answer. Its test reads
+_it answers, but it is a general model, so expect it to stay in Shadow_, and the list marks
+it **Experimental**. Every model C5 asks through a chat is one of these: every LM Studio
+model and every cloud model.
+
+An experimental model is used like any other. It records its answers in Shadow, and acts on a
+kind of decision only if its own promotion gate passes on your install, which a general
+model rarely does. Choosing one does not stop the built-in model acting: until the chosen
+model's own gate passes, the built-in model's record keeps acting wherever it had been allowed
+to act, while the built-in model is on.
+
+### How a chosen model earns its place
+
+Every answer is recorded under the model that gave it. Each model has its own
+[promotion gate](#when-it-starts-to-act), calibration and record for each kind of decision:
+the chosen model is never measured on the built-in model's answers, nor the other way round.
+
+- **A model new to C5 starts in Shadow** on every kind of decision, from no answers of its
+  own. Its gate line adds _It started from no answers when you chose it, so this takes as
+  long as collecting labels does._ One of the last three models chosen picks up its own
+  records again.
+- **Each kind of decision says whose answers count.** Beside a chosen model, its row says who
+  is asked now (_Asked: M._ or _Asked: the built-in model._, and why not, where the chosen
+  model is not), then M's gate (_M — Promotion gate: …_), then the built-in model's while it
+  is on (_Built-in model — Promotion gate: …_). Where the built-in model's record acts and M is
+  still being measured, it reads _Acts on the built-in model's answers; M's are recorded
+  beside them until its own gate passes._
+- **Raising a kind** into Assisted or Authoritative is judged on the gate of the model the
+  raise is for: the chosen model's, wherever it is asked that kind. So a kind acts on the
+  chosen model's answers only once that model has been measured, however well the built-in
+  model did.
+- **Act on M's answers** moves a kind that already acts onto the chosen model's own record,
+  once that model's gate has passed on a fitted calibration. Nothing stops acting in
+  between. If the gate refuses, the kind says _Not acting on M's answers: …_
+- **Fit calibration now** is offered once per model, each named for whose calibration it
+  fits (… _on M_, … _on the built-in model_), to an administrator at the machine.
+- **Teach the classifier** stays available while C5 asks the chosen model, even with the
+  built-in model off: then the answers you give there are what the chosen model is measured
+  against.
+
+### Stop using it, or choose another
+
+- **Stop using it**, on the model's row, is open to anyone who may change settings, from a
+  paired device too: stopping is always the safe direction. Where a kind of decision acts on
+  the model's answers, C5 asks first (**Stop using M?**) and says what acts there afterwards.
+  The model's records are kept: choose it again while it is one of the last three models
+  chosen, and it picks them up.
+- **Change…** opens the list to choose another model. If a kind of decision acts on the
+  current model's answers, the list says what acts there until the new model has been
+  measured.
+- **Turning its provider off** in **Settings › Integrations** stops C5 asking the model, and
+  the question that turns the provider off says the classifier uses it. The row then reads
+  _Not used: P is turned off in Settings › Integrations._
+
+### When the chosen model is not answering
+
+The model's row says what is wrong, then what answers meanwhile: _Meanwhile the built-in model
+answers._, or _Meanwhile no classifier answers, and C5 answers as it did before._
+
+| The row says | What it means | What to do |
+| --- | --- | --- |
+| _Not loaded in P. C5 never loads a model itself; load it there and C5 uses it again._ | The provider has unloaded the model | Load it in the provider |
+| _P is busy with other work, so recent questions went elsewhere._ | The provider's server was busy, often with your own work: where it answers one request at a time, C5 never makes a question wait behind your own chat | Nothing |
+| _P is not answering (since 14:03)._ | The provider's server is not reachable | Start it, or check its address in **Settings › Integrations** |
+| _Paused. …_ | The provider refused (a key it does not accept, a rate limit), or the model failed repeatedly. The reason follows | Follow the reason. C5 picks up a key you fix in **Settings › Integrations** within seconds |
+| _Changed since it was tested. …_ | New weights at the same name, or the provider moved to another address | Choose the model again to test it again |
+| _Not used until it passes a test._ | No passing test of it is kept | Press **Test again** |
+| _Not used. …_ | Your organisation's policy, **Models allowed from**, or a confirmation that no longer holds; the reason follows | Follow the reason |
+| _Not used: P is turned off in Settings › Integrations._ | | Turn the provider back on, or **Stop using it** |
+
 ## What you see in Settings › Learning
 
-The **Local Classifier** card has a switch, a **Terms** button and a short status badge, then a
-few status lines and one row for each kind of decision.
+The **Classifier** card has a **Terms** button and a short status badge in its header. Under
+**Classifier models** are two rows:
+
+- **Built-in model**, with its switch and the status lines below;
+- **A model from your providers**: what is chosen and where it runs, its last test, its
+  state and what answers meanwhile, **Models allowed from**, and the buttons **Choose a
+  model…** (**Change…** once one is chosen), **Test again** and **Stop using it**. See
+  [A model from your providers](#a-model-from-your-providers).
+
+Which model is asked first is said in words, and in the tags **Asked first** and
+**Fallback** beside the rows' titles. Under both rows a line says who answers now (see
+[Who answers](#who-answers)). Then comes one row for each kind of decision.
 
 ### The badge
+
+While no model from your providers is chosen, the badge in the header is the built-in
+model's, as below. With one chosen, the header's badge says how the classifier answers —
+**Running** (the chosen model answers), **Fallback** (it cannot be asked now, and the built-in
+model answers), **Unavailable** (it cannot be asked now, and nothing answers), **Testing** (a
+test of it is running) or **Off** (your organisation's policy keeps every model off) — and
+the built-in model's own badge moves into its row.
 
 | Badge | What it means | What to do |
 | --- | --- | --- |
@@ -550,11 +863,12 @@ Learning**.
 
 ## The Terms that cover it
 
-The **Terms** button on the card opens **The local classifier — Terms of Service, Section 14**:
+The **Terms** button on the card opens **The classifier — Terms of Service, Section 14**:
 section 14 of the Growther.si Terms of Service, _Models C5 downloads and runs on your machine_,
-word for word, with this install's model, its size, its licence, whether it is on this machine,
-and its notice. The **On this machine** row says what is at the model's path, without claiming
-C5 downloaded it (you may have placed it by hand):
+word for word, under the Terms version and its effective date (_Terms v1.9 · effective …_
+in this release). Below it are this install's built-in model, its size, its
+licence, whether it is on this machine, and its notice. The **On this machine** row says what
+is at the model's path, without claiming C5 downloaded it (you may have placed it by hand):
 
 | It reads | Meaning |
 | --- | --- |
@@ -570,17 +884,35 @@ While the model is not here (or the file there is not the model), on a machine t
 download it (see [Turn it back on](#turn-it-back-on)), a line under the notice says so and why:
 _On this machine it is not downloaded: …_
 
+With a [model from your providers](#a-model-from-your-providers) chosen, a **Your model** row
+names it too: _M through Ollama, on this machine._, or, for a model off this machine, where it
+runs and when an administrator allowed it, for example _M through LM Studio, at
+localhost:1234. You allowed this on 2026-10-15 under Terms v1.9._
+
 At the bottom are **Full Terms of Service**
 ([growther.si/t=models](https://growther.si/t=models)), **Third-party notices** (the licences of
-everything C5 ships or downloads), **Turn off the local classifier…** and **Close**. **Turn off
-the local classifier…** is offered to someone who may change settings, while the classifier is
-on and not locked by policy. Reading the Terms asks you to accept nothing.
+everything C5 ships or downloads), **Turn off the local classifier…** (**Turn off the built-in
+model…** while a model from your providers is chosen) and **Close**. That button is offered to
+someone who may change settings, while the built-in model is on and not locked by policy.
+Reading the Terms asks you to accept nothing.
 
 In short, section 14 says: C5 downloads these models from Hugging Face only while the feature
 that needs one is on, checks each one before using it, keeps it on your machine, and sends
 nothing about it or your use of it to Growther.si. Each model stays under its publisher's own
 licence. The classifier is on by default, first only records, and acts only after it has been
 measured on your install and only for the kinds of decision allowed in Settings.
+
+From version 1.9, section 14 also covers **a provider's model, if you choose one**: an
+administrator at the machine may choose a model one of your providers serves, and none is
+chosen by default. C5 does not download it. That model, and the questions C5 sends it, are
+governed by your agreement with the provider and the model's own terms; Growther.si is not a
+party to that and does not receive them, and the provider may charge you for them. It is
+measured on its own record and acts only where it has been measured. While the built-in model
+is on, it keeps acting where it has been measured and the chosen model has not, and answers
+whenever the chosen model cannot be reached; while it is off, no classifier answers then. A
+model not served on your machine can be chosen only where your organisation's policy allows
+it, and only after C5 has shown what it will send there and you have confirmed. Questions
+about whether a tool call is safe are never sent to such a model.
 
 ## Machines it cannot run on
 
@@ -766,9 +1098,15 @@ match_), followed by the placement step.
 ## Privacy
 
 - The questions, the classifier's answers and the labels people give stay in C5's database on
-  this machine. The model runs on this machine, in its own process.
-- The only network traffic is the one download of the model from Hugging Face. C5 sends nothing
-  about the model, or your use of it, to Growther.si.
+  this machine. The built-in model runs on this machine, in its own process.
+- The built-in model's only network traffic is the one download of the model from Hugging
+  Face. C5 sends nothing about the model, or your use of it, to Growther.si.
+- A [model from your providers](#a-model-from-your-providers), if an administrator chooses one,
+  is sent the classifier's questions like any other work you send that provider: from your
+  machine to the provider, under your agreement with it, never through Growther.si. A model off
+  this machine is sent none of your work until an administrator has confirmed it, and is never
+  asked whether a tool call is safe. Its answers are recorded in C5's database on this machine,
+  like the built-in model's.
 - C5's status address, `GET /health`, answers without any sign-in, so that supervisors can
   see C5 is up. It includes the classifier's details (use counts, answer times, how many
   questions are in progress or waiting, whether it is paused) only for someone signed in
@@ -786,7 +1124,8 @@ macOS managed preferences, `/etc/growther/policy.d`, or a signed policy document
 
 - **Locked to `false`**: the classifier stays off, and C5 never downloads the model — not even
   through `growther classifier pull`. An administrator can still delete a model that is already
-  there.
+  there. No model from your providers answers either, unless the policy also sets
+  `classifier_external_allowed` at the same level or a higher one (see below).
 - **Locked to `true`**: it stays on. Nobody can turn it off or delete the model in Settings.
   If the file at the model's path is not the model, the card says so and adds _Your
   organisation's policy keeps the classifier on, so the file cannot be deleted here._ (for a
@@ -807,6 +1146,16 @@ macOS managed preferences, `/etc/growther/policy.d`, or a signed policy document
   `classifier_enabled` falls back to `false`, its safe default. See
   [How a policy is applied](../configuration/enterprise-policy.md#how-a-policy-is-applied).
 
+### Managed policy: `classifier_external_allowed`
+
+`classifier_external_allowed` (`off`, `loopback`, `lan` or `any`) decides how far away a
+[model from your providers](#a-model-from-your-providers) may run. It is delivered the same
+ways as `classifier_enabled`. Locked, it replaces **Models allowed from** on the card, which
+is then shown locked with the reason; only recommended, it is the default an administrator at
+the machine may change; not set at all, **Models allowed from** starts at **This machine**.
+`allowedProviders` and `allowedModels` apply to the classifier's models too. See
+[Classifier models from your providers](../configuration/enterprise-policy.md#classifier-models-from-your-providers).
+
 ### Downloads only by hand or on request
 
 Start C5 with `GROWTHER_CLASSIFIER_NO_AUTO_DOWNLOAD=1` (exactly `1`) and C5 does not download
@@ -816,7 +1165,12 @@ hand. C5 also never downloads it automatically when the `CI` environment variabl
 
 ### Network
 
-The download goes through the proxy and certificate authorities set under **Settings ›
+A [model from your providers](#a-model-from-your-providers) is asked at the address its
+provider is set up with in **Settings › Integrations**, never at an address taken from
+anywhere else, and through the same proxy settings as the rest of C5. While the Egress
+posture is **Offline**, C5 asks — and tests — only a model at an address on this machine.
+
+The built-in model's download goes through the proxy and certificate authorities set under **Settings ›
 Enterprise › Network**, like every other C5 download (see
 [Corporate proxy](../configuration/network.md#corporate-proxy)). `huggingface.co` answers a
 model request by redirecting to its download network, so allow these hosts as well — a proxy
@@ -1165,10 +1519,62 @@ after the move. If the classifier is on, it starts from the new location.
 **_Not running: The classifier's model is being deleted._**
 A delete is in progress. It ends in seconds.
 
+### Choosing a model from your providers
+
+**There is no Choose a model… button.**
+Choosing and testing are for an administrator at the machine running C5, never from a paired
+device. The row says why it is not offered to you. If your organisation's policy keeps every
+model off, or does not allow a model from your providers, choosing is not offered at all; a
+model already chosen can still be stopped. See
+[Classifier models from your providers](../configuration/enterprise-policy.md#classifier-models-from-your-providers).
+
+**_None of your enabled providers lists a model right now. Turn one on in Settings › Integrations._**
+The list shows only providers turned on in **Settings › Integrations**, and only the models
+each one lists. Turn the provider on, start it if it runs on your machine or network, and
+press **Refresh list**.
+
+**_Not listed: OpenClaw, PicoClaw and Hermes Agent. …_**
+These are agent gateways: they hand each question to an agent, which may pass it to any
+model. The classifier needs one model's own probabilities for each answer. Choose the model
+the gateway uses from that model's own provider instead.
+
+**A provider's group says _… cannot answer the classifier._** (Anthropic, Groq, Mistral, Cohere, Amazon Bedrock)
+Their APIs do not return the probabilities the classifier reads, so none of their models can
+be used. The rest of the line says why for each.
+
+**_C5 cannot tell that it runs on this machine, and Models allowed from is This machine: …_**
+The model's provider cannot show that it runs the model here: LM Studio, vLLM, or a server on
+another computer. Set **Models allowed from** to **Your network** on the Classifier card (an
+administrator at the machine can), then choose it and confirm where it runs. If the line
+names your organisation's policy instead, only the policy can change it.
+
+**_Runs online through P, and Models allowed from is …_**
+A cloud model needs **Anywhere**. Ollama's cloud models cannot be chosen at all: Ollama passes
+them on to its own servers.
+
+**_M is not loaded in P. C5 never loads a model itself; load it there and try again. Nothing was changed._**
+Load the model in the provider (in LM Studio or Ollama, say), then choose it again.
+
+**The test says the model reasoned before it answered.**
+A model that thinks before it answers cannot be read this way. In LM Studio, turn the model's
+reasoning off, then test it again. A cloud model that cannot answer without reasoning cannot be
+used.
+
+**_… names whichever model the provider points it at; choose a dated or versioned model instead_**
+The name moves to a newer model by itself (one ending in `latest`, or `openrouter/auto`), so
+its record would mean nothing. Choose a dated or versioned name.
+
+**_This machine now requires Terms v1.9, and this page shows v1.8. Reload C5 to read the current text._**
+The page was loaded before C5 was updated. Reload it, read Section 14 again, and confirm.
+
+**The chosen model's row says _Not used._, _Paused._ or _Changed since it was tested._**
+See [When the chosen model is not answering](#when-the-chosen-model-is-not-answering).
+
 ## Related
 
 - [Memory search](memory-search.md) — the other models C5 downloads, for semantic search
 - [Network and egress](../configuration/network.md) — the Egress posture, proxies and every host C5 contacts
-- [Managed configuration](../configuration/enterprise-policy.md) — locking `classifier_enabled` across a fleet
+- [Managed configuration](../configuration/enterprise-policy.md) — locking `classifier_enabled` and `classifier_external_allowed` across a fleet
+- [Model providers](../configuration/model-providers.md) — setting up the providers a classifier model can come from
 - [Running doctor](../cli/doctor.md) — every check, and how to read the results
 - [Environment variables](../cli/environment.md) — `GROWTHER_CLASSIFIER_NO_AUTO_DOWNLOAD` and `GROWTHER_CACHE_DIR`
