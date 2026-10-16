@@ -43,8 +43,8 @@ To accept:
 3. Press **Agree**.
 
 **Cancel** leaves the switch off. Once accepted, the dialog is not shown again unless C5
-brings newer Terms than the ones accepted. The tab shows a line like _Terms v1.8 accepted
-by Ana Ruiz on Oct 2, 2026_ — the name of whoever accepted, your own included — with a
+brings newer Terms than the ones accepted. The tab shows a line like _Terms v1.9 accepted
+by Ana Ruiz on Oct 15, 2026_ — the name of whoever accepted, your own included — with a
 **View** link that reopens the text. Only when that account no longer exists on the
 install — deleted since — does the line fall back to the account id.
 
