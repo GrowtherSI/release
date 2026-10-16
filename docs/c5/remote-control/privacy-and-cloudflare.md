@@ -148,14 +148,16 @@ settings. See [Troubleshooting](/c5/remote-control/troubleshooting).
 
 ## Your own tunnel, your own provider
 
-If you paste your own tunnel token under Advanced, or supply your own name and certificate,
-Growther.si is not in the path and holds no credential for it. Your tunnel provider — Cloudflare
-on your own account, Tailscale, ngrok — is in the path instead, under your agreement with
-them (Section 15 of the Terms says this from version 1.9), and most operate the way
-Cloudflare does: encrypted to and from them, with the
-connection handled within their network. Choose one you are content to have there. Turning
-Remote Control off keeps a token you pasted on your machine; Growther.si is not asked to
-release anything, because it holds nothing for your tunnel.
+If you paste your own tunnel token under Advanced, Growther.si is not in the path and holds
+no credential for it. Your tunnel provider — Cloudflare on your own account, Tailscale,
+ngrok — is in the path instead, under your agreement with them (Section 15 of the Terms says
+this from version 1.9), and most operate the way Cloudflare does: encrypted to and from them,
+with the connection handled within their network. Choose one you are content to have there.
+Turning Remote Control off keeps a token you pasted on your machine; Growther.si is not asked
+to release anything, because it holds nothing for your tunnel.
+
+A name and certificate of your own, with no tunnel, keeps every third party out (Section
+15 (a) of the Terms).
 
 ## Voice
 
