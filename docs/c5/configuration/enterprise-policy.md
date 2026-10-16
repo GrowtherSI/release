@@ -1,6 +1,6 @@
 ---
 title: Managed configuration
-description: Push C5 settings from Intune, Jamf, Group Policy or a signed policy file; what users see when a setting is locked; keeping the local classifier on or off; the growther policy commands.
+description: Push C5 settings from Intune, Jamf, Group Policy or a signed policy file; what users see when a setting is locked; keeping the local classifier on or off, and where a classifier model from your providers may run; the growther policy commands.
 order: 7
 ---
 
@@ -37,8 +37,9 @@ under **Settings › Enterprise › Policy** on any C5. In short:
   error reports (the key exists, but this version sends no error reports — see
   [Network and egress](network.md)), GitHub backups, automatic updates and the
   release channel.
-- **Models**: which providers and models agents may use, and whether C5 runs its
-  local classifier (`classifier_enabled`, below).
+- **Models**: which providers and models agents may use, whether C5 runs its
+  local classifier (`classifier_enabled`), and how far away a classifier model from
+  your providers may run (`classifier_external_allowed`). Both are described below.
 - **Security**: elevated exec, workspace-only edits, autonomy ceilings, the global cost
   cap, allowed domains.
 - **Retention and audit**: audit and event retention, legal hold, the audit shipping
@@ -74,8 +75,10 @@ build's own key list, so they can never offer a key the server does not understa
 is the failure they exist to prevent: a policy an administrator sets and the server silently
 ignores. C5 refreshes them on every start, and leaves any file you have edited alone.
 Templates written by a build from before the local classifier do not carry
-`classifier_enabled` ([below](#keep-the-local-classifier-on-or-off)); write them again
-from the version you deploy.
+`classifier_enabled` ([below](#keep-the-local-classifier-on-or-off)), and those from
+before Terms of Service v1.9 do not carry `classifier_external_allowed`
+([below](#classifier-models-from-your-providers)); write them again from the version you
+deploy.
 
 ### Windows: Intune or Group Policy
 
@@ -182,9 +185,9 @@ every kind of decision starts in Shadow, where it only records its answers. Pass
 measurement changes nothing by itself: only Task categories can be raised to act, and only
 when someone with permission to change settings chooses to. No policy key does it. On a
 machine where it runs on the CPU, the most frequent kinds record one question in four.
-What it does, and what users see, is described in [Local classifier](../tools/local-classifier.md) and
-under [Settings › Learning](settings.md#learning). One policy key decides it for a
-fleet:
+What it does, and what users see, is described in [Classifier](../tools/local-classifier.md) and
+under [Settings › Learning](settings.md#learning), where its switch is **Built-in model**
+on the **Classifier** card. One policy key decides it for a fleet:
 
 | | |
 | --- | --- |
@@ -195,7 +198,7 @@ fleet:
 | Applies | Live, with no restart |
 | If a locked value is malformed, or the policy expires | Off |
 
-In the generated templates it is the **Local classifier** policy in
+In the generated templates it is the **Classifier** policy in
 `Growther-C5.admx` (enabled is `1`, disabled is `0`, under the registry value
 `classifier_enabled`), and a commented-out `classifier_enabled` line in
 `ai.growther.c5.mobileconfig` and in the YAML samples — uncomment it and set the value.
@@ -236,6 +239,10 @@ model already on the machine stays there until an administrator deletes it; the
 **Delete the model** button in **Settings › Learning** still works while the classifier is
 off.
 
+A lock to `false` also keeps off every classifier model from your providers, unless your
+policy names `classifier_external_allowed` at the right level — see
+[With `classifier_enabled` locked off](#with-classifier_enabled-locked-off).
+
 **Locked on.** Nobody on the device can turn it off or delete its model, because C5
 would only download it again. A request to turn it off is refused with *Locked by your
 organisation's policy: classifier_enabled.*, and a delete with *Your organisation's
@@ -246,17 +253,122 @@ the model's path is not the model, the card says so and that *Your organisation'
 keeps the classifier on, so the file cannot be deleted here.* An administrator at the
 machine can put the model in its place by hand.
 
-**In Settings › Learning**, either way, the switch is shown disabled with the managed
-badge, and the card says why in words a phone user can read without hovering: *Your
-organisation's policy keeps the local classifier off, so it cannot be turned on here.
-The policy is set by* … followed by where the policy came from. The Terms dialog does
-not offer **Turn off the local classifier…**, and under a lock that keeps it on, no
-delete button is shown.
+**In Settings › Learning**, either way, the **Built-in model** switch is shown disabled
+with the managed badge, and the card says why in words a phone user can read without
+hovering: *Your organisation's policy keeps the local classifier off, so it cannot be
+turned on here. The policy is set by* … followed by where the policy came from. Where the
+lock keeps every model off, the line reads instead: *Your organisation's policy keeps the
+local classifier off, so no model answers these questions here, built-in or from your
+providers.* The Terms dialog does not offer **Turn off the local classifier…**, and under
+a lock that keeps it on, no delete button is shown.
 
 Lifting the lock gives the switch back to the device: it returns to whatever was set
 there, and the classifier starts or stops to match. On a machine where nothing was ever
 set (the policy arrived before the first start), it stays off until C5 next starts, and
 C5 then turns it on as it would on a new install.
+
+## Classifier models from your providers
+
+From Terms of Service v1.9, an administrator can also choose a model that one of your
+model providers serves to answer the classifier's questions — see
+[A model from your providers](../tools/local-classifier.md#a-model-from-your-providers).
+None is chosen by default. One key decides how far away such a model may run:
+
+| | |
+| --- | --- |
+| Key | `classifier_external_allowed` |
+| Values | `off` (never), `loopback` (only a model C5 can show runs on this machine), `lan` (this machine or your network), `any` (anywhere, a provider's cloud included) |
+| Lockable | Yes |
+| Delivered by | Group Policy or Intune, macOS managed preferences, `/etc/growther/policy.d`, or a signed policy document. Not by the Mothership |
+| Applies | Live, with no restart |
+| When no policy sets it | An administrator at the machine chooses it in C5. Until they do, `loopback` |
+| If a locked value is malformed, or the policy expires | `off` |
+
+In C5 this is **Models allowed from**, on the **Classifier** card in **Settings ›
+Learning**: **This machine** (`loopback`), **Your network** (`lan`) or **Anywhere** (`any`).
+Only an administrator at the machine can change it there — never from a device paired
+through Remote Control.
+
+### Who decides
+
+Highest first:
+
+1. **A policy that locks the key.** The card shows **Models allowed from** locked, with
+   the reason and where the policy is set (for `off`, the choice reads **Off — set by your
+   organisation**). Nobody in C5 can change it.
+2. **What an administrator at the machine chose** on the card.
+3. **A value that does not lock**: a **Recommended** value, or one set under User
+   Configuration. It is a default the administrator may change on the card.
+4. **Nothing set**: `loopback`, shown as **This machine**.
+
+### What each value lets through
+
+Where a model runs is what C5 can show, not what its address suggests:
+
+- **`loopback` (This machine)**: a llama.cpp server or an Ollama model on this machine,
+  when that program itself tells C5 it runs the model here. An address on this machine
+  is not enough on its own: a program there can pass the questions on to another computer.
+- **`lan` (Your network)**: also a model on another computer on your network, and LM
+  Studio or a vLLM server on this machine. Neither can show C5 where its model runs; LM
+  Studio, for one, can serve a model that runs on another device. So C5 counts them as
+  your network even at this machine's address.
+- **`any` (Anywhere)**: also the cloud providers' models (OpenAI, MS Azure, OpenRouter,
+  DeepSeek, xAI Grok, Alibaba Cloud Qwen, Moonshot Kimi, Meta and Google Gemini). Those
+  providers bill your account for each question.
+
+Whatever the value, two things hold:
+
+- **A model off this machine still needs an administrator's confirmation.** C5 sends a
+  model on your network or online none of your work until an administrator at the machine
+  has seen where it runs and what C5 would send it, and confirmed. Widening the limit does
+  not skip that.
+- **Tool-call safety questions never leave this machine.** C5 asks those only of a model
+  it can show runs here.
+
+`allowedProviders` and `allowedModels` apply too: a provider or model they do not allow
+cannot be chosen for the classifier either.
+
+**Narrowing it takes effect at the next policy reload.** A model chosen earlier that now
+falls outside the limit stops being asked. Its row on the card reads *Not used.*, followed
+by the reason, and the built-in model answers in its place while it is switched on.
+
+In the generated templates it is the **Classifier models from your providers** policy in
+`Growther-C5.admx`, a drop-down of `off`, `loopback`, `lan` and `any` (the string registry
+value `classifier_external_allowed`), with a **(recommended)** twin. Set to **Disabled**,
+it behaves as if it were not configured. It is also a commented-out line in
+`ai.growther.c5.mobileconfig` and in the YAML samples. To forbid every model from your
+providers:
+
+```yaml
+keys:
+  classifier_external_allowed: { value: "off", locked: true }
+```
+
+### With `classifier_enabled` locked off
+
+Locked to `false`, `classifier_enabled` keeps **every** classifier model off: the built-in
+one and any from your providers. The one exception is a policy that also sets
+`classifier_external_allowed`, locked or only recommended:
+
+- **at the same level as the lock, or a higher one.** Device policy (Group Policy or
+  Intune, macOS managed preferences, `/etc/growther/policy.d`) is a higher level than a
+  signed policy document;
+- **and for the computer.** A value set for a user — under User Configuration, or in a
+  configuration profile for one user — never lifts the lock.
+
+What an administrator chooses on the card never lifts it either. Set like that, models from
+your providers may answer within the limit while the built-in model stays off and is never
+downloaded. For example, to allow only models that run on each machine:
+
+```yaml
+keys:
+  classifier_enabled: { value: false, locked: true }
+  classifier_external_allowed: { value: "loopback", locked: true }
+```
+
+While the lock keeps every model off, the card says so once for both rows: *Your
+organisation's policy keeps the local classifier off, so no model answers these questions
+here, built-in or from your providers.*, followed by where the policy is set.
 
 ## Validate before you ship
 
