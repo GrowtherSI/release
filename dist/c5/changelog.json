@@ -1,5 +1,46 @@
 [
   {
+    "tag": "v2026.10.17-v327",
+    "version": "2026.10.17-v327",
+    "build": 327,
+    "releasedAt": "2026-10-17T01:35:23-07:00",
+    "bullets": [
+      {
+        "kind": "new",
+        "text": "The Ops page now shows how many background jobs expired."
+      },
+      {
+        "kind": "new",
+        "text": "Analyst work is now graded against its own checklist."
+      },
+      {
+        "kind": "new",
+        "text": "You are told when one quality check fails almost every step."
+      },
+      {
+        "kind": "new",
+        "text": "The review badge now quietly counts questions that help C5 learn."
+      },
+      {
+        "kind": "new",
+        "text": "The decision log writes a provider model's backend."
+      },
+      {
+        "kind": "new",
+        "text": "A provider model's calibration is stored under its own id."
+      },
+      {
+        "kind": "new",
+        "text": "The calibration fit runs per backend, each into its own store."
+      },
+      {
+        "kind": "fixed",
+        "text": "Price limits and routing choices for cloud models now take effect."
+      }
+    ],
+    "more": 526
+  },
+  {
     "tag": "v2026.10.11-v326",
     "version": "2026.10.11-v326",
     "build": 326,
