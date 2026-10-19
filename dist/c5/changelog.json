@@ -1,5 +1,30 @@
 [
   {
+    "tag": "v2026.10.19-v329",
+    "version": "2026.10.19-v329",
+    "build": 329,
+    "releasedAt": "2026-10-19T06:24:50-07:00",
+    "bullets": [
+      {
+        "kind": "new",
+        "text": "Search now looks through every file, not just visible ones."
+      },
+      {
+        "kind": "fixed",
+        "text": "Selected attachments stay selected while you search."
+      },
+      {
+        "kind": "fixed",
+        "text": "Text is easier to read in attachment previews and cards."
+      },
+      {
+        "kind": "fixed",
+        "text": "The toolbar now fits properly on every screen size."
+      }
+    ],
+    "more": 3
+  },
+  {
     "tag": "v2026.10.17-v327",
     "version": "2026.10.17-v327",
     "build": 327,
