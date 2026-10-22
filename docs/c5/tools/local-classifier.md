@@ -1103,9 +1103,10 @@ Under each setting you see:
   decisions recorded (1,204 by the local classifier), 37 labels (12 from a person or an
   outcome)._ Only those last ones measure the classifier.
 - For task categories, **Saved, last 7 days** — how many calls to the usual model its
-  Authoritative answers replaced, and roughly what they would have cost, provider by provider.
-  Local models are counted in model time, not money, and a model with no price set is never
-  called free.
+  Authoritative answers replaced, and roughly what they would have cost, provider by
+  provider, priced from the usual model's real calls (a provider's replay of a cached answer
+  is not one). Local models are counted in model time, not money, and a model with no price
+  set is never called free.
 
 ## What you see in Ops › Classifier
 
@@ -1117,6 +1118,33 @@ given up after a minute's wait (see
 [When the classifier is busy](#when-the-classifier-is-busy)). Only accounts that may view
 Settings see this tab. It only reports; the switch and the modes are in **Settings ›
 Learning**.
+
+For the kind of decision you pick, it also shows:
+
+- **Answer time per day**, with the gate's 1.5-second budget drawn for Task categories only:
+  nothing waits for the other kinds' answers.
+- **The usual model's calls**: _Last 14 days, beside the classifier's answers. Wall time
+  runs from the call to its answer, waits included._ — the number of calls, the mean wall
+  time and the mean tokens in and out per call. A **replay**, an answer a provider repeated
+  from its cache, made no call, so it is left out and counted apart. The panel says whether
+  the classifier can replace these calls: only Task categories can, while it is
+  Authoritative. The figures are context for the classifier's speed, not a saving.
+- **Shadow coverage**: of the usual model's questions the classifier is asked about, how
+  many it answered (_Answered 1,120 of 1,180 questions (95%)._), day by day, and what became
+  of every question, kept across restarts: **Answered**, **Timed out**, **Timed out while
+  the model loaded**, **Dropped: too many waiting**, **Refused while paused**, **Refused:
+  busy**, **Not running**, **Skipped: language**, **Switched off**, **Skipped**, **Failed**,
+  or **Not asked: its settings did not answer in time**. A question asked while the
+  classifier or that kind was switched off counts as unanswered, and the last 5 minutes are
+  left out, since a question may still be waiting for the model to load. C5 began keeping
+  these counts when it updated to this version; until that day is older than the panel's
+  window, the heading says so (_Every question since Oct 15 (UTC), when counting began, kept
+  across restarts_).
+
+**Saved** counts only the calls the usual model actually made, never a replay, and prices
+them at the usual model's fresh calls. The early guess C5 makes at a draft's categories in
+Chat counts as an avoided call too, when the classifier answers it in Authoritative, but it
+is left out of the labels waiting: no label can reach a draft.
 
 **Labels** counts, for the kind of decision you pick, the answered questions still waiting
 for a label (_Answered states waiting_), how far it is from its gate's floor (_Toward the
