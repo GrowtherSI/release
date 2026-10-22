@@ -64,7 +64,8 @@ stand until the rubric or the role's instructions are corrected.
 
 It is raised once for each role, check and rubric version, and does not come back once
 acknowledged. A notification you delete is raised again the next night if the check still
-fails. A night C5 is not running at 23:55 is skipped.
+fails. If C5 was off, asleep or restarting at 23:55, the check runs once when C5 next
+starts, or within the hour if it was already running, and never twice in one day.
 
 ## Getting better over time
 
