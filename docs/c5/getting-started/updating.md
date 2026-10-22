@@ -194,12 +194,12 @@ version 1.9 was, and the next save on that tab asks someone at the machine to ac
 [If the Terms changed after you accepted them](/c5/remote-control/setup#if-the-terms-changed-after-you-accepted-them).
 
 **The Classifier card is laid out around the chosen model.** With a model from your
-providers chosen, its panel now comes first, tagged **Primary**, and has a switch of its own
-that turns it off without removing it. **Stop using it** is now **Remove**. Under the
-built-in model's switch, **Use as fallback** (on by default) decides whether the built-in
-model answers in the chosen model's place when that model cannot. Nothing changes until
-someone uses them: a model chosen before the update stays on, and the built-in model stands
-in for it as before. See
+providers chosen, its panel now comes first, tagged **Primary** while the built-in model
+stands behind it, and has a switch of its own that turns it off without removing it. **Stop
+using it** is now **Remove**. Under the built-in model's switch, **Use as fallback** (on by
+default) decides whether the built-in model answers in the chosen model's place when that
+model cannot. Nothing changes until someone uses them: a model chosen before the update
+stays on, and the built-in model stands in for it as before. See
 [Turn the chosen model off for a while](/c5/tools/local-classifier#turn-the-chosen-model-off-for-a-while)
 and [Use as fallback](/c5/tools/local-classifier#use-as-fallback). The policy key
 `classifier_builtin_fallback` sets Use as fallback across a fleet; write your templates

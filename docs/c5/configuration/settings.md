@@ -174,11 +174,11 @@ them today. It has two panels, under **Classifier models**:
   sees leaves the machine. The rest of this section is about it.
 - **A model from your providers** — a model one of your providers serves (llama.cpp,
   Ollama, LM Studio, vLLM, or a cloud API), which an administrator at the machine can
-  choose. None is chosen by default. Once chosen, its panel comes first, tagged
-  **Primary**, and it is asked first. Its own setting, **Models allowed from** (**This
-  machine**, **Your network** or **Anywhere**), says how far away the chosen model may
-  run. It has its own switch, which turns it off without removing it, and **Remove**, which
-  clears the choice. See
+  choose. None is chosen by default. Once chosen, its panel comes first and it is asked
+  first; it is tagged **Primary** while the built-in model stands behind it. Its own
+  setting, **Models allowed from** (**This machine**, **Your network** or **Anywhere**),
+  says how far away the chosen model may run. It has its own switch, which turns it off
+  without removing it, and **Remove**, which clears the choice. See
   [A model from your providers](../tools/local-classifier.md#a-model-from-your-providers).
 
 When the chosen model cannot answer, the built-in model answers in its place, while it is
