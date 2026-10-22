@@ -64,8 +64,8 @@ which command. Then you choose:
 
 An agent sometimes needs something C5 has not been set up with — a local tool, or a way to
 make video or audio. With **Tool & Web Escalation** on, it can ask for one. The checkbox is
-in **Settings › Tools**, in the **Tool Use** panel; it is off by default, and takes effect
-when you press **Save**.
+in **Settings › Tools**, in the **Tool Use** panel; it is off by default, takes effect when
+you press **Save**, and only an administrator at the machine can change it.
 
 The request comes as a **Tool Authorization Required** dialog, marked **Tool Capability
 Escalation**, **Free Web Resource Escalation** or **System Control & Web Escalation**, and
@@ -114,7 +114,8 @@ have, it lists:
 | `request_web_resource_escalation` | Capability & Web Escalation | Lets an agent ask for a public web resource, and System Control with it |
 
 **On** for `request_web_resource_escalation` approves every such request without asking,
-System Control included. Changing a switch needs edit permission.
+System Control included. Only an administrator at the machine can change a switch (see
+[Settings only an administrator can change](#settings-only-an-administrator-can-change)).
 
 **Settings → Autonomy** (headed **Autonomy Policies**) sets how far agents may go without
 you for each type of work: under **Work Type Thresholds**, the minimum autonomy level that
@@ -124,6 +125,43 @@ one agent and type of work, and **Escalation Notifications** lists the tasks tha
 blocked or downgraded this way.
 
 Between the two, you decide exactly how much rope your agents get.
+
+## Settings only an administrator can change
+
+Some settings each take a prompt away from every agent, or let C5 do more with nobody asked.
+Only an administrator can change them, and only at the machine running C5: a phone or
+tablet paired through [Remote Control](/c5/remote-control/overview) is refused, even when it
+is signed in as an administrator. A teammate who may change other settings sees them, but a
+change to one is refused, and nothing else in that save is stored either.
+
+| Setting | Where it is |
+| --- | --- |
+| **Tool & Web Escalation** | **Settings › Tools**, in the **Tool Use** panel |
+| **System Control** (computer use) | **Settings › Tools** |
+| **Egress Data-Loss Prevention**: its mode (**Off**, **Warn**, **Redact**, **Block**) and **Scan PII** | **Settings › Tools** |
+| **Strict Path Boundary** and **Enable Root Level Terminal** | **Settings › Tools** |
+| **FFmpeg location** | **Settings › Tools** (see [Pictures and video](/c5/tools/what-tools-do#pictures-and-video)) |
+| **Master Tool Authorizations** | **Settings › Extensions** |
+| **Permitted Directory Paths**, read and write | **Settings › Extensions** |
+| **State Machine HITL Decay Threshold**: how many approvals of a recipe step skip its sign-off from then on | **Settings › Autonomy**, under **Global Rules** |
+| **Guardian Vetting**: the guardian's check of agents' tool calls | **Settings › Budget**, under **System-Level Prompting** |
+| **Back up secret files** | **Settings › Integrations**, on the **GitHub** card, under **C5 Data** (see [Backing up to GitHub](/c5/security/backups#backing-up-to-github)) |
+
+C5 also strips credentials from the environment of every command an agent runs. That has
+no switch in Settings, and only an administrator could turn it off.
+
+**What a teammate sees.** The save is refused with a message that names the setting by its
+internal name, for example _Failed to save budget settings: Forbidden: these
+security-critical settings are admin-only (rejected: guardian_enabled)_. From a paired
+device the message reads _These settings cannot be changed from a remote device. Change
+them in C5 on the machine itself (…)._ On **Settings › Budget** and **Settings ›
+Autonomy** only what you changed is sent, so these settings never block a teammate's other
+changes there. **Settings › Tools**, **Settings › Extensions** and the GitHub card's switch
+save only for an administrator.
+
+**What is recorded.** Every change an administrator makes to one of them is recorded in the
+audit log, with who made it, and so is every attempt from a paired device. See
+[Audit trail](/c5/security/audit-trail).
 
 ## Hard limits
 

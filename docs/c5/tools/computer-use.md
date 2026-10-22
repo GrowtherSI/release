@@ -33,12 +33,17 @@ You watch it happen. It is not hidden or running invisibly in the background.
 
 Computer use is **off** until you turn it on.
 
-1. Go to **Settings**.
-2. Open **Autonomy** and allow the **Control** level — this is the permission that covers
-   driving your screen, mouse, and keyboard. See
+1. Go to **Settings › Tools**.
+2. Turn on **System Control** (_Permits agents to interact with the OS and GUI visually via
+   MCP._) and press **Save**. It needs global **Tool Use** on; while that is off the switch
+   is greyed out. Only an administrator at the machine running C5 can turn it on or off —
+   a teammate who may change other settings, or a paired phone, is refused (see
+   [Settings only an administrator can change](/c5/security/permissions#settings-only-an-administrator-can-change)).
+   The panel under the switch shows how System Control stands; its policy is set on the
+   **Guardrails** tab, under **Computer Use**.
+3. In **Settings › Extensions**, leave its tools asking you, or set them to **Prompt** so
+   they ask each time, even where you once chose **Always Allow**. See
    [Permissions](/c5/security/permissions).
-3. Open **Extensions** and set the computer-use tool to **On** or **Prompt**. Choose
-   **Prompt** unless you have a reason not to.
 
 Your operating system will also ask for permission the first time. That is normal — the
 operating system protects screen access and input control by design.

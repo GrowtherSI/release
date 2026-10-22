@@ -30,7 +30,9 @@ not get flagged as a credit card just because it is the right length.
 
 ## What happens when it finds something
 
-You choose, in **Settings › Tools**, under *Egress Data-Loss Prevention*:
+An administrator chooses, in **Settings › Tools**, under *Egress Data-Loss Prevention*, at
+the machine running C5 (see
+[Settings only an administrator can change](/c5/security/permissions#settings-only-an-administrator-can-change)):
 
 | Setting    | What C5 does                                                             |
 | ---------- | ------------------------------------------------------------------------ |
@@ -46,8 +48,9 @@ leaves.
 ## Turning it on
 
 It is already on. **Block PII Exfiltration** in **Settings › Guardrails** ships
-enabled, and enabling it is all that is needed — C5 redacts by default. Use the
-Tool DLP setting in Settings › Extensions only if you want warn or block instead.
+enabled, and enabling it is all that is needed — C5 redacts by default. Use
+**Egress Data-Loss Prevention** in **Settings › Tools** only if you want warn or block
+instead.
 
 ## What this does not cover
 

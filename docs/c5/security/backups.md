@@ -67,6 +67,30 @@ growther
 
 A backup taken while C5 is running is usually fine, but stopping first removes all doubt.
 
+## Backing up to GitHub
+
+The **GitHub** card in **Settings › Integrations** can also push your C5 folder to a GitHub
+repository on a schedule, in its **C5 Data** panel.
+
+**Secret files stay out by default.** The folder holds your device master key, every
+provider's API key and the licence signing key, so C5 refuses to push those files, copies
+still in the commit history included. **Back up secret files**, in the same panel, lets
+them through:
+
+- It can be turned on only for a repository GitHub confirms is private. Otherwise the
+  switch is greyed out: _This repo is public. Secrets can only be backed up to a repo GitHub
+  confirms is private._, or _C5 cannot verify this repo is private, so secrets stay
+  excluded._ C5 checks again on every push, and stops including them the moment the
+  repository is no longer private.
+- Turning it on asks first: **Push secrets to GitHub?**, saying that anyone who can read the
+  repository, now or later, can read those keys. **Include them** turns it on; **Cancel**
+  leaves it off.
+- **Only an administrator at the machine** can turn it on or off. Anyone else, and any
+  device paired through Remote Control, is refused, and the card says _Failed to update
+  secret handling_. Each change is recorded in the audit log.
+
+Treat a repository that holds them like the folder itself: see the warning above.
+
 ## Backup settings
 
 Inside the app you can change:

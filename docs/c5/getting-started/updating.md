@@ -241,6 +241,15 @@ again to get it (see
 See [When it starts to act](/c5/tools/local-classifier#when-it-starts-to-act) and
 [Teaching it](/c5/tools/local-classifier#teaching-it).
 
+**Security settings are for administrators.** What you set stays as it was, but only an
+administrator at the machine running C5 can change it from now on: **Tool & Web
+Escalation**, **System Control**, **Egress Data-Loss Prevention**, the read and write
+**Permitted Directory Paths**, **Master Tool Authorizations**, the **State Machine HITL
+Decay Threshold**, **Guardian Vetting** and **Back up secret files** for the GitHub backup.
+Before, anyone who may change settings could change some of them, from a paired device too;
+now a teammate and a paired device are refused. See
+[Settings only an administrator can change](/c5/security/permissions#settings-only-an-administrator-can-change).
+
 **OpenRouter keeps your limits.** Nothing you set changes:
 
 - **A chat or task request never goes out without your price caps and provider limits.** If

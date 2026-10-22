@@ -114,6 +114,16 @@ Once C5 starts, your browser tab reconnects on its own within a few seconds and 
 > **Self-help: Missing "Start C5" button on offline screens?**
 > The green **Start C5** button on the offline screen and sidebar menu is governed by an administrative RBAC toggle. If your organization has disabled **Sidebar: Restart, Quit, Start C5** in [Settings → Access](/c5/configuration/settings#access-user-permissions-rbac), this button remains hidden for standard users. Ask your administrator to enable the permission for your account.
 
+### "Forbidden: these security-critical settings are admin-only"
+
+The save touched a setting that only an administrator can change — **Tool & Web
+Escalation**, **System Control**, **Guardian Vetting** and the others listed under
+[Settings only an administrator can change](/c5/security/permissions#settings-only-an-administrator-can-change).
+The name in brackets is the setting's internal name. Nothing in that save was stored. Ask
+an administrator to make the change at the machine running C5, then save your other
+changes again. _These settings cannot be changed from a remote device. …_ means you saved
+from a paired phone or tablet: change them on the machine itself.
+
 ## Models
 
 ### "No model configured"
