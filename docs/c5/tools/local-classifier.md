@@ -277,9 +277,11 @@ decision, beside the answers C5 already uses. Nothing C5 does changes. Recording
 earns the evidence its promotion gate measures (see
 [When it starts to act](#when-it-starts-to-act)); a kind left off never could. In this
 version only Task categories can act on that evidence. The other four are recorded so their
-gate line shows how well the classifier does at them; for Tool-call safety, for example,
-Settings says it has measured at chance so far. If you do not want a kind recorded, set it to
-**Off**, and that choice is kept.
+gate line shows how well the classifier does at them. Each one's note says why it offers
+only Off and Shadow: for Tool-call safety, _Phase 0 could not tell how well it does,
+because the guardian verdicts it was scored against contradicted themselves_; Skill routing
+and Alert triage were never measured in Phase 0, C5's first measurement of the classifier.
+If you do not want a kind recorded, set it to **Off**, and that choice is kept.
 
 **Step quality reads the step, not its grade.** It is given the agent's role, the task's
 title and the step's name, and the start and end of the step's own instruction and of its
@@ -527,7 +529,10 @@ the lower corner of the HITL button says how many questions are waiting here and
 **Guardian blocks**. It is never added to the button's own count and never plays a sound:
 these questions hold up no work. It is shown only to administrators, never on a paired
 device, and is hidden while no model answers. See
-[Opening it](../using-c5/hitl.md#opening-it).
+[Opening it](../using-c5/hitl.md#opening-it). The **Classifier** card in **Settings ›
+Learning** also says, under each kind of decision, where its labels come from and how many
+of its questions wait, with a button to the tab (see
+[Each kind of decision](#each-kind-of-decision)).
 
 Three other actions count as answers too:
 
@@ -1061,7 +1066,7 @@ While a change you made is being saved the badge says **Turning on…**, **Turni
 | **Model** | Whether the model is here and checked, partly downloaded (for example _300 of 812 MB_), downloading, or not downloaded — and on a machine that will not download it, why not and what to do. It also tells you when the file at the model's path is not the model, or when the path is a link whose file cannot be reached (see [Troubleshooting](#troubleshooting)). |
 | **Notice** | The model's notice, quoted above. |
 | **Runtime** | What the classifier's process is doing: for example _Running on the Metal GPU, 742 MB in memory, loaded in 1.9 s._ This is where you read its real memory use. When the **Model** line already says why nothing was downloaded, Runtime reads only _Not running: the model is not on this machine._ |
-| **Health** | What became of its questions since the server started, and how fast it answered: _Since the server started at 09:12: answered 12 of 30 · p50 210 ms, p95 640 ms over its last 12 answers · 4 not running · 3 refused while paused · …_ p50 is the typical answer time and p95 the slow end, over its last 200 answers at most. Only what happened is listed: timed out, failed, skipped for language (text not in the Latin alphabet), not running, refused while paused, dropped with too many waiting, refused while busy, in progress. These counts start again at every restart; **Ops › Classifier** keeps them across restarts. |
+| **Health** | What became of its questions since the server started, and how fast it answered: _Since the server started at 09:12: answered 12 of 30 · p50 210 ms, p95 640 ms over its last 12 answers · 4 not running · 3 refused while paused · …_ p50 is the typical answer time and p95 the slow end, over its last 200 answers at most. Only what happened is listed: timed out, failed, skipped for language (text not in the Latin alphabet), not running, refused while paused, dropped with too many waiting, refused while busy, not asked because **Use as fallback** is off (_3 not asked: Use as fallback is off_, or _… not asked while Use as fallback was off_ once it is on again), in progress. These counts start again at every restart; **Ops › Classifier** keeps them across restarts. |
 
 **The machine line uses your operating system's own figures**: the machine's model name, its
 processor, its physical cores by kind, and its installed memory — what System Information
@@ -1118,12 +1123,41 @@ Under each setting you see:
   recorded beside: the router's choice, the rubric's score, the guardian's verdict or the
   Sense-Maker's suppress decision (see the table in
   [What it does at first](#what-it-does-at-first)).
+- **Where its labels come from**, the answers its promotion gate measures, for everyone who
+  sees the card:
+
+  | Kind | The card says |
+  | --- | --- |
+  | **Task categories** | _Labels come from an administrator's answers in HITL › Teach the classifier, and from a task's categories corrected by hand._ |
+  | **Skill routing** | _No way to label this question yet, so its accuracy cannot be measured: only its agreement with the router is recorded._ |
+  | **Step quality** | _Labels come from the step ratings an administrator gives in HITL › Teach the classifier._ |
+  | **Tool-call safety** | _Labels come from an administrator's verdicts in HITL › Guardian blocks — only calls the guardian blocked or the classifier sent for a second look, so not a fair sample of its verdicts — and from spot checks of calls it allowed, in HITL › Teach the classifier._ |
+  | **Alert triage** | _Labels come from muting or unmuting an alert in the Auto-Suppression Ledger, once the Sense-Maker or the classifier has judged that alert; your latest act stands._ |
+
+- **How many of its questions wait for you**, under that line, for Task categories, Step
+  quality and Tool-call safety while some model answers the classifier's questions. An
+  administrator at the machine sees their own count and a button to the tab: _11 category
+  questions waiting in Teach the classifier._ with **Answer in Teach the classifier**,
+  _20+ step ratings waiting in Teach the classifier._, or for Tool-call safety _10 of the
+  57 open calls in Guardian blocks can count toward its gate._ with **Review in Guardian
+  blocks**, and its spot checks apart. With none, it reads _No category questions waiting
+  in Teach the classifier now._ (and so on) and offers no button. On a paired device it says
+  _Answer them in HITL › Teach the classifier on the machine running C5._, and to an account
+  that is not an administrator _An administrator answers them in HITL › Teach the
+  classifier._ The counts are read when the page opens, every five minutes, and when you
+  close the HITL window; a question you skipped is left out, as in the tab.
 - Under Step quality, on a machine where it applies, _Sampling 1 in 4 on this machine: …_ (see
   [On a machine where it runs on the CPU](#on-a-machine-where-it-runs-on-the-cpu)).
-- **Promotion gate** — _passed_, _not passed_, _not enough evidence yet_, or _not measured
-  yet_, when it was measured and over how many days, and each part that did not pass with
-  what was measured (see [When it starts to act](#when-it-starts-to-act)). C5 measures it in
-  the background, at most every ten minutes.
+- **Promotion gate** — _passed_, _not passed_, _not enough evidence yet_, _nothing to
+  measure yet_, or _not measured yet_, when it was measured and over how many days, and
+  each part that did not pass with what was measured (see
+  [When it starts to act](#when-it-starts-to-act)). C5 measures it in the background, at
+  most every ten minutes. _Nothing to measure yet_ means no answers to compare at all, not
+  answers waiting for labels: _Promotion gate: nothing to measure yet: no alert triage
+  decisions recorded over the last 180 days (as of 14:05)._ when nothing was recorded for
+  that kind, or _… it recorded no answers over …_ when only the usual model's answers were
+  recorded (for example the built-in model beside a chosen model it is not asked in place
+  of).
 - **How often it agrees with the usual model**, once the gate has compared them — never as a
   bare rate, always beside what always giving the usual model's commonest answer would
   score, for example _Agrees with the guardian on 97% of 298 calls (always answering SAFE
@@ -1191,7 +1225,9 @@ For the kind of decision you pick, it also shows:
   of every question, kept across restarts: **Answered**, **Timed out**, **Timed out while
   the model loaded**, **Dropped: too many waiting**, **Refused while paused**, **Refused:
   busy**, **Not running**, **Skipped: language**, **Switched off**, **Skipped**, **Failed**,
-  or **Not asked: its settings did not answer in time**. A question asked while the
+  **Not asked: its settings did not answer in time**, or, for the built-in model beside a
+  chosen model, **Not asked: Use as fallback is off** (**… was off** once it is on again:
+  the counts cover the whole window). A question asked while the
   classifier or that kind was switched off counts as unanswered, and the last 5 minutes are
   left out, since a question may still be waiting for the model to load. C5 began keeping
   these counts when it updated to this version; until that day is older than the panel's
@@ -1203,12 +1239,23 @@ them at the usual model's fresh calls. The early guess C5 makes at a draft's cat
 Chat counts as an avoided call too, when the classifier answers it in Authoritative, but it
 is left out of the labels waiting: no label can reach a draft.
 
-**Labels** counts, for the kind of decision you pick, the answered questions still waiting
-for a label (_Answered states waiting_), how far it is from its gate's floor (_Toward the
-gate's floor_), and the held-out answers an acting kind needs to stay verified. Where
-questions wait for a kind that **Teach the classifier** asks about, an administrator gets
-**Answer in Teach the classifier**, which opens that tab of the HITL window and waits for
-its questions to load; if they cannot be read, the tab says why. On a paired device the
+**Labels**, for the kind of decision you pick, shows its labels per day by where they came
+from (only a person's answer and a run's outcome are truth), how far it is from its gate's
+floor (_Toward the gate's floor_), **Where labels come from** (the card's own sentence,
+above), and two counts that are not the same:
+
+- **Unlabelled answers**: every question it answered in the window that no person or
+  outcome has labelled. This is the gate's backlog.
+- **Askable now**: what **Teach the classifier** can actually ask about this question, from
+  as far back as it asks, at most a page of 20 (_20+_ beyond that). It is smaller when some
+  answers belong to a task that has gone. A question someone skipped still counts here,
+  since the count is shared; nothing is asked while no model answers.
+
+It also counts the held-out answers an acting kind needs to stay verified. Skill routing
+and Alert triage have no questions in Teach the classifier, so their panel shows only where
+their labels come from until some arrive. While Askable now is above 0, an administrator
+gets **Answer in Teach the classifier**, which opens that tab of the HITL window and waits
+for its questions to load; if they cannot be read, the tab says why. On a paired device the
 panel says _Answer them in Teach the classifier on the machine running C5._, and to anyone
 else that an administrator answers them. For tool-call safety the waiting count is far
 larger than Teach asks about, and the panel says so: _Teach the classifier asks only spot

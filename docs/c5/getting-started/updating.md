@@ -223,6 +223,13 @@ again to get it (see
   32 GB of memory or more, instead of 10 minutes.
 - **Ops › Classifier** counts what became of every question from this update on, across
   restarts, and shows the usual model's own calls.
+- **Each kind of decision says where its labels come from**, and how many of its questions
+  wait for you, with a button to the HITL tab. Ops' **Labels** panel puts **Askable now**
+  beside **Unlabelled answers**, which used to be called **Answered states waiting**.
+- **A gate with no answers to compare** reads _nothing to measure yet_, not _not enough
+  evidence yet_.
+- **With Use as fallback off**, the questions the built-in model is not asked are counted,
+  on its Health line and in Ops, as _not asked: Use as fallback is off_.
 
 See [When it starts to act](/c5/tools/local-classifier#when-it-starts-to-act) and
 [Teaching it](/c5/tools/local-classifier#teaching-it).

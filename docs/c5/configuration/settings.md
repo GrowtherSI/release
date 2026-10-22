@@ -226,11 +226,14 @@ panel has the switch. Under it:
 | **Model** | Whether the model is here and checked, partly downloaded (*300 of 812 MB*), downloading, or not downloaded and why. It also says when the file at the model's path is not the model, or when the path is a link whose file cannot be reached |
 | **Notice** | The model's notice: who made it, its licence, and the note about its research-use training data, word for word as C5 shows it everywhere. Shown only while the classifier is on or the model is on disk |
 | **Runtime** | What its process is doing: running on the Metal GPU or the CPU, memory used, load time, or why it is not running |
-| **Health** | Since the server started (and at what time): questions answered of those asked, typical and slow response times over its last answers, and what became of the rest — time-outs, failures, not running, refused while paused or busy. *Paused after repeated failures* means the usual answers stand alone until it recovers |
+| **Health** | Since the server started (and at what time): questions answered of those asked, typical and slow response times over its last answers, and what became of the rest — time-outs, failures, not running, refused while paused or busy, and, beside a chosen model, those not asked because **Use as fallback** is off. *Paused after repeated failures* means the usual answers stand alone until it recovers |
 
 Below that is one row per kind of decision, with its mode, a note on what its modes mean
-(*Shadow by default: recorded beside … never used.*), its promotion gate (the measurement),
-its calibration, and the last seven days' counts.
+(*Shadow by default: recorded beside … never used.*), where its labels come from, how many
+of its questions wait for you in the HITL window (for an administrator at the machine, with
+a button that opens the tab), its promotion gate (the measurement), its calibration, and the
+last seven days' counts. A gate with no answers at all to compare reads *nothing to measure
+yet*, not *not enough evidence yet*.
 
 #### Which machines can run it
 
