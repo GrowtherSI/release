@@ -22,16 +22,21 @@ You will find it in **Ops › Audit**.
 - **Tool and extension permissions** — changes to what an agent is allowed to use, and to
   search providers and integrations.
 
-Two further records are shown in the same list, so one timeline covers everything:
+Three further records are shown in the same list, so one timeline covers everything:
 
 - **Tool decisions** — every time an agent was allowed or refused a tool, and which one.
 - **System notifications** — the things C5 told you about.
+- **Stuck-run recoveries** — what C5 did on its own when a run stopped moving: requeued,
+  rescued, cancelled or failed it, or raised the alarm that the whole fleet had stalled.
+  Each row carries the event's own name as its action, the run it was about (or
+  _orchestration fleet_ for the alarm), the reason, and the status _RECORDED_: it says what
+  C5 did, not whether it worked.
 
 Each entry has a time, an actor, what was touched, whether it succeeded, and how serious it
-was. The **Source** column says which of the three records a row came from — the audit trail
-itself, a tool decision, or a notification. That distinction matters more than it looks: only
-the audit rows are fingerprinted, and the three are not all kept for the same length of time.
-See [How long it is kept](#how-long-it-is-kept).
+was. The **Source** column says which of the four records a row came from — the audit trail
+itself, a tool decision, a notification, or a stuck-run recovery. That distinction matters
+more than it looks: only the audit rows are fingerprinted, and the four are not all kept for
+the same length of time. See [How long it is kept](#how-long-it-is-kept).
 
 Ordinary settings changes are **not** here. Saving a change in most Settings areas does not
 write an audit entry. The exceptions are the security settings: a change to one of the
@@ -41,8 +46,9 @@ device's refused attempt.
 
 ## Why you can trust it
 
-This section is about the audit entries — the first group in the list above. Tool decisions
-and notifications are ordinary records: useful, but not fingerprinted and not chained.
+This section is about the audit entries — the first group in the list above. Tool
+decisions, notifications and stuck-run recoveries are ordinary records: useful, but not
+fingerprinted and not chained.
 
 The audit trail is **tamper-evident**. Every entry carries a fingerprint of the entry before
 it, so the day's entries form one continuous chain.
@@ -86,7 +92,7 @@ Old records are removed once a day, late in the evening, a few minutes before th
 database backup — so your backups hold the tidied-up version rather than a copy of what you
 asked to delete.
 
-### The other two kinds of row
+### The other three kinds of row
 
 **Tool decisions** are covered by the same setting, and removed on the same nightly pass — but one
 at a time as each passes the cutoff, rather than a whole day at once. They are not chained, so
@@ -103,6 +109,10 @@ there are no fingerprints to protect and nothing is gained by keeping a day toge
 ages them out, so a notification from two years ago will still be there, looking as current as
 everything around it.
 
+**Stuck-run recoveries** are never removed either: they come from C5's record of its runs,
+which only ever grows. The list shows the newest 100 of them, the newest 200 tool decisions
+and the newest 100 notifications, beside the audit rows.
+
 > **Warning**
 > So "the last 90 days" is true of the audit rows, not of the whole view. If you are answering a
 > question about what the record covers, answer it per source — the **Source** column is how you
@@ -118,8 +128,10 @@ There is a second, separate setting for C5's own operational events. See
 Four things worth knowing:
 
 - **You get everything that matches, not the page on screen.** The file is built on the server
-  from the whole record — all three kinds of entry, audit rows, tool decisions and
-  notifications alike — rather than from the fifty rows in front of you.
+  from the whole record — all four kinds of entry, audit rows, tool decisions,
+  notifications and stuck-run recoveries alike — rather than from the rows in front of you.
+  Stuck-run recoveries are warnings, so an export filtered to information only leaves them
+  out.
 - **It usually holds more than the count says.** The list on screen loads only the most recent
   activity — several hundred rows at most — while the export has no limit at all. So the
   number above the table is a floor, not a total: on an install with any history behind it,
@@ -130,7 +142,7 @@ Four things worth knowing:
   file that leaves your machine cannot be mistaken for the complete trail.
 - **The fingerprints are included** — on the audit rows. The chain columns are in the CSV, so
   whoever receives it can check those records end to end with their own tools, without taking
-  C5's word for it and without having C5 installed. Tool decisions and notifications are not
+  C5's word for it and without having C5 installed. The other three kinds are not
   fingerprinted, so those columns are empty on those rows; the Source column is what makes an
   empty fingerprint read as "this kind of record was never chained" rather than as a broken
   one.

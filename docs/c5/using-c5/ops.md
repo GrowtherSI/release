@@ -78,7 +78,7 @@ task that caused it.
 | **Token Budget** | Daily and weekly token use, spend trends, and a breakdown by coordinator. |
 | **Triage**   | Queue health at a glance: pending jobs, background jobs waiting for a gap in real work (and how many expired unrun after 7 days), saga rollbacks, how effective triage briefs are, and a forecast of budget impact. |
 | **Memory**   | What C5 has remembered from your past work.                         |
-| **Audit**    | A record of what happened and when.                                 |
+| **Audit**    | A record of what happened and when, including what C5 did about stuck runs. See [Audit trail](/c5/security/audit-trail). |
 | **Learning** | Reward signals by agent and gate, so you can see which prompts and routes are improving. |
 | **Classifier** | How the [classifier](/c5/tools/local-classifier) is doing: its decisions, its speed, the calls it replaced and the labels waiting. **Whose answers** switches between the built-in model's record and a chosen model's. Only accounts that may view Settings see it. |
 | **Errors**   | Problems that came up, grouped so you can spot patterns.            |

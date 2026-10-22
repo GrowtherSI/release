@@ -106,9 +106,10 @@ knowing:
 > longer, in step with everything else; setting it below only shortens how long the audit records
 > themselves are kept.
 
-One thing in the Audit view is still not covered: the **system notifications** merged into the
-same list have no retention setting, and nothing ages them out. The **Source** column is what tells
-the three kinds of row apart.
+Two things in the Audit view are still not covered: the **system notifications** merged into
+the same list have no retention setting, and nothing ages them out; nor are the **stuck-run
+recoveries**, what C5 did about runs that stopped moving, ever removed. The **Source**
+column is what tells the four kinds of row apart.
 
 **System Events Retention** covers C5's own operational record: coordinator failovers, gateway
 timeouts, shutdowns, steps that had to be abandoned and requeued, and the adjustments C5 makes
