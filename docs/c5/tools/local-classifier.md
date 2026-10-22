@@ -1304,12 +1304,32 @@ match_), followed by the placement step.
   this machine is sent none of your work until an administrator has confirmed it, and is never
   asked whether a tool call is safe. Its answers are recorded in C5's database on this machine,
   like the built-in model's.
+- **How long it is kept.** The classifier's records of its answers, and the usual model's
+  beside them, are deleted 180 days after they were made, every night at 23:55 (not while
+  a legal hold is on). The labels people gave are kept. The text of a step that Step quality
+  was asked about (its task, step name, instruction and output) is deleted 31 days after the
+  step unless someone rated it there; its scores and its agent's role are kept.
+- **What is kept, and what is masked.** Secret values (API keys, tokens, private keys) are
+  masked in that text before it is stored. A guardian decision's record keeps its verdict,
+  the tool's name and the length of its reasoning; the reasoning itself stays only on the
+  audit log. A guardian block's stored reason keeps the first 50 characters of the call,
+  with secrets masked in the whole call before it is cut, and the reasoning, masked too. A
+  skill-routing record keeps
+  what the router chose, never the text of its reply.
+- **Who sees it.** **Teach the classifier** shows administrators any task's title and the
+  start of its description, a step's instruction and output, and an agent's tool call with
+  its arguments, secrets masked. That is how a question can be answered without the
+  classifier's answer beside it.
 - C5's status address, `GET /health`, answers without any sign-in, so that supervisors can
   see C5 is up. It includes the classifier's details (use counts, answer times, how many
   questions are in progress or waiting, whether it is paused) only for someone signed in
   to C5 on this machine or its network, or for a request made directly on the machine
   itself. Everyone else gets `"classifier": null`, including a phone or tablet paired
   through Remote Control and anyone reaching C5 through a Remote Control address.
+
+The binding text on where these questions go is the
+[Privacy Policy](https://license.growther.si/privacy), under _Local by default_, and Section
+14 of the Terms (see [The Terms that cover it](#the-terms-that-cover-it)).
 
 ## For administrators
 
