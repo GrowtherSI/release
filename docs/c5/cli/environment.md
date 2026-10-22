@@ -91,7 +91,7 @@ See [Local model servers and gateways](#local-model-servers-and-gateways) below.
 
 | Variable | What it does |
 | -------- | ------------ |
-| `GROWTHER_DEBUG_CATEGORIZATION` | Set to anything (even `0`) to log each task categorisation to `logs/categorization-debug.log`. The log names a goal by a fingerprint and its length, but keeps the model's full reply, which can repeat words from the task. Leave it unset unless you are asked for it. |
+| `GROWTHER_DEBUG_CATEGORIZATION` | Set to `1`, `true`, `yes` or `on` to log each task categorisation to `logs/categorization-debug.log`; anything else, `0` and `false` included, leaves it off. The log names a goal by a fingerprint and its length, and keeps only the first 300 characters of the model's reply, with secrets and personal details masked; the reply can still repeat words from the task. Leave it off unless you are asked for it. |
 
 **Media tools**
 

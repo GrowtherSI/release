@@ -38,10 +38,10 @@ account at every start.
 **An older `logs/categorization-debug.log`.** Before C5 v327, every failed task
 categorisation wrote the first 80 characters of the task's goal to this file, in plain text,
 on every install. C5 no longer does: it writes the file only while the
-`GROWTHER_DEBUG_CATEGORIZATION` variable is set (to anything), names a goal there only by a
-fingerprint and its length, and, on macOS and Linux, keeps it readable only by your account;
-an existing file is narrowed that way at every start, but never deleted. If yours has one
-from an earlier version, an administrator may delete it: nothing reads it.
+`GROWTHER_DEBUG_CATEGORIZATION` variable is on (`1`, `true`, `yes` or `on`), names a goal
+there only by a fingerprint and its length, and, on macOS and Linux, keeps it readable only
+by your account; an existing file is narrowed that way at every start, but never deleted. If
+yours has one from an earlier version, an administrator may delete it: nothing reads it.
 
 ## See it in Settings
 
