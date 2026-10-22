@@ -223,14 +223,55 @@ recorded only one question in four for these two kinds as well as for Step quali
 Step quality is sampled there; see
 [On a machine where it runs on the CPU](/c5/tools/local-classifier#on-a-machine-where-it-runs-on-the-cpu).
 
+**From v326 or earlier: old background work expires, and stuck work is closed.** On the
+first start, and every five minutes after, C5 expires the background model jobs — delegation
+autopsies, skill crystallisation, sparring matches, notification reviews — still waiting 7
+days after they were queued. They never run, and stay listed as **Expired** under **Monitor
+› Queueing › System Jobs**; on an install whose queue had stalled, that can be most of them.
+Requests to improve a task's description never expire. **Ops › Triage** has a **Background
+LLM Jobs** card with the count (see [Budgets & costs](/c5/using-c5/ops)). A run that could
+never move again is cancelled with a 🩺 comment on its task (see
+[A task is stuck as "Blocked"](/c5/troubleshooting/common-issues#a-task-is-stuck-as-blocked)).
+
+**From v326 or earlier: background self-improvement runs again.** A check that asked "is
+real work waiting?" counted jobs that could never run, so on some installs alert triage and
+the background learning jobs had not run for weeks. They now run in the gaps between real
+work, so the tokens C5 spends in the background can rise.
+
+**From v326 or earlier: unreviewed proposals expire.** Rule proposals nobody reviewed within
+30 days, and findings about steps that have since been pruned, expire every night at 23:55,
+starting the first night C5 is running then. They are kept, never deleted; see
+[Human review (HITL)](/c5/using-c5/hitl#rules).
+
+**From v326 or earlier: the analyst has its own rubric.** Analyst steps are graded on a
+checklist of their own (quality rubric v4), so their scores rise — on the one install
+measured, from about 20 to about 40 on average — and the analyst's variants in **Labs ›
+Variants** start again unmeasured. See
+[Analytics](/c5/using-c5/analytics#reading-the-charts).
+
+**From v326 or earlier: OpenRouter's price caps and routing take effect.** A cap below the
+price of a routed model now makes the request fail, and a stored 0 waits until you keep or
+clear it. See
+[OpenRouter routing settings](/c5/configuration/model-providers#openrouter-routing-settings).
+
+**From v326 or earlier: llama.cpp models are listed.** v326 never listed a llama.cpp
+server's models, so they could not be chosen; now they can, for agents and for the
+classifier.
+
+**From v326 or earlier: one run per scheduled occurrence.** A scheduled task now starts once
+each time it is due, not two or three times.
+
 **Going back to an earlier version.** v327 to v329 have neither the chosen model's own
 switch nor Use as fallback: there a chosen model you turned off is asked again, and the
 built-in model answers in its place whenever it cannot, while it is on. v326 and earlier do
 not know about a model from your providers: they ignore the choice, and the built-in model
-answers as it did there. An
-acceptance of version 1.10 for Remote Control also counts in any version after v322, so
-going back to one of those asks nothing (see
-[Remote Control Terms after a rollback](#remote-control-terms-after-a-rollback)).
+answers as it did there. An acceptance of version 1.10 for Remote Control also counts in any
+version after v322, so going back to one of those asks nothing (see
+[Remote Control Terms after a rollback](#remote-control-terms-after-a-rollback)). v326 and
+earlier do not know that a job, a rule proposal or a finding expired: they never run an
+expired job, but **Monitor › Queueing** shows it with the clock of a waiting one, and
+expired proposals and findings come back into the **Rules** and **Training** queues of the
+HITL window.
 
 ### Updating to the release with the local classifier (Terms v1.8)
 
