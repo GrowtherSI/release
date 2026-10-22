@@ -185,16 +185,18 @@ Flip the switch on again.
   notice. **Download and turn on** turns it on and starts the download; **Cancel** leaves it off.
 - If a file is at the model's path but C5 already knows it is not the model, the dialog says
   so, and that C5 downloads the model and replaces that file.
-- With a [model from your providers](#a-model-from-your-providers) in use, the dialog adds
-  _M stays first; the built-in model answers when it cannot._, or, with
-  [Use as fallback](#use-as-fallback) off, _M stays first; with Use as fallback off, the
-  built-in model does not answer in its place._
+- With a [model from your providers](#a-model-from-your-providers) chosen, the question is
+  **Turn on the built-in model?**, as the turn-off question names it. With the chosen model
+  in use, the dialog adds _M stays first; the built-in model answers when it cannot._, or,
+  with [Use as fallback](#use-as-fallback) off, _M stays first; with Use as fallback off,
+  the built-in model does not answer in its place._
 - On a machine that will not download the model — the Egress posture is Offline, automatic
   downloads are turned off, there is not enough disk space, or the model's path is a symbolic
   link C5 cannot use yet (one whose file cannot be reached, one it has not checked, or one to
   a file that is not the model) — the dialog says so and why, and the button reads
-  **Turn on**. The classifier then answers nothing until the model is on the machine; the
-  dialog tells you how to get it there.
+  **Turn on**. The classifier then answers nothing until the model is on the machine (beside
+  a chosen model, the dialog says _the built-in model answers nothing_ instead, since the
+  chosen model still does); the dialog tells you how to get it there.
   - For a link whose file cannot be reached (a share that is not mounted, say): make that file
     reachable, or remove the link so that C5 can fetch the model.
   - For a link C5 has not checked yet: C5 checks the file it points to first and uses it only
@@ -646,6 +648,11 @@ shows the result of a model's last test beside it:
 | **Experimental** | _Tested <day>: it answers, but it is a general model, so expect it to stay in Shadow._ | It is used; see [Experimental models](#experimental-models). |
 | **Did not work** | _Tested <day>: it cannot answer the classifier's questions._ and the reason, for example that the model gives no probabilities | Nothing is chosen, and nothing changes. |
 
+Beside the badge, a model the test could read says how far its answers were from the
+built-in model's: _11 of 26 top answers differed from the built-in model's_, _Same top
+answers as the built-in model; a probability differed by up to 0.31_, or _Answered its test
+as the built-in model does_. **Worked** alone says only that C5 can read its answers.
+
 **The test does not check that the answers are right.** It checks that C5 can read them, and
 compares them with the built-in model's answers to the same questions. A model trained for
 decisions elsewhere can differ from the built-in model on many and still be chosen. Whether
@@ -655,6 +662,18 @@ your install's labels.
 A test that could not judge the model — it was not loaded, its provider did not answer —
 changes nothing either, and says so: _M is not loaded in P. C5 never loads a model itself;
 load it there and try again. Nothing was changed._
+
+**Test again** says its result once, in the card's words (P is the provider's name, as on
+its card in **Settings › Integrations**):
+
+| The message says | What it means |
+| --- | --- |
+| _M is not loaded in P, so it was not tested. C5 never loads a model itself; load it there and test it again._ | Load the model in the provider, then press **Test again** |
+| _P did not answer, so M was not tested._ | Start the provider, or check its address in **Settings › Integrations** |
+| _Could not test M: Ollama is busy with other work. Nothing was changed._ (the reason is the test's own) | The test could not judge the model, so nothing changed. Try again later |
+| _M cannot answer the classifier's questions now. … C5 does not ask it until it passes a test again._ | The test ran and the model failed it. It stays chosen, and its test line says so |
+| _M was tested, but its result could not be saved, so nothing was changed._ | Try again; if it repeats, run `growther doctor` |
+| _M was tested and its result kept, but the classifier's status could not be read. Settings › Learning shows it once it can be._ | The test is done. Only the card's refresh failed; it catches up by itself |
 
 C5 tests a model only when an administrator chooses it or presses **Test again** on its
 panel, never on a schedule. A model that has changed since its test — new weights at the
@@ -874,6 +893,17 @@ since its test. If anything fails, it stays off, and a message says why:
 **Change…** offers the model again while it is off: choosing it tests it again and turns it
 on.
 
+Turning it on asks the model nothing: it judges the choice C5 kept. So a model that has
+changed since it was chosen turns on with a warning, not a test result: _M is turned on, but
+it has changed since it was chosen, so C5 does not ask it. Choose it again to use it._
+
+**When the switch itself fails.** If C5 could not make the change at all, the message says
+so once: _Could not turn off M; it may still be on._ or _Could not turn on M; it may still
+be off._ Look at the switch once the card has refreshed, and try again. If the change was
+made and only the card's refresh failed, you get a warning instead, for example _M was
+turned off, but the classifier's status could not be read. Settings › Learning shows it once
+it can be._ Nothing needs doing: the switch catches up when the status can be read.
+
 ### Use as fallback
 
 **Use as fallback** is a switch on the built-in model's panel, directly under the built-in
@@ -905,7 +935,8 @@ as a fallback only on the machine running C5._ Each change is recorded in the au
 
 **Your organisation's policy** can set it, with `classifier_builtin_fallback` (see
 [For administrators](#managed-policy-classifier_builtin_fallback)). Locked, the switch is
-greyed out, with _Your organisation's policy sets this. The policy is set by …_ under it.
+greyed out, with a **Managed** badge beside its label, like every other locked control on
+the card, and _Your organisation's policy sets this. The policy is set by …_ under it.
 
 Use as fallback comes with version 1.10 of the Terms of Service, whose Section 14 says the
 built-in model need not answer in the chosen model's place (see
@@ -920,15 +951,26 @@ built-in model need not answer in the chosen model's place (see
   _Task categories acts on its answers now. Removed, the built-in model acts there on its
   own record; a family without one only records, and C5 answers as it did before._ The
   model's records are kept: choose it again while it is one of the last three models chosen,
-  and it picks them up.
+  and it picks them up. Done, it says _M was removed._ and what answers now. If C5 could not
+  remove it, the message says so once: _Could not remove M; it may still be chosen._ If it
+  was removed and only the card's refresh failed, a warning says _M was removed, but the
+  classifier's status could not be read. Settings › Learning shows it once it can be._
 - To stop asking it for a while and keep it chosen, turn it off instead (see
   [Turn the chosen model off for a while](#turn-the-chosen-model-off-for-a-while)).
 - **Change…** opens the list to choose another model. If a kind of decision acts on the
   current model's answers, the list says what acts there until the new model has been
   measured.
 - **Turning its provider off** in **Settings › Integrations** stops C5 asking the model, and
-  the question that turns the provider off says the classifier uses it. The row then reads
-  _Not used: P is turned off in Settings › Integrations._
+  the question that turns the provider off says the classifier uses it, and what answers
+  meanwhile: _Meanwhile the classifier asks its built-in model if that is on; otherwise C5
+  answers those questions as it did before._, or, with [Use as fallback](#use-as-fallback)
+  off, _Meanwhile nothing answers in that model's place (Use as fallback is off), and C5
+  answers those questions as it did before._ The row then reads _Not used: P is turned off
+  in Settings › Integrations._
+- **A choice that was made but not shown.** If the model was chosen and only the card's
+  refresh failed, the list closes and a warning says _M was chosen, but the classifier's
+  status could not be read. Settings › Learning shows it once it can be._ Do not choose it
+  again: the card catches up by itself.
 
 ### When the chosen model is not answering
 
@@ -954,6 +996,10 @@ server that came back, or swapped its model, shows its old state until C5 next a
 | _Not used: P is turned off in Settings › Integrations._ | | Turn the provider back on, or **Remove** the model |
 | _Turned off. C5 keeps it chosen, …_ | Someone turned it off with its own switch | Turn it on again; see [Turn the chosen model off for a while](#turn-the-chosen-model-off-for-a-while) |
 
+Every message on the card names a provider as its card in **Settings › Integrations** does,
+for example _Not used. Your organisation's policy does not allow the provider Ollama._ or
+_The provider LM Studio is not turned on in Settings › Integrations._
+
 ## What you see in Settings › Learning
 
 The **Classifier** card has a **Terms** button and a short status badge in its header. Under
@@ -969,8 +1015,9 @@ once a model is chosen, its panel comes first, whether it is on or off:
   and on (see [Use as fallback](#use-as-fallback)), and the status lines below.
 
 Two tags beside the panels' titles say how they stand. **Primary**, on the chosen model's
-panel, is shown while C5 asks that model and the built-in model can run; it does not
-promise that the built-in model takes over, which is what **Use as fallback** decides.
+panel, is shown only while the built-in model stands behind it: C5 asks the chosen model,
+the built-in model can run, and **Use as fallback** is on. With Use as fallback off, nothing
+answers in the chosen model's place, so there is no order to show and the tag is gone.
 **Fallback**, on the built-in model's panel, is shown while it stands behind a chosen model
 that is answering, with Use as fallback on. Under both panels a line says who answers now
 (see [Who answers](#who-answers)). Then comes one row for each kind of decision.
