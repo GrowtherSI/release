@@ -227,6 +227,20 @@ again to get it (see
 See [When it starts to act](/c5/tools/local-classifier#when-it-starts-to-act) and
 [Teaching it](/c5/tools/local-classifier#teaching-it).
 
+**OpenRouter keeps your limits.** Nothing you set changes:
+
+- **A chat or task request never goes out without your price caps and provider limits.** If
+  C5 cannot read them, it sends the ones it last read, or, with none read since it started,
+  refuses the request and says why. Earlier versions sent such a request with no limits.
+- **A save from OpenRouter's Config tab keeps plugin entries with options**, which earlier
+  versions deleted. Check **Raw JSON** if you had set some.
+- **Fleet › Assignment never erases OpenRouter's settings** when it cannot read them first.
+- **The classifier's model list offers every model OpenRouter lists.** Its choice no longer
+  has to be one of your **Model Selection** models, and never changes them.
+
+See
+[OpenRouter routing settings](/c5/configuration/model-providers#openrouter-routing-settings).
+
 **From v326 or earlier: the classifier can use a model from your providers.** The section in
 **Settings › Learning** is now called **Classifier**, and the local classifier's switch is
 now **Built-in model**. An administrator at the machine can choose a model that one of your

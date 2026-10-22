@@ -143,6 +143,15 @@ allows free providers only. Check them on OpenRouter's **Config** tab in Setting
 or clear a stored 0 there. See
 [OpenRouter routing settings](/c5/configuration/model-providers#openrouter-routing-settings).
 
+### "C5 cannot read your OpenRouter routing limits …"
+
+A chat or task request to OpenRouter was refused because C5 could not read your price caps
+and provider limits, and had not read them once since it started. C5 never sends such a
+request without them. Once it has read them, a later fault sends the limits it last read
+instead. Open OpenRouter's **Config** tab in Settings to check that they load, and try
+again. See
+[If C5 cannot read these settings](/c5/configuration/model-providers#if-c5-cannot-read-these-settings).
+
 ### A coordinator shows "Skipped — repeated failed generations"
 
 Its recent answers came back empty or broken, so C5 tries it last for a while — a minute at
