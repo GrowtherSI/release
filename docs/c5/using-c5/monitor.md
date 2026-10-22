@@ -39,8 +39,10 @@ Click any item that is not green. C5 explains what it means and usually what to 
 Open **Queueing**. It shows the jobs waiting and how fast they are moving, in three tables:
 
 - **Task Jobs** — the steps of your tasks: **Pending**, **Active**, **Completed**,
-  **Failed** or **Cancelled** (a struck-through circle). A job is cancelled when the run or
-  step behind it ended without it, for example a cancelled run; it will not run.
+  **Failed**, **Suspended** (a pause symbol) or **Cancelled** (a struck-through circle). A
+  job is suspended when its step stopped to wait for someone to answer a Tool Authorization;
+  approving it queues a fresh job, so this one does not run again. A job is cancelled when
+  the run or step behind it ended without it, for example a cancelled run; it will not run.
 - **LLM Leases** — the model slots C5 hands out to the work that runs: **Active** while
   held, **Completed** once used, **Failed** when one expired unused.
 - **System Jobs** — C5's background requests to a model, such as improving a task's
@@ -52,8 +54,8 @@ Open **Queueing**. It shows the jobs waiting and how fast they are moving, in th
   before the update.
 
 Each table's filter starts at **All Statuses** and offers that table's own statuses: Task
-Jobs **Pending**, **Active**, **Completed**, **Failed** and **Cancelled**; LLM Leases
-**Active**, **Completed** and **Failed** (a lease is never pending); System Jobs
+Jobs **Pending**, **Active**, **Completed**, **Failed**, **Suspended** and **Cancelled**;
+LLM Leases **Active**, **Completed** and **Failed** (a lease is never pending); System Jobs
 **Pending**, **Success** and **Expired**. Rows come newest first.
 
 A queue that is long but shrinking is fine — it is just busy. A queue that is not moving
