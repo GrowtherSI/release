@@ -34,7 +34,11 @@ The cap adds up everything spent since the current period began, by this machine
 calendar: a daily cap starts again at local midnight, a weekly or monthly one on the day you
 chose, wherever in the world the machine is. Every day's spending counts, the classifier's
 questions to a model your provider bills included, and **Ops › Token Budget** shows the same
-days: today's use, the last 7 and 30 days, and the month.
+days: today's use, the last 7 and 30 days, and the month. So do the spending figures on the
+provider cards in **Settings › Integrations** and the token costs in the
+[ROI reports](/c5/using-c5/schedules#roi-trackers-system-audits). A swarm agent's spending
+is filed under the local day too; what earlier versions filed for it under the UTC day stays
+there, so around midnight a day can hold a little of its neighbour's.
 
 > **Note**
 > Up to v329 the cap counted the wrong days in two ways. The installed app filed each day's
