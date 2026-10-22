@@ -320,8 +320,8 @@ work, so the tokens C5 spends in the background can rise.
 
 **From v326 or earlier: unreviewed proposals expire.** Rule proposals nobody reviewed within
 30 days, and findings about steps that have since been pruned, expire every night at 23:55,
-starting the first night C5 is running then. They are kept, never deleted; see
-[Human review (HITL)](/c5/using-c5/hitl#rules).
+or at the next start or within the hour when C5 was not running then. They are kept, never
+deleted; see [Human review (HITL)](/c5/using-c5/hitl#rules).
 
 **From v326 or earlier: the analyst has its own rubric.** Analyst steps are graded on a
 checklist of their own (quality rubric v4), so their scores rise — on the one install

@@ -146,8 +146,9 @@ lists those in force. Approve a proposal to put it in force, or reject it.
 **A proposal nobody reviews for 30 days expires.** Every night at 23:55, and at the start of
 each Retrospective Loop, C5 expires the proposals still waiting 30 days after they were made,
 including those adopted from the fleet. An expired proposal leaves the list, the badge and
-its notification, but it is kept, never deleted. The nightly pass runs only while C5 is
-running at that time; a night it is off is not made up.
+its notification, but it is kept, never deleted. If C5 was off, asleep or restarting at
+23:55, the pass runs once when C5 next starts, or within the hour if it was already
+running, and never twice in one day.
 
 ## Training
 
@@ -172,6 +173,10 @@ classifier's **Alert triage**, when C5 triaged that alert while Alert triage was
 
 Versions before v327 do not know that a rule proposal or a finding expired. After going back
 to one, the expired ones come back into its **Rules** and **Training** queues.
+
+A rule you approve after going back to an earlier version stays in force when you update
+again: C5 clears its old expiry at start-up, so it is listed under **Active Rule-Book** as
+before. Only proposals nobody reviewed stay expired.
 
 ## Related
 
