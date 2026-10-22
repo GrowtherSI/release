@@ -38,8 +38,10 @@ under **Settings › Enterprise › Policy** on any C5. In short:
   [Network and egress](network.md)), GitHub backups, automatic updates and the
   release channel.
 - **Models**: which providers and models agents may use, whether C5 runs its
-  local classifier (`classifier_enabled`), and how far away a classifier model from
-  your providers may run (`classifier_external_allowed`). Both are described below.
+  local classifier (`classifier_enabled`), how far away a classifier model from your
+  providers may run (`classifier_external_allowed`), and whether the built-in model
+  answers in its place when it cannot be reached (`classifier_builtin_fallback`). All three
+  are described below.
 - **Security**: elevated exec, workspace-only edits, autonomy ceilings, the global cost
   cap, allowed domains.
 - **Retention and audit**: audit and event retention, legal hold, the audit shipping
@@ -77,8 +79,9 @@ ignores. C5 refreshes them on every start, and leaves any file you have edited a
 Templates written by a build from before the local classifier do not carry
 `classifier_enabled` ([below](#keep-the-local-classifier-on-or-off)), and those from
 before C5 v327 (Terms of Service v1.9) do not carry `classifier_external_allowed`
-([below](#classifier-models-from-your-providers)); write them again from the version you
-deploy.
+([below](#classifier-models-from-your-providers)), and those from before Terms of Service
+v1.10 do not carry `classifier_builtin_fallback` ([below](#classifier_builtin_fallback));
+write them again from the version you deploy.
 
 ### Windows: Intune or Group Policy
 
@@ -330,8 +333,9 @@ Whatever the value, two things hold:
 cannot be chosen for the classifier either.
 
 **Narrowing it takes effect at the next policy reload.** A model chosen earlier that now
-falls outside the limit stops being asked. Its row on the card reads *Not used.*, followed
-by the reason, and the built-in model answers in its place while it is switched on.
+falls outside the limit stops being asked. Its panel on the card reads *Not used.*,
+followed by the reason, and the built-in model answers in its place while it is switched on
+and **Use as fallback** is on ([below](#classifier_builtin_fallback)).
 
 In the generated templates it is the **Classifier models from your providers** policy in
 `Growther-C5.admx`, a drop-down of `off`, `loopback`, `lan` and `any` (the string registry
@@ -343,6 +347,50 @@ providers:
 ```yaml
 keys:
   classifier_external_allowed: { value: "off", locked: true }
+```
+
+### `classifier_builtin_fallback`
+
+While a model from your providers is chosen, the built-in model normally answers in its
+place whenever that model cannot be reached. This key can stop that. In C5 it is **Use as
+fallback**, under the built-in model's switch on the **Classifier** card (see
+[Use as fallback](../tools/local-classifier.md#use-as-fallback)).
+
+| | |
+| --- | --- |
+| Key | `classifier_builtin_fallback` |
+| Values | `true` (the built-in model answers in the chosen model's place) or `false` (nothing does, and C5 uses its usual checks) |
+| Lockable | Yes |
+| Delivered by | Group Policy or Intune, macOS managed preferences, `/etc/growther/policy.d`, or a signed policy document. Not by the Mothership |
+| Applies | Live, with no restart |
+| When no policy sets it | What was chosen on the card. Until someone does, `true` |
+| A **Recommended** value, or one set under User Configuration | A default, which someone allowed to change it on the card may change |
+| If a locked value is malformed | `false` |
+
+`false` keeps the built-in model out of the chosen model's place only. It still answers
+what the chosen model is not asked, such as Tool-call safety beside a model off this
+machine, and still acts where it has a promotion record of its own and the chosen model has
+none. To keep the built-in model from answering anything, lock `classifier_enabled` to
+`false` as well.
+
+The key matters only while a model from your providers is chosen and turned on, and the
+built-in model is on. Builds that ship Terms of Service earlier than v1.10 ignore it, and
+the built-in model answers in the chosen model's place there.
+
+Without a policy, anyone who may change settings in C5 can turn **Use as fallback** off,
+from a paired device too; turning it back on is for an administrator at the machine. Locked,
+the switch is greyed out, with *Your organisation's policy sets this. The policy is set by
+…* under it.
+
+In the generated templates it is the **Classifier built-in model as fallback** policy in
+`Growther-C5.admx`: **Enabled** writes `1` (on) and **Disabled** writes `0` (off). It has a
+**(recommended)** twin, and is a commented-out line in `ai.growther.c5.mobileconfig`
+(`<key>classifier_builtin_fallback</key><false/>`) and in the YAML samples. To keep the
+built-in model out of a chosen model's place on every machine:
+
+```yaml
+keys:
+  classifier_builtin_fallback: { value: false, locked: true }
 ```
 
 ### With `classifier_enabled` locked off
@@ -367,7 +415,7 @@ keys:
   classifier_external_allowed: { value: "loopback", locked: true }
 ```
 
-While the lock keeps every model off, the card says so once for both rows: *Your
+While the lock keeps every model off, the card says so once for both panels: *Your
 organisation's policy keeps the local classifier off, so no model answers these questions
 here, built-in or from your providers.*, followed by where the policy is set.
 

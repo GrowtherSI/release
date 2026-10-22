@@ -160,13 +160,16 @@ Turned off, the built-in model is completely quiet. C5 does not start its proces
 model, download anything, run its nightly jobs or print anything about it in the log.
 
 **With a model from your providers chosen**, the question is **Turn off the built-in
-model?**, and it says who answers once it is off: the chosen model keeps answering, with
-nothing behind it, so whenever it does not answer, C5 answers those questions as it did
-before. It also names any kind of decision that only the built-in model answers (Tool-call
-safety, beside a model that is not on this machine), where turning it off ends the classifier,
-and any kind that acts on the built-in model's record, where acting ends and the chosen
-model's answers are only recorded. Its delete button reads **Turn off and delete the
-built-in model**. See [Who answers](#who-answers).
+model?**, and it says who answers once it is off. While the chosen model answers: _M keeps
+answering. With the built-in model off, nothing stands behind it: if M stops answering, C5
+answers those questions as it did before._ While the chosen model is turned off, or cannot
+be asked now, it says that once the built-in model is off nothing answers C5's routine
+questions, and C5 answers them as it did before. It also names any kind of decision that
+only the built-in model answers (Tool-call safety, beside a model that is not on this
+machine), where turning it off ends the classifier, and any kind that acts on the built-in
+model's record, where acting ends and the chosen model's answers are only recorded. Its
+delete button reads **Turn off and delete the built-in model**. See
+[Who answers](#who-answers).
 
 You can also reach the same question from the **Terms** dialog: **Turn off the local
 classifier…** (**Turn off the built-in model…** while a model from your providers is chosen).
@@ -183,7 +186,9 @@ Flip the switch on again.
 - If a file is at the model's path but C5 already knows it is not the model, the dialog says
   so, and that C5 downloads the model and replaces that file.
 - With a [model from your providers](#a-model-from-your-providers) in use, the dialog adds
-  _M stays first; the built-in model answers when it cannot._
+  _M stays first; the built-in model answers when it cannot._, or, with
+  [Use as fallback](#use-as-fallback) off, _M stays first; with Use as fallback off, the
+  built-in model does not answer in its place._
 - On a machine that will not download the model — the Egress posture is Offline, automatic
   downloads are turned off, there is not enough disk space, or the model's path is a symbolic
   link C5 cannot use yet (one whose file cannot be reached, one it has not checked, or one to
@@ -468,20 +473,28 @@ serves it, as set up in **Settings › Integrations**.
 ### Who answers
 
 **By default C5 uses the built-in model.** Once an administrator chooses a model from your
-providers, C5 asks that model first, and:
+providers, C5 asks that model first. What answers when it cannot depends on two switches on
+the built-in model's panel:
 
-- **while the built-in model is switched on**, the built-in model answers whenever the
-  chosen model cannot;
-- **while the built-in model is switched off** — for example because its notice does not
-  fit your use — the chosen model is the only one asked. Whenever it cannot answer, no
-  classifier answers, and C5 answers those questions as it did before.
+- **The built-in model on, and Use as fallback on** (the default): the built-in model
+  answers whenever the chosen model cannot.
+- **The built-in model on, and Use as fallback off**: nothing answers in the chosen model's
+  place, and C5 uses its usual checks. The built-in model still answers what the chosen
+  model is not asked (below). See [Use as fallback](#use-as-fallback).
+- **The built-in model off** — for example because its notice does not fit your use: the
+  chosen model is the only one asked. Whenever it cannot answer, no classifier answers, and
+  C5 answers those questions as it did before.
 
-The card says which, under **Classifier models**, in these words (M is the model's name):
+The card says which, under both panels, in these words (M is the model's name):
 
 | The built-in model | The chosen model answers | The chosen model cannot be asked now |
 | --- | --- | --- |
 | On | _C5 asks M first. If it stops answering, the built-in model answers._ | _Using the built-in model while M is unavailable._ |
+| On, with **Use as fallback** off | _C5 asks M first. If it stops answering, nothing answers in its place, and C5 uses its usual checks._ | _Nothing answers in place of M while it is unavailable, and C5 uses its usual checks._ |
 | Off | _C5 asks only M. If it stops answering, no classifier answers, and C5 answers as it did before._ | _No classifier while M is unavailable. C5 answers as it did before._ |
+
+Where the built-in model answers a kind of decision that the chosen model is not asked, the
+line names it, for example _Tool-call safety is answered only by the built-in model._
 
 "Cannot be asked now" covers a model that is not loaded, is busy, does not answer, is paused
 after repeated failures, is refused by a policy or by **Models allowed from**, or whose
@@ -489,6 +502,11 @@ provider is turned off in **Settings › Integrations**. A chosen model waiting 
 reads _… until M passes its test again_, and one that has changed since its test _… until M is
 chosen again_. On a machine that cannot run the built-in model, the line reads _C5 asks only
 M: the built-in model cannot run here. …_
+
+A chosen model you [turned off](#turn-the-chosen-model-off-for-a-while) reads _Using the
+built-in model while M is turned off._ (or _No classifier while M is turned off. C5 answers
+as it did before._ with the built-in model off). It is not asked at all, and the built-in
+model answers as it does with nothing chosen.
 
 The chosen model is not asked everything:
 
@@ -530,18 +548,24 @@ shows the result of a model's last test beside it:
 
 | Badge | The card then says | What happens |
 | --- | --- | --- |
-| **Worked** | _Tested <day>: it answers the classifier's questions._ | A model made for this kind of decision, or the built-in model's own weights served by your provider. It is used. |
+| **Worked** | _Tested <day>: it answers the classifier's questions._, then what the test found, for example _11 of its 26 top answers differed from the built-in model's (the largest difference in a probability was 1.00)._ | A model made for this kind of decision, or the built-in model's own weights served by your provider. It is used. |
 | **Experimental** | _Tested <day>: it answers, but it is a general model, so expect it to stay in Shadow._ | It is used; see [Experimental models](#experimental-models). |
-| **Did not work** | The reason, for example that the model gives no probabilities | Nothing is chosen, and nothing changes. |
+| **Did not work** | _Tested <day>: it cannot answer the classifier's questions._ and the reason, for example that the model gives no probabilities | Nothing is chosen, and nothing changes. |
+
+**The test does not check that the answers are right.** It checks that C5 can read them, and
+compares them with the built-in model's answers to the same questions. A model trained for
+decisions elsewhere can differ from the built-in model on many and still be chosen. Whether
+its answers are right is what its own [promotion gate](#when-it-starts-to-act) measures, on
+your install's labels.
 
 A test that could not judge the model — it was not loaded, its provider did not answer —
 changes nothing either, and says so: _M is not loaded in P. C5 never loads a model itself;
 load it there and try again. Nothing was changed._
 
-C5 tests a model only when an administrator chooses it or presses **Test again** on its row,
-never on a schedule. A model that has changed since its test — new weights at the same name,
-or a provider moved to another address — is not asked until it is chosen again, which tests
-it again.
+C5 tests a model only when an administrator chooses it or presses **Test again** on its
+panel, never on a schedule. A model that has changed since its test — new weights at the
+same name, or a provider moved to another address — is not asked until it is chosen again,
+which tests it again.
 
 ### What each provider needs
 
@@ -560,7 +584,7 @@ it again.
 
 ### Models allowed from
 
-**Models allowed from**, on the **A model from your providers** row, says how far away a
+**Models allowed from**, on the **A model from your providers** panel, says how far away a
 model may run:
 
 | Choice | Lets C5 ask |
@@ -639,9 +663,10 @@ Once a billed model is in use:
 - C5 adds what each question costs to **Settings › Budget**, beside your other spending.
 - While your global cost cap is reached and set to block, C5 asks the model nothing. The
   built-in model answers meanwhile, if it is on.
-- Every question to OpenRouter carries the routing limits you set for OpenRouter in
-  **Settings › Integrations**, and asks OpenRouter to use only a provider that returns the
-  probabilities.
+- Every question to OpenRouter carries the routing limits you set on OpenRouter's
+  **Config** tab in Settings (see [Model providers](../configuration/model-providers.md)),
+  and asks OpenRouter to use only a provider that returns the probabilities. If C5 cannot
+  read those limits, it asks OpenRouter nothing they might rule out.
 - A name the provider moves to another model by itself cannot be chosen — one ending in
   `latest`, `openrouter/auto`, or a name starting with `~`: _choose a dated or versioned model
   instead_.
@@ -694,13 +719,95 @@ the chosen model is never measured on the built-in model's answers, nor the othe
   built-in model off: then the answers you give there are what the chosen model is measured
   against.
 
-### Stop using it, or choose another
+### Turn the chosen model off for a while
 
-- **Stop using it**, on the model's row, is open to anyone who may change settings, from a
-  paired device too: stopping is always the safe direction. Where a kind of decision acts on
-  the model's answers, C5 asks first (**Stop using M?**) and says what acts there afterwards.
-  The model's records are kept: choose it again while it is one of the last three models
-  chosen, and it picks them up.
+The chosen model's panel has a switch of its own, at its top right. Turned off, the model
+stays chosen, with its test and its records, but C5 asks it nothing until it is turned on
+again. Meanwhile the built-in model answers as it does with nothing chosen, while it is on.
+
+1. Flip the switch off. A small box under it asks **Turn off M?** and says what happens:
+   _The built-in model answers instead._ (or _Nothing answers; C5 uses its usual checks._
+   while the built-in model is off or cannot run here), then _C5 keeps it chosen, with its
+   test and its records; turn it on again to use it._
+2. Choose **Turn off**. **Cancel**, where the focus starts, or Escape leaves it on.
+
+While it is off, its panel reads _Turned off. C5 keeps it chosen, with its test and its
+records, and asks it nothing until it is turned on again._, followed by what answers
+meanwhile. The header's badge is then the built-in model's own, and the **Primary** tag and
+**Use as fallback** are not shown.
+
+**Who can.** Turning it off is open to anyone who may change settings, from a paired device
+too. Turning it on is for an administrator at the machine running C5, with a second factor,
+as for choosing a model; anyone else sees why beside the switch, for example _Only an
+administrator can turn on the classifier's model._
+
+**Turning it on checks it again.** One click turns it on, and C5 first judges it as it would
+a model being chosen: the Terms, your organisation's policy (and the providers and models it
+allows), **Models allowed from**, its provider turned on in **Settings › Integrations**, a
+passing test, your confirmation for a model off this machine, and whether it has changed
+since its test. If anything fails, it stays off, and a message says why:
+
+| The message says | What to do |
+| --- | --- |
+| _Could not turn on M: M has no passing test kept, so C5 does not ask it: …_ | Choose it again with **Change…**, which tests it and turns it on |
+| _Could not turn on M: M has changed since it was tested: …_, or _… M's provider is set up at another address than the one it was tested at, …_ | Choose it again with **Change…** to test it again |
+| _Could not turn on M: C5 has no consent of yours, under the Terms in force, to send the classifier's questions to M: …_ | Choose it again, and confirm where it runs |
+| _Could not turn on M: Models allowed from is set to …, and this one runs …_ | Widen **Models allowed from**, or choose another model |
+| _Could not turn on M: Your organisation's policy …_ | Only the policy can change it |
+| _Could not turn on M: The provider … is not turned on in Settings › Integrations. …_ | Turn the provider on, then turn the model on |
+
+**Change…** offers the model again while it is off: choosing it tests it again and turns it
+on.
+
+### Use as fallback
+
+**Use as fallback** is a switch on the built-in model's panel, directly under the built-in
+model's own switch. It is there while a model from your providers is chosen and turned on,
+and the built-in model is on. It is on by default.
+
+- **On**: whenever the chosen model cannot be asked — not loaded, busy, not answering,
+  paused after failures, waiting for a test, changed since its test, or not allowed for now
+  (its provider turned off, your organisation's policy, or **Models allowed from**) — the
+  built-in model answers in its place.
+- **Off**: nothing answers in its place, and C5 uses its usual checks, as it did before the
+  classifier. The built-in model still answers what the chosen model is not asked (see
+  [Who answers](#who-answers)), and still acts where it has a promotion record of its own
+  and the chosen model has none. To keep it from answering anything at all, turn the
+  built-in model off.
+
+Under the switch a line says which: _If M can't answer, the built-in model answers. Turn the
+built-in model off to never use it._, or, with it off, _If M can't answer, nothing answers
+in its place, and C5 uses its usual checks. The built-in model still answers where M is not
+asked or has no record of its own. Turn the built-in model off to never use it._ (The last
+sentence is left out while your organisation's policy decides the built-in model's switch.)
+The last step of choosing a model shows the same line, before anything is tested.
+
+**Who can change it.** Turning it off is open to anyone who may change settings, from a
+paired device too. Turning it back on is for an administrator at the machine running C5,
+with a second factor; anyone else sees why under the switch, for example _Only an
+administrator can use the built-in model as a fallback._ or _You can use the built-in model
+as a fallback only on the machine running C5._ Each change is recorded in the audit log.
+
+**Your organisation's policy** can set it, with `classifier_builtin_fallback` (see
+[For administrators](#managed-policy-classifier_builtin_fallback)). Locked, the switch is
+greyed out, with _Your organisation's policy sets this. The policy is set by …_ under it.
+
+Use as fallback comes with version 1.10 of the Terms of Service, whose Section 14 says the
+built-in model need not answer in the chosen model's place (see
+[The Terms that cover it](#the-terms-that-cover-it)).
+
+### Remove, or choose another
+
+- **Remove**, on the chosen model's panel, clears the choice. It is open to anyone who may
+  change settings, from a paired device too, whatever your organisation's policy says:
+  removing is always the safe direction. Where a kind of decision acts on the model's
+  answers, C5 asks first (**Remove M?**) and says what acts there afterwards, for example
+  _Task categories acts on its answers now. Removed, the built-in model acts there on its
+  own record; a family without one only records, and C5 answers as it did before._ The
+  model's records are kept: choose it again while it is one of the last three models chosen,
+  and it picks them up.
+- To stop asking it for a while and keep it chosen, turn it off instead (see
+  [Turn the chosen model off for a while](#turn-the-chosen-model-off-for-a-while)).
 - **Change…** opens the list to choose another model. If a kind of decision acts on the
   current model's answers, the list says what acts there until the new model has been
   measured.
@@ -710,43 +817,60 @@ the chosen model is never measured on the built-in model's answers, nor the othe
 
 ### When the chosen model is not answering
 
-The model's row says what is wrong, then what answers meanwhile: _Meanwhile the built-in model
-answers._, or _Meanwhile no classifier answers, and C5 answers as it did before._
+The model's panel says what is wrong, then what answers meanwhile: _Meanwhile the built-in
+model answers._, _Meanwhile no classifier answers, and C5 answers as it did before._, or,
+with [Use as fallback](#use-as-fallback) off, _Meanwhile nothing answers in its place, and
+C5 uses its usual checks._
 
-| The row says | What it means | What to do |
+What the panel says about the model is what C5 found the last time it asked it: nothing
+reads the provider's server in between. So the line says when that was, for example
+_Answering when C5 last asked it, at 05:52._, or ends _As of its last question, at 14:03._ A
+server that came back, or swapped its model, shows its old state until C5 next asks it.
+
+| The panel says | What it means | What to do |
 | --- | --- | --- |
 | _Not loaded in P. C5 never loads a model itself; load it there and C5 uses it again._ | The provider has unloaded the model | Load it in the provider |
 | _P is busy with other work, so recent questions went elsewhere._ | The provider's server was busy, often with your own work: where it answers one request at a time, C5 never makes a question wait behind your own chat | Nothing |
 | _P is not answering (since 14:03)._ | The provider's server is not reachable | Start it, or check its address in **Settings › Integrations** |
-| _Paused. …_ | The provider refused (a key it does not accept, a rate limit), or the model failed repeatedly. The reason follows | Follow the reason. C5 picks up a key you fix in **Settings › Integrations** within seconds |
+| _Paused. …_ | The provider refused (a key it does not accept, a rate limit), or the model failed repeatedly, so C5 holds it back for a while. This is not the model's own switch. The reason follows | Follow the reason. C5 picks up a key you fix in **Settings › Integrations** within seconds |
 | _Changed since it was tested. …_ | New weights at the same name, or the provider moved to another address | Choose the model again to test it again |
 | _Not used until it passes a test._ | No passing test of it is kept | Press **Test again** |
 | _Not used. …_ | Your organisation's policy, **Models allowed from**, or a confirmation that no longer holds; the reason follows | Follow the reason |
-| _Not used: P is turned off in Settings › Integrations._ | | Turn the provider back on, or **Stop using it** |
+| _Not used: P is turned off in Settings › Integrations._ | | Turn the provider back on, or **Remove** the model |
+| _Turned off. C5 keeps it chosen, …_ | Someone turned it off with its own switch | Turn it on again; see [Turn the chosen model off for a while](#turn-the-chosen-model-off-for-a-while) |
 
 ## What you see in Settings › Learning
 
 The **Classifier** card has a **Terms** button and a short status badge in its header. Under
-**Classifier models** are two rows:
+**Classifier models** are two panels. With nothing chosen, the built-in model's comes first;
+once a model is chosen, its panel comes first, whether it is on or off:
 
-- **Built-in model**, with its switch and the status lines below;
 - **A model from your providers**: what is chosen and where it runs, its last test, its
-  state and what answers meanwhile, **Models allowed from**, and the buttons **Choose a
-  model…** (**Change…** once one is chosen), **Test again** and **Stop using it**. See
-  [A model from your providers](#a-model-from-your-providers).
+  state and what answers meanwhile, **Models allowed from**, its own switch at the top right
+  (see [Turn the chosen model off for a while](#turn-the-chosen-model-off-for-a-while)), and
+  the buttons **Choose a model…** (**Change…** once one is chosen), **Test again** and
+  **Remove**. See [A model from your providers](#a-model-from-your-providers).
+- **Built-in model**, with its switch, **Use as fallback** under it while a model is chosen
+  and on (see [Use as fallback](#use-as-fallback)), and the status lines below.
 
-Which model is asked first is said in words, and in the tags **Asked first** and
-**Fallback** beside the rows' titles. Under both rows a line says who answers now (see
-[Who answers](#who-answers)). Then comes one row for each kind of decision.
+Two tags beside the panels' titles say how they stand. **Primary**, on the chosen model's
+panel, is shown while C5 asks that model and the built-in model can run; it does not
+promise that the built-in model takes over, which is what **Use as fallback** decides.
+**Fallback**, on the built-in model's panel, is shown while it stands behind a chosen model
+that is answering, with Use as fallback on. Under both panels a line says who answers now
+(see [Who answers](#who-answers)). Then comes one row for each kind of decision.
 
 ### The badge
 
-While no model from your providers is chosen, the badge in the header is the built-in
-model's, as below. With one chosen, the header's badge says how the classifier answers —
-**Running** (the chosen model answers), **Fallback** (it cannot be asked now, and the built-in
-model answers), **Unavailable** (it cannot be asked now, and nothing answers), **Testing** (a
-test of it is running) or **Off** (your organisation's policy keeps every model off) — and
-the built-in model's own badge moves into its row.
+While no model from your providers is chosen, or the chosen one is turned off, the badge in
+the header is the built-in model's, as below. With one chosen and on, the header's badge
+says how the classifier answers — **Running** (the chosen model answers), **Fallback** (it
+cannot be asked now, and the built-in model answers in its place), **Unavailable** (it
+cannot be asked now, and nothing answers in its place: always so with Use as fallback off,
+even where the built-in model still answers some kinds of decision), **Testing** (a test of
+it is running) or **Off** (your organisation's policy keeps every model off) — and the
+built-in model's own badge moves into its panel. While a change is being saved, the badge
+says **Turning off…**, **Turning on…** or **Saving…** instead.
 
 | Badge | What it means | What to do |
 | --- | --- | --- |
@@ -1160,6 +1284,26 @@ the machine may change; not set at all, **Models allowed from** starts at **This
 `allowedProviders` and `allowedModels` apply to the classifier's models too. See
 [Classifier models from your providers](../configuration/enterprise-policy.md#classifier-models-from-your-providers).
 
+### Managed policy: `classifier_builtin_fallback`
+
+`classifier_builtin_fallback` (a boolean) decides whether the built-in model answers in
+place of a chosen model that cannot be reached: **Use as fallback** on the card (see
+[Use as fallback](#use-as-fallback)). It is delivered the same ways as
+`classifier_external_allowed`, never by the Mothership, and applies without a restart.
+
+- **Locked to `false`**: the built-in model never answers in the chosen model's place, and
+  nobody can turn Use as fallback on in C5. It still answers what the chosen model is not
+  asked, and acts where it has a record of its own and the chosen model has none.
+- **Locked to `true`**: it always does, and nobody can turn it off in C5.
+- **Recommended, or under User Configuration**: a default, which anyone allowed to change
+  it on the card may change.
+- **Not set**: on, until someone changes it on the card.
+- **A locked value that cannot be read** counts as `false`.
+
+It matters only while a model from your providers is chosen and turned on, and the built-in
+model is on. Builds that ship Terms of Service earlier than v1.10 ignore it. See
+[Classifier models from your providers](../configuration/enterprise-policy.md#classifier-models-from-your-providers).
+
 ### Downloads only by hand or on request
 
 Start C5 with `GROWTHER_CLASSIFIER_NO_AUTO_DOWNLOAD=1` (exactly `1`) and C5 does not download
@@ -1529,7 +1673,7 @@ A delete is in progress. It ends in seconds.
 Choosing and testing are for an administrator at the machine running C5, never from a paired
 device. The row says why it is not offered to you. If your organisation's policy keeps every
 model off, or does not allow a model from your providers, choosing is not offered at all; a
-model already chosen can still be stopped. See
+model already chosen can still be turned off or removed. See
 [Classifier models from your providers](../configuration/enterprise-policy.md#classifier-models-from-your-providers).
 
 **_None of your enabled providers lists a model right now. Turn one on in Settings › Integrations._**
@@ -1572,14 +1716,26 @@ its record would mean nothing. Choose a dated or versioned name.
 **_This machine now requires Terms v1.10, and this page shows v1.9. Reload C5 to read the current text._**
 The page was loaded before C5 was updated. Reload it, read Section 14 again, and confirm.
 
-**The chosen model's row says _Not used._, _Paused._ or _Changed since it was tested._**
+**The chosen model's panel says _Not used._, _Paused._ or _Changed since it was tested._**
 See [When the chosen model is not answering](#when-the-chosen-model-is-not-answering).
+
+**_Could not turn on M: …_**
+Turning the chosen model on checks it again, as choosing it would, and it stays off when a
+check fails. The message says which; see
+[Turn the chosen model off for a while](#turn-the-chosen-model-off-for-a-while). From a
+paired device, or as an account that is not an administrator, it cannot be turned on at all.
+
+**There is no Use as fallback switch, or it is greyed out.**
+It is shown only while a model from your providers is chosen and turned on and the built-in
+model is on. Greyed out, the line under it says why: your organisation's policy sets it, you
+need permission to edit settings, or turning it on needs an administrator at the machine.
+See [Use as fallback](#use-as-fallback).
 
 ## Related
 
 - [Memory search](memory-search.md) — the other models C5 downloads, for semantic search
 - [Network and egress](../configuration/network.md) — the Egress posture, proxies and every host C5 contacts
-- [Managed configuration](../configuration/enterprise-policy.md) — locking `classifier_enabled` and `classifier_external_allowed` across a fleet
+- [Managed configuration](../configuration/enterprise-policy.md) — locking `classifier_enabled`, `classifier_external_allowed` and `classifier_builtin_fallback` across a fleet
 - [Model providers](../configuration/model-providers.md) — setting up the providers a classifier model can come from
 - [Running doctor](../cli/doctor.md) — every check, and how to read the results
 - [Environment variables](../cli/environment.md) — `GROWTHER_CLASSIFIER_NO_AUTO_DOWNLOAD` and `GROWTHER_CACHE_DIR`

@@ -64,7 +64,7 @@ backups, are not stopped; see [What offline does not cover](#what-offline-does-n
 | Memory-search models | No embedding, reranking or query-expansion model is downloaded — not at start, and not by `growther qmd-run pull` |
 | Offline speech model | Not downloaded — not at start, and not by `growther voice pull` |
 | Local classifier model | Not downloaded — not at start, not when someone turns the classifier on, and not by `growther classifier pull` |
-| A classifier model from your providers | Asked, and tested, only at an address on this machine. One on your network or online is not asked; the built-in model answers in its place while it is on |
+| A classifier model from your providers | Asked, and tested, only at an address on this machine. One on your network or online is not asked; the built-in model answers in its place while it is on and **Use as fallback** is on |
 | Remote Control tunnel program | `cloudflared` is not downloaded. A tunnel that still needs it cannot start; a tunnel whose program is already on the machine still runs (see below) |
 | Hugging Face as a model provider (Inferencer) | No background health check (normally at start and once a minute), no model list for the model pickers, and no latency test in Settings, to any Hugging Face host — `huggingface.co`, `hf.co`, `huggingface.cloud` or any name under them, such as `router.huggingface.co` or a dedicated Inference Endpoint. The provider shows as unhealthy, with no models and no latency figure. An Inferencer endpoint on any other host — your own server — is still checked |
 | Directory group sync | Skipped |

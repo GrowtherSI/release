@@ -219,8 +219,10 @@ Yes. An administrator at the machine can choose a model that one of your provide
 on llama.cpp, Ollama, LM Studio or vLLM, or a cloud API such as OpenAI, OpenRouter or
 DeepSeek — under **Settings › Learning › Classifier › Choose a model…**. C5 tests it first,
 and asks it before the built-in model. While the built-in model is on, it answers whenever
-the chosen model cannot; with the built-in model off, the chosen model is the only one, and
-when it cannot answer C5 answers as it did before. A new model only records its answers
+the chosen model cannot, unless **Use as fallback**, under its switch, has been turned off;
+with the built-in model off, the chosen model is the only one, and when it cannot answer C5
+answers as it did before. The chosen model has its own switch, to turn it off for a while
+without removing it. A new model only records its answers
 until it has been measured on your install, like the built-in model was. Questions about
 whether a tool call is safe are never sent to a model off this machine. See
 [A model from your providers](/c5/tools/local-classifier#a-model-from-your-providers).
