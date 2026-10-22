@@ -1008,7 +1008,7 @@ While a change you made is being saved the badge says **Turning on…**, **Turni
 | **Model** | Whether the model is here and checked, partly downloaded (for example _300 of 812 MB_), downloading, or not downloaded — and on a machine that will not download it, why not and what to do. It also tells you when the file at the model's path is not the model, or when the path is a link whose file cannot be reached (see [Troubleshooting](#troubleshooting)). |
 | **Notice** | The model's notice, quoted above. |
 | **Runtime** | What the classifier's process is doing: for example _Running on the Metal GPU, 742 MB in memory, loaded in 1.9 s._ This is where you read its real memory use. When the **Model** line already says why nothing was downloaded, Runtime reads only _Not running: the model is not on this machine._ |
-| **Health** | How many questions it answered, how fast (p50 is the typical answer time, p95 the slow end), and how many timed out, failed, or were skipped because the text was not in the Latin alphabet. |
+| **Health** | What became of its questions since the server started, and how fast it answered: _Since the server started at 09:12: answered 12 of 30 · p50 210 ms, p95 640 ms over its last 12 answers · 4 not running · 3 refused while paused · …_ p50 is the typical answer time and p95 the slow end, over its last 200 answers at most. Only what happened is listed: timed out, failed, skipped for language (text not in the Latin alphabet), not running, refused while paused, dropped with too many waiting, refused while busy, in progress. These counts start again at every restart; **Ops › Classifier** keeps them across restarts. |
 
 **The machine line uses your operating system's own figures**: the machine's model name, its
 processor, its physical cores by kind, and its installed memory — what System Information
@@ -1088,12 +1088,20 @@ Under each setting you see:
   shows _Unvalidated: an administrator raised it on a gate that had not passed …_
 - **Calibration** — the one stored, when it was fitted and by what. An administrator on the
   machine can press **Fit calibration now** for task categories, tool-call safety and alert
-  triage while the classifier is on. When the last fit was not stored because it could not
-  tell answers apart, the line says so, for example _Its last fit, on 2026-10-08, was not
-  stored: calibrated, every answer would get about the same probability, so no confidence
-  level could tell them apart._ (see [When it starts to act](#when-it-starts-to-act)).
-- **Last 7 days** — how many decisions were recorded and how many by the local classifier, and
-  how many labels people gave.
+  triage while the classifier is on, once the fit would find what it needs; until then the
+  reason stands in its place, for example _Fit calibration now is offered once there are 200
+  labelled answers to fit on; there are 12._ (or that they must come from two tasks or more,
+  or say both yes and no). Step quality and Skill routing are never fitted — C5 can store
+  and use a calibration only of a yes-or-no answer — so they read _Calibration: none._ and
+  say why, and **Ops** reads _never fitted (not a yes/no answer)_. When the last fit was not
+  stored because it could not tell answers apart, the line says so, for example _Its last
+  fit, on 2026-10-08, was not stored: calibrated, every answer would get about the same
+  probability, so no confidence level could tell them apart._ (see
+  [When it starts to act](#when-it-starts-to-act)).
+- **Last 7 days** — how many decisions were recorded and how many by the local classifier,
+  and how many labels, of which how many from a person or an outcome: _Last 7 days: 1,204
+  decisions recorded (1,204 by the local classifier), 37 labels (12 from a person or an
+  outcome)._ Only those last ones measure the classifier.
 - For task categories, **Saved, last 7 days** — how many calls to the usual model its
   Authoritative answers replaced, and roughly what they would have cost, provider by provider.
   Local models are counted in model time, not money, and a model with no price set is never
@@ -1810,8 +1818,9 @@ The option says why. Usually one of these:
   answer has yet been the correct one in 10 labelled tasks and not the correct one in 10.
   Labelling more tasks fixes the second, not the first.
 - No calibration is fitted yet. C5 fits one at 23:50 once there are enough labels, or an
-  administrator can press **Fit calibration now**. A fit that cannot tell answers apart is
-  not stored; the **Calibration** line says so when that happened.
+  administrator can press **Fit calibration now** once it is offered (it says what it still
+  needs until then). A fit that cannot tell answers apart is not stored; the **Calibration**
+  line says so when that happened.
 
 If you can choose it but the line reads _Set to Assisted, but not running: this machine is too
 slow …_, see [Slow machines](#slow-machines). On Windows this lasts until the model's first

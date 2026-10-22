@@ -226,7 +226,7 @@ panel has the switch. Under it:
 | **Model** | Whether the model is here and checked, partly downloaded (*300 of 812 MB*), downloading, or not downloaded and why. It also says when the file at the model's path is not the model, or when the path is a link whose file cannot be reached |
 | **Notice** | The model's notice: who made it, its licence, and the note about its research-use training data, word for word as C5 shows it everywhere. Shown only while the classifier is on or the model is on disk |
 | **Runtime** | What its process is doing: running on the Metal GPU or the CPU, memory used, load time, or why it is not running |
-| **Health** | Questions answered, typical and slow response times, time-outs and failures. *Paused after repeated failures* means the usual answers stand alone until it recovers |
+| **Health** | Since the server started (and at what time): questions answered of those asked, typical and slow response times over its last answers, and what became of the rest — time-outs, failures, not running, refused while paused or busy. *Paused after repeated failures* means the usual answers stand alone until it recovers |
 
 Below that is one row per kind of decision, with its mode, a note on what its modes mean
 (*Shadow by default: recorded beside … never used.*), its promotion gate (the measurement),
@@ -363,13 +363,15 @@ start, when its audit log shows nobody chose them. See
 **Assisted** and **Authoritative** need the kind's promotion gate to pass first — the
 measurement against your own labels, which includes **Telling cases apart**: whether the
 classifier's answer actually changes when the right answer does — and a fitted calibration.
-Until then they are shown but cannot be chosen (except by an administrator, below), with
-the reason beside them. Calibration is fitted every night once there are enough labels, or
-at once by an administrator's **Fit calibration now**. An acting mode uses only answers
-calibrated the way its gate measured them. If the nightly check finds the evidence no
-longer holds, C5 moves the kind back to **Shadow**. A kind an administrator raised anyway
-is not moved back just because its gate still has not passed; it is moved back only if the
-model or its calibration changes, or its calibration error doubles.
+Until then they are shown but cannot be chosen (except by an administrator, below), with the
+reason beside them. Calibration is fitted every night once there are enough labels, or at
+once by an administrator's **Fit calibration now**, offered once the fit would find 200
+labelled answers. Step quality and Skill routing are never fitted, so they never act. An
+acting mode uses only answers calibrated the way its gate measured them. If the nightly
+check finds the evidence no longer holds, C5 moves the kind back to **Shadow**. A kind an
+administrator raised anyway is not moved back just because its gate still has not passed; it
+is moved back only if the model or its calibration changes, or its calibration error
+doubles.
 
 An administrator can raise a kind on a gate that has not passed, after a warning
 (**Raise anyway**). The kind then reads *Unvalidated: an administrator raised it on a
