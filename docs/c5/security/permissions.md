@@ -218,19 +218,6 @@ example _You can change tool settings only on the machine running C5._ On **Sett
 Budget** and **Settings › Autonomy** only what you changed is sent, so these settings never
 block a teammate's other changes there.
 
-**If a change is refused anyway** — from a page opened before an update, say, or a script
-— nothing in that save is stored, and the message names each setting as Settings does:
-_Forbidden: Guardian Vetting is admin-only._ From a paired device it reads _These settings
-cannot be changed from a remote device. Change them in C5 on the machine itself: Guardian
-Vetting._ Sending the value already stored is not a change, and goes through.
-
-**A blank never turns a guard off.** An empty value for **Strict Path Boundary**, the
-**Egress Data-Loss Prevention** mode or the filesystem autonomy level is refused from
-everyone, an administrator included: _Strict Path Boundary needs a value: an empty one would
-turn it off. Nothing was saved._ An administrator turns one off by choosing off. A setting
-nobody has saved yet counts as what C5 uses while it is unset, and one C5 cannot read at
-that moment counts as a change, so neither lets a teammate's value through as a repeat.
-
 **What is recorded.** Every change an administrator makes to one of them is recorded in the
 audit log, with who made it, and so is every attempt from a paired device. A save that
 changes nothing — the same value, or the same list in another order — is not recorded as a
@@ -242,6 +229,31 @@ restrictions but not loosen them (see
 and can turn **Voice on remote devices** off but not on (see
 [Voice from a paired phone](/c5/using-c5/voice#voice-from-a-paired-phone)). Once the
 setting is saved the restrictive way, its switch is greyed out for them.
+
+### When a change is refused
+
+A teammate should rarely see a refusal, since Settings holds these controls back. One comes
+from a page opened before an update, say, or from a script. Nothing in that save is stored,
+and the message names each setting as Settings does:
+
+| The message | What it means |
+| --- | --- |
+| _Forbidden: Guardian Vetting is admin-only._ | A setting in the table above; ask an administrator at the machine to change it |
+| _Forbidden: only an administrator can lift these Remote Control restrictions: Read-only for all remote devices. Turning one on is allowed._ | Loosening a Remote Control restriction; see [Who can change these switches](/c5/remote-control/setup#who-can-change-these-switches) |
+| _Forbidden: only an administrator can turn on Voice on remote devices. Turning it off is allowed._ | See [Voice from a paired phone](/c5/using-c5/voice#voice-from-a-paired-phone) |
+| _Forbidden: Retrospective Loop needs the HITL edit permission (Settings › Access)._ | The Retrospective Loop's switch, schedule and token cap need **Edit** on **Sidebar: HITL Button & Modal** |
+| _Forbidden: … is managed by your organisation's policy._ | A setting your organisation's policy locks; see [How a policy is applied](/c5/configuration/enterprise-policy#how-a-policy-is-applied) |
+| _These settings cannot be changed from a remote device. Change them in C5 on the machine itself: Guardian Vetting._ | Saved from a paired phone or tablet: change it on the machine itself |
+| _Strict Path Boundary needs a value: an empty one would turn it off. Nothing was saved._ | An empty value (below) |
+
+Sending the value already stored is not a change, and goes through.
+
+**A blank never turns a guard off.** An empty value for **Strict Path Boundary**, the
+**Egress Data-Loss Prevention** mode or the filesystem autonomy level is refused from
+everyone, an administrator included; an administrator turns one off by choosing off. A
+setting nobody has saved yet counts as what C5 uses while it is unset, and one C5 cannot
+read at that moment counts as a change, so neither lets a teammate's value through as a
+repeat.
 
 ## Hard limits
 
