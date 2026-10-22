@@ -364,11 +364,34 @@ already waiting are counted under _Skipped: busy_.
 Only **Task categories** can be raised to **Assisted** or **Authoritative**, and only after the
 classifier has been measured on your own install. The other four offer only Off and Shadow.
 
-The measurement is called the **promotion gate**. It compares the classifier's recorded answers
-over the last 30 days with the usual model's, and with the answers people gave when they
-corrected or labelled tasks. Its line in Settings shows each part that has not passed yet:
-**Labels**, **Accuracy against your labels**, **Telling cases apart**, **Agreement with the
-teacher model**, **Calibration**, **Confident answers** and **Speed**.
+The measurement is called the **promotion gate**. It compares the classifier's recorded
+answers with the usual model's, and with the answers people gave when they corrected or
+labelled tasks.
+
+**It counts the last 200 labelled answers, up to 180 days back.** A labelled answer is a
+question both the classifier and the usual model answered, and a person or an outcome
+labelled. When the last 30 days hold 200 of them, the gate measures those 30 days; otherwise
+it reaches back as far as it takes to hold 200, but never past 180 days. Only the answers of
+the model answering now count, so a model new to C5 starts from none. The nightly re-check
+and the calibration fit read the same window, and **Teach the classifier** asks about task
+categories up to 180 days old for the same reason.
+
+Its line in Settings says when it was measured and over what, for example _Promotion gate:
+not enough evidence yet (12 labelled states), measured at 14:05 over the last 180 days._
+Until a kind has its 200 labelled answers, the parts that cannot be judged yet are one line,
+_Needs 200 labelled answers before its accuracy can be judged; has 12._, followed by how
+long the 200 take at the pace of the last 30 days:
+
+- _At the current rate (60 labelled in the last 30 days): about 70 days._
+- _At the current rate: never — 25 new answers came in over the last 30 days, and 180 days
+  at that pace hold 150, however many are labelled._ Here labelling cannot help: the kind
+  gets too few questions for 200 to fit in 180 days.
+- _At the current rate: never — none were labelled in the last 30 days._
+
+A part that failed, Speed included, is still listed beside that line. Once there are 200,
+the line shows each part that has not passed yet: **Labels**, **Accuracy against your
+labels**, **Telling cases apart**, **Agreement with the teacher model**, **Calibration**,
+**Confident answers** and **Speed**.
 
 **Telling cases apart** does not compare the classifier with the usual model. It checks
 that the classifier's answer actually changes when the right answer changes. A classifier
@@ -408,10 +431,13 @@ gave a task, fixes that.
   - the classifier now answers as a different model;
   - the calibration its confidence level was measured on has been replaced; or
   - its calibration error has more than doubled since it was raised.
-- If the gate only lacks enough new evidence, it keeps acting for up to 60 days after its last
-  pass. Administrators are told that its evidence is thin (**Local classifier: … is acting on
-  evidence from …**), and after the 60 days it goes back to Shadow. Answering its questions in
-  **Teach the classifier** re-checks it.
+- If the gate only lacks enough new evidence, it keeps acting for up to 60 days after its
+  last verification: a night it passed on something answered or labelled since the one
+  before. Because the window reaches back for its 200 answers, a kind nobody labels any more
+  would otherwise pass every night on the answers it was raised on; a pass on nothing new
+  counts as too little evidence. Administrators are told that its evidence is thin (**Local
+  classifier: … is acting on evidence from …**), and after the 60 days it goes back to
+  Shadow. Answering its questions in **Teach the classifier** re-checks it.
 - On a machine where the classifier is too slow (see [Slow machines](#slow-machines)), only
   kinds set to Shadow run. A kind set to Assisted or Authoritative is not asked at all: it
   does not even record, so it gathers no new evidence for its promotion gate while the
@@ -993,8 +1019,9 @@ Under each setting you see:
 - Under Step quality, on a machine where it applies, _Sampling 1 in 4 on this machine: …_ (see
   [On a machine where it runs on the CPU](#on-a-machine-where-it-runs-on-the-cpu)).
 - **Promotion gate** — _passed_, _not passed_, _not enough evidence yet_, or _not measured
-  yet_, with each part that did not pass and what was measured. C5 measures it in the
-  background, at most every ten minutes.
+  yet_, when it was measured and over how many days, and each part that did not pass with
+  what was measured (see [When it starts to act](#when-it-starts-to-act)). C5 measures it in
+  the background, at most every ten minutes.
 - What it is really doing, when it is set to act: _Acting in Authoritative at confidence 0.83 or
   more._, _Set to Assisted, but only recording its answers._ with the reason, or _Set to
   Assisted, but not running: this machine is too slow for its answers to be used in time, so
