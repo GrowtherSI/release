@@ -246,7 +246,9 @@ and the message names each setting as Settings does:
 | _These settings cannot be changed from a remote device. Change them in C5 on the machine itself: Guardian Vetting._ | Saved from a paired phone or tablet: change it on the machine itself |
 | _Strict Path Boundary needs a value: an empty one would turn it off. Nothing was saved._ | An empty value (below) |
 
-Sending the value already stored is not a change, and goes through.
+Sending the value already stored is not a change, and goes through. For **Guardian
+Vetting** what counts is whether vetting is on now, wherever that was set: sending the state
+in force goes through, and any change of it is refused.
 
 **A blank never turns a guard off.** An empty value for **Strict Path Boundary**, the
 **Egress Data-Loss Prevention** mode or the filesystem autonomy level is refused from
