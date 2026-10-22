@@ -436,14 +436,14 @@ Point `GROWTHER_LIBVIPS_DIR` at a folder laid out the way sharp lays out its own
 ```
 
 `<platform>` is the platform name sharp uses, for example `darwin-arm64`, `darwin-x64`,
-`linux-x64`, `linux-arm64` or `win32-x64`. With today's releases (sharp 0.35.4, libvips 8.18.6)
+`linux-x64`, `linux-arm64` or `win32-x64`. With today's releases (sharp 0.35.5, libvips 8.18.7)
 the files are named:
 
 | Platform | Binding | libvips |
 | --- | --- | --- |
-| macOS | `sharp-darwin-arm64/lib/sharp-darwin-arm64-0.35.4.node` | `sharp-libvips-darwin-arm64/lib/libvips-cpp.8.18.6.dylib` |
-| Linux | `sharp-linux-x64/lib/sharp-linux-x64-0.35.4.node` | `sharp-libvips-linux-x64/lib/libvips-cpp.so.8.18.6` |
-| Windows | `sharp-win32-x64/lib/sharp-win32-x64-0.35.4.node` | In the same `lib` folder as the binding: `libvips-42.dll` and `libvips-cpp-8.18.6.dll`, plus any other DLLs your build needs |
+| macOS | `sharp-darwin-arm64/lib/sharp-darwin-arm64-0.35.5.node` | `sharp-libvips-darwin-arm64/lib/libvips-cpp.8.18.7.dylib` |
+| Linux | `sharp-linux-x64/lib/sharp-linux-x64-0.35.5.node` | `sharp-libvips-linux-x64/lib/libvips-cpp.so.8.18.7` |
+| Windows | `sharp-win32-x64/lib/sharp-win32-x64-0.35.5.node` | In the same `lib` folder as the binding: `libvips-42.dll` and `libvips-cpp-8.18.7.dll`, plus any other DLLs your build needs |
 
 **The exact names for your copy of C5 are in its own notices.** Look for the libvips entry in
 Part 2, under _Your own libvips_. A different release may use different version numbers.
@@ -498,7 +498,7 @@ This does not change how C5 starts at sign-in. For that, follow the steps for yo
 2. Sign each library or binding you built or changed. An ad hoc signature is enough:
 
    ```bash
-   codesign --force --sign - "$HOME/my-libvips/sharp-libvips-darwin-arm64/lib/libvips-cpp.8.18.6.dylib"
+   codesign --force --sign - "$HOME/my-libvips/sharp-libvips-darwin-arm64/lib/libvips-cpp.8.18.7.dylib"
    ```
 
 3. If C5 starts when you sign in, add the variable to C5's startup file:
@@ -557,7 +557,7 @@ C5 decides which libvips to use the first time it processes an image, not at sta
 loads yours, it prints one line:
 
 ```
-[sharp] using libvips 8.18.6 from GROWTHER_LIBVIPS_DIR: binding <path to the binding>, library <path to the library>
+[sharp] using libvips 8.18.7 from GROWTHER_LIBVIPS_DIR: binding <path to the binding>, library <path to the library>
 ```
 
 The line names the files the operating system actually loaded, so you can see that your library
@@ -620,14 +620,14 @@ variable), then restart C5.
 The libvips entry in your notices names the exact source for your build. In current releases:
 
 - **macOS and Linux:** the source of libvips and of every library built into it is the
-  [sharp-libvips v1.3.3 release](https://github.com/lovell/sharp-libvips/releases/tag/v1.3.3).
-  Its [build scripts](https://github.com/lovell/sharp-libvips/tree/v1.3.3) fetch each library's
+  [sharp-libvips v1.3.4 release](https://github.com/lovell/sharp-libvips/releases/tag/v1.3.4).
+  Its [build scripts](https://github.com/lovell/sharp-libvips/tree/v1.3.4) fetch each library's
   source, at the listed version, from that library's own publisher.
 - **Windows:** sharp-libvips repackages the DLLs of the
-  [libvips/build-win64-mxe v8.18.6 release](https://github.com/libvips/build-win64-mxe/releases/tag/v8.18.6).
-  That project's [build recipes and patches](https://github.com/libvips/build-win64-mxe/tree/v8.18.6)
-  fetch and build each library. `libvips-cpp-8.18.6.dll` is libvips' own C++ interface, compiled
-  by [sharp 0.35.4's build](https://github.com/lovell/sharp/tree/v0.35.4) (`src/binding.gyp`).
+  [libvips/build-win64-mxe v8.18.7 release](https://github.com/libvips/build-win64-mxe/releases/tag/v8.18.7).
+  That project's [build recipes and patches](https://github.com/libvips/build-win64-mxe/tree/v8.18.7)
+  fetch and build each library. `libvips-cpp-8.18.7.dll` is libvips' own C++ interface, compiled
+  by [sharp 0.35.5's build](https://github.com/lovell/sharp/tree/v0.35.5) (`src/binding.gyp`).
 - **sharp itself** (the binding) is Apache-2.0. Its source is the
   [sharp repository](https://github.com/lovell/sharp) at the version your notices name.
 
