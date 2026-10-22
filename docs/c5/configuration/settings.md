@@ -56,6 +56,10 @@ The Budget tab is also where you track progress toward self-improvement mileston
 the Retrospective Loop (50 tasks) and Reward Model Promotion (100 tasks).
 See [Budgets & costs](/c5/using-c5/ops).
 
+Its **Retrospective Loop** switch, like the loop's schedule and token cap on the **Learning**
+tab, needs **Edit** on **Sidebar: HITL Button & Modal** in **Settings › Access**; without it
+the switch is greyed out with _Needs the HITL edit permission (Settings › Access)._
+
 ### Autonomy
 
 Decide how much your agents may do on their own. Start cautious. As you learn what C5
@@ -156,7 +160,7 @@ itself from your work. It has six sections:
 | **Factorial Experiments** | The shadow run sampling rate for C5's experiments on its own settings |
 | **Prompt Self-Improvement** | Prompt telemetry, and whether better prompt variants are promoted automatically |
 | **Quality vs Efficiency Balance** | How much C5 weighs answer quality against cost |
-| **Reward Pipeline Automation** | Which roles use the learned reward model, and the retrospective loop's frequency and token limits |
+| **Reward Pipeline Automation** | Which roles use the learned reward model, and the retrospective loop's frequency and token limits (shown only with **Edit** on **Sidebar: HITL Button & Modal**) |
 | **Classifier** | The small model that answers C5's routine questions: the built-in one on this machine, or one you choose from your providers (below) |
 
 The first five save together with the tab's **Save** button. **Classifier** is
@@ -398,6 +402,8 @@ Administrator accounts always retain full view, edit, and execution privileges a
 - **User View**: Controls whether standard users can see a feature, page, or action button. When turned off, the navigation tab, sidebar link, or button is hidden from their interface.
 - **User Edit**: Controls whether standard users can modify records, trigger active pipelines, or perform actions. When edit is turned off, the interface switches to read-only (disabling save buttons, edit forms, creation modals, and action menus).
 
+An **Edit** grant also opens what it covers: a row with **User Edit** on and **User View** off counts as both, so a teammate allowed to change a page can always open it.
+
 At the top of the page, a global **Killswitch** banner allows an administrator to immediately halt all autonomous agent execution across the entire platform. When active, background processes pause and the controls dim.
 
 ### The RBAC grid
@@ -411,16 +417,16 @@ Granular controls over specific high-impact capabilities:
 | Feature | User View | User Edit | Description |
 | --- | :---: | :---: | --- |
 | **Chat Pipeline Runner** | Toggle | Toggle | Authorize starting/stopping unprompted, looped orchestration pipelines on the Chat page. |
-| **Kanban Deleted Column** | Toggle | Toggle | View reveals the trash icon to see deleted tasks; Edit unlocks the *Undelete → Todo* action. |
-| **Orchestration Master Pause Button** | — | Toggle | Lets a standard user use **Master Pause**, the pause button in the **Productivity** header, which halts all new AI task steps for everyone. Without it the button is greyed out. See [Pausing everything](/c5/using-c5/productivity#pausing-everything). |
-| **Sidebar: HITL Button & Modal** | Toggle | Toggle | View opens the HITL (clipboard) window and its lists; off, the sidebar's button does nothing. Edit is what every decision there needs, **Mute Noise** and **Unmute** included; off, the window opens read-only. No other permission is needed. See [Human review (HITL)](/c5/using-c5/hitl). |
+| **Kanban Deleted Column** | Toggle | Toggle | View reveals the trash icon to see deleted tasks; Edit unlocks the *Undelete → Todo* action, and shows the deleted tasks too. |
+| **Orchestration Master Pause Button** | — | Toggle | Lets a standard user use **Master Pause**, the pause button in the **Productivity** header, which pauses or resumes all AI orchestration, for everyone. It needs no other setting permission. Without it the button is greyed out. See [Pausing everything](/c5/using-c5/productivity#pausing-everything). |
+| **Sidebar: HITL Button & Modal** | Toggle | Toggle | View opens the HITL (clipboard) window and its lists; off, the sidebar's button does nothing. Edit approves or rejects a paused task, runs the Retrospective Loop, and covers **Mute Noise**, **Unmute** and the cluster merges in **Ops › Errors**, and the Retrospective Loop's own settings; off, the window opens read-only. The **Rules** and **Training** decisions are an administrator's, at the machine, and **Variants** follows the **Variants** row below. See [Human review (HITL)](/c5/using-c5/hitl#who-can-use-it). |
 | **Sidebar: Notifications Button & List** | Toggle | Toggle | View shows notifications; Edit permits acknowledging or deleting individual notifications. |
 | **Sidebar: Remote Control Button** | Toggle | Disabled | Shows the **Remote Control** button in the sidebar `⋯` menu to standard users. Kept in step with **Enable Remote Control for non-admin accounts** in **Settings → Remote Control**. Administrators always see it. |
 | **Sidebar: Restart, Quit, Start C5** | Toggle | Disabled | Controls whether standard users can see and trigger server lifecycle controls in the sidebar `⋯` menu, offline recovery screen, and connection error boundary. Defaults to **Off**. |
 | ↳ *Remote Control: Restart, Quit* | Toggle | Disabled | Whether Restart and Quit, and the Remote Control launcher, are offered over Remote Control. A standard user needs this row and the row above it. Administrators always have it. |
 | **System Killswitch Execution** | Toggle | Toggle | Grants access to the global Killswitch banner on Settings and Dashboard. |
 | **Teammate Profiles & Roles** | Toggle | Toggle | Permits editing team member permissions and autonomy bounds via Profile modal. |
-| **Tool Activity Button & List** | Toggle | Toggle | View shows tool activity list; Edit allows approving/denying pending tool authorizations. |
+| **Tool Activity Button & List** | Toggle | Toggle | View shows the Tool Activity button and its list; Edit lets a standard user acknowledge and delete the items in it. Approving or denying a tool request, and remembering that choice, is for administrators only; see [When an agent asks](/c5/security/permissions#when-an-agent-asks). |
 
 > **User self-help: Missing Restart, Quit, or Start buttons**
 > If you are a standard user and do not see the **Restart C5**, **Quit C5**, or **Start C5** buttons in your sidebar menu (`⋯`), or the **Start C5** button on connection error screens, your administrator has kept **Sidebar: Restart, Quit, Start C5** in its default **Off** position.
@@ -456,7 +462,7 @@ Advanced workspaces, agent fleets, and system configuration:
 | Section | User View | User Edit | Notes |
 | --- | :---: | :---: | --- |
 | **Labs Page Master** | Toggle | Toggle | Master switch over Variants, Skills, and Recipes. |
-| ↳ *Variants* | Toggle | Toggle | Edit off disables agent variant evolution. |
+| ↳ *Variants* | Toggle | Toggle | Edit off disables agent variant evolution. This row alone also decides the HITL window's **Variants** tab: View lists the proposed variants there, and Edit approves or rejects them. |
 | ↳ *Skills* | Toggle | Toggle | Edit off hides *Add Skill*, *Save*, and skill management menus. |
 | ↳ *Recipes* | Toggle | Disabled | Curated workflows and recipes. |
 | **Analytics** | Toggle | Disabled | Internal grading loops, quality scores, and reward metrics. |
