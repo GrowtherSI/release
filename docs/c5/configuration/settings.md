@@ -514,6 +514,13 @@ machine is using.
 | **Quit C5** | C5 shuts down cleanly and stays down. |
 | **Start C5** | When C5 is offline, launches C5 on your computer and reconnects this tab. |
 
+**Work under way when C5 stops is picked up at the next start.** Once a restart or quit
+begins, C5 starts no new model call and retries none. A task step a model was working on is
+left for the next start: it is not marked failed, not counted as one of its tries, and not
+marked done, and the next start runs it again. A tool call the guardian was checking at that
+moment is refused, to be safe, but is not listed in **Guardian blocks**: the step that asked
+runs again at the next start, and that check is the one that counts.
+
 Two settings sit beside them and are often confused:
 
 - **Start when I sign in** registers C5 with your operating system, so it is

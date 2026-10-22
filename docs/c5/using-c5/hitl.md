@@ -105,6 +105,8 @@ whether the guardian was right.
   shows **Why it was allowed**, and offers **Confirm unsafe** or **Dismiss**.
 - **Blocks from before C5 recorded the guardian's decisions** cannot teach anything, so C5
   closes them at start-up without a verdict, and they leave the list.
+- **A check cut short by a restart is not a block.** The call is refused, to be safe, but
+  nothing is listed: the step runs again at the next start, and is checked then.
 
 A guardian block's row in the notification list's **Tool Activity** opens this tab, for an
 administrator who is not on a paired device.
