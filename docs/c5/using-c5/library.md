@@ -25,7 +25,8 @@ The Library is split into tabs:
 ## Finding things
 
 There is a search box at the top of every tab. It looks inside your files, not just at
-their names, so you can search for a phrase you remember.
+their names, so you can search for a phrase you remember — except on **Attachments**, which
+searches names, descriptions and C5's analysis of each file (see below).
 
 You can also:
 
@@ -50,10 +51,34 @@ Deliverables can be signed, which is a way of proving a file came from you and h
 been changed since. This matters when you send work to a client. See
 [Workspaces](/c5/configuration/workspaces).
 
+## Attachments
+
+**Attachments** holds every file attached to your tasks and chats: the ones you gave C5 and
+the ones its agents made. Its header counts them, **Attachments (N)**.
+
+- **Search.** **Search attachments...** looks through every attachment, not only the ones
+  on screen, by name, description and C5's analysis of the file; it does not read inside the
+  files. Clear it to get back the list you had, scrolled where it was (when the type filter
+  is **All**).
+- **Filter by type.** **All**, a group — **Documents**, **Images**, **Text & Code**,
+  **Audio**, **Video**, **Archives**, **Other** — or one type within it, such as **PDF** or
+  **PNG**. Only the types you have are offered.
+- **Previews.** A text file's card shows its first lines. A PDF's card shows its first page
+  where Poppler's `pdftoppm` is installed on this machine, and a plain PDF card otherwise.
+- **Open one** to see it full size: an image or a PDF in place, and text, Markdown, JSON,
+  CSV or code in a viewer with **Copy** (and **Preview** or **Source** for Markdown). Other
+  files, such as a video or a ZIP, are not previewed properly: download them to open them.
+  **Download** there saves the file.
+- **Download several.** Tick them and press **Download Selected (N)**: C5 saves them one
+  after another, each under its own name. Your ticks stay while you search, so you can
+  gather files from several searches. Ticking needs **Edit** on Attachments. In the table
+  view, the header's tick selects the rows shown and replaces what you had ticked.
+
 ## Getting files out
 
-Every item has a **Download** button. There is nothing locking your work inside C5 —
-files are files, and you can take them whenever you like.
+Everything can be downloaded — an attachment from its preview, or several at once from the
+Attachments tab. There is nothing locking your work inside C5 — files are files, and you
+can take them whenever you like.
 
 You can also download a whole project at once as a zip.
 
