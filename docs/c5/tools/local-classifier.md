@@ -279,6 +279,15 @@ gate line shows how well the classifier does at them; for Tool-call safety, for 
 Settings says it has measured at chance so far. If you do not want a kind recorded, set it to
 **Off**, and that choice is kept.
 
+**Step quality reads the step, not its grade.** It is given the agent's role, the task's
+title and the step's name, and the start and end of the step's own instruction and of its
+output — never the rubric's score it is compared with. (The instruction is what the step was
+asked to do, before C5 adds the tools to use, the quality rules learned from past reviews
+and the like, which are much the same for every step of a role.) Earlier versions showed it
+the rubric's breakdown too, so it was judged with the answer in front of it. The gate
+therefore counts only steps recorded since your install updated to this version; a rating
+you gave an older step still counts for the reward model.
+
 **A mode someone chose is kept.** The defaults apply only to a kind of decision nobody has
 set. If you set a kind to **Off**, it stays off. Nothing ever raises a kind into **Assisted**
 or **Authoritative** for you. With the built-in model switched off and no model from your
@@ -483,8 +492,10 @@ Signoffs** window, which opens from the HITL (clipboard) button in the sidebar (
 account needs a second factor, unless the install was set up without any sign-in. What
 counts is the administrator role, not where the browser runs: on an install bound beyond
 this machine (`GROWTHER_BIND_HOST`), an administrator signed in from another computer sees
-it too. It shows a task's categories to confirm, or a step's output to rate. It never shows
-what the classifier answered, so your answer cannot lean towards it.
+it too. It shows a task's categories to confirm, or a step's output to rate, with the task
+and the step it belongs to (a step recorded before this version shows neither, and the start
+and end of the whole prompt instead). It never shows what the classifier answered, so your
+answer cannot lean towards it.
 
 You need not open the window to find out whether anything is asked. A small grey count on
 the lower corner of the HITL button says how many questions are waiting here and in
