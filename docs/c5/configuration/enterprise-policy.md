@@ -171,7 +171,12 @@ stands in for the signature, and a signature is verified when present.
    type is reported and skipped. A locked key with a bad value falls to its safest
    default and raises a critical audit event. One typo never unlocks a fleet.
 4. Locked keys shadow whatever the user had set. Lifting the policy restores the
-   user's value.
+   user's value. A teammate's save that changes a locked setting is refused, nothing in it
+   is stored, and the message names the setting as the policy templates do, for example
+   _Forbidden: Share improvements with the Mothership is managed by your organisation's
+   policy._ An administrator's save goes through without the locked settings; on
+   **Settings › Budget** a message names the ones left out: _Not saved — managed by your
+   organisation's policy: …_
 5. If the source becomes unreachable, the last verified policy holds for the grace
    window (default fourteen days). After that, locked keys fall to their safest
    defaults and C5 says so. It never quietly runs unmanaged.
