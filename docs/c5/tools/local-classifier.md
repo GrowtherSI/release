@@ -1096,7 +1096,9 @@ server that came back, or swapped its model, shows its old state until C5 next a
 
 Every message on the card names a provider as its card in **Settings › Integrations** does,
 for example _Not used. Your organisation's policy does not allow the provider Ollama._ or
-_The provider LM Studio is not turned on in Settings › Integrations._
+_The provider LM Studio is not turned on in Settings › Integrations._, and a chosen model by
+its name, never by an internal code: a raise refused on its gate reads _categories cannot be
+set to assisted on the chosen model qwen3:0.6b: …_
 
 ## What you see in Settings › Learning
 
