@@ -393,6 +393,14 @@ the line shows each part that has not passed yet: **Labels**, **Accuracy against
 labels**, **Telling cases apart**, **Agreement with the teacher model**, **Calibration**,
 **Confident answers** and **Speed**.
 
+**Speed counts only where something waits for the answer.** Task categories must give 95% of
+its answers within the 1.5 seconds a new task waits for them; the detail reads _p95 … ms vs
+budget 1,500 ms_. A question that ran out of time leaves no answer to time, so this is
+measured on the answers it gave. Nothing waits for the other kinds — their answers are only
+recorded beside the usual ones — so their speed is reported and never decides their gate,
+and **Ops › Classifier** draws no time budget for them: _Nothing waits for this family's
+answers, so the gate holds it to no time budget._
+
 **Telling cases apart** does not compare the classifier with the usual model. It checks
 that the classifier's answer actually changes when the right answer changes. A classifier
 that gives much the same answer every time fails it, even if the usual model does no
