@@ -516,6 +516,17 @@ The chosen model is not asked everything:
   those questions: the built-in model answers them while it is on, and C5's usual checks
   decide either way, as before. Beside such a model, Tool-call safety reads _Tool-call safety
   stays on this machine, so M is not asked it._
+
+  **One gap: llama.cpp's `--rpc`.** A llama.cpp server can hand part of its model to RPC
+  servers on other computers (`--rpc host:port`), which then work on what is derived from
+  each question. A llama.cpp router lists each model's `--rpc`, and C5 reads it: RPC servers
+  on this machine still count as this machine, one on your network makes the model **Your
+  network**, and one further away makes it **Online**. But a single-model llama.cpp server
+  started with `--rpc`, or a router's model given its RPC servers through `LLAMA_ARG_RPC` in
+  its environment, does not show it anywhere C5 can read, so C5 counts it as **This
+  machine** and asks it Tool-call safety too. If you offload a model that way, do not choose
+  it, or keep its RPC servers on this machine. (Only a llama.cpp build with RPC support
+  accepts `--rpc`; Homebrew's 0.6.0 refuses it.)
 - **Questions with more choices than the model can read.** Some models read only a few
   choices per question (10 for LM Studio, for example, and fewer for some cloud providers).
   Skill routing offers one choice for every skill area you have turned on — 11 on a new
@@ -571,7 +582,7 @@ which tests it again.
 
 | Provider | Where C5 counts it as running | What it needs |
 | --- | --- | --- |
-| **llama.cpp** | On this machine when its server says it runs the model here; otherwise your network, or online, by its address | The model loaded, with at least 4,096 tokens of context. A server that applies a LoRA adapter is refused |
+| **llama.cpp** | On this machine when its server says it runs the model here (a server that hands part of the model to other computers with `--rpc` may not say so; see [Who answers](#who-answers)); otherwise your network, or online, by its address | The model loaded, with at least 4,096 tokens of context. A server that applies a LoRA adapter is refused |
 | **Ollama** | On this machine for a model Ollama runs here (never a cloud model); otherwise your network, or online, by its address | Ollama 0.12.11 or newer, with the model loaded. C5 never changes how long Ollama keeps a model loaded, but its questions do reset the model's idle timer. Ollama's cloud models cannot be chosen: Ollama passes them on to its own servers |
 | **LM Studio** | Never on this machine: your network, even at this machine's address, because LM Studio can serve a model that runs on another device and cannot show C5 where it runs. At an address outside your network, online | LM Studio 0.4.0 or newer, with the model loaded with at least 4,096 tokens of context, and its reasoning switched off. C5 asks only a model LM Studio lists as loaded, so it never makes LM Studio load or swap a model |
 | **vLLM** | Never on this machine: your network, even at this machine's address. At an address outside your network, online | vLLM 0.26.0 or newer, entered as the address on the **llama.cpp** card. Its model needs at least 4,096 tokens of context |
