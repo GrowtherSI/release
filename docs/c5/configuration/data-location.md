@@ -43,6 +43,13 @@ there only by a fingerprint and its length, and, on macOS and Linux, keeps it re
 by your account; an existing file is narrowed that way at every start, but never deleted. If
 yours has one from an earlier version, an administrator may delete it: nothing reads it.
 
+**The model's replies stay out of the other logs.** `errors.log` never holds a model's reply
+to a categorisation or to a task's title, only its length, and C5's own output shows one
+only while `GROWTHER_DEBUG_CATEGORIZATION` is on, masked and cut to 300 characters. Up to
+v329, C5's output carried the start of every such reply (in `service.out.log` on macOS), and
+`errors.log` the start of a reply that would not parse or read as an error; an administrator
+may delete older copies of those files.
+
 ## See it in Settings
 
 Open **Settings › Storage › Configuration & Data**. The card shows:

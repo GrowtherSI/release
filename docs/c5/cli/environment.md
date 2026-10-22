@@ -91,7 +91,7 @@ See [Local model servers and gateways](#local-model-servers-and-gateways) below.
 
 | Variable | What it does |
 | -------- | ------------ |
-| `GROWTHER_DEBUG_CATEGORIZATION` | Set to `1`, `true`, `yes` or `on` to log each task categorisation to `logs/categorization-debug.log`; anything else, `0` and `false` included, leaves it off. The log names a goal by a fingerprint and its length, and keeps only the first 300 characters of the model's reply, with secrets and personal details masked; the reply can still repeat words from the task. Leave it off unless you are asked for it. |
+| `GROWTHER_DEBUG_CATEGORIZATION` | Set to `1`, `true`, `yes` or `on` to log each task categorisation to `logs/categorization-debug.log`; anything else, `0` and `false` included, leaves it off. The log names a goal by a fingerprint and its length, and keeps only the first 300 characters of the model's reply, with secrets and personal details masked; the reply can still repeat words from the task. The same switch, and the same masking and cut, decide whether C5's own output (the terminal, or `logs/service.out.log` at sign-in on macOS) shows the model's reply to a categorisation or to a task's title; off, it shows at most their lengths. `errors.log` never holds the reply. Leave it off unless you are asked for it. |
 
 **Media tools**
 
