@@ -38,11 +38,18 @@ The button carries up to two counts:
 ### Who can use it
 
 The **Sidebar: HITL Button & Modal** permission, under **Settings › Access › Feature
-Locks**, is the only one the window needs. **View** opens it and lists what waits there;
-with **View** off the button does nothing. **Edit** is what every decision in it needs:
-approving or rejecting a task, the review queues' buttons, and **Mute Noise** and
-**Unmute**. With **Edit** off the window opens read-only. **Chat Pipeline Runner** plays no
-part. Administrators always pass.
+Locks**, opens the window. **View** opens it and lists what waits there; with **View** off
+the button does nothing. **Edit** is what most decisions in it need: approving or rejecting
+a task, **Run Retrospective Analysis**, and **Mute Noise** and **Unmute**. With **Edit** off
+the window opens read-only. **Chat Pipeline Runner** plays no part. Administrators always
+pass. Three tabs follow other rules, the ones C5 itself applies to their decisions:
+
+- **Rules** and **Training**: their buttons are for an administrator at the machine running
+  C5. Anyone else, and any device paired through Remote Control, sees the lists without
+  them, whatever their HITL permission.
+- **Variants** follows the **Variants** row under **Labs** in **Settings › Access**, not
+  this one: its **View** lists the proposed variants, and its **Edit** approves or rejects
+  them, with or without **Edit** here.
 
 **Guardian blocks** and **Teach the classifier** are for administrators, and never on a
 device paired through [Remote Control](/c5/remote-control/overview). The account needs a
@@ -59,7 +66,7 @@ too: what counts is the role, not where the browser runs.
 | **Guardian blocks** | Administrators | Tool calls the guardian refused, waiting for a verdict |
 | **Teach the classifier** | Administrators, while something is asked | Questions whose answers measure the [classifier](/c5/tools/local-classifier) |
 | **Evaluations** | Anyone who may use the window | How C5's review rules have classified recent runs |
-| **Variants** | Anyone who may use the window | Proposed changes to how agents work, and the variants already kept |
+| **Variants** | Anyone who may use the window; its lists need **View** on **Labs › Variants** | Proposed changes to how agents work, and the variants already kept |
 | **Analysis** | Anyone who may use the window | The Retrospective Loop |
 | **Rules** | Anyone who may use the window | Review rules C5 proposed, and the rule book in force |
 | **Training** | Anyone who may use the window | Defects C5 found in past steps, to confirm or reject |
@@ -125,6 +132,19 @@ to load, and says why if they cannot be read. See
 [Teaching it](/c5/tools/local-classifier#teaching-it) for what each question shows and how
 its answer counts.
 
+## Variants
+
+**Pending Harness Evolutions (N)** lists the proposed changes to how an agent works, each a
+**Variant Proposal** naming the file it changes, the agent's role and the kind of change;
+**Stable Variants (N)** lists those already kept. **Approve** keeps a proposal and **Reject**
+reverts it, each after you confirm. Both are offered to administrators and to anyone with
+**Edit** on the **Variants** row under **Labs** in **Settings › Access**; that row's grant
+alone is enough, without the Labs page's own.
+
+Without **View** on that row, the tab reads nothing and says _Harness variants need the Labs
+› Variants view permission. An administrator can grant it in Settings › Access._ An **Edit**
+grant on the row counts as **View** too.
+
 ## Analysis
 
 **Run Retrospective Analysis** runs the Retrospective Loop now: it looks back over past runs
@@ -141,7 +161,9 @@ expired._ Run it again once the queue has drained.
 ## Rules
 
 **Pending Human Approval (N)** lists the review rules C5 proposed; **Active Rule-Book (N)**
-lists those in force. Approve a proposal to put it in force, or reject it.
+lists those in force. Approve a proposal to put it in force, or reject it. These buttons,
+and the tab's others, are for an administrator at the machine running C5: anyone else sees
+both lists without them.
 
 **A proposal nobody reviews for 30 days expires.** Every night at 23:55, and at the start of
 each Retrospective Loop, C5 expires the proposals still waiting 30 days after they were made,
@@ -153,7 +175,8 @@ running, and never twice in one day.
 ## Training
 
 **Pending Defect Confirmation (N)** lists the defects C5 found in past steps, for an
-administrator to **Confirm Defect** or **Reject**; **Verified Training Signal Dataset (N)**
+administrator at the machine to **Confirm Defect** or **Reject** (anyone else sees the list
+without them); **Verified Training Signal Dataset (N)**
 holds the confirmed ones. A finding about a step that has since been pruned can no longer be
 judged, so it expires, on the same nightly pass. Answering one that expired while the tab was
 open is refused: its card leaves the list, and the reason stays above the list: _This

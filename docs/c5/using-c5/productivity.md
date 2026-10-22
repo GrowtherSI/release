@@ -36,6 +36,14 @@ Click any card to open it. Inside you will find:
 This is the place to look when you want to know *why* something turned out the way it
 did.
 
+**A task waiting for review** shows **Human Review Required** inside it. Enter your
+reasoning, then choose **Approve** or **Deny**. The ruling is offered to someone with
+**Edit** on **Sidebar: HITL Button & Modal** in **Settings › Access** who is also the task's
+owner or an administrator. A task an agent or C5 itself created has no owner, so anyone
+with that permission can rule on it. Anyone else sees why instead of the buttons: _Needs
+HITL edit permission to approve or reject tasks._, or _Only this task's owner or an
+administrator can approve or reject it._ See [Human review (HITL)](/c5/using-c5/hitl).
+
 When you edit a task, the title, description and reasoning boxes each have a small microphone.
 Click it, say what you mean, and click again to stop — your words land in the box so you can read
 them over before saving. Reasoning is the one people dictate most: it is the field where you are
