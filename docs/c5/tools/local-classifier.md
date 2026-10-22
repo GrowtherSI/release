@@ -509,6 +509,17 @@ given with its categories already ticked can lean towards them. A question that 
 answers to blank questions apart from the others, so the evaluation can tell whether the
 ticks swayed them.
 
+**Tool calls to check.** Guardian blocks ask only about calls the guardian refused, so they
+cannot show how often it lets an unsafe call through, which is where the classifier would
+act. So the tab also asks about a few of the calls it allowed: a fixed random one in a
+hundred of those the classifier answered, up to 180 days back. Each card, _A call to …_,
+shows the tool's name and its **Arguments**, with secrets hidden as in Guardian blocks, and
+neither the guardian's verdict nor the classifier's answer. Answer **Was this call safe?**
+with **Safe** or **Unsafe** (each says what it means) and press **Save**, or **Skip** it for
+a week. A call that is waiting in Guardian blocks, or that someone has already reviewed, is
+not asked. Your answer is kept as a human label on the call, apart from the Guardian blocks
+verdicts.
+
 You need not open the window to find out whether anything is asked. A small grey count on
 the lower corner of the HITL button says how many questions are waiting here and in
 **Guardian blocks**. It is never added to the button's own count and never plays a sound:
@@ -520,9 +531,10 @@ Three other actions count as answers too:
 
 - **Changing the categories C5 gave a task**, a task one of your schedules created included.
 - **A verdict in Guardian blocks**, for tool-call safety. **Confirm block** says the
-  guardian was right to refuse the call; **Dismiss** says it was a false alarm. These are
-  the only answers people give tool-call safety there, and they cover only calls the
-  guardian blocked (see [Guardian blocks](../using-c5/hitl.md#guardian-blocks)).
+  guardian was right to refuse the call; **Dismiss** says it was a false alarm. They cover
+  only calls the guardian blocked (see
+  [Guardian blocks](../using-c5/hitl.md#guardian-blocks)); the tool calls to check above
+  cover the ones it allowed.
 - **Muting or unmuting an alert**, for alert triage. The **Auto-Suppression Ledger**, in the
   **Errors** tab of the same HITL window, has **Mute Noise** and **Unmute** beside each
   repeating error. Muting says "this is noise, hide it"; unmuting says "this should not have
@@ -1096,10 +1108,14 @@ Learning**.
 for a label (_Answered states waiting_), how far it is from its gate's floor (_Toward the
 gate's floor_), and the held-out answers an acting kind needs to stay verified. Where
 questions wait for a kind that **Teach the classifier** asks about, an administrator gets
-**Answer in Teach the classifier**, which opens that tab of the HITL window and waits for its
-questions to load; if they cannot be read, the tab says why. On a paired device the panel
-says _Answer them in Teach the classifier on the machine running C5._, and to anyone else
-that an administrator answers them.
+**Answer in Teach the classifier**, which opens that tab of the HITL window and waits for
+its questions to load; if they cannot be read, the tab says why. On a paired device the
+panel says _Answer them in Teach the classifier on the machine running C5._, and to anyone
+else that an administrator answers them. For tool-call safety the waiting count is far
+larger than Teach asks about, and the panel says so: _Teach the classifier asks only spot
+checks of these: about 1 in 100 of the calls the guardian allowed, picked at random. The
+calls it blocked, and those the classifier sent for a second look, are answered in Guardian
+blocks. The rest are never asked._
 
 ### Analytics › Classifier and Labs › Classifier
 
