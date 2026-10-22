@@ -18,10 +18,13 @@ Budgets stop that. You set a ceiling, and C5 will not go past it.
 
 ## Setting a budget
 
-1. Go to **Ops**.
-2. Open the **Budget** tab.
-3. Set a limit for the day, the week, or the month.
-4. Save.
+1. Go to **Settings › Budget**.
+2. In the **Hard Budget Cap** panel, set the amount and the period, and whether reaching
+   it notifies you (**Notify**) or blocks new work (**Block**).
+3. Save.
+
+**Ops › Token Budget** then shows what is being used and spent against it. Ops itself only
+reports: the limits live in Settings.
 
 You can set limits for the whole system, or for one project.
 
@@ -72,12 +75,18 @@ task that caused it.
 
 | Tab          | What it is for                                                     |
 | ------------ | ------------------------------------------------------------------ |
-| **Budget**   | Spending limits and cost charts.                                    |
-| **Triage**   | Things that need a decision from you.                               |
-| **Errors**   | Problems that came up, grouped so you can spot patterns.            |
-| **Audit**    | A record of what happened and when.                                 |
+| **Token Budget** | Daily and weekly token use, spend trends, and a breakdown by coordinator. |
+| **Triage**   | Queue health at a glance: pending jobs, background jobs waiting for a gap in real work (and how many expired unrun after 7 days), saga rollbacks, how effective triage briefs are, and a forecast of budget impact. |
 | **Memory**   | What C5 has remembered from your past work.                         |
+| **Audit**    | A record of what happened and when.                                 |
+| **Learning** | Reward signals by agent and gate, so you can see which prompts and routes are improving. |
 | **Classifier** | How the [classifier](/c5/tools/local-classifier) is doing: its decisions, its speed, the calls it replaced and the labels waiting. Only accounts that may view Settings see it. |
+| **Errors**   | Problems that came up, grouped so you can spot patterns.            |
+
+**Background LLM Jobs**, on **Triage**, counts the background improvement work waiting for a
+gap in real work — delegation autopsies, skill crystallisation, sparring matches — and how
+many expired: a job still waiting after 7 days expires without running. It is read when
+you open Ops.
 
 ## Self-improvement milestones
 
@@ -92,7 +101,7 @@ badge is independent — you will see whichever ones you have earned, in any ord
 | Milestone | Unlocks at | Sidebar badge | What it means |
 | --- | --- | --- | --- |
 | **Recipes In Use** | 25 recipe uses | **Gold star** | Recipes have planned 25 tasks. Each one now carries a measured verdict on whether using it beat planning from scratch. |
-| **Retrospective Loop** | 50 completed tasks | **Violet star** | Analyzes failed tasks to suggest new review rules and compare rule similarity. |
+| **Retrospective Loop** | 50 completed tasks | **Violet star** | Analyzes failed tasks to suggest new review rules and compare rule similarity. You review them in [Human review (HITL)](/c5/using-c5/hitl#rules); one nobody reviews for 30 days expires. |
 | **Reward Model Promotion** | 100 completed tasks | **Blue star** | Uses historical data to automatically promote experimental prompt variants when they beat the baseline. |
 
 Note that the three count different things. The Retrospective Loop and Reward Model
@@ -140,6 +149,12 @@ A few habits help:
 - **Be specific.** A clear request takes fewer tries than a vague one.
 - **Check your schedules.** A frequent schedule is usually the biggest line on the bill.
 - **Run models locally** for routine work, and save paid models for the hard parts.
+- **Know what runs in the background.** C5 improves itself in the gaps between real work —
+  autopsies of delegated work, skill crystallisation, sparring matches, alert triage — and
+  that work uses tokens too, on the models in the **System Priority** column of **Settings ›
+  Integrations › Coordinator Priority**. It waits while chats, tasks or schedules hold the
+  models, and the prompt optimizer waits as well. At a global cost cap set to block,
+  background jobs stay queued, and expire after 7 days.
 
 ## Where to go next
 
