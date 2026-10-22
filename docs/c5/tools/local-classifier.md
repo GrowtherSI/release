@@ -649,6 +649,18 @@ Remote Control.
 5. C5 tests the model, which can take up to a minute and a half. If it passes, it is in use
    at once, and a message says where it starts.
 
+If something changed while the test ran, nothing is chosen, and the message says what to
+do:
+
+- _M's provider was set up at another address while it was being tested, so its test does
+  not describe it there. Choose it again. Nothing was changed._
+- _M's provider is no longer set up in Settings › Integrations: it was removed while the
+  model was being tested. Set it up, then choose it again. Nothing was changed._
+- _Another test of M was already running, and it stopped before it asked anything: test it
+  again. Nothing was changed._ Two people choosing or testing the same model share one
+  test; when that test is stopped for the other one's reason, you are told so in these
+  words, never as a policy lock.
+
 **The test.** The model must answer C5's test questions in a way the classifier can read: it
 must return, for each answer it could give, how likely it thinks that answer is. The list
 shows the result of a model's last test beside it:
@@ -682,9 +694,16 @@ its card in **Settings › Integrations**):
 | _M is not loaded in P, so it was not tested. C5 never loads a model itself; load it there and test it again._ | Load the model in the provider, then press **Test again** |
 | _P did not answer, so M was not tested._ | Start the provider, or check its address in **Settings › Integrations** |
 | _Could not test M: Ollama is busy with other work. Nothing was changed._ (the reason is the test's own) | The test could not judge the model, so nothing changed. Try again later |
-| _M cannot answer the classifier's questions now. … C5 does not ask it until it passes a test again._ | The test ran and the model failed it. It stays chosen, and its test line says so |
+| _M cannot answer the classifier's questions now. … C5 does not ask it until it passes a test again._ | The test ran and the model failed it. The result was kept: it stays chosen, C5 stops asking it, and its test line says so |
+| _M cannot answer the classifier's questions now. … The result was not kept, so nothing was changed: C5 still asks M._ | The test was refused before C5 could tell which model answered (its provider refused the key, or its answer could not be read), so nothing was kept. The last passing test stands, and C5 goes on asking the model. Without _C5 still asks M_ when C5 was not asking it, for example while it is turned off |
+| _Could not test M: M runs on your network, … (10.0.0.7:8080), and you consented to sending the classifier's questions to 10.0.0.9:8080, not there: choose it again to confirm it there. C5 asked it none of the test's questions. Nothing was changed._ | Its provider now points at another address than the one you confirmed when you chose it. Choose it again with **Change…** and confirm the new address |
 | _M was tested, but its result could not be saved, so nothing was changed._ | Try again; if it repeats, run `growther doctor` |
 | _M was tested and its result kept, but the classifier's status could not be read. Settings › Learning shows it once it can be._ | The test is done. Only the card's refresh failed; it catches up by itself |
+
+**Test again asks only where you consented.** A model off this machine is tested again
+only at the address you confirmed for it, and a billed one only after its cost is shown;
+anywhere else the test sends nothing (above). On this machine, choosing the model was the
+consent, whatever its address.
 
 C5 tests a model only when an administrator chooses it or presses **Test again** on its
 panel, never on a schedule. A model that has changed since its test — new weights at the
