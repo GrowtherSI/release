@@ -29,8 +29,10 @@ account's credits and usage. Its routing settings have a tab of their own; see
 **Which models a provider lists.** A cloud provider lists the models its own listing named
 the last time C5 asked it. Before the first answer, after a failed one, or without a key,
 the model pickers fall back to C5's built-in list. MS Azure lists only the deployment you
-configured. OpenRouter lists the models you picked under **Model Selection** on its
-**Config** tab.
+configured. For your agents, OpenRouter lists the models you picked under **Model
+Selection** on its **Config** tab. The classifier's model list is the exception: it offers
+every model OpenRouter itself lists (see
+[What the classifier's questions carry](#what-the-classifiers-questions-carry)).
 
 ## Where keys come from
 
@@ -104,7 +106,9 @@ use free providers only.
 
 - **Model Selection**: the models to use, in order. _A request carries at most three: the
   agent's own model first, then the next ones in this order._ The models you pick here are
-  also the OpenRouter models the agents and the classifier can choose from.
+  also the OpenRouter models your agents can choose from. They are not the classifier's
+  choice: its list offers every model OpenRouter lists, and choosing one there never adds
+  it here or changes the order a chat or task tries.
 - **Allow Fallbacks**: whether OpenRouter may use a backup _provider_ for the same model
   when the first is unavailable (true by default). It is not about fallback models; those
   are the Model Selection list.
@@ -124,10 +128,12 @@ use free providers only.
 - **Provider Order**, **Allowed Providers** and **Ignored Providers** take OpenRouter
   _provider_ slugs — who serves a model, such as `deepinfra` or `together` — not who made
   it. The tab shows them; set them in **Raw JSON** as `"order"`, `"only"` and `"ignore"`.
-- **Plugins** are kept by name only (`"web"`, `"response_healing"`,
-  `"context-compression"`). A plugin entry with options, such as
-  `{"id": "web", "max_results": 3}`, cannot be set on the tab, **Raw JSON** included, and a
-  save from the tab removes one that was stored some other way.
+- **Plugins**: the switches under **Plugins** turn a plugin on or off by its name (`"web"`,
+  `"response_healing"`, `"context-compression"`). To give a plugin options, write it in
+  **Raw JSON** as an entry with an `id`, such as `{"id": "web", "max_results": 3}`; to keep
+  one off, give it `"enabled": false`. A save from the tab keeps such an entry with its
+  options. Its switch shows what requests carry: on, unless the entry says
+  `"enabled": false`. Flipping that switch changes only `enabled`, and keeps the options.
 
 ### When a save is refused
 
@@ -136,16 +142,46 @@ example _OpenRouter settings were not saved: sort must be one of price, throughp
 exacto (got "fastest")._ While **Raw JSON** holds something that does not parse, the tab
 says so and keeps the last valid settings.
 
+### If C5 cannot read these settings
+
+Your price caps and provider limits travel with every chat and task request to OpenRouter.
+If C5 cannot read them at the moment of a request — the database did not answer, or what is
+stored is not a settings object — it never sends that request without them:
+
+- **It sends the limits it last read** since C5 started, so a passing fault changes nothing
+  you would notice.
+- **If it has not read them once since starting**, it refuses the request instead: _C5
+  cannot read your OpenRouter routing limits (Settings › OpenRouter Config), so it did not
+  send this request: it never sends one without your price caps and provider limits. Check
+  them in Settings › OpenRouter Config._ The request is not retried on its own.
+
+(_Settings › OpenRouter Config_ is the **Config** tab with OpenRouter's icon.) C5 writes
+this to its log once per start, not once per request. If the refusal persists, open the
+**Config** tab: if the tab cannot show your settings either, run `growther doctor`.
+
+**Fleet › Assignment** never erases these settings either. Giving agents an OpenRouter
+model there saves it with the rest of OpenRouter's settings, so when C5 cannot read them
+first, it changes nothing and says so: _Could not set M for OpenRouter: C5 could not read
+its current settings, so it changed nothing._ The same holds for the local model pool.
+Try again once the settings can be read.
+
 ### What the classifier's questions carry
 
-A classifier model chosen from OpenRouter (see
-[A model from your providers](/c5/tools/local-classifier#a-model-from-your-providers)) is
-asked with your data collection, Zero Data Retention and distillable-text settings, the
-provider order and the allowed and ignored providers, quantizations, the sort, the price
-caps (a stored 0 included), and **Allow Fallbacks** when it is false. It is never sent the
-fallback models or the plugins, and C5 asks OpenRouter to use only providers that support
-every part of the question. If C5 cannot read these settings, it asks OpenRouter nothing
-they might rule out.
+The classifier's model list for OpenRouter (see
+[A model from your providers](/c5/tools/local-classifier#a-model-from-your-providers)) offers
+every model OpenRouter lists, read from OpenRouter's public list of models, with your key,
+through your proxy if you set one. C5 keeps that list for ten minutes. If it cannot read
+it, the list shows only your **Model Selection** models and says so: _C5 could not read the
+models OpenRouter lists, so this shows only those under Model Selection on its Config tab.
+Choosing one here never changes that list._ Choosing or testing a classifier model never
+changes these settings, and never changes which models a chat or task tries.
+
+A classifier model chosen from OpenRouter is asked with your data collection, Zero Data
+Retention and distillable-text settings, the provider order and the allowed and ignored
+providers, quantizations, the sort, the price caps (a stored 0 included), and **Allow
+Fallbacks** when it is false. It is never sent the fallback models or the plugins, and C5
+asks OpenRouter to use only providers that support every part of the question. If C5 cannot
+read these settings, it asks OpenRouter nothing they might rule out.
 
 ### If OpenRouter requests fail after an update
 

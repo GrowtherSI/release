@@ -21,7 +21,7 @@ The limit is your computer and your budget, not C5.
 | Tab            | What it is for                                              |
 | -------------- | ----------------------------------------------------------- |
 | **Roster**     | Every agent you have, and what it is for.                    |
-| **Assignment** | Which agent is working on what.                              |
+| **Assignment** | Giving a group of agents a model, in one batch.              |
 | **Deployment** | Starting up new agents.                                      |
 | **Health**     | How each agent is doing.                                     |
 
@@ -42,6 +42,16 @@ each works on its own copy and you review the results.
 4. Start them.
 
 New agents pick up waiting work right away.
+
+## Giving agents a model
+
+**Assignment** gives a group of agents a model in one batch. Choosing an OpenRouter model,
+or one on the **Local Provider** card, saves it into that provider's own settings, and C5
+keeps everything else there as it was: price caps, provider limits and data collection. If
+C5 cannot read those settings at that moment, it changes nothing and says so, for example
+_Could not set M for OpenRouter: C5 could not read its current settings, so it changed
+nothing._ Try again once the settings can be read. See
+[OpenRouter routing settings](/c5/configuration/model-providers#openrouter-routing-settings).
 
 ## How many should you run?
 

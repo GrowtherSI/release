@@ -773,9 +773,15 @@ Once a billed model is in use:
   quantizations and price caps, never its fallback models (see
   [OpenRouter routing settings](../configuration/model-providers.md#what-the-classifiers-questions-carry))
   — and asks OpenRouter to use only a provider that returns the probabilities. If C5 cannot
-  read those limits, it asks OpenRouter nothing they might rule out. A model tested by an
-  earlier version keeps that version's note, which names **Settings › Integrations ›
-  OpenRouter**, until it is tested again.
+  read those limits, it asks OpenRouter nothing they might rule out. The model's note says
+  so: _Every question C5 asks this model carries your OpenRouter routing limits from
+  OpenRouter's Config tab in Settings (…), never its fallback models._ A model tested by an
+  earlier version shows that note in these words too, without a new test.
+- The list offers every model OpenRouter lists, not only those under **Model Selection** on
+  OpenRouter's **Config** tab, and choosing one never adds it there: the models your chats
+  and tasks fall back to stay as you set them. If C5 cannot read OpenRouter's list, the
+  group says so and offers only the **Model Selection** models. A model OpenRouter no longer
+  lists is refused: _OpenRouter no longer lists M. Nothing was changed._
 - A name the provider moves to another model by itself cannot be chosen — one ending in
   `latest`, `openrouter/auto`, or a name starting with `~`: _choose a dated or versioned model
   instead_.
