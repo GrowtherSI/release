@@ -207,10 +207,17 @@ the key as you save and tells you straight away if it does not work.
 as an error or empty, or 3 of its last 5 attempts get a server error, a refused connection
 or a dead gateway, C5 moves it to the end of the order for a while: a minute at first,
 doubling each time it fails again, up to 15 minutes. Saving the provider again does not end
-that; a good answer, the time running out, or restarting C5 does. A coordinator skipped for
-empty or broken answers shows **Skipped — repeated failed generations** on its card, and
-hovering it says why and for how long. One moved for server errors or refused connections
-shows no chip. See [Choosing models](/c5/agents/model-routing#when-a-model-is-unavailable).
+that; a good answer, the time running out, or restarting C5 does. Hover a chip for why and
+for how long:
+
+- **Skipped — repeated failed generations**: its answers came back empty or broken.
+- **Tried last — repeated gateway errors**, in amber beside its status: its gateway answered
+  with server errors, refused the connection, or was down. Its status check can still
+  answer, so the card may read **Online** at the same time. It is still tried, after every
+  other coordinator.
+
+When both apply, only **Skipped** is shown. See
+[Choosing models](/c5/agents/model-routing#when-a-model-is-unavailable).
 
 ## Where to go next
 
