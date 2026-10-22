@@ -1046,9 +1046,15 @@ and when you run `growther classifier status` on a machine that can run the clas
 your endpoint protection blocks it, the line shows only what C5 knows without it (the
 processor and the memory the system can use), and nothing else about the classifier changes.
 
-The model is unloaded after 10 minutes without a question, and loaded again by the next one.
-The Runtime line then reads _Started; the model is not loaded yet and loads with the first
-question._
+The model stays loaded for **an hour** after its last question on a machine with 32 GB of
+memory or more (one that reports 28 GB or more counts: Linux and Windows report a 32 GB
+machine as a little less), and for **10 minutes** on a smaller one. Then it is unloaded, and
+the next question loads it again. Kept loaded, it holds its memory — the **Runtime** line
+says how much — while nothing is asked; with only ten minutes, many background questions
+had to wait for the model to load first. Once it is unloaded, the Runtime line reads
+_Started; the model is not loaded yet and loads with the first question._, and the badge
+**Not loaded**. A background question that has to wait for the load is given its usual time
+once the model is loaded, so it is answered rather than given up.
 
 ### Each kind of decision
 
@@ -1672,7 +1678,7 @@ While the classifier is on, C5 may print:
 | `[classifier] model download 40%` | The first download, in 10% steps. |
 | `[classifier] local classifier connected` | It started when C5 started. |
 | `[mcp] [classifier] model decider-0.8b-q8_0 loaded in 883 ms (metal, 8 threads, context 4096)` | The model loaded. |
-| `[mcp] [classifier] model unloaded (idle for 10 minutes)` | Unloaded after 10 minutes without a question; it loads again when asked. |
+| `[mcp] [classifier] model unloaded (idle for 60 minutes)` | Unloaded after an hour without a question (`idle for 10 minutes` on a machine with less than 32 GB of memory); it loads again when asked. |
 | `[mcp] [classifier] …` (any other line) | The classifier's own process explaining why it could not load the model, or why it stopped. The **Runtime** line in Settings shows the same reason. |
 | `[classifier] local classifier not started (no-model): …` | No model when C5 started; the reason and what to do follow. |
 | `[classifier] local classifier not started (error): …` | It could not be started; the reason follows. |
