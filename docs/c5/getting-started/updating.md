@@ -213,8 +213,15 @@ again to get it (see
   and how long 200 take at the current pace. **Teach the classifier** asks about task
   categories up to 180 days old.
 - **Speed counts only for Task categories**, the one kind of decision something waits for,
-  and it now counts the questions that timed out or were dropped as slower than the budget,
-  so a gate that passed on its answers alone can fail Speed.
+  and it now counts the questions that timed out as slower than the budget, out of every
+  question asked, so a gate that passed on its answers alone can fail Speed. A question
+  dropped from the background line every kind shares is not counted, and a model that
+  replaced another starts its count where it took over.
+- **Only a new label keeps a kind verified.** A question answered again on a label it
+  already had no longer re-verifies a kind that acts, so a kind nobody labels any more now
+  enters its 60 days of grace, and administrators are told so. Answer its questions in
+  **Teach the classifier** to keep it acting. A raise is judged on the newest measurement,
+  the nightly re-check's included.
 - **Step quality's agreement line names the reward model** where it, not the rubric, gave
   the usual score.
 - **Step quality no longer sees the rubric's score** it is compared with, so its gate starts
@@ -247,15 +254,19 @@ Escalation**, **System Control**, **Egress Data-Loss Prevention**, the read and 
 **Permitted Directory Paths**, **Master Tool Authorizations**, the **State Machine HITL
 Decay Threshold**, **Guardian Vetting** and **Back up secret files** for the GitHub backup.
 Before, anyone who may change settings could change some of them, from a paired device too;
-now a teammate and a paired device are refused. See
+now Settings shows them greyed out to a teammate and a paired device, saying why, and a
+refusal names the setting as Settings does. The same goes for answering a tool request and
+for the HITL window's **Rules** and **Training** buttons. See
 [Settings only an administrator can change](/c5/security/permissions#settings-only-an-administrator-can-change).
 
 **Remote Control's restrictions are loosened only by an administrator.** A teammate can
 still turn **Read-only for remote devices** or **Read-only restriction for non-admin
 accounts** on, or **Enable Remote Control for non-admin accounts** off, but only an
-administrator can undo them. Turning **Enable Remote Control for non-admin accounts** off
-now takes effect as soon as it is saved: before, a non-administrator's paired device kept
-working until C5 restarted. See
+administrator can undo them. A teammate can now save the tab on an install no administrator
+has saved yet, which was refused before, and **Voice on remote devices** is turned on only
+by an administrator now, though anyone who may change settings can still turn it off.
+Turning **Enable Remote Control for non-admin accounts** off now takes effect as soon as it
+is saved: before, a non-administrator's paired device kept working until C5 restarted. See
 [Who can change these switches](/c5/remote-control/setup#who-can-change-these-switches).
 
 **Master Pause has its own permission.** Pausing or resuming all orchestration needs
@@ -263,6 +274,21 @@ working until C5 restarted. See
 administrators always have. That permission alone is now enough, and the right to change
 other settings no longer includes it. See
 [Pausing everything](/c5/using-c5/productivity#pausing-everything).
+
+**Always Allow is for the agent that asked.** Choosing **Always Allow** for a whole tool no
+longer sets that tool's switch under **Master Tool Authorizations** to **On**, which let
+every agent use it without asking, over any other agent's **Always Deny**, and made a
+**1 hour** or **10 uses** answer permanent. An **Always Deny** now turns an **On** switch
+**Off** and leaves **Prompt** alone. A switch an earlier version turned On this way stays
+On: an administrator should look at **Master Tool Authorizations** in **Settings ›
+Extensions** after updating, and set to **Off** any tool that should ask. See
+[When an agent asks](/c5/security/permissions#when-an-agent-asks).
+
+**Check the Egress Data-Loss Prevention mode.** Up to v329, a save of any switch on
+**Settings › Tools** stored **Off** for a mode nobody had chosen, which turned the check off.
+The card now shows the mode C5 enforces, and a save stores only what changed. If an
+administrator saved that tab before, open the card: see
+[Data protection](/c5/security/data-protection#what-happens-when-it-finds-something).
 
 **Tool approvals keep your rules.** Approving an agent's request for a tool it lacks no
 longer turns your **Always Deny** into a grant, cuts a permanent **Always Allow** down to a
@@ -280,11 +306,44 @@ page's image asks for approval in an unattended run. See
 - **A save from OpenRouter's Config tab keeps plugin entries with options**, which earlier
   versions deleted. Check **Raw JSON** if you had set some.
 - **Fleet › Assignment never erases OpenRouter's settings** when it cannot read them first.
-- **The classifier's model list offers every model OpenRouter lists.** Its choice no longer
-  has to be one of your **Model Selection** models, and never changes them.
+- **The classifier's model list offers the models OpenRouter lists.** Its choice no longer
+  has to be one of your **Model Selection** models, and never changes them. The list is read
+  only where such a model could be chosen, and offers only the models your organisation's
+  policy allows.
+- **No agent is put into JSON mode by its name.** With the Config tab saved, a planner's
+  requests were asked for JSON, which broke its plans; now they are asked for whatever the
+  work needs.
 
 See
 [OpenRouter routing settings](/c5/configuration/model-providers#openrouter-routing-settings).
+
+**Review buttons follow who may decide.** A task's own **Approve** and **Deny** are offered
+only to its owner or an administrator, with HITL Edit; the HITL window's **Rules** and
+**Training** buttons only to an administrator at the machine; and **Variants** to whoever
+has the **Variants** grant under **Labs** in **Settings › Access**, HITL Edit or not. The
+Retrospective Loop's switch and settings need HITL Edit, which the permission to change
+settings no longer stands in for. An **Edit** grant on any row of **Settings › Access** now
+opens what it covers too. See [Human review (HITL)](/c5/using-c5/hitl#who-can-use-it).
+
+**Spending limits work in the installed app.** Up to v329 the installed app filed each day's
+use under a date the **Hard Budget Cap** and **Ops › Token Budget** could not read in order:
+the cap left out most of the spending, the classifier's billed questions included, and could
+count older days in every period, and today's use read nothing. In a time zone ahead of UTC
+every period also began a day early, so a daily cap counted yesterday's spending too. On the
+first start after updating, C5 refiles the use those versions recorded, and the dates its
+nightly jobs last ran, under the right day, so the cap's total for the current period can
+change. See [How the cap counts](/c5/using-c5/ops#how-the-cap-counts).
+
+**Nightly upkeep C5 missed is caught up.** If C5 was off, asleep or restarting at 23:55, the
+expiry of unreviewed rule proposals and findings and the Scoring check run once when it next
+starts, or within the hour, and never twice in one day; before, a night C5 missed was
+skipped. In the installed app, the **Daily Output** count of completed tasks, which read 0
+there, counts again.
+
+**A restart keeps the work under way.** A step a model was working on when C5 restarted or
+quit is left for the next start, never failed or counted as one of its tries, and a guardian
+check the restart cut short no longer leaves a false entry in **Guardian blocks**. See
+[Starting, restarting and quitting C5](/c5/configuration/settings#starting-restarting-and-quitting-c5).
 
 **From v326 or earlier: the classifier can use a model from your providers.** The section in
 **Settings › Learning** is now called **Classifier**, and the local classifier's switch is
@@ -358,7 +417,10 @@ version after v322, so going back to one of those asks nothing (see
 earlier do not know that a job, a rule proposal or a finding expired: they never run an
 expired job, but **Monitor › Queueing** shows it with the clock of a waiting one, and
 expired proposals and findings come back into the **Rules** and **Training** queues of the
-HITL window.
+HITL window. In the installed app, v329 and earlier file each day's use under the old dates
+again, so their **Ops › Token Budget** does not show the days this version refiled, and an
+**Always Allow** for a whole tool given there sets its switch to **On** for every agent, as it
+did.
 
 ### Updating to the release with the local classifier (Terms v1.8)
 
