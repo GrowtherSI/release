@@ -706,9 +706,13 @@ shows the result of a model's last test beside it:
 
 | Badge | The card then says | What happens |
 | --- | --- | --- |
-| **Worked** | _Tested <day>: it answers the classifier's questions._, then what the test found, for example _11 of its 26 top answers differed from the built-in model's (the largest difference in a probability was 1.00)._ | A model made for this kind of decision, or the built-in model's own weights served by your provider. It is used. |
-| **Experimental** | _Tested <day>: it answers, but it is a general model, so expect it to stay in Shadow._ | It is used; see [Experimental models](#experimental-models). |
+| **Worked** | _Tested <day>: it answers the classifier's questions._, then what the test found, for example _11 of its 26 top answers differed from the built-in model's (the largest difference in a probability was 1.00)._ | Every test question it was asked came back in a way C5 can read. It is used. |
+| **Partly worked** | _Tested <day>: it gave usable answers to 2 of 17 test questions._, then what the test found. Beside the badge: _Usable answers to 2 of 17 test questions_ | Some of its answers could be read. It is used, and C5 skips any question whose answer it cannot read: that question is answered as when the model cannot be asked (see [Use as fallback](#use-as-fallback)). The fewer usable answers, the less it will add |
 | **Did not work** | _Tested <day>: it cannot answer the classifier's questions._ and the reason, for example that the model gives no probabilities | Nothing is chosen, and nothing changes. |
+
+The badge is worked out the same way whatever serves the model — llama.cpp, Ollama,
+LM Studio, vLLM or a cloud provider — from that test alone, on your install. A model you have
+not tested has no badge.
 
 Beside the badge, a model the test could read says how far its answers were from the
 built-in model's: _11 of 26 top answers differed from the built-in model's_, _Same top
@@ -919,14 +923,13 @@ Google also refuses every request from a place where it does not offer the Gemin
 without counting it as failures, and its panel reads _Paused. C5 stopped asking it until its
 settings change: …_
 
-### Experimental models
+### General models
 
-A general model — one not made for this kind of decision — can still answer. Its test reads
-_it answers, but it is a general model, so expect it to stay in Shadow_, and the list marks
-it **Experimental**. Every model C5 asks through a chat is one of these: every LM Studio
-model and every cloud model.
+A general model — one not made for this kind of decision — can still answer, and its badge
+says how its test went, as for any other model. Every model C5 asks through a chat is one of
+these: every LM Studio model and every cloud model.
 
-An experimental model is used like any other. It records its answers in Shadow, and acts on a
+A general model is used like any other. It records its answers in Shadow, and acts on a
 kind of decision only if its own promotion gate passes on your install, which a general
 model rarely does. Choosing one does not stop the built-in model acting: until the chosen
 model's own gate passes, the built-in model's record keeps acting wherever it had been allowed
