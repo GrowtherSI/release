@@ -312,6 +312,10 @@ Where a model runs is what C5 can show, not what its address suggests:
 - **`loopback` (This machine)**: a llama.cpp server or an Ollama model on this machine,
   when that program itself tells C5 it runs the model here. An address on this machine
   is not enough on its own: a program there can pass the questions on to another computer.
+  A llama.cpp server that hands part of its model to RPC servers on other computers can
+  still say it runs here: a single-model server started with `--rpc`, or a router's model
+  given `LLAMA_ARG_RPC`, shows it nowhere C5 can read (see
+  [Who answers](../tools/local-classifier.md#who-answers)).
 - **`lan` (Your network)**: also a model on another computer on your network, and LM
   Studio or a vLLM server on this machine. Neither can show C5 where its model runs; LM
   Studio, for one, can serve a model that runs on another device. So C5 counts them as
@@ -326,8 +330,10 @@ Whatever the value, two things hold:
   model on your network or online none of your work until an administrator at the machine
   has seen where it runs and what C5 would send it, and confirmed. Widening the limit does
   not skip that.
-- **Tool-call safety questions never leave this machine.** C5 asks those only of a model
-  it can show runs here.
+- **Tool-call safety questions are asked only of a model C5 can show runs here.** The one
+  gap is the llama.cpp `--rpc` offload above: such a model counts as this machine and is
+  asked them too. Do not let a model that is offloaded that way be chosen, or keep its RPC
+  servers on the same machine.
 
 `allowedProviders` and `allowedModels` apply too: a provider or model they do not allow
 cannot be chosen for the classifier either.
