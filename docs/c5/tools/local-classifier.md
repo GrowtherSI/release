@@ -681,10 +681,14 @@ Once a billed model is in use:
 - C5 adds what each question costs to **Settings › Budget**, beside your other spending.
 - While your global cost cap is reached and set to block, C5 asks the model nothing. The
   built-in model answers meanwhile, if it is on.
-- Every question to OpenRouter carries the routing limits you set on OpenRouter's
-  **Config** tab in Settings (see [Model providers](../configuration/model-providers.md)),
-  and asks OpenRouter to use only a provider that returns the probabilities. If C5 cannot
-  read those limits, it asks OpenRouter nothing they might rule out.
+- Every question to OpenRouter carries the routing limits you set on OpenRouter's **Config**
+  tab in Settings — data collection, the providers allowed, ignored or preferred,
+  quantizations and price caps, never its fallback models (see
+  [OpenRouter routing settings](../configuration/model-providers.md#what-the-classifiers-questions-carry))
+  — and asks OpenRouter to use only a provider that returns the probabilities. If C5 cannot
+  read those limits, it asks OpenRouter nothing they might rule out. A model tested by an
+  earlier version keeps that version's note, which names **Settings › Integrations ›
+  OpenRouter**, until it is tested again.
 - A name the provider moves to another model by itself cannot be chosen — one ending in
   `latest`, `openrouter/auto`, or a name starting with `~`: _choose a dated or versioned model
   instead_.
