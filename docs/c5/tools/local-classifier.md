@@ -845,10 +845,13 @@ included. So C5 says what a test costs before anything is sent:
 
 Once a billed model is in use:
 
-- C5 adds what each question costs to **Settings › Budget**, beside your other spending.
-- While your global cost cap is reached and set to block, C5 asks the model nothing. The
+- C5 adds what each question costs to **Settings › Budget**, beside your other spending,
+  under the day it was asked.
+- While your **Hard Budget Cap** is reached and set to block, C5 asks the model nothing. The
   built-in model answers meanwhile, if it is on and [Use as fallback](#use-as-fallback) is
-  on.
+  on. The cap counts these questions with the rest of the period's spending (see
+  [How the cap counts](/c5/using-c5/ops#how-the-cap-counts)); up to v329 the installed app
+  filed them under a date the cap could not read in order, so it could fail to stop them.
 - Every question to OpenRouter carries the routing limits you set on OpenRouter's **Config**
   tab in Settings — data collection, the providers allowed, ignored or preferred,
   quantizations and price caps, never its fallback models (see

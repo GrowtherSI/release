@@ -28,6 +28,24 @@ reports: the limits live in Settings.
 
 You can set limits for the whole system, or for one project.
 
+### How the cap counts
+
+The cap adds up everything spent since the current period began, by this machine's own
+calendar: a daily cap starts again at local midnight, a weekly or monthly one on the day you
+chose, wherever in the world the machine is. Every day's spending counts, the classifier's
+questions to a model your provider bills included, and **Ops › Token Budget** shows the same
+days: today's use, the last 7 and 30 days, and the month.
+
+> **Note**
+> Up to v329 the cap counted the wrong days in two ways. The installed app filed each day's
+> use under a date written the American way (`10/22/2026`), which the cap could not put in
+> order: it left out most of that spending, could count some older days in every period,
+> and **Ops › Token Budget** showed nothing for today. And in a time zone ahead of UTC — most
+> of Europe, Asia and Australia — every period began a day early, so a daily cap also counted
+> yesterday's spending. Both are fixed. On the first start after updating, C5 refiles the use earlier
+> versions recorded that way under the right day, so it shows again and counts in the right
+> period.
+
 ### The voice budget is separate, and lives elsewhere
 
 Speech has its own limit, in the **Voice Spending Limit** panel under **Settings → Budget** —
