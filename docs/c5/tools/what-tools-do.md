@@ -74,9 +74,10 @@ Agents can make images and short videos on this machine, and fetch images from t
   which does not see your shell's `PATH` or an `FFMPEG_PATH` you exported. It must be the
   full path to a file named `ffmpeg`, and only an administrator can set it; a save with
   anything else is refused and says why. C5 notices a newly installed ffmpeg within a
-  minute, without a restart. Without it, the tool refuses and suggests `render_svg`
-  instead, and a task that asks for a video is told when it is planned that ffmpeg was not
-  found, so it delivers the frames and a storyboard rather than a video.
+  minute, without a restart, and one you removed the next time it looks: it then uses the
+  next ffmpeg on the list, or reports none. Without it, the tool refuses and suggests
+  `render_svg` instead, and a task that asks for a video is told when it is planned that
+  ffmpeg was not found, so it delivers the frames and a storyboard rather than a video.
 - **`fetch_web_image`** downloads one image from an address into the task, as an attachment
   with a readable file name and a line naming where it came from. To find a page's main
   image, `read_url` reads the image the page itself names for sharing (its Open Graph,
