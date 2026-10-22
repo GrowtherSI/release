@@ -1287,6 +1287,12 @@ Learning._ The built-in model's switch and its process counters are not drawn fo
 choice is kept in the page's address, and a link to a model no longer chosen shows the
 built-in model's record instead.
 
+**The record is named only when it is that model's.** Each read shows the record of the
+model chosen at that moment. If someone chooses another model in Settings while the tab is
+open, the next read is the new model's, so C5 asks again which model that is, and names it
+once it knows. Until then the record is not named: _Showing the record of the model from
+your providers chosen now, read-only. Its controls are in Settings › Learning._
+
 For the kind of decision you pick, it also shows:
 
 - **Answer time per day**, with the gate's 1.5-second budget drawn for Task categories only:
@@ -1355,7 +1361,11 @@ while a model from your providers is chosen.
   each answer's counts, Step quality by the step's role and tool-call safety by tool, Step
   quality's weighted κ and distance in levels, and how often the usual model changed its own
   answer; Cohen's κ against each source of answers; and how the questions people answered
-  were chosen. For Step quality it also compares the reward model with people's ratings. It
+  were chosen. For Step quality it also compares the reward model with people's ratings, and
+  its card comparing the classifier with the usual score is titled by what gave that score:
+  **The classifier against the rubric**, **The classifier against the reward model**, or,
+  where both scored the steps compared, **The classifier against the score each step was
+  given**, with _That score was the rubric's on N steps and the reward model's on M._ It
   reads once when opened; press **Refresh** to read again.
 - **Labs › Classifier** has **What a threshold would do**: pick a confidence threshold (τ)
   and see how many decisions it would cover, how many tasks the classifier would answer
