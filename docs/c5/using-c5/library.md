@@ -81,12 +81,17 @@ the ones its agents made. Its header counts them, **Attachments (N)**.
   is **All**).
 - **Filter by type.** **All**, a group — **Documents**, **Images**, **Text & Code**,
   **Audio**, **Video**, **Archives**, **Other** — or one type within it, such as **PDF** or
-  **PNG**. Only the types you have are offered. Every file is in exactly one group: an RTF
-  file is under **Documents** only, and a file stored with no type is filed by its name — a
-  `.pdf`, `.doc(x)` or `.xls(x)` under **Documents**, a `.zip`, `.tar` or `.gz` under
-  **Archives**, anything else under **Other**.
+  **PNG**. Only the types you have are offered. Every file is in exactly one group, the one
+  its card shows: a file named `.pdf`, or whose type says PDF, is a PDF under **Documents**;
+  an RTF file is under **Documents** only; a compressed or archive type, a `.jar` for
+  example, is under **Archives**; a text file with no name is under **Text & Code**; and a
+  file stored with no type is filed by its name — a `.doc(x)` or `.xls(x)` under
+  **Documents**, a `.zip`, `.tar` or `.gz` under **Archives**, anything else under
+  **Other**.
 - **Previews.** A text file's card shows its first ten lines, up to 400 characters, and ends
-  in **…** when there is more. A PDF's card shows its first page where Poppler's `pdftoppm`
+  in **…** when there is more. Text that is not UTF-8 previews as text too: a CSV saved by
+  Excel or a `.txt` saved by Notepad in Windows-1252 or Latin-1, and UTF-16 with or without a
+  byte-order mark. A PDF's card shows its first page where Poppler's `pdftoppm`
   is installed on this machine, and a plain PDF card otherwise: C5 does not ship Poppler.
   Install it (for example `brew install poppler` on a Mac) and restart C5 to get PDF
   thumbnails.
