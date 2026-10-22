@@ -62,14 +62,21 @@ Agents can make images and short videos on this machine, and fetch images from t
 
 - **`render_svg`** draws an image (PNG by default, or JPEG or WebP), from the agent's own
   drawing or from a ready-made card: `editorial_card` (a headline card), `stat_callout` (a
-  big number), `quote_card` (a quotation) or `badge_banner`.
+  big number), `quote_card` (a quotation) or `badge_banner` (a slim header banner, 1200×240
+  unless asked otherwise, with an optional badge, a one-line title and subtitle, and the
+  source and date).
 - **`render_video`** makes a video from slides: an H.264 `.mp4`, 1920×1080 unless asked
   otherwise, with each slide's caption shown on it and, for a task, written beside it as a
   `.vtt` caption file. It uses **ffmpeg** on this machine, which C5 does not ship. C5 looks
-  for it in `FFMPEG_PATH`, then on your `PATH`, then in `/opt/homebrew/bin`,
-  `/usr/local/bin` and `/usr/bin`, and remembers what it found until it restarts — so
-  restart C5 after installing ffmpeg. Without it, the tool refuses and suggests `render_svg`
-  instead.
+  for it first at the **FFmpeg location** in **Settings › Tools**, then in `FFMPEG_PATH`,
+  then on your `PATH`, then in `/opt/homebrew/bin`, `/usr/local/bin`, `/opt/local/bin` and
+  `/usr/bin`. Set the location when ffmpeg is anywhere else, or when C5 starts at sign-in,
+  which does not see your shell's `PATH` or an `FFMPEG_PATH` you exported. It must be the
+  full path to a file named `ffmpeg`, and only an administrator can set it; a save with
+  anything else is refused and says why. C5 notices a newly installed ffmpeg within a
+  minute, without a restart. Without it, the tool refuses and suggests `render_svg`
+  instead, and a task that asks for a video is told when it is planned that ffmpeg was not
+  found, so it delivers the frames and a storyboard rather than a video.
 - **`fetch_web_image`** downloads one image from an address into the task, as an attachment
   with a readable file name and a line naming where it came from. To find a page's main
   image, `read_url` reads the image the page itself names for sharing (its Open Graph,
@@ -78,7 +85,8 @@ Agents can make images and short videos on this machine, and fetch images from t
   like `fetch_web_image`: it asks for approval unless a grant or its master switch covers
   `read_url`, and the guardian checks it.
 
-A result is kept with the task, up to 25 MB. Each of these tools has a switch under **Master
+A result is kept with the task, up to 25 MB; a larger one is refused, as a video or an
+image, by its kind. Each of these tools has a switch under **Master
 Tool Authorizations** (see [Permissions](/c5/security/permissions#setting-the-level)).
 
 ## Adding more tools

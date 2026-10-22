@@ -59,7 +59,11 @@ When a deliverable's PDF carries images an agent fetched from the web:
   same headline.
 - **It sits with the item it belongs to**, after that item's headline, summary and link,
   under a readable file name instead of a string of letters and digits.
-- **Its caption says where it came from**, ending _| Source: domain (address)_.
+- **Its caption says where it came from**, ending _| Source: domain (address)_. Only an
+  image taken from the web is credited this way: a photo you uploaded is never credited to
+  a website, even beside a paragraph that cites one.
+- **An image C5 drew itself** (a card or a rendered picture) carries no technical note about
+  how it was made.
 - **Lines that only name an image file**, such as `**Image:** headline1.jpg`, are left out
   of the text, because the image itself is shown.
 
