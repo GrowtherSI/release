@@ -51,6 +51,21 @@ Deliverables can be signed, which is a way of proving a file came from you and h
 been changed since. This matters when you send work to a client. See
 [Workspaces](/c5/configuration/workspaces).
 
+### Images in a deliverable
+
+When a deliverable's PDF carries images an agent fetched from the web:
+
+- **Each image appears once**, even if it was attached twice, or attached again under the
+  same headline.
+- **It sits with the item it belongs to**, after that item's headline, summary and link,
+  under a readable file name instead of a string of letters and digits.
+- **Its caption says where it came from**, ending _| Source: domain (address)_.
+- **Lines that only name an image file**, such as `**Image:** headline1.jpg`, are left out
+  of the text, because the image itself is shown.
+
+An image that belongs to no item goes into a **Task Attachments** section at the end, and
+the images the task started with into **Task Inputs**.
+
 ## Attachments
 
 **Attachments** holds every file attached to your tasks and chats: the ones you gave C5 and
