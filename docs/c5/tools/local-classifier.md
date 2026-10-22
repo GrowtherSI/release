@@ -677,7 +677,11 @@ Remote Control.
 3. Pick a model. The list has one group for each provider you turned on, in the same order
    as the cards in Integrations, and a search box. A group's heading says where its models
    run (_On this machine_, _At this machine's address_, _Your network_ or _Online_). A provider
-   C5 cannot ask, or a model it cannot use here, says why.
+   C5 cannot ask, or a model it cannot use here, says why. When one reason holds every model
+   in a group, or in the whole list, it is said once, in amber, above them, for example
+   _C5 cannot tell that it runs on this machine, and Models allowed from is This machine: set
+   it to Your network on the Classifier card to choose it._ LM Studio's models need **Your
+   network**: C5 cannot see past LM Studio to tell that a model runs only on this machine.
 4. For a model on this machine, choose **Test and use**. For a model on your network or
    online, choose **Next**: C5 first shows where it runs and what it would send there, and
    asks you to confirm (see [Before a model off this machine is asked](#before-a-model-off-this-machine-is-asked)).
