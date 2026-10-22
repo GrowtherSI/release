@@ -1441,7 +1441,7 @@ while a model from your providers is chosen.
 The **Terms** button on the card opens **The classifier — Terms of Service, Section 14**:
 section 14 of the Growther.si Terms of Service, _Models C5 downloads and runs on your
 machine_, word for word, under the Terms version and its effective date (_Terms v1.10 ·
-effective …_ in this release). Below it are this install's built-in model, its size, its
+effective October 22, 2026_ in this release). Below it are this install's built-in model, its size, its
 licence, whether it is on this machine, and its notice. The **On this machine** row says
 what is at the model's path, without claiming C5 downloaded it (you may have placed it by
 hand):
