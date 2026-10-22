@@ -60,6 +60,10 @@ At the bottom of the left navigation sidebar, the **Options** menu (`⋯`) provi
 | **Quit** | Gracefully shuts down the C5 backend server and closes active connections. |
 | **Start C5** | When the server is offline or shut down, replaces Restart and Quit with a green **Start C5** button to launch or wake the server in one click. |
 
+Beside it are the **HITL** (clipboard) button, which opens the window where tasks wait for
+your sign-off and C5's self-improvement waits for review (see
+[Human review (HITL)](/c5/using-c5/hitl)), and the notification bell.
+
 ## Overview: your home screen
 
 **Overview** is the first thing you see when you open C5. It answers "what is going on
