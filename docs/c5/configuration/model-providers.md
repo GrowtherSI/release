@@ -164,8 +164,17 @@ The usual causes:
 - **The provider is down.** Check their status page.
 - **You hit a rate limit.** C5 slows down and retries by itself.
 
-To re-check a provider, open **Settings → Integrations** and save it again. C5 tests the
-key as you save and tells you straight away if it does not work.
+To re-check a provider's key, open **Settings → Integrations** and save it again. C5 tests
+the key as you save and tells you straight away if it does not work.
+
+**A coordinator that keeps failing is tried last.** When 3 of its last 5 answers come back
+as an error or empty, or 3 of its last 5 attempts get a server error, a refused connection
+or a dead gateway, C5 moves it to the end of the order for a while: a minute at first,
+doubling each time it fails again, up to 15 minutes. Saving the provider again does not end
+that; a good answer, the time running out, or restarting C5 does. A coordinator skipped for
+empty or broken answers shows **Skipped — repeated failed generations** on its card, and
+hovering it says why and for how long. One moved for server errors or refused connections
+shows no chip. See [Choosing models](/c5/agents/model-routing#when-a-model-is-unavailable).
 
 ## Where to go next
 

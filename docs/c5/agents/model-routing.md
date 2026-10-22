@@ -59,7 +59,24 @@ See [Model providers](/c5/configuration/model-providers) for how to connect one.
 ## When a model is unavailable
 
 Providers have outages. When one is down, C5 can fall back to another model rather than
-stopping. You choose the order it tries.
+stopping. You choose the order it tries, in **Settings › Integrations › Coordinator
+Priority** (with its own column for chats, tasks and C5's background work).
+
+That order holds among the coordinators that are working. One that keeps failing is tried
+last, until it recovers:
+
+- when 3 of its last 5 answers came back as an error or empty, or
+- when 3 of its last 5 attempts got a server error (5xx), a refused connection, or a
+  gateway that stayed dead.
+
+Being tried last lasts a minute at first, then twice as long each time it fails again once
+let back in, up to 15 minutes. A good answer resets that, and so does restarting C5. It is
+never dropped from the list: if everything else fails, it is still tried. A coordinator
+skipped for empty or broken answers shows **Skipped — repeated failed generations** on its
+card in **Settings › Integrations** (see
+[When a provider fails](/c5/configuration/model-providers#when-a-provider-fails)).
+
+Cancelling a task is not a failure: C5 stops there and tries no other model.
 
 This is worth setting up if you rely on schedules that run while you are not watching.
 
