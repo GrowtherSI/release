@@ -121,8 +121,10 @@ Escalation**, **System Control**, **Guardian Vetting** and the others listed und
 [Settings only an administrator can change](/c5/security/permissions#settings-only-an-administrator-can-change).
 The name in brackets is the setting's internal name. Nothing in that save was stored. Ask
 an administrator to make the change at the machine running C5, then save your other
-changes again. _These settings cannot be changed from a remote device. …_ means you saved
-from a paired phone or tablet: change them on the machine itself.
+changes again. _Forbidden: only an administrator can lift these Remote Control
+restrictions …_ is the same rule for Remote Control's read-only and non-admin switches,
+and _These settings cannot be changed from a remote device. …_ means you saved from a paired
+phone or tablet: change them on the machine itself.
 
 ## Models
 

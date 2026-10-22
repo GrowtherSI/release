@@ -163,6 +163,10 @@ save only for an administrator.
 audit log, with who made it, and so is every attempt from a paired device. See
 [Audit trail](/c5/security/audit-trail).
 
+**Remote Control's own restrictions** work one way round: a teammate can tighten them but
+not loosen them. See
+[Who can change these switches](/c5/remote-control/setup#who-can-change-these-switches).
+
 ## Hard limits
 
 **Settings → Guardrails** holds the checks that run no matter what any other setting
