@@ -107,8 +107,8 @@ use free providers only.
 - **Model Selection**: the models to use, in order. _A request carries at most three: the
   agent's own model first, then the next ones in this order._ The models you pick here are
   also the OpenRouter models your agents can choose from. They are not the classifier's
-  choice: its list offers every model OpenRouter lists, and choosing one there never adds
-  it here or changes the order a chat or task tries.
+  choice: its list offers the models OpenRouter lists that it could choose, and choosing
+  one there never adds it here or changes the order a chat or task tries.
 - **Allow Fallbacks**: whether OpenRouter may use a backup _provider_ for the same model
   when the first is unavailable (true by default). It is not about fallback models; those
   are the Model Selection list.
@@ -169,10 +169,13 @@ Try again once the settings can be read.
 
 The classifier's model list for OpenRouter (see
 [A model from your providers](/c5/tools/local-classifier#a-model-from-your-providers)) offers
-every model OpenRouter lists, read from OpenRouter's public list of models, with your key,
-through your proxy if you set one. C5 keeps that list for ten minutes. If it cannot read
-it, the list shows only your **Model Selection** models and says so: _C5 could not read the
-models OpenRouter lists, so this shows only those under Model Selection on its Config tab.
+the models OpenRouter lists, read from OpenRouter's public list of models, with your key,
+through your proxy if you set one. C5 reads it only where a classifier model from OpenRouter
+could be chosen — **Models allowed from** at **Anywhere**, OpenRouter turned on, and your
+organisation's policy allowing it — and offers only the models that policy's
+`allowedModels` allows. C5 keeps the list for ten minutes. If it cannot read it, the list
+shows only your **Model Selection** models and says so: _C5 could not read the models
+OpenRouter lists, so this shows only those under Model Selection on its Config tab.
 Choosing one here never changes that list._ Choosing or testing a classifier model never
 changes these settings, and never changes which models a chat or task tries.
 
