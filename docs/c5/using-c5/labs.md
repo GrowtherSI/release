@@ -25,7 +25,7 @@ workshop without stopping the work happening next door.
 | -------------- | ----------------------------------------------------------------- |
 | **Evolution**  | A record of what improved over time.                               |
 | **Factorial**  | Structured tests that compare options fairly.                      |
-| **Classifier** | A what-if for the [classifier](/c5/tools/local-classifier)'s confidence threshold. It changes nothing. Shown to accounts that may view Settings. |
+| **Classifier** | A what-if for the [classifier](/c5/tools/local-classifier)'s confidence threshold, for the built-in model or a model chosen from your providers. It changes nothing. Shown to accounts that may view Settings. |
 | **Variants**   | Different versions of a setup, so you can compare them.            |
 | **Skills**     | Specific abilities your agents can use.                            |
 | **Recipes**    | Saved sets of steps for jobs you do again and again.               |
@@ -103,6 +103,11 @@ would make and the calls to the usual model it would replace a week. **Evidence 
 says how many questions it is asked a week and how many have been labelled so far. Nothing
 you do here changes anything: a kind of decision acts on the threshold its promotion gate
 measured. See [When it starts to act](/c5/tools/local-classifier#when-it-starts-to-act).
+
+While a model from your providers is chosen, **Whose answers** beside the kind of decision
+switches between **Built-in model** and that model, so you can try a threshold on either
+one's record. See
+[What you see in Ops › Classifier](/c5/tools/local-classifier#what-you-see-in-ops-classifier).
 
 ### Automated promotion
 

@@ -234,6 +234,9 @@ again to get it (see
   evidence yet_.
 - **With Use as fallback off**, the questions the built-in model is not asked are counted,
   on its Health line and in Ops, as _not asked: Use as fallback is off_.
+- **Ops, Analytics and Labs can show a chosen model's own record.** While a model from your
+  providers is chosen, **Whose answers** beside the kind of decision switches from the
+  built-in model's charts to that model's, read-only.
 
 See [When it starts to act](/c5/tools/local-classifier#when-it-starts-to-act) and
 [Teaching it](/c5/tools/local-classifier#teaching-it).

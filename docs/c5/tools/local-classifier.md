@@ -1213,11 +1213,18 @@ server started** chart counts every question by outcome, including the backgroun
 given up after a minute's wait (see
 [When the classifier is busy](#when-the-classifier-is-busy)). Only accounts that may view
 Settings see this tab. It only reports; the switch and the modes are in **Settings ›
-Learning**. Its charts are the built-in model's; a model from your providers has its own
-gate and record (see
-[How a chosen model earns its place](#how-a-chosen-model-earns-its-place)) but no charts of
-its own here yet, and with the built-in model off the tab says it is showing what the
-built-in model recorded before.
+Learning**. With the built-in model off, the tab says it is showing what
+the built-in model recorded before.
+
+**Whose answers.** The charts are the built-in model's. While a model from your providers
+is chosen, a **Whose answers** choice beside the kind of decision offers **Built-in model**
+or that model by name, and the chosen model's own record — its answers, speed, coverage,
+savings, labels, gate and history (see
+[How a chosen model earns its place](#how-a-chosen-model-earns-its-place)) — shows under
+_Showing M's record: a model from your providers, read-only. Its controls are in Settings ›
+Learning._ The built-in model's switch and its process counters are not drawn for it. The
+choice is kept in the page's address, and a link to a model no longer chosen shows the
+built-in model's record instead.
 
 For the kind of decision you pick, it also shows:
 
@@ -1275,8 +1282,8 @@ blocks. The rest are never asked._
 ### Analytics › Classifier and Labs › Classifier
 
 Two more tabs show the classifier's record in detail. Both need permission to view Settings,
-and both show the built-in model's record; a model from your providers has no view of its
-own there yet.
+and both show the built-in model's record, with the same **Whose answers** choice as Ops
+while a model from your providers is chosen.
 
 - **Analytics › Classifier** follows one kind of decision at a time (**Family**), over 7, 14
   or 30 days (**Window**): how it does against the usual model on the answers people or
