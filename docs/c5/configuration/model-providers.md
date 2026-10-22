@@ -123,6 +123,11 @@ use free providers only.
 - **Middle-out compression** has no control on the tab: set `"middle_out_compression": true`
   in **Raw JSON**, and chat and task requests carry OpenRouter's context compression.
 
+**A reply is asked for as JSON only where the work needs one**, for every agent, whether or
+not this tab was ever saved. Up to v329, once the tab had been saved, a request from an agent
+whose name contains `planner` was always asked for JSON, which broke the plans and routing
+answers C5 reads line by line; such plans now work as with every other provider.
+
 ### Provider lists and plugins
 
 - **Provider Order**, **Allowed Providers** and **Ignored Providers** take OpenRouter
@@ -151,12 +156,12 @@ stored is not a settings object — it never sends that request without them:
 - **It sends the limits it last read** since C5 started, so a passing fault changes nothing
   you would notice.
 - **If it has not read them once since starting**, it refuses the request instead: _C5
-  cannot read your OpenRouter routing limits (Settings › OpenRouter Config), so it did not
-  send this request: it never sends one without your price caps and provider limits. Check
-  them in Settings › OpenRouter Config._ The request is not retried on its own.
+  cannot read your OpenRouter routing limits (OpenRouter's Config tab in Settings), so it did
+  not send this request: it never sends one without your price caps and provider limits.
+  Check them in OpenRouter's Config tab in Settings._ The request is not retried on its own.
 
-(_Settings › OpenRouter Config_ is the **Config** tab with OpenRouter's icon.) C5 writes
-this to its log once per start, not once per request. If the refusal persists, open the
+(That is the **Config** tab with OpenRouter's icon, the same place the classifier's notes
+name.) C5 writes this to its log once per start, not once per request. If the refusal persists, open the
 **Config** tab: if the tab cannot show your settings either, run `growther doctor`.
 
 **Fleet › Assignment** never erases these settings either. Giving agents an OpenRouter
