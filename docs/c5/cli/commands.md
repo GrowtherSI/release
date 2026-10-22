@@ -123,9 +123,9 @@ growther stop
 "Gently" means C5 is asked to shut down rather than being killed: it finishes writing
 its databases and releases its lock before it exits. Work under way is left for the next
 start, never failed or counted as a failed try (see
-[Starting, restarting and quitting C5](/c5/configuration/settings#starting-restarting-and-quitting-c5)). The command prints
-`Stopping C5 (pid …)…`, waits up to 10 seconds, and then prints `C5 stopped.`. If C5 is
-not running it says `C5 is not running.` Both exit with code `0`.
+[Starting, restarting and quitting C5](/c5/configuration/settings#starting-restarting-and-quitting-c5)).
+The command prints `Stopping C5 (pid …)…`, waits up to 10 seconds, and then prints
+`C5 stopped.`. If C5 is not running it says `C5 is not running.` Both exit with code `0`.
 
 If C5 has not exited after 10 seconds, the command says so and exits with code `1`. C5
 may still be shutting down: run `growther status` a moment later to check.
