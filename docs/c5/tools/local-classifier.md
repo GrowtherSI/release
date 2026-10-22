@@ -1088,7 +1088,7 @@ server that came back, or swapped its model, shows its old state until C5 next a
 | _P is busy with other work, so recent questions went elsewhere._ | The provider's server was busy, often with your own work: where it answers one request at a time, C5 never makes a question wait behind your own chat | Nothing |
 | _P is not answering (since 14:03)._ | The provider's server is not reachable | Start it, or check its address in **Settings › Integrations** |
 | _Paused. …_ | The provider refused (a key it does not accept, a rate limit), or the model failed repeatedly, so C5 holds it back for a while. This is not the model's own switch. The reason follows | Follow the reason. C5 picks up a key you fix in **Settings › Integrations** within seconds |
-| _Changed since it was tested. …_ | New weights at the same name, or the provider moved to another address | Choose the model again to test it again |
+| _Changed since it was tested. …_ | New weights at the same name, the provider moved to another address, or the model now runs farther away than where it was chosen. For a llama.cpp model on this machine, also while C5 cannot check its model file, for example on a network share that stopped answering | Choose the model again to test it again; for a share, once it answers again, nothing |
 | _Not used until it passes a test._ | No passing test of it is kept | Press **Test again** |
 | _Not used. …_ | Your organisation's policy, **Models allowed from**, or a confirmation that no longer holds; the reason follows | Follow the reason |
 | _Not used: P is turned off in Settings › Integrations._ | | Turn the provider back on, or **Remove** the model |
