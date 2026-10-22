@@ -36,8 +36,9 @@ Computer use is **off** until you turn it on.
 1. Go to **Settings › Tools**.
 2. Turn on **System Control** (_Permits agents to interact with the OS and GUI visually via
    MCP._) and press **Save**. It needs global **Tool Use** on; while that is off the switch
-   is greyed out. Only an administrator at the machine running C5 can turn it on or off —
-   a teammate who may change other settings, or a paired phone, is refused (see
+   is greyed out. Only an administrator at the machine running C5 can turn it on or off: for
+   a teammate who may change other settings, or on a paired phone, the whole tab is greyed
+   out with the reason under its heading (see
    [Settings only an administrator can change](/c5/security/permissions#settings-only-an-administrator-can-change)).
    The panel under the switch shows how System Control stands; its policy is set on the
    **Guardrails** tab, under **Computer Use**.
