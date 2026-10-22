@@ -212,7 +212,11 @@ again to get it (see
   when the last 30 do not hold 200, and the gate line says over how many days it measured
   and how long 200 take at the current pace. **Teach the classifier** asks about task
   categories up to 180 days old.
-- **Speed counts only for Task categories**, the one kind of decision something waits for.
+- **Speed counts only for Task categories**, the one kind of decision something waits for,
+  and it now counts the questions that timed out or were dropped as slower than the budget,
+  so a gate that passed on its answers alone can fail Speed.
+- **Step quality's agreement line names the reward model** where it, not the rubric, gave
+  the usual score.
 - **Step quality no longer sees the rubric's score** it is compared with, so its gate starts
   again from the steps recorded after this update.
 - **Agreement with the usual model** is shown beside what always giving its commonest answer

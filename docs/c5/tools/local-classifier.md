@@ -259,7 +259,7 @@ in **Settings › Learning**:
 | --- | --- | --- | --- | --- |
 | **Task categories** | Which categories a new task belongs to | The categories the usual model gave | Shadow | Record, or act once it has been measured |
 | **Skill routing** | Which skill area a specialist's step draws on | The skill area C5's **router** chose (the part of C5 that hands a step to a specialist) | Shadow | Record only |
-| **Step quality** | How good a step's output is, on five levels | The **rubric** score, C5's usual grade for a step | Shadow | Record only |
+| **Step quality** | How good a step's output is, on five levels | The **rubric** score, C5's usual grade for a step, or the **reward model**'s for a role whose learned reward model has been promoted | Shadow | Record only |
 | **Tool-call safety** | Whether a tool call is unsafe | The verdict of C5's **guardian**, which checks agents' tool calls before they run and still makes the decision | Shadow | Record only |
 | **Alert triage** | Whether a repeating error is noise to suppress | Whether the **Sense-Maker** (C5's own alert triage) chose to suppress it | Shadow | Record only |
 
@@ -407,12 +407,18 @@ labels**, **Telling cases apart**, **Agreement with the teacher model**, **Calib
 **Confident answers** and **Speed**.
 
 **Speed counts only where something waits for the answer.** Task categories must give 95% of
-its answers within the 1.5 seconds a new task waits for them; the detail reads _p95 … ms vs
-budget 1,500 ms_. A question that ran out of time leaves no answer to time, so this is
-measured on the answers it gave. Nothing waits for the other kinds — their answers are only
-recorded beside the usual ones — so their speed is reported and never decides their gate,
-and **Ops › Classifier** draws no time budget for them: _Nothing waits for this family's
-answers, so the gate holds it to no time budget._
+its answers within the 1.5 seconds a new task waits for them. Every question it was asked
+counts, not only the ones it answered: one that ran out of time, or was dropped with too
+many waiting, counts as slower than the budget. So the detail reads, for example, _p95 1,180
+ms vs budget 1,500 ms over 412 asks: 400 answered, 12 of 412 asks (2.9%) timed out or were
+shed, each counted above the budget_, and a kind that runs out of time on more than one
+question in twenty fails Speed however fast its answers were. Refusals while paused or busy
+are not counted. C5 began keeping these counts when your install updated to the version that
+keeps them; while the window reaches back before that day, the detail ends _(partial: C5 has
+kept its timeouts and sheds only since …; one before then is not counted)_. Nothing waits
+for the other kinds — their answers are only recorded beside the usual ones — so their speed
+is reported and never decides their gate, and **Ops › Classifier** draws no time budget for
+them: _Nothing waits for this family's answers, so the gate holds it to no time budget._
 
 **Telling cases apart** does not compare the classifier with the usual model. It checks
 that the classifier's answer actually changes when the right answer changes. A classifier
@@ -1165,9 +1171,12 @@ Under each setting you see:
   right._ Task categories compares whole sets first: _Same categories as the usual model on
   0 of 22 tasks (it picks 1.6 a task, the usual model 3.2); agrees on 85% of category
   decisions, where answering no category would score 81% — agreement, not a measure of being
-  right._ Where the usual model was asked the same question more than once, the line also
-  says how often it changed its own answer. This is agreement, not accuracy — only your
-  labels measure that — and nothing acts on it.
+  right._ Step quality names what gave the usual score: _the rubric_, _the reward model_,
+  or, where both scored the steps compared, _the score each step was given_, followed by
+  _That score was the rubric's on N steps and the reward model's on M._ Where the usual
+  model was asked the same question more than once, the line also says how often it changed
+  its own answer. This is agreement, not accuracy — only your labels measure that — and
+  nothing acts on it.
 - What it is really doing, when it is set to act: _Acting in Authoritative at confidence 0.83 or
   more._, _Set to Assisted, but only recording its answers._ with the reason, or _Set to
   Assisted, but not running: this machine is too slow for its answers to be used in time, so
@@ -1541,7 +1550,9 @@ match_), followed by the placement step.
   beside them, are deleted 180 days after they were made, every night at 23:55 (not while
   a legal hold is on). The labels people gave are kept. The text of a step that Step quality
   was asked about (its task, step name, instruction and output) is deleted 31 days after the
-  step unless someone rated it there; its scores and its agent's role are kept.
+  step unless someone rated it there; its scores and its agent's role are kept. The daily
+  counts of what became of each question (the ones **Ops › Classifier** and the speed check
+  read, which hold no text) are deleted after 400 days, on the same nightly pass.
 - **What is kept, and what is masked.** Secret values (API keys, tokens, private keys) are
   masked in that text before it is stored. A guardian decision's record keeps its verdict,
   the tool's name and the length of its reasoning; the reasoning itself stays only on the
@@ -1827,7 +1838,8 @@ While the classifier is on, C5 may print:
 | `[classifier-drift] categories: assisted → shadow — …` | The nightly re-check moved that kind of question back to Shadow, for the reason given. Administrators also get a notification. |
 | `[classifier-drift] Check was PARTIAL — …`, `[classifier-gate-history] Nightly pass was PARTIAL — …`, `[classifier-calibration] Fit was PARTIAL — …` | A nightly job could not finish every part of its work; the failures follow. It runs again the next night. |
 | `[classifier-drift] Nightly check failed: …`, `[classifier-gate-history] Nightly pass failed: …`, `[classifier-calibration] Nightly fit failed: …` | A nightly job failed outright; the error follows. It runs again the next night. |
-| `[classifier-decisions-retention] Prune was PARTIAL — …`, `[classifier-gate-history-retention] Prune was PARTIAL — …` | The nightly clean-up of old classifier records could not remove everything due; it tries again the next night. |
+| `[classifier-outcomes-retention] Daily prune complete: …` | The nightly clean-up removed daily question counts older than 400 days. Printed only when it removed some. |
+| `[classifier-decisions-retention] Prune was PARTIAL — …`, `[classifier-gate-history-retention] Prune was PARTIAL — …`, `[classifier-outcomes-retention] Prune was PARTIAL — …` | The nightly clean-up of old classifier records could not remove everything due; it tries again the next night. |
 
 C5 prints no `[mcp] Connected …` line for the classifier. Switched off, or on a machine that
 cannot run it, the classifier prints nothing.
