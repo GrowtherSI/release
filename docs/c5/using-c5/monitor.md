@@ -38,9 +38,11 @@ Click any item that is not green. C5 explains what it means and usually what to 
 
 Open **Queueing**. It shows the jobs waiting and how fast they are moving, in three tables:
 
-- **Task Jobs** — the steps of your tasks: **Pending**, **Active**, **Completed** or
-  **Failed**.
-- **LLM Leases** — the model slots C5 hands out to the work that runs.
+- **Task Jobs** — the steps of your tasks: **Pending**, **Active**, **Completed**,
+  **Failed** or **Cancelled** (a struck-through circle). A job is cancelled when the run or
+  step behind it ended without it, for example a cancelled run; it will not run.
+- **LLM Leases** — the model slots C5 hands out to the work that runs: **Active** while
+  held, **Completed** once used, **Failed** when one expired unused.
 - **System Jobs** — C5's background requests to a model, such as improving a task's
   description or the self-improvement work that runs in the gaps between real work. These
   show **Pending**, **Success** (a check mark) or **Expired** (a muted timer): a background
@@ -49,9 +51,10 @@ Open **Queueing**. It shows the jobs waiting and how fast they are moving, in th
   Jobs list where everything is **Expired** is normal: those jobs had been waiting since
   before the update.
 
-Each table's filter starts at **All Statuses**; System Jobs filters by **Pending**,
-**Success** and **Expired**, the other two by **Pending**, **Active**, **Completed** and
-**Failed**. Rows come newest first.
+Each table's filter starts at **All Statuses** and offers that table's own statuses: Task
+Jobs **Pending**, **Active**, **Completed**, **Failed** and **Cancelled**; LLM Leases
+**Active**, **Completed** and **Failed** (a lease is never pending); System Jobs
+**Pending**, **Success** and **Expired**. Rows come newest first.
 
 A queue that is long but shrinking is fine — it is just busy. A queue that is not moving
 at all points at something blocking, usually a missing API key, a spending limit, or a
