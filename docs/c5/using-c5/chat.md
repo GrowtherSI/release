@@ -23,6 +23,11 @@ These all work:
 C5 reads your request, makes a plan, and starts working. You will see the plan before
 the work begins, so you always know what is about to happen.
 
+The card that shows it also holds the task's options, such as **Tools**, **Orchestration**,
+**Auto Review**, the task type and the priority. C5 suggests a task type from what you
+wrote. Once you pick one yourself, a suggestion that arrives later leaves your pick alone,
+and the card keeps what you chose if you reload the page or come back to the chat.
+
 ## Bringing back something you sent
 
 Press **↑** in the message box to bring back the last thing you sent, the same way a
