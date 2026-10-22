@@ -492,7 +492,7 @@ gave a task, fixes that.
   was labelled since it was last verified), and after the 60 days it goes back to Shadow.
   Answering its questions in **Teach the classifier** re-checks it.
 - If moving a kind back fails part-way, the notification says exactly what changed and what
-  did not, for example _'categories' was moved back to shadow. The local classifier's
+  did not, for example _Task categories was moved back to shadow. The local classifier's
   promotion record for it could not be removed._, and is titled **… could not be moved back
   to shadow** when the kind itself is still acting. The next night judges it again. A night
   on which none of the checks could run is not counted as done: it is tried again before
@@ -1097,8 +1097,10 @@ server that came back, or swapped its model, shows its old state until C5 next a
 Every message on the card names a provider as its card in **Settings › Integrations** does,
 for example _Not used. Your organisation's policy does not allow the provider Ollama._ or
 _The provider LM Studio is not turned on in Settings › Integrations._, and a chosen model by
-its name, never by an internal code: a raise refused on its gate reads _categories cannot be
-set to assisted on the chosen model qwen3:0.6b: …_
+its name, never by an internal code: a raise refused on its gate reads _Task categories
+cannot be set to assisted on the chosen model qwen3:0.6b: …_ Each kind of decision is named
+as the card names it, in every message and notification: **Task categories**, **Skill
+routing**, **Step quality**, **Tool-call safety** and **Alert triage**.
 
 ## What you see in Settings › Learning
 
@@ -1308,8 +1310,8 @@ what is stored.
 
 A change that was saved, where only reading the status back failed, is said as done, also
 as a warning: _The local classifier was switched on, but the classifier's status could not
-be read. Settings › Learning shows it once it can be._ (for a mode, _categories was set to
-assisted, but …_). Nothing needs doing: the card catches up once it can read the status.
+be read. Settings › Learning shows it once it can be._ (for a mode, _Task categories was set
+to assisted, but …_). Nothing needs doing: the card catches up once it can read the status.
 
 **When the card cannot read the models from your providers** for a moment, it says so
 instead of drawing as if none were chosen: _C5 could not read the models from your
