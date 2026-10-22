@@ -71,9 +71,10 @@ last, until it recovers:
 
 Being tried last lasts a minute at first, then twice as long each time it fails again once
 let back in, up to 15 minutes. A good answer resets that, and so does restarting C5. It is
-never dropped from the list: if everything else fails, it is still tried. A coordinator
-skipped for empty or broken answers shows **Skipped — repeated failed generations** on its
-card in **Settings › Integrations** (see
+never dropped from the list: if everything else fails, it is still tried. Its card in
+**Settings › Integrations** says which: **Skipped — repeated failed generations** for empty
+or broken answers, or **Tried last — repeated gateway errors** for server errors, refused
+connections and a dead gateway (see
 [When a provider fails](/c5/configuration/model-providers#when-a-provider-fails)).
 
 Cancelling a task is not a failure: C5 stops there and tries no other model.

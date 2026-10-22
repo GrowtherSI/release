@@ -160,6 +160,14 @@ is tried again on its own when the time runs out; saving the provider again does
 that, and restarting C5 clears it. If it keeps happening, check the model it runs. See
 [When a model is unavailable](/c5/agents/model-routing#when-a-model-is-unavailable).
 
+### A coordinator shows "Tried last — repeated gateway errors"
+
+Recent requests to it got no answer at all: its gateway returned server errors, refused the
+connection, or was down. C5 tries it after every other coordinator for a while, on the same
+clock as **Skipped**. Its status check can still answer, which is why the card may read
+**Online** beside the chip. Check that the gateway or server behind it is running and
+healthy. The chip goes on its own once the block ends; restarting C5 clears it too.
+
 ### Results got worse
 
 Check what changed. [Analytics](/c5/using-c5/analytics) shows quality over time — find
