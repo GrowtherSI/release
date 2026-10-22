@@ -81,7 +81,7 @@ task that caused it.
 | **Audit**    | A record of what happened and when, including what C5 did about stuck runs. See [Audit trail](/c5/security/audit-trail). |
 | **Learning** | Reward signals by agent and gate, so you can see which prompts and routes are improving. |
 | **Classifier** | How the [classifier](/c5/tools/local-classifier) is doing: its decisions, its speed, the calls it replaced and the labels waiting. **Whose answers** switches between the built-in model's record and a chosen model's. Only accounts that may view Settings see it. |
-| **Errors**   | Problems that came up, grouped so you can spot patterns.            |
+| **Errors**   | Problems that came up, grouped so you can spot patterns. **Cluster Merge Candidates** lists groups that look like the same error; merging one into another, or dismissing the pair, needs **Edit** on **Sidebar: HITL Button & Modal** in **Settings › Access**, and anyone else sees the list without those buttons. |
 
 **Background LLM Jobs**, on **Triage**, counts the background improvement work waiting for a
 gap in real work — delegation autopsies, skill crystallisation, sparring matches — and how
@@ -123,7 +123,8 @@ For **Recipes In Use**, the count you are watching is in **Analytics › Recipes
 
 Clicking a star tells you what it unlocked. The Retrospective Loop and Reward Model stars
 take you to **Settings › Budget**, where you can turn either feature off to manage token
-usage. The Recipes In Use star takes you to **Labs › Recipes** instead, because it does
+usage. The Retrospective Loop's switch there needs **Edit** on **Sidebar: HITL Button &
+Modal** in **Settings › Access**. The Recipes In Use star takes you to **Labs › Recipes** instead, because it does
 not switch anything on — it marks the point where there is finally something to look at.
 
 ### Using recipes
