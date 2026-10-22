@@ -497,6 +497,18 @@ and the step it belongs to (a step recorded before this version shows neither, a
 and end of the whole prompt instead). It never shows what the classifier answered, so your
 answer cannot lean towards it.
 
+**One category question in four starts blank.** Most category questions start with the usual
+model's categories ticked: _Ticked as the usual model answered. Change anything that is
+wrong; saving with none ticked records that none apply._ A fixed quarter of them, chosen
+from the question itself, start with nothing ticked instead: _One question in four starts
+with nothing ticked, so your answer checks the usual model too. Tick the categories that
+fit, or None of these._ The usual model is measured on your answers too, and an answer
+given with its categories already ticked can lean towards them. A question that starts blank
+— these, and those the usual model could not answer — saves only once you tick a category or
+**None of these**: _Tick the categories that fit, or None of these, then save._ C5 keeps
+answers to blank questions apart from the others, so the evaluation can tell whether the
+ticks swayed them.
+
 You need not open the window to find out whether anything is asked. A small grey count on
 the lower corner of the HITL button says how many questions are waiting here and in
 **Guardian blocks**. It is never added to the button's own count and never plays a sound:
