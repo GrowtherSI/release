@@ -227,9 +227,15 @@ useful when you change your mind mid-sentence.
 ## Voice from a paired phone
 
 A phone or tablet you have paired through [Remote Control](/c5/remote-control/overview)
-shows the same microphone, but it is **off until you turn it on**, and it can be turned on
-only in C5 on the machine, under **Settings › Voice**. A paired device cannot switch it on
-for itself.
+shows the same microphone, but it is **off until you turn it on**: **Voice on remote
+devices**, under **Settings › Voice**. A paired device cannot switch it on for itself.
+
+**Only an administrator, at the machine, can turn it on.** Anyone who may change settings
+can turn it off. For anyone else, once it is off, the switch is greyed out with _Only an
+administrator can turn on voice for remote devices._ If a save turning it on is refused all
+the same, the tab says the reason in full: _Could not save: Forbidden: only an administrator
+can turn on Voice on remote devices. Turning it off is allowed._ Every change to it, an
+administrator's included, is recorded in the audit log.
 
 When it is on, one tap on the phone records live microphone audio and sends it to the
 machine — through the address Growther.si issues, if that is how the phone is connected — and
