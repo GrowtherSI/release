@@ -459,12 +459,11 @@ the others.
 
 ## A model from your providers
 
-From version 1.9 of the Terms of Service, an administrator can choose a model that one of
-your model providers serves — a llama.cpp or Ollama server on this machine, LM Studio, vLLM, or
-a cloud API — to answer the classifier's questions, asked before the built-in model. None
-is chosen by default, and nothing changes until someone chooses one. C5 does not download
-such a model: it asks it where your provider serves it, as set up in **Settings ›
-Integrations**.
+An administrator can choose a model that one of your model providers serves — a llama.cpp or
+Ollama server on this machine, LM Studio, vLLM, or a cloud API — to answer the classifier's
+questions, asked before the built-in model. None is chosen by default, and nothing changes
+until someone chooses one. C5 does not download such a model: it asks it where your provider
+serves it, as set up in **Settings › Integrations**.
 
 ### Who answers
 
@@ -615,8 +614,8 @@ Tick _I have read Section 14 and want C5 to send these questions to H._ (H is th
 address) and choose **Allow and test**. **Back** returns to the list with your choice kept.
 
 The confirmation is for that address. A model at another address asks again. The Terms
-dialog then shows the chosen model and when you allowed it, for example _M through LM Studio,
-at localhost:1234. You allowed this on 2026-10-15 under Terms v1.9._
+dialog then shows the chosen model and when you allowed it, for example _M through LM
+Studio, at localhost:1234. You allowed this on 2026-11-02 under Terms v1.10._
 
 Those questions then go from your machine to that provider like any other work you send it,
 under your agreement with the provider. They do not go through Growther.si.
@@ -864,11 +863,12 @@ Learning**.
 ## The Terms that cover it
 
 The **Terms** button on the card opens **The classifier — Terms of Service, Section 14**:
-section 14 of the Growther.si Terms of Service, _Models C5 downloads and runs on your machine_,
-word for word, under the Terms version and its effective date (_Terms v1.9 · effective …_
-in this release). Below it are this install's built-in model, its size, its
-licence, whether it is on this machine, and its notice. The **On this machine** row says what
-is at the model's path, without claiming C5 downloaded it (you may have placed it by hand):
+section 14 of the Growther.si Terms of Service, _Models C5 downloads and runs on your
+machine_, word for word, under the Terms version and its effective date (_Terms v1.10 ·
+effective …_ in this release). Below it are this install's built-in model, its size, its
+licence, whether it is on this machine, and its notice. The **On this machine** row says
+what is at the model's path, without claiming C5 downloaded it (you may have placed it by
+hand):
 
 | It reads | Meaning |
 | --- | --- |
@@ -884,10 +884,10 @@ While the model is not here (or the file there is not the model), on a machine t
 download it (see [Turn it back on](#turn-it-back-on)), a line under the notice says so and why:
 _On this machine it is not downloaded: …_
 
-With a [model from your providers](#a-model-from-your-providers) chosen, a **Your model** row
-names it too: _M through Ollama, on this machine._, or, for a model off this machine, where it
-runs and when an administrator allowed it, for example _M through LM Studio, at
-localhost:1234. You allowed this on 2026-10-15 under Terms v1.9._
+With a [model from your providers](#a-model-from-your-providers) chosen, a **Your model**
+row names it too: _M through Ollama, on this machine._, or, for a model off this machine,
+where it runs and when an administrator allowed it, for example _M through LM Studio, at
+localhost:1234. You allowed this on 2026-11-02 under Terms v1.10._
 
 At the bottom are **Full Terms of Service**
 ([growther.si/t=models](https://growther.si/t=models)), **Third-party notices** (the licences of
@@ -902,17 +902,20 @@ nothing about it or your use of it to Growther.si. Each model stays under its pu
 licence. The classifier is on by default, first only records, and acts only after it has been
 measured on your install and only for the kinds of decision allowed in Settings.
 
-From version 1.9, section 14 also covers **a provider's model, if you choose one**: an
-administrator at the machine may choose a model one of your providers serves, and none is
-chosen by default. C5 does not download it. That model, and the questions C5 sends it, are
-governed by your agreement with the provider and the model's own terms; Growther.si is not a
-party to that and does not receive them, and the provider may charge you for them. It is
-measured on its own record and acts only where it has been measured. While the built-in model
-is on, it keeps acting where it has been measured and the chosen model has not, and answers
-whenever the chosen model cannot be reached; while it is off, no classifier answers then. A
-model not served on your machine can be chosen only where your organisation's policy allows
-it, and only after C5 has shown what it will send there and you have confirmed. Questions
-about whether a tool call is safe are never sent to such a model.
+Section 14 also covers **a provider's model, if you choose one**: an administrator at the
+machine may choose a model one of your providers serves, and none is chosen by default. C5
+does not download it. That model, and the questions C5 sends it, are governed by your
+agreement with the provider and the model's own terms; Growther.si is not a party to that
+and does not receive them, and the provider may charge you for them. It is measured on its
+own record and acts only where it has been measured. While the built-in model is on, it
+keeps acting where it has been measured and the chosen model has not, and answers whenever
+the chosen model cannot be reached, unless its use as a fallback has been turned off in
+Settings › Learning or by your organisation's policy. While the built-in model is off, or
+its use as a fallback is turned off, no classifier answers when the chosen model cannot be
+reached, and C5 answers as it did before. (Version 1.10 of the Terms added the words about
+its use as a fallback.) A model not served on your machine can be chosen only where your
+organisation's policy allows it, and only after C5 has shown what it will send there and you
+have confirmed. Questions about whether a tool call is safe are never sent to such a model.
 
 ## Machines it cannot run on
 
@@ -1566,7 +1569,7 @@ used.
 The name moves to a newer model by itself (one ending in `latest`, or `openrouter/auto`), so
 its record would mean nothing. Choose a dated or versioned name.
 
-**_This machine now requires Terms v1.9, and this page shows v1.8. Reload C5 to read the current text._**
+**_This machine now requires Terms v1.10, and this page shows v1.9. Reload C5 to read the current text._**
 The page was loaded before C5 was updated. Reload it, read Section 14 again, and confirm.
 
 **The chosen model's row says _Not used._, _Paused._ or _Changed since it was tested._**

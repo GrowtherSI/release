@@ -250,19 +250,18 @@ machine, Step quality records one question in four (above).
 
 #### Read the Terms that cover it
 
-Select **Terms** on the card. The dialog shows Section 14 of the Terms of Service,
-*Models C5 downloads and runs on your machine*, word for word; this install's model with
-its size, licence (Apache-2.0) and what is on this machine (for example *present and
-verified*, *a link to the model, verified*, or *a file that is not the model (wrong size), so
-it is not used*); and the model's notice. While the model is not here,
-on a machine that will not download it, a line under the notice says so and why. From there you can
-open the **Full Terms of Service** (<https://growther.si/t=models>) and the
-**Third-party notices** for everything C5 is built from — the same notices as
-**About › Copyright & Legal** in the sidebar's **Options** menu (`⋯`). If you may change
-settings and the classifier is on, it also offers **Turn off the local classifier…**
-(**Turn off the built-in model…** while a model from your providers is chosen). Nothing in
-the dialog asks you to accept anything. Since Terms v1.9, Section 14 also covers a model
-from your providers, if you choose one.
+Select **Terms** on the card. The dialog shows Section 14 of the Terms of Service, *Models
+C5 downloads and runs on your machine*, word for word; this install's model with its size,
+licence (Apache-2.0) and what is on this machine (for example *present and verified*, *a
+link to the model, verified*, or *a file that is not the model (wrong size), so it is not
+used*); and the model's notice. While the model is not here, on a machine that will not
+download it, a line under the notice says so and why. From there you can open the **Full
+Terms of Service** (<https://growther.si/t=models>) and the **Third-party notices** for
+everything C5 is built from — the same notices as **About › Copyright & Legal** in the
+sidebar's **Options** menu (`⋯`). If you may change settings and the classifier is on, it
+also offers **Turn off the local classifier…** (**Turn off the built-in model…** while a
+model from your providers is chosen). Nothing in the dialog asks you to accept anything.
+Section 14 also covers a model from your providers, if you choose one.
 
 #### Turn the classifier off
 

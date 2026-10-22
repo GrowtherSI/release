@@ -76,7 +76,7 @@ is the failure they exist to prevent: a policy an administrator sets and the ser
 ignores. C5 refreshes them on every start, and leaves any file you have edited alone.
 Templates written by a build from before the local classifier do not carry
 `classifier_enabled` ([below](#keep-the-local-classifier-on-or-off)), and those from
-before Terms of Service v1.9 do not carry `classifier_external_allowed`
+before C5 v327 (Terms of Service v1.9) do not carry `classifier_external_allowed`
 ([below](#classifier-models-from-your-providers)); write them again from the version you
 deploy.
 
@@ -270,8 +270,8 @@ C5 then turns it on as it would on a new install.
 
 ## Classifier models from your providers
 
-From Terms of Service v1.9, an administrator can also choose a model that one of your
-model providers serves to answer the classifier's questions — see
+An administrator can also choose a model that one of your model providers serves to answer
+the classifier's questions — see
 [A model from your providers](../tools/local-classifier.md#a-model-from-your-providers).
 None is chosen by default. One key decides how far away such a model may run:
 

@@ -42,8 +42,8 @@ To accept:
 3. Press **Agree**.
 
 **Cancel** leaves the switch off. Once accepted, the dialog is not shown again unless C5
-brings newer Terms than the ones accepted. The tab shows a line like _Terms v1.9 accepted
-by Ana Ruiz on Oct 15, 2026_ — the name of whoever accepted, your own included — with a
+brings newer Terms than the ones accepted. The tab shows a line like _Terms v1.10 accepted
+by Ana Ruiz on Nov 2, 2026_ — the name of whoever accepted, your own included — with a
 **View** link that reopens the text. Only when that account no longer exists on the
 install — deleted since — does the line fall back to the account id.
 
@@ -54,16 +54,16 @@ that describes all three ways in.
 ### If the Terms changed after you accepted them
 
 An acceptance counts for the version accepted and any older one. When an update brings a
-newer version — as the update to version 1.9 does — an install that already had Remote
+newer version — as the update to version 1.10 does — an install that already had Remote
 Control on keeps working: nothing is torn down, no device is signed out, and the address
 stays up. What changes is on the tab:
 
-- the _accepted_ line adds _— v1.9 now needs accepting_;
-- a warning reads _Remote Control is on, but Terms v1.9 have not been accepted on this
+- the _accepted_ line adds _— v1.10 now needs accepting_;
+- a warning reads _Remote Control is on, but Terms v1.10 have not been accepted on this
   machine._ with a **Review and accept** link that opens the dialog. The link works only on
   the machine, for someone who may change settings: a paired device cannot accept.
 
-What version 1.9 changed for Remote Control is summed up in
+What changed for Remote Control in the latest versions is summed up in
 [The words that bind](/c5/remote-control/privacy-and-cloudflare#the-words-that-bind).
 
 The next time you press **Save** on this tab — whichever field you changed — or turn Remote

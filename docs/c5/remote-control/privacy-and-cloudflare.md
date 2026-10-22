@@ -108,10 +108,10 @@ hand-off is a link to your own machine and the portal is not in the path after i
 
 A tunnel — the address Growther.si issues, or a tunnel of your own on Cloudflare whose token
 you give C5 — is carried by Cloudflare's connector program, `cloudflared`, running on your
-machine. Section 3 of the Terms says so for both from version 1.9; until then it named only
-the tunnel Growther.si creates. It is open-source software from Cloudflare under the Apache
-License 2.0, used only to carry traffic to your own install. C5 does not ship it inside its
-download, and does not use any copy already installed on your system:
+machine. Section 3 of the Terms says so for both (since version 1.9; before that it named
+only the tunnel Growther.si creates). It is open-source software from Cloudflare under the
+Apache License 2.0, used only to carry traffic to your own install. C5 does not ship it
+inside its download, and does not use any copy already installed on your system:
 
 - **It is fetched only when needed.** The first time a tunnel starts, C5 downloads it from
   Cloudflare's releases on GitHub (`github.com/cloudflare/cloudflared`, which redirects to
@@ -150,11 +150,11 @@ settings. See [Troubleshooting](/c5/remote-control/troubleshooting).
 
 If you paste your own tunnel token under Advanced, Growther.si is not in the path and holds
 no credential for it. Your tunnel provider — Cloudflare on your own account, Tailscale,
-ngrok — is in the path instead, under your agreement with them (Section 15 of the Terms says
-this from version 1.9), and most operate the way Cloudflare does: encrypted to and from them,
-with the connection handled within their network. Choose one you are content to have there.
-Turning Remote Control off keeps a token you pasted on your machine; Growther.si is not asked
-to release anything, because it holds nothing for your tunnel.
+ngrok — is in the path instead, under your agreement with them (Section 15 of the Terms and
+the Privacy Policy both say so), and most operate the way Cloudflare does: encrypted to and
+from them, with the connection handled within their network. Choose one you are content to
+have there. Turning Remote Control off keeps a token you pasted on your machine; Growther.si
+is not asked to release anything, because it holds nothing for your tunnel.
 
 A name and certificate of your own, with no tunnel, keeps every third party out (Section
 15 (a) of the Terms).
@@ -213,8 +213,8 @@ at
 [terms](https://www.cloudflare.com/terms/) and
 [privacy policy](https://www.cloudflare.com/privacypolicy/) govern Cloudflare's part.
 
-**Terms version 1.9** changed two things about Remote Control, without renumbering any
-section:
+**The Terms are now version 1.10.** Since version 1.8, three things changed about Remote
+Control, without renumbering any section:
 
 - **Section 3** now says that C5 downloads and runs `cloudflared` for any Cloudflare Tunnel
   Remote Control runs: the one Growther.si creates for an issued address, or one of your own
@@ -222,9 +222,15 @@ section:
 - **Section 15** now says that a tunnel you supply yourself also works without the address
   Growther.si issues, with its provider in the path under your agreement with that provider
   (see [Your own tunnel, your own provider](#your-own-tunnel-your-own-provider)).
+- **The Privacy Policy**, under _Local by default_, now says the same: with a name and
+  certificate you supply, nobody but you and your machine is in the path, while a tunnel you
+  supply puts its provider in the path, under your agreement with it. Before, it counted a
+  tunnel you supply among the ways that keep everyone else out.
 
-Both describe what C5 already did; only the wording changed. An install that already has
-Remote Control on keeps running after the update: nobody is signed out and the address stays up.
-The next time someone saves Remote Control's settings on the machine, C5 asks them to
-accept version 1.9 first; a paired device cannot accept it. See
+The first two came in version 1.9, which C5 v327 to v329 carried; the third is new in
+version 1.10. All three describe what C5 already did; only the wording changed. An install
+that already has Remote Control on keeps running after the update: nobody is signed out and
+the address stays up. The next time someone saves Remote Control's settings on the machine,
+C5 asks them to accept version 1.10 first, including an install that accepted version 1.9; a
+paired device cannot accept it. See
 [If the Terms changed after you accepted them](/c5/remote-control/setup#if-the-terms-changed-after-you-accepted-them).
