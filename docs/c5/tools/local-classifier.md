@@ -647,9 +647,12 @@ The chosen model is not asked everything:
 
   **One gap: llama.cpp's `--rpc`.** A llama.cpp server can hand part of its model to RPC
   servers on other computers (`--rpc host:port`), which then work on what is derived from
-  each question. A llama.cpp router lists each model's `--rpc`, and C5 reads it: RPC servers
-  on this machine still count as this machine, one on your network makes the model **Your
-  network**, and one further away makes it **Online**. But a single-model llama.cpp server
+  each question. A llama.cpp router lists each model's `--rpc`, and C5 reads it, when the
+  model is chosen and at every check after: RPC servers on this machine still count as this
+  machine, one on your network makes the model **Your network**, and one further away makes
+  it **Online**. A model given RPC servers farther away than where it was chosen reads
+  _Changed since it was tested._ at its next check, and is not asked until it is chosen
+  again. But a single-model llama.cpp server
   started with `--rpc`, or a router's model given its RPC servers through `LLAMA_ARG_RPC` in
   its environment, does not show it anywhere C5 can read, so C5 counts it as **This
   machine** and asks it Tool-call safety too. If you offload a model that way, do not choose
@@ -785,6 +788,15 @@ C5 still asks you before it sends questions to each model that is not on this ma
 - **Narrowing it** stops C5 asking a chosen model that is now too far away. Its panel reads
   _Not used._ with the reason, and the built-in model answers while it is on and
   [Use as fallback](#use-as-fallback) is on.
+- **A model is held where it was tested.** A model chosen at a name on this machine or your
+  network is asked only while that name still points there: if it comes to resolve to an
+  address outside, C5 does not connect, and the reason reads _gpu-box.lan now resolves to
+  203.0.113.9, outside your network, where this model was tested to run, so C5 did not
+  connect_. A name ending in `.localhost` is taken for this machine, as `localhost` is: C5
+  connects to it here and never asks a resolver about it, offline included, and it counts as
+  **This machine** only where the provider can show it runs the model here. A request that
+  goes through your organisation's proxy is resolved by the proxy, so this check does not
+  apply to it.
 - **Your organisation's policy** comes first. A policy that locks
   `classifier_external_allowed` shows the setting locked, with the reason and where the
   policy is set; locked to `off`, it reads _Your organisation's policy does not allow a
@@ -891,6 +903,11 @@ where a provider's own documentation leaves it open: xAI ignores the request on 
 newer models, Moonshot Kimi and Meta do not document it, and Google no longer returns them
 for most Gemini models. A test of a model that does not return them ends after its first
 question, so it costs one question.
+
+Google also refuses every request from a place where it does not offer the Gemini API
+(_User location is not supported for the API use._). C5 then stops asking the model,
+without counting it as failures, and its panel reads _Paused. C5 stopped asking it until its
+settings change: …_
 
 ### Experimental models
 
@@ -1125,7 +1142,7 @@ says **Turning off…**, **Turning on…** or **Saving…** instead.
 | **Loading** | The classifier is loading the model. | Nothing. |
 | **Not loaded** | The classifier's process is running; the model loads with the first question. | Nothing. |
 | **Running** | The model is loaded and answering. | Nothing. |
-| **Paused** | It failed three times in a row, so C5 is giving it a 60-second rest. The usual answers stand meanwhile. A question that ran out of time behind a background question, or a background question given up after waiting, is not a failure. | If it keeps happening, read the **Runtime** line and run `growther doctor`. |
+| **Paused** | It failed three times in a row, so C5 is giving it a 60-second rest. The usual answers stand meanwhile. A question that ran out of time behind a background question, or a background question given up after waiting, is not a failure; nor is a question cut short because C5 restarted or stopped the classifier on purpose, or one that ran out of time while the model was loading again after a rest (for up to two minutes). | If it keeps happening, read the **Runtime** line and run `growther doctor`. |
 | **Not running** | It was started but cannot run here, or it stopped. The **Runtime** line says why. | Find that message under [Troubleshooting](#troubleshooting). |
 | **Not answering** | Its process is running but did not answer a status check in time. | It usually clears on its own. If it lasts, turn the classifier off and on, and run `growther doctor`. |
 | **Starting** | It is being started. | Nothing. |
@@ -2007,6 +2024,13 @@ yourself.
 **_The classifier model downloaded incompletely (N of M bytes); the next attempt resumes it._**
 The connection dropped. The next attempt carries on from where it stopped.
 
+**_The download failed: The download did not answer with the classifier model: it sent an HTML page (a proxy, a captive portal or a block page answers like this). Nothing was kept. …_**
+Something between this machine and Hugging Face answered in the model's place: a proxy's
+block page, a hotel or office sign-in page, or a file of another size (_… it sent N bytes
+where the model is M …_). C5 stops at once and keeps none of it, so the next attempt does not
+build on it. Ask for the [Hugging Face hosts](#network) to be allowed, sign in to the
+network, or place the file by hand as the message's last sentence says.
+
 **The Model line says _Already attempted in this process; restart C5 or run `growther classifier pull` to try again._**
 The download at start failed and C5 does not retry it until the next start. Turning the
 classifier off and on also retries it.
@@ -2060,7 +2084,16 @@ Normal on a virtual machine without GPU access. C5 moves it to the CPU by itself
 **_Paused after repeated failures; the current answers stand alone meanwhile._**
 Three questions in a row failed. C5 rests the classifier for 60 seconds, tries one question,
 and carries on if it succeeds. If it keeps happening, check the **Runtime** line and run
-`growther doctor`.
+`growther doctor`. What C5 does to the classifier itself never pauses it: moving it between
+GPU and CPU, turning it off, or moving its cache. A crash does count: the questions it was
+answering fail, and C5 starts a fresh process on its own, whose first question loads the
+model again.
+
+**The Runtime line says the model could not be loaded, for example for lack of memory.**
+C5 tries again by itself: a minute after the failure, then after twice as long each time it
+fails again, up to 15 minutes, so the classifier comes back once memory frees up. The usual
+model answers meanwhile. Turning the classifier off and on tries at once. A model this
+machine or this build cannot run at all is not tried again until you do that.
 
 **I cannot choose Assisted or Authoritative.**
 The option says why. Usually one of these:
