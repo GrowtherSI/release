@@ -160,10 +160,22 @@ versions after v322 read it too: C5 started from that shell dials that gateway, 
 OpenClaw card's **Host** and **Port** lock. See
 [Local model servers and gateways](/c5/cli/environment#local-model-servers-and-gateways).
 
-### Updating to the release with Terms v1.9
+### Updating to the release with Terms v1.10
 
-**The Terms of Service are now version 1.9.** No section is added or renumbered. Three
-sections change:
+**The Terms of Service are now version 1.10.** No section is added or renumbered. What
+changes depends on the version you update from.
+
+**From v327, v328 or v329**, which carry version 1.9, two sentences change:
+
+- **Section 14**: when a classifier model from your providers cannot be reached, the
+  built-in model answers in its place only while its use as a fallback has not been turned
+  off, in **Settings › Learning** or by your organisation's policy.
+- **The Privacy Policy**, under _Local by default_: with a name and certificate you supply,
+  nobody but you and your machine is in the path; a tunnel you supply puts its provider in
+  the path, under your agreement with it.
+
+**From v326 or earlier**, which carry version 1.8, you also get the changes version 1.9
+made:
 
 - **Section 14** also covers a classifier model from your providers, if an administrator
   chooses one (below). The Privacy Policy says the same: those questions go to that
@@ -172,33 +184,35 @@ sections change:
   Remote Control runs, including one of your own.
 - **Section 15** says that a tunnel you supply yourself puts its provider in the path.
 
-The changes to Sections 3 and 15 describe what C5 already did. See
+The changes to Sections 3 and 15, and the Privacy Policy's tunnel sentence, describe what C5
+already did. See
 [Privacy and Cloudflare](/c5/remote-control/privacy-and-cloudflare#the-words-that-bind).
 
 If Remote Control is on, it keeps running and nobody is signed out. The **Settings › Remote
-Control** tab says that version 1.9 has not been accepted on this machine, and the next save
-on that tab asks someone at the machine to accept it. See
+Control** tab says that version 1.10 has not been accepted on this machine, even where
+version 1.9 was, and the next save on that tab asks someone at the machine to accept it. See
 [If the Terms changed after you accepted them](/c5/remote-control/setup#if-the-terms-changed-after-you-accepted-them).
 
-**The classifier can use a model from your providers.** The section in **Settings ›
-Learning** is now called **Classifier**, and the local classifier's switch is now
-**Built-in model**. An administrator at the machine can choose a model that one of your
+**From v326 or earlier: the classifier can use a model from your providers.** The section in
+**Settings › Learning** is now called **Classifier**, and the local classifier's switch is
+now **Built-in model**. An administrator at the machine can choose a model that one of your
 providers serves — llama.cpp, Ollama, LM Studio, vLLM or a cloud API — to answer the
 classifier's questions before the built-in model. Nothing changes until someone does: none
 is chosen, and **Models allowed from** starts at **This machine**. See
-[A model from your providers](/c5/tools/local-classifier#a-model-from-your-providers). To keep
-these models off across a fleet, or to allow them while the built-in model stays off, see
+[A model from your providers](/c5/tools/local-classifier#a-model-from-your-providers). To
+keep these models off across a fleet, or to allow them while the built-in model stays off,
+see
 [Classifier models from your providers](/c5/configuration/enterprise-policy#classifier-models-from-your-providers).
 
-**Tool-call safety and Skill routing are recorded every time.** On a machine where the
-built-in model runs on the CPU, or is marked slow, versions v320 to v326 recorded only one
-question in four for these two kinds as well as for Step quality. Now only Step quality is
-sampled there; see
+**From v326 or earlier: Tool-call safety and Skill routing are recorded every time.** On a
+machine where the built-in model runs on the CPU, or is marked slow, versions v320 to v326
+recorded only one question in four for these two kinds as well as for Step quality. Now only
+Step quality is sampled there; see
 [On a machine where it runs on the CPU](/c5/tools/local-classifier#on-a-machine-where-it-runs-on-the-cpu).
 
-**Going back to an earlier version.** An earlier version does not know about a model from
-your providers: it ignores the choice, and the built-in model answers as it did there. An
-acceptance of version 1.9 for Remote Control also counts in any version after v322, so
+**Going back to an earlier version.** v326 and earlier do not know about a model from your
+providers: they ignore the choice, and the built-in model answers as it did there. An
+acceptance of version 1.10 for Remote Control also counts in any version after v322, so
 going back to one of those asks nothing (see
 [Remote Control Terms after a rollback](#remote-control-terms-after-a-rollback)).
 

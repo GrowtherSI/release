@@ -293,17 +293,17 @@ terms on unchanged. Two points to check:
 
 ### A model from your providers is not one of these
 
-From Terms of Service v1.9, an administrator can choose a model that one of your model
-providers serves to answer the classifier's questions instead
+An administrator can choose a model that one of your model providers serves to answer the
+classifier's questions instead
 ([A model from your providers](/c5/tools/local-classifier#a-model-from-your-providers)).
 **C5 does not download that model**, does not check it against a recorded size and
 fingerprint as it does the models above, and does not list it among them or in the
-third-party notices. It runs wherever your provider runs it — llama.cpp, Ollama, LM
-Studio or vLLM on your machine or network, or a cloud provider's servers — and you obtain it
-under that provider's and that model's own terms, as you would for any other model you use
-with C5. C5 only sends it questions and reads its answers, at the address your provider is
-set up with. Those questions go to the provider under your agreement with it, not to
-Growther.si, and a cloud provider may charge you for them.
+third-party notices. It runs wherever your provider runs it — llama.cpp, Ollama, LM Studio
+or vLLM on your machine or network, or a cloud provider's servers — and you obtain it under
+that provider's and that model's own terms, as you would for any other model you use with
+C5. C5 only sends it questions and reads its answers, at the address your provider is set up
+with. Those questions go to the provider under your agreement with it, not to Growther.si,
+and a cloud provider may charge you for them.
 
 ### When each one is downloaded
 

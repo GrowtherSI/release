@@ -215,15 +215,14 @@ keeps the classifier off.
 
 ### Can the classifier use a model I already run?
 
-Yes, from Terms of Service v1.9. An administrator at the machine can choose a model that one
-of your providers serves — on llama.cpp, Ollama, LM Studio or vLLM, or a cloud API such as
-OpenAI, OpenRouter or DeepSeek — under **Settings › Learning › Classifier › Choose a
-model…**. C5 tests it first, and asks it before the built-in model. While the built-in
-model is on, it answers whenever the chosen model cannot; with the built-in model off, the
-chosen model is the only one, and when it cannot answer C5 answers as it did before. A new
-model only records its answers until it has been measured on your install, like the
-built-in model was. Questions about whether a tool call is safe are never sent to a model
-off this machine. See
+Yes. An administrator at the machine can choose a model that one of your providers serves —
+on llama.cpp, Ollama, LM Studio or vLLM, or a cloud API such as OpenAI, OpenRouter or
+DeepSeek — under **Settings › Learning › Classifier › Choose a model…**. C5 tests it first,
+and asks it before the built-in model. While the built-in model is on, it answers whenever
+the chosen model cannot; with the built-in model off, the chosen model is the only one, and
+when it cannot answer C5 answers as it did before. A new model only records its answers
+until it has been measured on your install, like the built-in model was. Questions about
+whether a tool call is safe are never sent to a model off this machine. See
 [A model from your providers](/c5/tools/local-classifier#a-model-from-your-providers).
 
 ### Why can't I choose OpenClaw, PicoClaw or Hermes Agent?
