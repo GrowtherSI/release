@@ -725,12 +725,18 @@ A test that could not judge the model — it was not loaded, its provider did no
 changes nothing either, and says so: _M is not loaded in P. C5 never loads a model itself;
 load it there and try again. Nothing was changed._
 
+**LM Studio is the exception.** If LM Studio lists the model but has not loaded it, C5 asks
+LM Studio to load it before the test, and waits for it; the time the load takes is not
+counted against the test. If LM Studio cannot load it, the message says so in its words:
+_C5 asked 127.0.0.1:1234 to load M, and it could not (…). Nothing was changed._
+
 **Test again** says its result once, in the card's words (P is the provider's name, as on
 its card in **Settings › Integrations**):
 
 | The message says | What it means |
 | --- | --- |
-| _M is not loaded in P, so it was not tested. C5 never loads a model itself; load it there and test it again._ | Load the model in the provider, then press **Test again** |
+| _M is not loaded in P, so it was not tested. C5 never loads a model itself; load it there and test it again._ | Load the model in the provider, then press **Test again**. Not said of LM Studio, which C5 loads itself |
+| _C5 asked H to load M, and it could not (…). M was not tested._ (LM Studio) | LM Studio refused the load, for the reason in brackets, often too little memory | Free some memory in LM Studio, or load the model there yourself, then press **Test again** |
 | _P did not answer, so M was not tested._ | Start the provider, or check its address in **Settings › Integrations** |
 | _Could not test M: Ollama is busy with other work. Nothing was changed._ (the reason is the test's own) | The test could not judge the model, so nothing changed. Try again later |
 | _M cannot answer the classifier's questions now. … C5 does not ask it until it passes a test again._ | The test ran and the model failed it. The result was kept: it stays chosen, C5 stops asking it, and its test line says so |
@@ -755,7 +761,7 @@ which tests it again.
 | --- | --- | --- |
 | **llama.cpp** | On this machine when its server says it runs the model here (a server that hands part of the model to other computers with `--rpc` may not say so; see [Who answers](#who-answers)); otherwise your network, or online, by its address | The model loaded, with at least 4,096 tokens of context. A server that applies a LoRA adapter is refused |
 | **Ollama** | On this machine for a model Ollama runs here (never a cloud model); otherwise your network, or online, by its address | Ollama 0.12.11 or newer, with the model loaded. C5 never changes how long Ollama keeps a model loaded, but its questions do reset the model's idle timer. Ollama's cloud models cannot be chosen: Ollama passes them on to its own servers |
-| **LM Studio** | Never on this machine: your network, even at this machine's address, because LM Studio can serve a model that runs on another device and cannot show C5 where it runs. At an address outside your network, online | LM Studio 0.4.0 or newer, with the model loaded with at least 4,096 tokens of context, and its reasoning switched off. C5 asks only a model LM Studio lists as loaded, so it never makes LM Studio load or swap a model |
+| **LM Studio** | Never on this machine: your network, even at this machine's address, because LM Studio can serve a model that runs on another device and cannot show C5 where it runs. At an address outside your network, online | LM Studio 0.4.0 or newer, and a model that takes at least 4,096 tokens of context. C5 asks the model not to reason before it answers. If the model is not loaded, C5 asks LM Studio to load it, with 8,192 tokens of context at most, and unloads that copy when you turn the model off, remove it or choose another; it never unloads a copy it did not load, and never loads one by asking it a question (which would let LM Studio unload your other just-in-time models) |
 | **vLLM** | Never on this machine: your network, even at this machine's address. At an address outside your network, online | vLLM 0.26.0 or newer, entered as the address on the **llama.cpp** card. Its model needs at least 4,096 tokens of context |
 | **OpenAI**, **MS Azure**, **OpenRouter**, **DeepSeek**, **xAI Grok**, **Alibaba Cloud Qwen**, **Moonshot Kimi**, **Meta**, **Google Gemini** | Online | A key set up in Integrations, and a model that returns probabilities for its answers. Each question is billed; see [Models your provider bills](#models-your-provider-bills) |
 | **Anthropic**, **Groq**, **Mistral**, **Cohere**, **Amazon Bedrock** | — | Cannot be used: their APIs do not return the probabilities the classifier reads. The list says why for each |
@@ -1011,7 +1017,8 @@ it can be._ Nothing needs doing: the switch catches up when the status can be re
 
 **Use as fallback** is a switch on the built-in model's panel, directly under the built-in
 model's own **Enabled** switch. It is there while a model from your providers is chosen and
-turned on, and the built-in model is on. It is on by default.
+turned on, and the built-in model is on. It is on by default. While it is off, the words
+beside it read **Not used as fallback**.
 
 - **On**: whenever the chosen model cannot be asked — not loaded, busy, not answering,
   paused after failures, waiting for a test, changed since its test, or not allowed for now
@@ -1090,6 +1097,8 @@ server that came back, or swapped its model, shows its old state until C5 next a
 | The panel says | What it means | What to do |
 | --- | --- | --- |
 | _Not loaded in P. C5 never loads a model itself; load it there and C5 uses it again._ | The provider has unloaded the model | Load it in the provider |
+| _H has not loaded M; C5 asked LM Studio to load it, and asks it questions once it has._ (LM Studio) | LM Studio unloaded the model, and C5 is loading it again; the built-in model answers meanwhile | Nothing |
+| _H has not loaded M: … C5 asks again at 14:05 UTC._ (LM Studio) | LM Studio could not load it, or unloaded the copy C5 loaded; C5 waits before it loads it again, longer each time, up to an hour | Nothing, or load it in LM Studio yourself |
 | _P is busy with other work, so recent questions went elsewhere._ | The provider's server was busy, often with your own work: where it answers one request at a time, C5 never makes a question wait behind your own chat | Nothing |
 | _P is not answering (since 14:03)._ | The provider's server is not reachable | Start it, or check its address in **Settings › Integrations** |
 | _Paused. …_ | The provider refused (a key it does not accept, a rate limit), or the model failed repeatedly, so C5 holds it back for a while. This is not the model's own switch. The reason follows | Follow the reason. C5 picks up a key you fix in **Settings › Integrations** within seconds |
@@ -1118,9 +1127,9 @@ once a model is chosen, its panel comes first, whether it is on or off:
   the top right (see [Turn the chosen model off for a while](#turn-the-chosen-model-off-for-a-while)),
   and the buttons **Choose a model…** (**Change…** once one is chosen), **Test again** and
   **Remove**. See [A model from your providers](#a-model-from-your-providers).
-- **Built-in model**, with its **Enabled** switch, **Use as fallback** under it while a
-  model is chosen and on (see [Use as fallback](#use-as-fallback)), and the status lines
-  below.
+- **Built-in model**, with its **Enabled** switch (it reads **Disabled** while the built-in
+  model is off), **Use as fallback** under it while a model is chosen and on (see
+  [Use as fallback](#use-as-fallback)), and the status lines below.
 
 Two tags beside the panels' titles say how they stand. **Primary**, on the chosen model's
 panel, is shown only while the built-in model stands behind it: C5 asks the chosen model,
