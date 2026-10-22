@@ -636,8 +636,11 @@ C5 still asks you before it sends questions to each model that is not on this ma
 ### Before a model off this machine is asked
 
 A model on your network or online is sent none of your work until an administrator at the
-machine has confirmed it. After **Next** (or, if the test finds the model is not on this
-machine, after **Test and use**), C5 shows **Send these questions to another machine?**:
+machine has confirmed it. To find out where a model runs, C5 only reads what its provider
+says about itself, with read-only requests (LM Studio's list of models, Ollama's version
+and model list, llama.cpp's properties and health); no test question is sent before you
+confirm. After **Next** (or, if those reads show that the model is not on this machine,
+after **Test and use**), C5 shows **Send these questions to another machine?**:
 
 - **Where it runs**, for example _M runs at 192.168.1.20:8080, not on this machine._, _M runs
   online at api.openai.com, not on this machine._, or, for a program at this machine's address
