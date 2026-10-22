@@ -87,6 +87,12 @@ See [Local model servers and gateways](#local-model-servers-and-gateways) below.
 | ---------------------- | -------------------------------------------------------------------- |
 | `GROWTHER_LIBVIPS_DIR` | Run C5 on your own copy of libvips instead of the one it ships with. |
 
+**Troubleshooting**
+
+| Variable | What it does |
+| -------- | ------------ |
+| `GROWTHER_DEBUG_CATEGORIZATION` | Set to anything (even `0`) to log each task categorisation to `logs/categorization-debug.log`. The log names a goal by a fingerprint and its length, but keeps the model's full reply, which can repeat words from the task. Leave it unset unless you are asked for it. |
+
 **Media tools**
 
 | Variable      | What it does |

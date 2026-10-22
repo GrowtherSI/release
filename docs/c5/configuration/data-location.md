@@ -30,6 +30,19 @@ New Windows installs keep the databases and keys under `%LOCALAPPDATA%` on purpo
 folder never travels with a roaming profile, so signing in on another machine cannot
 carry an encrypted database away from the key that opens it.
 
+**Logs** are in `logs/` under the same folder: `errors.log` and the `errors/` folder, and on
+macOS the sign-in service's `service.out.log` and `service.err.log`. They are plain text,
+outside the encrypted databases, so on macOS and Linux C5 narrows the folder to your own
+account at every start.
+
+**An older `logs/categorization-debug.log`.** Before C5 v327, every failed task
+categorisation wrote the first 80 characters of the task's goal to this file, in plain text,
+on every install. C5 no longer does: it writes the file only while the
+`GROWTHER_DEBUG_CATEGORIZATION` variable is set (to anything), names a goal there only by a
+fingerprint and its length, and, on macOS and Linux, keeps it readable only by your account;
+an existing file is narrowed that way at every start, but never deleted. If yours has one
+from an earlier version, an administrator may delete it: nothing reads it.
+
 ## See it in Settings
 
 Open **Settings › Storage › Configuration & Data**. The card shows:

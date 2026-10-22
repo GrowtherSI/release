@@ -57,6 +57,11 @@ Worth being straight about:
   or the agent's own written replies.
 - It looks for recognisable formats. A secret with no distinctive shape — a
   password in a sentence, say — will not be spotted.
+- **Logs are plain text.** Before v327, C5 wrote the start of a task's goal to
+  `logs/categorization-debug.log` whenever a categorisation failed. It no longer does, but
+  an existing file is kept; see
+  [Where your data lives](/c5/configuration/data-location#the-four-kinds-of-files) for what to
+  do with it.
 - **Prevent Prompt Injection** and **Halt on Hallucinations** in Settings ›
   Guardrails need an external policy engine. With the policy engine set to
   Native they do nothing, and the Guardrails screen marks them **Not enforcing**
