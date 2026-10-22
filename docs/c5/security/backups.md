@@ -85,9 +85,11 @@ them through:
 - Turning it on asks first: **Push secrets to GitHub?**, saying that anyone who can read the
   repository, now or later, can read those keys. **Include them** turns it on; **Cancel**
   leaves it off.
-- **Only an administrator at the machine** can turn it on or off. Anyone else, and any
-  device paired through Remote Control, is refused, and the card says _Failed to update
-  secret handling_. Each change is recorded in the audit log.
+- **Only an administrator at the machine** can turn it on or off. For anyone else the switch
+  is greyed out with _Only an administrator can change whether secret files are backed up._,
+  and on a device paired through Remote Control with _You can change whether secret files
+  are backed up only on the machine running C5._ If a change is refused all the same, the
+  card says _Failed to update secret handling_. Each change is recorded in the audit log.
 
 Treat a repository that holds them like the folder itself: see the warning above.
 

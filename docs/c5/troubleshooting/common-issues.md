@@ -114,17 +114,25 @@ Once C5 starts, your browser tab reconnects on its own within a few seconds and 
 > **Self-help: Missing "Start C5" button on offline screens?**
 > The green **Start C5** button on the offline screen and sidebar menu is governed by an administrative RBAC toggle. If your organization has disabled **Sidebar: Restart, Quit, Start C5** in [Settings → Access](/c5/configuration/settings#access-user-permissions-rbac), this button remains hidden for standard users. Ask your administrator to enable the permission for your account.
 
-### "Forbidden: these security-critical settings are admin-only"
+### "Forbidden: Guardian Vetting is admin-only"
 
 The save touched a setting that only an administrator can change — **Tool & Web
 Escalation**, **System Control**, **Guardian Vetting** and the others listed under
-[Settings only an administrator can change](/c5/security/permissions#settings-only-an-administrator-can-change).
-The name in brackets is the setting's internal name. Nothing in that save was stored. Ask
-an administrator to make the change at the machine running C5, then save your other
-changes again. _Forbidden: only an administrator can lift these Remote Control
-restrictions …_ is the same rule for Remote Control's read-only and non-admin switches,
-and _These settings cannot be changed from a remote device. …_ means you saved from a paired
-phone or tablet: change them on the machine itself.
+[Settings only an administrator can change](/c5/security/permissions#settings-only-an-administrator-can-change)
+— and the message names each one as Settings does. Nothing in that save was stored.
+Settings greys these out for anyone else, so you usually see this from a page opened
+before an update (reload it) or from a script. Ask an administrator to make the change at
+the machine running C5, then save your other changes again. The same kind of message
+covers a few more cases:
+
+| The message | What it means |
+| --- | --- |
+| _Forbidden: only an administrator can lift these Remote Control restrictions: Read-only for all remote devices. Turning one on is allowed._ | The same rule for Remote Control's read-only and non-admin switches; see [Who can change these switches](/c5/remote-control/setup#who-can-change-these-switches) |
+| _Forbidden: only an administrator can turn on Voice on remote devices. Turning it off is allowed._ | See [Voice from a paired phone](/c5/using-c5/voice#voice-from-a-paired-phone) |
+| _Forbidden: Retrospective Loop needs the HITL edit permission (Settings › Access)._ | The Retrospective Loop's switch, schedule and token cap need **Edit** on **Sidebar: HITL Button & Modal**; see [Access & user permissions](/c5/configuration/settings#access-user-permissions-rbac) |
+| _Forbidden: … is managed by your organisation's policy._ | Your organisation's policy locks it; see [How a policy is applied](/c5/configuration/enterprise-policy#how-a-policy-is-applied) |
+| _These settings cannot be changed from a remote device. Change them in C5 on the machine itself: Guardian Vetting._ | You saved from a paired phone or tablet: change them on the machine itself |
+| _… needs a value: an empty one would turn it off. Nothing was saved._ | An empty value never turns a guard off, whoever sends it; an administrator chooses off instead |
 
 ## Models
 
