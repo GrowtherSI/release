@@ -45,6 +45,17 @@ With redaction, the agent's request still goes out and still works — the
 sensitive value is replaced with a marker like `«REDACTED:credit_card»` before it
 leaves.
 
+**The card shows the mode C5 enforces.** Until an administrator chooses one, that is
+**Redact** while **Block PII Exfiltration** is on in **Settings › Guardrails**, and **Off**
+otherwise. **Save** on **Settings › Tools** stores only the settings you changed there, so
+saving another switch never changes this one.
+
+> **Note**
+> Up to v329 the card showed **Off** for a mode nobody had chosen, and a save of any switch
+> on **Settings › Tools** stored that **Off**, which switched the check off. If an
+> administrator saved that tab on such an install, open the card after updating: it shows
+> what is stored, and **Redact** restores the default.
+
 ## Turning it on
 
 It is already on. **Block PII Exfiltration** in **Settings › Guardrails** ships
