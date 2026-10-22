@@ -408,17 +408,31 @@ labels**, **Telling cases apart**, **Agreement with the teacher model**, **Calib
 
 **Speed counts only where something waits for the answer.** Task categories must give 95% of
 its answers within the 1.5 seconds a new task waits for them. Every question it was asked
-counts, not only the ones it answered: one that ran out of time, or was dropped with too
-many waiting, counts as slower than the budget. So the detail reads, for example, _p95 1,180
-ms vs budget 1,500 ms over 412 asks: 400 answered, 12 of 412 asks (2.9%) timed out or were
-shed, each counted above the budget_, and a kind that runs out of time on more than one
-question in twenty fails Speed however fast its answers were. Refusals while paused or busy
-are not counted. C5 began keeping these counts when your install updated to the version that
-keeps them; while the window reaches back before that day, the detail ends _(partial: C5 has
-kept its timeouts and sheds only since …; one before then is not counted)_. Nothing waits
-for the other kinds — their answers are only recorded beside the usual ones — so their speed
-is reported and never decides their gate, and **Ops › Classifier** draws no time budget for
-them: _Nothing waits for this family's answers, so the gate holds it to no time budget._
+counts, not only the ones it answered: one that ran out of time counts as slower than the
+budget. How many questions were asked, and how many timed out, come from C5's own count of
+every question; how long the answered ones took comes from the answers it recorded. So the
+detail reads, for example, _p95 1,180 ms vs budget 1,500 ms over 412 asks: 400 answered, 12
+of 412 asks (2.9%) timed out, each counted above the budget; the asks and the misses from
+C5's counts, the answered asks' times from 400 answered classifier rows_, and a kind that
+runs out of time on more than one question in twenty fails Speed however fast its answers
+were. The share is of every question asked, also for a kind that acts, whose recorded
+answers are only a sample of them.
+
+- **A question dropped from the background line is not a miss.** Every kind of decision
+  shares that line, so a question given up there says how busy the line was, not how fast
+  this kind's model answers. The detail names them apart: _…; 50 shed from the background
+  line every family shares are not counted, as no answer was attempted_.
+- **Refusals while paused or busy are not counted** either.
+- **A new model starts its count afresh.** The count begins where the model answering now
+  took over, so a model that replaced another is never charged with the other's time-outs.
+  A model's own time-outs before its first answer still count.
+
+C5 began keeping these counts when your install updated to the version that keeps them;
+while the window reaches back before that day, the detail ends _(partial: C5 has kept its
+timeouts only since …; one before then is not counted)_. Nothing waits for the other kinds
+— their answers are only recorded beside the usual ones — so their speed is reported and
+never decides their gate, and **Ops › Classifier** draws no time budget for them: _Nothing
+waits for this family's answers, so the gate holds it to no time budget._
 
 **Telling cases apart** does not compare the classifier with the usual model. It checks
 that the classifier's answer actually changes when the right answer changes. A classifier
