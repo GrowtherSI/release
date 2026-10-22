@@ -485,9 +485,9 @@ C5 can read:
 - the grouped errors under **Ops › Errors** and in the **Errors** tab of the HITL
   window, and the notification rows of the audit log, on screen and in
   **Export CSV**;
-- the status C5 shows for a download: Remote Control's tunnel line, the local
-  classifier's **Model** line, and the progress of an update started from the
-  app;
+- the status C5 shows for a download: Remote Control's tunnel line, the **Model** line
+  of the built-in model on the **Classifier** card, and the progress of an update started
+  from the app;
 - the error text C5 gives a model when it triages repeating errors and
   notifications.
 
@@ -634,7 +634,7 @@ already hold.
 
 ## Related
 
-- [Managed configuration](enterprise-policy.md) — locking any of these keys fleet-wide, the local classifier included
+- [Managed configuration](enterprise-policy.md) — locking any of these keys fleet-wide, the classifier's included
 - [Where your data lives](data-location.md) — where each downloaded model is kept, and placing one by hand
 - [Open-source licences and downloaded models](../security/open-source-and-models.md) — who publishes each model, and its licence
 - [Classifier](../tools/local-classifier.md) — the classifier's built-in model, a model from your providers, and what each does

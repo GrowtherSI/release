@@ -19,8 +19,9 @@ Connected or not, these stay on your machine:
 - **Your API keys.** Passwords and keys for other services.
 - **Your chats.** Whole conversations and their history.
 - **Your context.** The standing instructions you wrote.
-- **What the local classifier does.** Its answers, what it learns from them, and how often
-  it is used.
+- **What the classifier does.** Its answers, what it learns from them, and how often it is
+  used. (If an administrator chooses a classifier model from your providers, the questions
+  it is asked go to that provider, like any other work you send it, never to Growther.si.)
 
 These are stored encrypted in your data folder. Growther.si cannot read them, because
 Growther.si never receives them.
