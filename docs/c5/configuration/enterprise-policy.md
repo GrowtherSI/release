@@ -86,14 +86,37 @@ write them again from the version you deploy.
 ### Windows: Intune or Group Policy
 
 Import `Growther-C5.admx` and `en-US/Growther-C5.adml` into the Intune Settings Catalog
-(imported ADMX) or your central store. Policies under **Computer Configuration › Growther C5** are locked;
-**Recommended** values are defaults the user may change. The values land in
-`HKLM\SOFTWARE\Policies\Growther\C5`.
+(imported ADMX) or your central store. The policies are under **Administrative Templates ›
+Growther › C5**, in both Computer Configuration and User Configuration:
+
+- **Computer Configuration locks.** The value lands in `HKLM\SOFTWARE\Policies\Growther\C5`,
+  and users see the setting disabled with a lock; a change made in C5 is ignored and
+  audited.
+- **The Recommended twins**, under **C5 (Recommended: defaults the user may change)**, do
+  not lock. Their values land in `…\C5\Recommended`.
+- **User Configuration never locks.** A policy set there lands under `HKCU`, and C5 reads it
+  as it reads a Recommended value.
+- **Disabled** on a policy that holds a value (a folder, a port, a choice from a list) works
+  like **Not Configured**: nothing is written, so C5 behaves as if the policy were not set.
+  On an on/off policy, **Enabled** sets it to true and **Disabled** to false.
+
+A value that does not lock — Recommended, or under User Configuration — is for most keys a
+default: C5 uses it while the setting has no value of its own in C5. Eight keys apply only
+when locked, and a value that does not lock does nothing for them: `GROWTHER_HOME`,
+`GROWTHER_DATA_DIR`, `GROWTHER_SECRETS_DIR`, `GROWTHER_CACHE_DIR`, `PORT`,
+`GROWTHER_BIND_HOST`, `GROWTHER_ALLOW_REMOTE_NONE_LOGIN` and `GROWTHER_ALLOWED_HOSTS`. (The
+Recommended category's name does not make that exception.) The proxy and certificate keys
+have rules of their own; see [How a policy sets the proxy](#how-a-policy-sets-the-proxy).
+Each policy's explanation in the templates says which applies to it.
 
 ### macOS: Jamf or Intune
 
 Deploy a configuration profile for the preference domain `ai.growther.c5`. Top-level
-keys are locked; keys inside a `Recommended` dictionary are defaults. Use the
+keys are locked; keys inside a `Recommended` dictionary are defaults, except the keys the
+profile marks _lock only_ (the eight above), which a Recommended value does not set. A
+top-level key in a profile for one user still locks, but for that user only, and it never
+lifts a lock on `classifier_enabled` (see
+[With `classifier_enabled` locked off](#with-classifier_enabled-locked-off)). Use the
 `ai.growther.c5.mobileconfig` written above as your starting point.
 
 ### Linux
