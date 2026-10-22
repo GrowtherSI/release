@@ -363,7 +363,8 @@ waiting on steps that were never created. C5 checks for such runs every minute, 
 are an hour old, and cancels them. A task that was still in progress is then **Blocked** for
 a person to decide; a task waiting to start is picked up again with a fresh run, when it is
 one C5 runs on its own. The reason is also under
-**Latest Error** in the job's details in **Monitor › Queueing**.
+**Latest Error** in the job's details in **Monitor › Queueing**, and **Ops › Audit** lists
+what C5 did, under **Stuck-run recoveries** in its **Source** column.
 
 ### A task keeps failing
 
