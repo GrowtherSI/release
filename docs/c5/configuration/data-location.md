@@ -30,8 +30,10 @@ New Windows installs keep the databases and keys under `%LOCALAPPDATA%` on purpo
 folder never travels with a roaming profile, so signing in on another machine cannot
 carry an encrypted database away from the key that opens it.
 
-**Logs** are in `logs/` under the same folder: `errors.log` and the `errors/` folder, and on
-macOS the sign-in service's `service.out.log` and `service.err.log`. They are plain text,
+**Logs** are in `logs/` under the same folder: `errors.log`, and on macOS the sign-in
+service's `service.out.log` and `service.err.log`. An install from an older version may also
+have an `errors/` folder of old error files; nothing writes there now, and C5 clears it out
+the next time it logs an error. They are plain text,
 outside the encrypted databases, so on macOS and Linux C5 narrows the folder to your own
 account at every start.
 
