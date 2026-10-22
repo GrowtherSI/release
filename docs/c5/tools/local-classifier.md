@@ -680,7 +680,8 @@ Once a billed model is in use:
 
 - C5 adds what each question costs to **Settings › Budget**, beside your other spending.
 - While your global cost cap is reached and set to block, C5 asks the model nothing. The
-  built-in model answers meanwhile, if it is on.
+  built-in model answers meanwhile, if it is on and [Use as fallback](#use-as-fallback) is
+  on.
 - Every question to OpenRouter carries the routing limits you set on OpenRouter's **Config**
   tab in Settings — data collection, the providers allowed, ignored or preferred,
   quantizations and price caps, never its fallback models (see
