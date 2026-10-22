@@ -258,6 +258,13 @@ clear it. See
 server's models, so they could not be chosen; now they can, for agents and for the
 classifier.
 
+**From v326 or earlier: an old debug log may hold the start of task goals.** If your C5
+folder has `logs/categorization-debug.log`, earlier versions wrote the first 80 characters
+of a task's goal there whenever a categorisation failed. C5 now stops writing goals to it
+and, on macOS and Linux, narrows it to your own account, but does not delete it; an
+administrator may. See
+[Where your data lives](/c5/configuration/data-location#the-four-kinds-of-files).
+
 **From v326 or earlier: one run per scheduled occurrence.** A scheduled task now starts once
 each time it is due, not two or three times.
 
