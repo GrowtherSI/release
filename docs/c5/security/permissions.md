@@ -50,22 +50,43 @@ which command. Then you choose:
 
 - **Approve Once** — just this time.
 - **Deny** — not this time; the agent finds another way or stops.
-- **Always Allow** — do not ask again for this agent and this tool. Where the prompt offers
-  it, you can limit this to the one file or address it asked about. Under **"Always" lasts**
-  you pick how long it holds: **Forever**, **1 hour** or **10 uses**.
+- **Always Allow** — do not ask again for this agent and this tool. It covers only the agent
+  that asked: every other agent is still asked, and an **Always Deny** you gave another agent
+  stands. Where the prompt offers it, you can limit this to the one file or address it asked
+  about. Under **"Always" lasts** you pick how long it holds: **Forever**, **1 hour** or
+  **10 uses**.
 - **Always Deny** — refuse this agent and this tool from now on, without asking (or only that
   file or address, if you chose that).
 
-**An "Always" for the whole tool also moves its switch** under **Master Tool
-Authorizations** (below): **Always Allow** sets it to **On**, which lets every agent use the
-tool without asking, not only this one, and **Always Deny** sets it to **Off**, so the
-agent's own rule decides. An "Always" for one file or address moves no switch. If C5 could
-not save part of your choice, a message says which part, for example _“Always Allow” for
-read_file was not saved (HTTP 403), so C5 will ask again next time._ or _The Master Tool
-Authorizations switch for read_file was not changed (…); it is still Off. Set it in Settings
-› Extensions._ When C5 cannot read the current switches, it changes none of them, so the
-other tools' switches are never reset. Your answer to the call itself goes through either
-way.
+**An "Always" is about this agent.** It never sets the tool's switch under **Master Tool
+Authorizations** (below) to **On**, which would let every agent use the tool without asking.
+The one move it can make is the other way: an **Always Deny** for the whole tool turns a
+switch that is **On** to **Off**, because while it is On every agent runs the tool, this one
+included, whatever its own rule says. A switch at **Prompt** or **Off** is left as it is, and
+an "Always" for one file or address moves no switch.
+
+**Under Prompt, C5 still asks.** A tool at **Prompt** asks before every call, whatever an
+agent's own rule says, so your answer tells you so: _read_file is set to Prompt in Master
+Tool Authorizations, which asks before every call to it, so C5 will still ask. Your “Always
+Allow” for researcher is saved and applies if that switch is set to Off in Settings ›
+Extensions._
+
+If C5 could not save part of your choice, a message says which part, for example _“Always
+Allow” for read_file was not saved (HTTP 403), so C5 will ask again next time._ or, for an
+Always Deny that had to turn the switch off, _The Master Tool Authorizations switch for
+read_file was not changed (…); it is still On, so every agent still runs read_file without
+asking. Set it to Off in Settings › Extensions._ When C5 cannot read the switches, it changes
+none of them and says so, so the other tools' switches are never reset. Your answer to the
+call itself goes through either way.
+
+**Only an administrator at the machine can answer.** Anyone else sees the request, with
+_Only an administrator can answer tool requests._ in place of the buttons (on a paired
+device, _You can answer tool requests only on the machine running C5._), and a **Close**
+button, which Escape presses too. Close only takes the prompt off that screen: nothing is
+sent, and the request waits for an administrator until it times out. In the notification
+list's **Tool Activity**, a call waiting for an answer shows its **Approve** and **Deny**
+buttons to an administrator only; a teammate who may act on that list reads _Only an
+administrator can approve or deny tool requests._ instead.
 
 > **Tip**
 > Be slow with **Always Allow**. It is the choice people regret. **Approve Once** costs you
@@ -98,6 +119,11 @@ An approval never overrides a rule you set:
   or for the address or command it asked about — is left denied; the agent is told so, and
   not to ask again. A web escalation still grants the System Control tools that are not
   denied.
+- **An approval of nothing but denied tools grants nothing.** When `read_url` and every
+  System Control tool it would grant are at **Always Deny** for that agent, the agent is told
+  the approval granted nothing, and System Control stays off for its task. When only the
+  System Control tools are denied, it gets `read_url` and is told that System Control was
+  not granted.
 - **An Always Allow you gave stays as you gave it**, with no budget put on it.
 - **A request about one address or command** grants only that, where the tool works on one;
   otherwise the whole tool.
