@@ -1173,10 +1173,9 @@ own there yet.
   model's commonest answer would score (agreement, not accuracy), and where the two differ —
   each answer's counts, Step quality by the step's role and tool-call safety by tool, Step
   quality's weighted κ and distance in levels, and how often the usual model changed its own
-  answer; Cohen's κ against each source of
-  answers; and how the questions people answered were chosen. For Step quality it also
-  compares the reward model with people's ratings. It reads once when opened; press
-  **Refresh** to read again.
+  answer; Cohen's κ against each source of answers; and how the questions people answered
+  were chosen. For Step quality it also compares the reward model with people's ratings. It
+  reads once when opened; press **Refresh** to read again.
 - **Labs › Classifier** has **What a threshold would do**: pick a confidence threshold (τ)
   and see how many decisions it would cover, how many tasks the classifier would answer
   alone, the error it would make and the calls it would replace a week. _This changes
@@ -1444,8 +1443,7 @@ match_), followed by the placement step.
   the tool's name and the length of its reasoning; the reasoning itself stays only on the
   audit log. A guardian block's stored reason keeps the first 50 characters of the call,
   with secrets masked in the whole call before it is cut, and the reasoning, masked too. A
-  skill-routing record keeps
-  what the router chose, never the text of its reply.
+  skill-routing record keeps what the router chose, never the text of its reply.
 - **Who sees it.** **Teach the classifier** shows administrators any task's title and the
   start of its description, a step's instruction and output, and an agent's tool call with
   its arguments, secrets masked. That is how a question can be answered without the

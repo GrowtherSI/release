@@ -222,11 +222,10 @@ and asks it before the built-in model. While the built-in model is on, it answer
 the chosen model cannot, unless **Use as fallback**, under its switch, has been turned off;
 with the built-in model off, the chosen model is the only one, and when it cannot answer C5
 answers as it did before. The chosen model has its own switch, to turn it off for a while
-without removing it. A new model only records its answers
-until it has been measured on your install, like the built-in model was. Questions about
-whether a tool call is safe are asked only of a model C5 can show runs on this machine (a
-llama.cpp server that hands part of its model to other computers with `--rpc` can look as
-if it does; see the page below). See
+without removing it. A new model only records its answers until it has been measured on your
+install, like the built-in model was. Questions about whether a tool call is safe are asked
+only of a model C5 can show runs on this machine (a llama.cpp server that hands part of its
+model to other computers with `--rpc` can look as if it does; see the page below). See
 [A model from your providers](/c5/tools/local-classifier#a-model-from-your-providers).
 
 ### Why can't I choose OpenClaw, PicoClaw or Hermes Agent?
