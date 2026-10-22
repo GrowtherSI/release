@@ -180,8 +180,8 @@ Between the two, you decide exactly how much rope your agents get.
 Some settings each take a prompt away from every agent, or let C5 do more with nobody asked.
 Only an administrator can change them, and only at the machine running C5: a phone or
 tablet paired through [Remote Control](/c5/remote-control/overview) is refused, even when it
-is signed in as an administrator. A teammate who may change other settings sees them, but a
-change to one is refused, and nothing else in that save is stored either.
+is signed in as an administrator. Anyone else sees them as they are, held back, with the
+reason beside them (below).
 
 | Setting | Where it is |
 | --- | --- |
@@ -190,8 +190,8 @@ change to one is refused, and nothing else in that save is stored either.
 | **Egress Data-Loss Prevention**: its mode (**Off**, **Warn**, **Redact**, **Block**) and **Scan PII** | **Settings › Tools** |
 | **Strict Path Boundary** and **Enable Root Level Terminal** | **Settings › Tools** |
 | **FFmpeg location** | **Settings › Tools** (see [Pictures and video](/c5/tools/what-tools-do#pictures-and-video)) |
-| **Master Tool Authorizations** | **Settings › Extensions** |
-| **Permitted Directory Paths**, read and write | **Settings › Extensions** |
+| **Master Tool Authorizations** | **Settings › Extensions**, on the **Saved Tool Authorizations** card |
+| **Permitted Directory Paths**, read and write | **Settings › Extensions**, on the **Saved Tool Authorizations** card |
 | **State Machine HITL Decay Threshold**: how many approvals of a recipe step skip its sign-off from then on | **Settings › Autonomy**, under **Global Rules** |
 | **Guardian Vetting**: the guardian's check of agents' tool calls | **Settings › Budget**, under **System-Level Prompting** |
 | **Back up secret files** | **Settings › Integrations**, on the **GitHub** card, under **C5 Data** (see [Backing up to GitHub](/c5/security/backups#backing-up-to-github)) |
@@ -199,22 +199,49 @@ change to one is refused, and nothing else in that save is stored either.
 C5 also strips credentials from the environment of every command an agent runs. That has
 no switch in Settings, and only an administrator could turn it off.
 
-**What a teammate sees.** The save is refused with a message that names the setting by its
-internal name, for example _Failed to save budget settings: Forbidden: these
-security-critical settings are admin-only (rejected: guardian_enabled)_. From a paired
-device the message reads _These settings cannot be changed from a remote device. Change
-them in C5 on the machine itself (…)._ On **Settings › Budget** and **Settings ›
-Autonomy** only what you changed is sent, so these settings never block a teammate's other
-changes there. **Settings › Tools**, **Settings › Extensions** and the GitHub card's switch
-save only for an administrator.
+**Guardian Vetting is off only while it is saved off.** If C5 cannot read the setting, the
+guardian goes on vetting.
+
+**What a teammate sees.** For anyone but an administrator at the machine, these controls are
+greyed out, with the reason beside them:
+
+| Where | What it says |
+| --- | --- |
+| **Settings › Tools** | Every panel is greyed out and **Save** is held back, with _Only an administrator can change tool settings._ under the heading. The list of rate-limited agents at the foot of the tab, which only reads, is not |
+| **Settings › Extensions** | The **Saved Tool Authorizations** card is read-only, with no **Save** for it and _Only an administrator can change tool authorizations._ under its heading |
+| **Settings › Autonomy** | The decay slider, with _Only an administrator can change the HITL decay threshold._ |
+| **Settings › Budget** | The **Guardian Vetting** switch, with _Only an administrator can change Guardian vetting._ |
+| **Settings › Integrations** | The **Back up secret files** switch, with _Only an administrator can change whether secret files are backed up._ |
+
+On a paired device each reads _You can … only on the machine running C5._ instead, for
+example _You can change tool settings only on the machine running C5._ On **Settings ›
+Budget** and **Settings › Autonomy** only what you changed is sent, so these settings never
+block a teammate's other changes there.
+
+**If a change is refused anyway** — from a page opened before an update, say, or a script
+— nothing in that save is stored, and the message names each setting as Settings does:
+_Forbidden: Guardian Vetting is admin-only._ From a paired device it reads _These settings
+cannot be changed from a remote device. Change them in C5 on the machine itself: Guardian
+Vetting._ Sending the value already stored is not a change, and goes through.
+
+**A blank never turns a guard off.** An empty value for **Strict Path Boundary**, the
+**Egress Data-Loss Prevention** mode or the filesystem autonomy level is refused from
+everyone, an administrator included: _Strict Path Boundary needs a value: an empty one would
+turn it off. Nothing was saved._ An administrator turns one off by choosing off. A setting
+nobody has saved yet counts as what C5 uses while it is unset, and one C5 cannot read at
+that moment counts as a change, so neither lets a teammate's value through as a repeat.
 
 **What is recorded.** Every change an administrator makes to one of them is recorded in the
-audit log, with who made it, and so is every attempt from a paired device. See
-[Audit trail](/c5/security/audit-trail).
+audit log, with who made it, and so is every attempt from a paired device. A save that
+changes nothing — the same value, or the same list in another order — is not recorded as a
+change. See [Audit trail](/c5/security/audit-trail).
 
-**Remote Control's own restrictions** work one way round: a teammate can tighten them but
-not loosen them. See
-[Who can change these switches](/c5/remote-control/setup#who-can-change-these-switches).
+**Two settings work one way round.** A teammate can tighten **Remote Control**'s
+restrictions but not loosen them (see
+[Who can change these switches](/c5/remote-control/setup#who-can-change-these-switches)),
+and can turn **Voice on remote devices** off but not on (see
+[Voice from a paired phone](/c5/using-c5/voice#voice-from-a-paired-phone)). Once the
+setting is saved the restrictive way, its switch is greyed out for them.
 
 ## Hard limits
 
