@@ -81,17 +81,26 @@ the ones its agents made. Its header counts them, **Attachments (N)**.
   is **All**).
 - **Filter by type.** **All**, a group — **Documents**, **Images**, **Text & Code**,
   **Audio**, **Video**, **Archives**, **Other** — or one type within it, such as **PDF** or
-  **PNG**. Only the types you have are offered.
-- **Previews.** A text file's card shows its first lines. A PDF's card shows its first page
-  where Poppler's `pdftoppm` is installed on this machine, and a plain PDF card otherwise.
+  **PNG**. Only the types you have are offered. Every file is in exactly one group: an RTF
+  file is under **Documents** only, and a file stored with no type is filed by its name — a
+  `.pdf`, `.doc(x)` or `.xls(x)` under **Documents**, a `.zip`, `.tar` or `.gz` under
+  **Archives**, anything else under **Other**.
+- **Previews.** A text file's card shows its first ten lines, up to 400 characters, and ends
+  in **…** when there is more. A PDF's card shows its first page where Poppler's `pdftoppm`
+  is installed on this machine, and a plain PDF card otherwise: C5 does not ship Poppler.
+  Install it (for example `brew install poppler` on a Mac) and restart C5 to get PDF
+  thumbnails.
 - **Open one** to see it full size: an image or a PDF in place, and text, Markdown, JSON,
-  CSV or code in a viewer with **Copy** (and **Preview** or **Source** for Markdown). Other
-  files, such as a video or a ZIP, are not previewed properly: download them to open them.
-  **Download** there saves the file.
+  CSV or code in a viewer with **Copy** (and **Preview** or **Source** for Markdown). A
+  binary file, such as a video, a ZIP or a Word file, shows **No preview available** and
+  _This is a binary file C5 cannot show as text. Download it to open it in the app it
+  belongs to._, with a **Download** button. **Download** there saves the file.
 - **Download several.** Tick them and press **Download Selected (N)**: C5 saves them one
   after another, each under its own name. Your ticks stay while you search, so you can
-  gather files from several searches. Ticking needs **Edit** on Attachments. In the table
-  view, the header's tick selects the rows shown and replaces what you had ticked.
+  gather files from several searches. Ticking and downloading need only **View** on
+  Attachments; **Delete Selected** needs **Edit**. In the table view, the header's tick adds
+  the rows shown to what you had ticked, and, when they are all ticked already, unticks just
+  those: files a search or filter is hiding stay ticked either way.
 
 ## Getting files out
 
