@@ -35,8 +35,9 @@ See [How long it is kept](#how-long-it-is-kept).
 
 Ordinary settings changes are **not** here. Saving a change in most Settings areas does not
 write an audit entry. The exceptions are the security settings: a change to one of the
-[settings only an administrator can change](/c5/security/permissions#settings-only-an-administrator-can-change)
-is recorded with who made it, and so is a paired device's refused attempt.
+[settings only an administrator can change](/c5/security/permissions#settings-only-an-administrator-can-change),
+or to Remote Control's restrictions, is recorded with who made it, and so is a paired
+device's refused attempt.
 
 ## Why you can trust it
 

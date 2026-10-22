@@ -250,6 +250,14 @@ Before, anyone who may change settings could change some of them, from a paired 
 now a teammate and a paired device are refused. See
 [Settings only an administrator can change](/c5/security/permissions#settings-only-an-administrator-can-change).
 
+**Remote Control's restrictions are loosened only by an administrator.** A teammate can
+still turn **Read-only for remote devices** or **Read-only restriction for non-admin
+accounts** on, or **Enable Remote Control for non-admin accounts** off, but only an
+administrator can undo them. Turning **Enable Remote Control for non-admin accounts** off
+now takes effect as soon as it is saved: before, a non-administrator's paired device kept
+working until C5 restarted. See
+[Who can change these switches](/c5/remote-control/setup#who-can-change-these-switches).
+
 **OpenRouter keeps your limits.** Nothing you set changes:
 
 - **A chat or task request never goes out without your price caps and provider limits.** If

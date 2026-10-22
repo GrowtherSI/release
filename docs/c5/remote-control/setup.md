@@ -113,6 +113,26 @@ Nothing needs configuring on your router.
 | **Read-only for remote devices**                 | Every remote device, administrators included, can look but not change anything            |
 | **Read-only restriction for non-admin accounts** | Only non-administrator remote devices are read-only                                       |
 
+Turning **Enable Remote Control for non-admin accounts** off does more than stop new
+pairings: a device a non-administrator already paired is refused from then on. It takes
+effect as soon as the tab is saved; nothing needs restarting. The same switch is kept in
+step with **Sidebar: Remote Control Button** on the **Access** tab.
+
+### Who can change these switches
+
+Anyone who may change settings, at the machine, can turn Remote Control on or off. The
+three switches above work one way round:
+
+- **Tightening** — turning **Read-only for remote devices** or **Read-only restriction for
+  non-admin accounts** on, or **Enable Remote Control for non-admin accounts** off — is open
+  to anyone who may change settings.
+- **Loosening** them again is for an administrator. Anyone else is refused, and nothing in
+  that save is stored: _Forbidden: only an administrator can lift these Remote Control
+  restrictions; turning them on is allowed (rejected: …)_.
+
+A paired device can change none of them. Every change to these three is recorded in the
+audit log.
+
 Read-only is a preference for how you want to use your install from a phone, not a security
 boundary. The things a paired device can never do are listed in
 [Managing devices](/c5/remote-control/managing-devices) and are refused whatever these
