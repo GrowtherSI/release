@@ -167,18 +167,26 @@ Classifier**.)
 
 The classifier answers some of the routine questions C5 asks itself while it works —
 starting with which categories a new task belongs to — beside the model that answers
-them today. It has two rows, under **Classifier models**:
+them today. It has two panels, under **Classifier models**:
 
 - **Built-in model** — the local classifier: a small model, about 812 MB, that runs on
   this machine in its own process. It needs no provider and no account, and nothing it
   sees leaves the machine. The rest of this section is about it.
 - **A model from your providers** — a model one of your providers serves (llama.cpp,
   Ollama, LM Studio, vLLM, or a cloud API), which an administrator at the machine can
-  choose. None is chosen by default. Once chosen it is asked first; the built-in model
-  answers when it cannot, while the built-in model is on. Its own setting, **Models allowed
-  from** (**This machine**, **Your network** or **Anywhere**), says how far away the chosen
-  model may run. See
+  choose. None is chosen by default. Once chosen, its panel comes first, tagged
+  **Primary**, and it is asked first. Its own setting, **Models allowed from** (**This
+  machine**, **Your network** or **Anywhere**), says how far away the chosen model may
+  run. It has its own switch, which turns it off without removing it, and **Remove**, which
+  clears the choice. See
   [A model from your providers](../tools/local-classifier.md#a-model-from-your-providers).
+
+When the chosen model cannot answer, the built-in model answers in its place, while it is
+on and **Use as fallback** is on. That switch sits under the built-in model's own, is on by
+default, and anyone who may change settings can turn it off; turning it back on needs an
+administrator at the machine. With it off, nothing answers in the chosen model's place and
+C5 uses its usual checks. See
+[Use as fallback](../tools/local-classifier.md#use-as-fallback).
 
 **It is on by default.** The first time a version of C5 with the classifier starts — a
 new install, or an update — it turns the switch on wherever nobody has set it, downloads
@@ -210,7 +218,7 @@ nothing to the log.
 #### The card
 
 The card's header has a **Terms** button and a short status badge. The **Built-in model**
-row has the switch. Under it:
+panel has the switch. Under it:
 
 | Line | What it tells you |
 | --- | --- |
@@ -266,7 +274,8 @@ Section 14 also covers a model from your providers, if you choose one.
 #### Turn the classifier off
 
 1. Turn the **Built-in model** switch off, or select **Turn off the local classifier…** in
-   the Terms dialog.
+   the Terms dialog (**Turn off the built-in model…** while a model from your providers is
+   chosen).
 2. C5 asks first, because nobody chose to turn it on. The question says what off means
    and what is on the disk.
 3. Choose **Turn off**. The model stays on the machine, so turning it back on costs no

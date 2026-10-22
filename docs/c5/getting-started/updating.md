@@ -193,6 +193,19 @@ Control** tab says that version 1.10 has not been accepted on this machine, even
 version 1.9 was, and the next save on that tab asks someone at the machine to accept it. See
 [If the Terms changed after you accepted them](/c5/remote-control/setup#if-the-terms-changed-after-you-accepted-them).
 
+**The Classifier card is laid out around the chosen model.** With a model from your
+providers chosen, its panel now comes first, tagged **Primary**, and has a switch of its own
+that turns it off without removing it. **Stop using it** is now **Remove**. Under the
+built-in model's switch, **Use as fallback** (on by default) decides whether the built-in
+model answers in the chosen model's place when that model cannot. Nothing changes until
+someone uses them: a model chosen before the update stays on, and the built-in model stands
+in for it as before. See
+[Turn the chosen model off for a while](/c5/tools/local-classifier#turn-the-chosen-model-off-for-a-while)
+and [Use as fallback](/c5/tools/local-classifier#use-as-fallback). The policy key
+`classifier_builtin_fallback` sets Use as fallback across a fleet; write your templates
+again to get it (see
+[Managed configuration](/c5/configuration/enterprise-policy#classifier_builtin_fallback)).
+
 **From v326 or earlier: the classifier can use a model from your providers.** The section in
 **Settings › Learning** is now called **Classifier**, and the local classifier's switch is
 now **Built-in model**. An administrator at the machine can choose a model that one of your
@@ -210,8 +223,11 @@ recorded only one question in four for these two kinds as well as for Step quali
 Step quality is sampled there; see
 [On a machine where it runs on the CPU](/c5/tools/local-classifier#on-a-machine-where-it-runs-on-the-cpu).
 
-**Going back to an earlier version.** v326 and earlier do not know about a model from your
-providers: they ignore the choice, and the built-in model answers as it did there. An
+**Going back to an earlier version.** v327 to v329 have neither the chosen model's own
+switch nor Use as fallback: there a chosen model you turned off is asked again, and the
+built-in model answers in its place whenever it cannot, while it is on. v326 and earlier do
+not know about a model from your providers: they ignore the choice, and the built-in model
+answers as it did there. An
 acceptance of version 1.10 for Remote Control also counts in any version after v322, so
 going back to one of those asks nothing (see
 [Remote Control Terms after a rollback](#remote-control-terms-after-a-rollback)).
