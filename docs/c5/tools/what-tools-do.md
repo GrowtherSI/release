@@ -48,6 +48,35 @@ Beyond asking you, C5 has guards that work on their own:
   leak. It catches common patterns, not everything — do not rely on it to notice a
   secret.
 - **Everything is recorded**, so you can look back at what happened.
+- **A placeholder is never saved as a result.** `write_file` (and its other name,
+  `create_file`) refuses to write an empty file, and refuses any text written to a video,
+  image, PDF, Office or ZIP file (`.mp4`, `.mov`, `.webm`, `.mkv`, `.avi`, `.png`, `.jpg`,
+  `.jpeg`, `.webp`, `.gif`, `.pdf`, `.docx`, `.xlsx`, `.pptx`, `.zip`) — except a PDF whose
+  text really is a PDF. Its refusal tells the agent which tool makes the real thing, or to
+  write Markdown that C5 turns into the deliverable. So an agent that cannot make a file
+  says so, rather than leaving a file that only looks like one.
+
+## Pictures and video
+
+Agents can make images and short videos on this machine, and fetch images from the web:
+
+- **`render_svg`** draws an image (PNG by default, or JPEG or WebP), from the agent's own
+  drawing or from a ready-made card: `editorial_card` (a headline card), `stat_callout` (a
+  big number), `quote_card` (a quotation) or `badge_banner`.
+- **`render_video`** makes a video from slides: an H.264 `.mp4`, 1920×1080 unless asked
+  otherwise, with each slide's caption shown on it and, for a task, written beside it as a
+  `.vtt` caption file. It uses **ffmpeg** on this machine, which C5 does not ship. C5 looks
+  for it in `FFMPEG_PATH`, then on your `PATH`, then in `/opt/homebrew/bin`,
+  `/usr/local/bin` and `/usr/bin`, and remembers what it found until it restarts — so
+  restart C5 after installing ffmpeg. Without it, the tool refuses and suggests `render_svg`
+  instead.
+- **`fetch_web_image`** downloads one image from an address into the task, as an attachment
+  with a readable file name and a line naming where it came from. To find a page's main
+  image, `read_url` reads the image the page itself names for sharing (its Open Graph,
+  Twitter Card or Schema.org image) and can attach it.
+
+A result is kept with the task, up to 25 MB. Each of these tools has a switch under **Master
+Tool Authorizations** (see [Permissions](/c5/security/permissions#setting-the-level)).
 
 ## Adding more tools
 

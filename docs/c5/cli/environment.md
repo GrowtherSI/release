@@ -87,6 +87,12 @@ See [Local model servers and gateways](#local-model-servers-and-gateways) below.
 | ---------------------- | -------------------------------------------------------------------- |
 | `GROWTHER_LIBVIPS_DIR` | Run C5 on your own copy of libvips instead of the one it ships with. |
 
+**Media tools**
+
+| Variable      | What it does |
+| ------------- | ------------ |
+| `FFMPEG_PATH` | The ffmpeg program `render_video` uses. Looked at first; then `ffmpeg` on your `PATH`, `/opt/homebrew/bin`, `/usr/local/bin` and `/usr/bin`. Read once per run of C5. See [Pictures and video](/c5/tools/what-tools-do#pictures-and-video). |
+
 ## Common things people do
 
 ### Use a different port
@@ -389,7 +395,8 @@ The Linux and Windows places work for the other variables on this page too. On m
 keeps only `GROWTHER_LIBVIPS_DIR` across its rewrite, so for anything else use another
 route: the three download switches can go in `c5.yaml` as custom keys, and the models'
 location is better moved with `growther cache relocate`, which records it for every
-start.
+start. `FFMPEG_PATH` has no such route on macOS: there, install ffmpeg in
+`/opt/homebrew/bin` or `/usr/local/bin`, where C5 looks for it anyway.
 
 ## What is in your data folder
 
