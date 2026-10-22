@@ -134,11 +134,36 @@ itself, so this usually resolves.
 If it keeps happening, raise your limit with the provider or route some work to a
 different model.
 
+### OpenRouter requests fail after updating
+
+From v327, OpenRouter's price caps and routing settings take effect; before, C5 sent the
+caps under names OpenRouter does not read. A **Max Prompt Price** or **Max Completion
+Price** below the price of the model a request is routed to now makes it fail, and **0**
+allows free providers only. Check them on OpenRouter's **Config** tab in Settings, and keep
+or clear a stored 0 there. See
+[OpenRouter routing settings](/c5/configuration/model-providers#openrouter-routing-settings).
+
+### A coordinator shows "Skipped — repeated failed generations"
+
+Its recent answers came back empty or broken, so C5 tries it last for a while — a minute at
+first, doubling each time it fails again, up to 15 minutes — and asks the others first. It
+is tried again on its own when the time runs out; saving the provider again does not change
+that, and restarting C5 clears it. If it keeps happening, check the model it runs. See
+[When a model is unavailable](/c5/agents/model-routing#when-a-model-is-unavailable).
+
 ### Results got worse
 
 Check what changed. [Analytics](/c5/using-c5/analytics) shows quality over time — find
 the day it dropped and think about what you changed then. A model switch is the most
-common cause.
+common cause. A change in how C5 grades a role can move its scores too, as the analyst's
+rubric did in v327; see [Reading the charts](/c5/using-c5/analytics#reading-the-charts).
+
+### A "Scoring check" notification
+
+_Scoring check: <role> steps fail "<check>" almost every time_ means nearly every recent
+step of that role failed one check of its rubric. That usually says the check does not fit
+what the role is asked to do, not that the work is bad. Nothing changes on its own; see
+[When one check fails almost every step](/c5/using-c5/analytics#when-one-check-fails-almost-every-step).
 
 ## Downloaded models
 
@@ -303,6 +328,14 @@ proxy's root certificate. See
 Open it. Blocked almost always means it is waiting for you to approve something, or it
 hit a limit.
 
+**If its comments end with a 🩺 note**, C5 found the run stuck for good: _🩺 Run `run_…`
+cancelled: nothing in it could ever run again._, followed by why — for example, review steps
+waiting on steps that were never created. C5 checks for such runs every minute, once they
+are an hour old, and cancels them. A task that was still in progress is then **Blocked** for
+a person to decide; a task waiting to start is picked up again with a fresh run, when it is
+one C5 runs on its own. The reason is also under
+**Latest Error** in the job's details in **Monitor › Queueing**.
+
 ### A task keeps failing
 
 Open it and read the error. The usual causes:
@@ -320,6 +353,10 @@ Open [Monitor](/c5/using-c5/monitor) → **Queueing**.
 
 If nothing is moving, check that you have a working model provider, that you have not hit
 a budget limit, and that no task is waiting on your approval.
+
+**System Jobs shows only Expired.** That is normal after an update: a background job still
+waiting 7 days after it was queued expires without running, and stays in the list. Expired
+jobs never run. See [When work seems stuck](/c5/using-c5/monitor#when-work-seems-stuck).
 
 ### A schedule did not run
 
