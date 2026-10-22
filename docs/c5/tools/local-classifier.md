@@ -1223,6 +1223,32 @@ Under each setting you see:
   is not one). Local models are counted in model time, not money, and a model with no price
   set is never called free.
 
+### When a change does not save, or saves in part
+
+A change on the card saves the moment you make it. If it could not be saved at all, the
+card says so as an error, for example _Could not change the classifier's mode: The
+classifier's settings could not be saved, so nothing was saved_, and nothing changed.
+
+Some changes write more than one thing — raising a kind writes its mode and the model's
+promotion record — and a fault can stop the write part-way. Then the card says exactly what
+was kept, as a warning, not as a failure: _Only part of the change was saved: the families'
+modes were saved, and the built-in model's promotion records were not. Settings › Learning
+shows what is stored now._ The card reads the status again, so what it shows afterwards is
+what is stored.
+
+A change that was saved, where only reading the status back failed, is said as done, also
+as a warning: _The local classifier was switched on, but the classifier's status could not
+be read. Settings › Learning shows it once it can be._ (for a mode, _categories was set to
+assisted, but …_). Nothing needs doing: the card catches up once it can read the status.
+
+**When the card cannot read the models from your providers** for a moment, it says so
+instead of drawing as if none were chosen: _C5 could not read the models from your
+providers just now, so they are not shown here. M from P is still answering the classifier's
+questions._ The badge then reads **Running**, and the built-in model's switch asks **Turn
+off the built-in model?** (_With the built-in model off, only M answers: whenever it does
+not, C5 answers those questions as it did before._) or **Turn on the built-in model?**.
+Nothing more is said about the chosen model until it can be read again.
+
 ## What you see in Ops › Classifier
 
 The **Classifier** tab on the **Ops** page shows the classifier as it runs: whether it is on
