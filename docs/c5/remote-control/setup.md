@@ -11,7 +11,10 @@ A device that is itself paired remotely can look at this tab but cannot change i
 
 You need permission to change settings. An administrator has it; other accounts have it only
 if an administrator granted it under
-[Access & user permissions](/c5/configuration/settings#access-user-permissions-rbac).
+[Access & user permissions](/c5/configuration/settings#access-user-permissions-rbac). A few
+things on the tab are for an administrator at the machine only: loosening the restrictions
+below, the **Default sign-in lease**, and the **Advanced** options. Anyone else sees them
+greyed out, with the reason beside them, and can still save the rest of the tab.
 
 ## Step 1 — Turn Remote Control on
 
@@ -41,11 +44,13 @@ To accept:
    through the address Growther.si issues**.
 3. Press **Agree**.
 
-**Cancel** leaves the switch off. Once accepted, the dialog is not shown again unless C5
-brings newer Terms than the ones accepted. The tab shows a line like _Terms v1.10 accepted
-by Ana Ruiz on Nov 2, 2026_ — the name of whoever accepted, your own included — with a
-**View** link that reopens the text. Only when that account no longer exists on the
-install — deleted since — does the line fall back to the account id.
+**Cancel** leaves the switch off. Only this dialog records an acceptance, under the account
+that ticked the box: saving settings any other way cannot record one. Once accepted, the
+dialog is not shown again unless C5 brings newer Terms than the ones accepted. The tab shows
+a line like _Terms v1.10 accepted by Ana Ruiz on Nov 2, 2026_ — the name of whoever
+accepted, your own included — with a **View** link that reopens the text. Only when that
+account no longer exists on the install — deleted since — does the line fall back to the
+account id.
 
 If you want Remote Control without the issued address — on your own network only, or with a
 tunnel or certificate you supply — you still accept the same Section, because it is the one
@@ -116,19 +121,25 @@ Nothing needs configuring on your router.
 Turning **Enable Remote Control for non-admin accounts** off does more than stop new
 pairings: a device a non-administrator already paired is refused from then on. It takes
 effect as soon as the tab is saved; nothing needs restarting. The same switch is kept in
-step with **Sidebar: Remote Control Button** on the **Access** tab.
+step with **Sidebar: Remote Control Button** on the **Access** tab, whoever turned it off, so
+a later save of the Access tab does not undo it. Until someone saves it, the switch is on,
+and non-admin accounts are not refused.
 
 ### Who can change these switches
 
-Anyone who may change settings, at the machine, can turn Remote Control on or off. The
-three switches above work one way round:
+Anyone who may change settings, at the machine, can turn Remote Control on or off and save
+the tab, even on an install where no administrator has saved it yet. The three switches
+above work one way round:
 
 - **Tightening** — turning **Read-only for remote devices** or **Read-only restriction for
   non-admin accounts** on, or **Enable Remote Control for non-admin accounts** off — is open
   to anyone who may change settings.
-- **Loosening** them again is for an administrator. Anyone else is refused, and nothing in
-  that save is stored: _Forbidden: only an administrator can lift these Remote Control
-  restrictions; turning them on is allowed (rejected: …)_.
+- **Loosening** them again is for an administrator at the machine. For anyone else, a switch
+  saved the restrictive way is greyed out, with _Only an administrator can lift a Remote
+  Control restriction._ A switch on the other side stays live, so it can be tightened, and
+  put back before saving. If a loosening is refused all the same, nothing in that save is
+  stored: _Forbidden: only an administrator can lift these Remote Control restrictions:
+  Read-only for all remote devices. Turning one on is allowed._
 
 A paired device can change none of them. Every change to these three is recorded in the
 audit log.
@@ -144,7 +155,9 @@ Pairing needs Remote Control on and saved; the tab says so if it is not.
 
 1. Set the **Default sign-in lease** — how long a newly paired device stays signed in each
    time, from one hour to seven days. Twenty-four hours unless you change it. You can change
-   it per device afterwards.
+   it per device afterwards. Only an administrator at the machine can change the default;
+   anyone else sees the slider read-only, with _Only an administrator can change the default
+   sign-in lease._
 2. Press **Show pairing code**. C5 shows a QR code and, under it, one chip per address it can
    be paired against — your network addresses and, when the tunnel is up, the issued one.
    Press a chip to point the code at that address; pressing it also copies the link, for a
@@ -179,7 +192,9 @@ sign-ins only; it does not touch paired devices.
 ## Advanced — your own address, certificate, or tunnel
 
 Fold open **Advanced — your own address, your own certificate** when the turnkey path does
-not suit you. Each option is independent.
+not suit you. Each option is independent. These fields are for an administrator at the
+machine: anyone else sees them read-only, with _Only an administrator can change Remote
+Control's address, certificate or tunnel._, and their save leaves them as they are.
 
 > **Note**
 > While Remote Control is on, a Public address you set here, and the names on a certificate
