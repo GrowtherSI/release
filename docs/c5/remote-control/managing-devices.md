@@ -154,7 +154,8 @@ Whatever account it is signed in as, a paired device cannot:
 - pair another device;
 - revoke a device other than itself;
 - change any lease;
-- change any Remote Control, voice, or security setting;
+- change any Remote Control, voice, or security setting (see
+  [Settings only an administrator can change](/c5/security/permissions#settings-only-an-administrator-can-change));
 - change where C5's traffic goes: the egress posture (online or offline), the proxy and its
   bypass list, the CA bundle, or the platform certificate pin;
 - change how an account signs in (the sign-in provider settings, including which directory

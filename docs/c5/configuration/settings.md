@@ -392,7 +392,7 @@ disk and the network side, see
 
 **Settings → Access** (labeled **Security & Access Configuration**) is where administrators configure what standard (non-administrator) teammates are permitted to see and do throughout C5.
 
-Administrator accounts always retain full view, edit, and execution privileges across all pages, features, and system controls. For standard teammates, administrators can fine-tune access using two levels of control on every feature:
+Administrator accounts always retain full view, edit, and execution privileges across all pages, features, and system controls. Some settings stay with administrators whatever this grid says, because each takes a prompt away from every agent; see [Settings only an administrator can change](/c5/security/permissions#settings-only-an-administrator-can-change). For standard teammates, administrators can fine-tune access using two levels of control on every feature:
 
 - **User View**: Controls whether standard users can see a feature, page, or action button. When turned off, the navigation tab, sidebar link, or button is hidden from their interface.
 - **User Edit**: Controls whether standard users can modify records, trigger active pipelines, or perform actions. When edit is turned off, the interface switches to read-only (disabling save buttons, edit forms, creation modals, and action menus).
@@ -540,8 +540,10 @@ was, and save.
 
 If you are not sure what you changed, the **Audit** view in [Ops](/c5/using-c5/ops) covers
 some of it: changes to what tools an agent may use, and to search providers and integrations,
-are recorded there with a timestamp. An ordinary **Save** on the other settings areas is not
-recorded there — so when a setting matters, note what it was before you change it.
+are recorded there with a timestamp, and so is an administrator's change to any of the
+[settings only an administrator can change](/c5/security/permissions#settings-only-an-administrator-can-change).
+An ordinary **Save** on the other settings areas is not recorded there — so when a setting
+matters, note what it was before you change it.
 
 If C5 will not start at all after a change, see
 [Common issues](/c5/troubleshooting/common-issues).
