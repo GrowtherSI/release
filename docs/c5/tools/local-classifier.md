@@ -1030,6 +1030,16 @@ Under each setting you see:
   yet_, when it was measured and over how many days, and each part that did not pass with
   what was measured (see [When it starts to act](#when-it-starts-to-act)). C5 measures it in
   the background, at most every ten minutes.
+- **How often it agrees with the usual model**, once the gate has compared them — never as a
+  bare rate, always beside what always giving the usual model's commonest answer would
+  score, for example _Agrees with the guardian on 97% of 298 calls (always answering SAFE
+  would score 97%); flagged 1 of the 9 it blocked — agreement, not a measure of being
+  right._ Task categories compares whole sets first: _Same categories as the usual model on
+  0 of 22 tasks (it picks 1.6 a task, the usual model 3.2); agrees on 85% of category
+  decisions, where answering no category would score 81% — agreement, not a measure of being
+  right._ Where the usual model was asked the same question more than once, the line also
+  says how often it changed its own answer. This is agreement, not accuracy — only your
+  labels measure that — and nothing acts on it.
 - What it is really doing, when it is set to act: _Acting in Authoritative at confidence 0.83 or
   more._, _Set to Assisted, but only recording its answers._ with the reason, or _Set to
   Assisted, but not running: this machine is too slow for its answers to be used in time, so
@@ -1078,7 +1088,11 @@ own there yet.
   or 30 days (**Window**): how it does against the usual model on the answers people or
   outcomes labelled, with 95% intervals; its gate's history, day by day; a calibration chart
   of its confidence against how often it was right; how often it gives the same answer as
-  the usual model, week by week (agreement, not accuracy); Cohen's κ against each source of
+  the usual model, week by week, beside a dashed line for what always giving the usual
+  model's commonest answer would score (agreement, not accuracy), and where the two differ —
+  each answer's counts, Step quality by the step's role and tool-call safety by tool, Step
+  quality's weighted κ and distance in levels, and how often the usual model changed its own
+  answer; Cohen's κ against each source of
   answers; and how the questions people answered were chosen. For Step quality it also
   compares the reward model with people's ratings. It reads once when opened; press
   **Refresh** to read again.
