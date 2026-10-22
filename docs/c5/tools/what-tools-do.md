@@ -73,7 +73,10 @@ Agents can make images and short videos on this machine, and fetch images from t
 - **`fetch_web_image`** downloads one image from an address into the task, as an attachment
   with a readable file name and a line naming where it came from. To find a page's main
   image, `read_url` reads the image the page itself names for sharing (its Open Graph,
-  Twitter Card or Schema.org image) and can attach it.
+  Twitter Card or Schema.org image) and can attach it. Reading a page asks nothing in an
+  unattended run, but a `read_url` that attaches the image saves a file, so it is treated
+  like `fetch_web_image`: it asks for approval unless a grant or its master switch covers
+  `read_url`, and the guardian checks it.
 
 A result is kept with the task, up to 25 MB. Each of these tools has a switch under **Master
 Tool Authorizations** (see [Permissions](/c5/security/permissions#setting-the-level)).

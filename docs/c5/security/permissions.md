@@ -56,6 +56,17 @@ which command. Then you choose:
 - **Always Deny** — refuse this agent and this tool from now on, without asking (or only that
   file or address, if you chose that).
 
+**An "Always" for the whole tool also moves its switch** under **Master Tool
+Authorizations** (below): **Always Allow** sets it to **On**, which lets every agent use the
+tool without asking, not only this one, and **Always Deny** sets it to **Off**, so the
+agent's own rule decides. An "Always" for one file or address moves no switch. If C5 could
+not save part of your choice, a message says which part, for example _“Always Allow” for
+read_file was not saved (HTTP 403), so C5 will ask again next time._ or _The Master Tool
+Authorizations switch for read_file was not changed (…); it is still Off. Set it in Settings
+› Extensions._ When C5 cannot read the current switches, it changes none of them, so the
+other tools' switches are never reset. Your answer to the call itself goes through either
+way.
+
 > **Tip**
 > Be slow with **Always Allow**. It is the choice people regret. **Approve Once** costs you
 > two seconds and keeps you in the loop.
@@ -81,9 +92,21 @@ grants is fixed:
   drive the screen, mouse and keyboard, each for up to 25 uses within 30 minutes. Approve
   this only if you would let the agent drive your screen.
 
-An approval replaces that agent's own rule for those tools, an **Always Deny** included.
-When its uses or its time run out, the tool asks again; it does not go back to the rule it
-replaced.
+An approval never overrides a rule you set:
+
+- **An Always Deny stays.** A tool that agent was told **Always Deny** — for the whole tool,
+  or for the address or command it asked about — is left denied; the agent is told so, and
+  not to ask again. A web escalation still grants the System Control tools that are not
+  denied.
+- **An Always Allow you gave stays as you gave it**, with no budget put on it.
+- **A request about one address or command** grants only that, where the tool works on one;
+  otherwise the whole tool.
+- **Asking again does not top it up.** While a grant from an earlier approval still has uses
+  and time left, a new approval keeps it as it is; a new budget starts only once it is spent
+  or expired.
+
+When its uses or its time run out, the tool asks again. Spent and expired grants are
+cleared away every night.
 
 With the checkbox off, an agent's request for escalation is answered that escalation is off,
 and you are not asked — unless the request tool is set to **On** or **Prompt** under
@@ -98,8 +121,8 @@ positions:
 | Position   | What it means                                  |
 | ---------- | ---------------------------------------------- |
 | **On**     | Every agent may use this tool without asking.  |
-| **Prompt** | Agents must ask you each time, even an agent you gave **Always Allow** for the whole tool. An **Always** answer for one file or address still applies to that file or address. |
-| **Off**    | No override: the tool's own per-agent rules decide, and anything you have not answered with an **Always** still asks you. It is not a block. To stop a tool, choose **Always Deny** when it asks. |
+| **Prompt** | Agents must ask you each time, even an agent you gave **Always Allow** for the whole tool. An **Always** answer for one file or address still applies to that file or address. In a task run nobody may be there to answer: once the **Authorize-Use Timeout** in **Settings › Tools** passes, the step is suspended, not refused, and resumes when you approve it. A chat nobody answers is denied at the timeout. |
+| **Off**    | No override: the tool's own per-agent rules decide, and anything you have not answered with an **Always** still asks you. It is not a block. To stop a tool, choose **Always Deny** when it asks. A tool nobody has set is at **Off**, and the panel shows it so. |
 
 **Master Tool Authorizations**, in **Settings → Extensions**, is where those positions are
 set, one switch per tool, listed by the tool's own name. Besides the tools agents already
@@ -110,8 +133,8 @@ have, it lists:
 | `render_video` | Media — generate | Makes a video with captions from slides, on this machine |
 | `fetch_web_image` | Media — generate | Downloads one image from the web into the task |
 | `create_file` | Files — write | Another name for `write_file`, with its rules |
-| `request_tool_escalation` | Capability & Web Escalation | Lets an agent ask for a local tool it lacks |
-| `request_web_resource_escalation` | Capability & Web Escalation | Lets an agent ask for a public web resource, and System Control with it |
+| `request_tool_escalation` | Tool & Web Escalation | Lets an agent ask for a local tool it lacks |
+| `request_web_resource_escalation` | Tool & Web Escalation | Lets an agent ask for a public web resource, and System Control with it |
 
 **On** for `request_web_resource_escalation` approves every such request without asking,
 System Control included. Only an administrator at the machine can change a switch (see

@@ -264,6 +264,14 @@ administrators always have. That permission alone is now enough, and the right t
 other settings no longer includes it. See
 [Pausing everything](/c5/using-c5/productivity#pausing-everything).
 
+**Tool approvals keep your rules.** Approving an agent's request for a tool it lacks no
+longer turns your **Always Deny** into a grant, cuts a permanent **Always Allow** down to a
+budget, or resets a grant that still has uses left; spent and expired grants are cleared
+every night. Choosing **Always** for a tool no longer resets the other tools' switches under
+**Master Tool Authorizations** when C5 cannot read them, and a `read_url` that attaches a
+page's image asks for approval in an unattended run. See
+[When an agent lacks a tool](/c5/security/permissions#when-an-agent-lacks-a-tool).
+
 **OpenRouter keeps your limits.** Nothing you set changes:
 
 - **A chat or task request never goes out without your price caps and provider limits.** If
