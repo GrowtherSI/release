@@ -162,8 +162,8 @@ OpenClaw card's **Host** and **Port** lock. See
 
 ### Updating to the release with Terms v1.10
 
-**The Terms of Service are now version 1.10.** No section is added or renumbered. What
-changes depends on the version you update from.
+**The Terms of Service are now version 1.10**, effective October 22, 2026. No section is
+added or renumbered. What changes depends on the version you update from.
 
 **From v327, v328 or v329**, which carry version 1.9, two sentences change:
 
