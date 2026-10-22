@@ -618,12 +618,19 @@ C5 still asks you before it sends questions to each model that is not on this ma
   it to Your network on the Classifier card to choose it._, or _Runs online through OpenAI,
   and Models allowed from is Your network: set it to Anywhere on the Classifier card to choose
   it._
-- **Narrowing it** stops C5 asking a chosen model that is now too far away. Its row reads
-  _Not used._ with the reason, and the built-in model answers while it is on.
+- **Narrowing it** stops C5 asking a chosen model that is now too far away. Its panel reads
+  _Not used._ with the reason, and the built-in model answers while it is on and
+  [Use as fallback](#use-as-fallback) is on.
 - **Your organisation's policy** comes first. A policy that locks
-  `classifier_external_allowed` shows the setting locked, with the reason and where the policy
-  is set; locked to `off`, the choice reads **Off — set by your organisation**. A value the
-  policy only recommends is the default an administrator may change. See
+  `classifier_external_allowed` shows the setting locked, with the reason and where the
+  policy is set; locked to `off`, it reads _Your organisation's policy does not allow a
+  model from your providers here._ A value the policy only recommends is the default an
+  administrator may change. `off` is a value only a policy can give: whether locked or only
+  recommended, the setting then shows a fourth choice, **Off — set by your organisation**.
+  Recommended, it reads _Models allowed from is Off, so C5 asks no model from your providers
+  here: choose where they may run on the Classifier card._, and an administrator at the
+  machine can still choose **This machine**, **Your network** or **Anywhere**, after which
+  **Off** is gone. See
   [Classifier models from your providers](../configuration/enterprise-policy.md#classifier-models-from-your-providers).
 
 ### Before a model off this machine is asked
