@@ -24,7 +24,8 @@ The button carries up to two counts:
 
 - **The amber count** is the number of HITL notifications waiting in **Tasks**, **Rules**,
   **Variants**, **Training**, **Analysis** and **Errors** (_99+_ above 99). A new one plays
-  the **HITL Signoff Queue** sound, which you can change under **Settings › Alerts**.
+  the **HITL Signoff Queue** sound (_New item waiting for review in HITL._), which you can
+  change under **Settings › Alerts**.
 - **The grey count**, on the button's lower corner, is for administrators only, and never on
   a paired device. It counts the questions that teach the classifier: those waiting in
   **Teach the classifier**, and the calls in **Guardian blocks** whose verdict can count
@@ -37,10 +38,11 @@ The button carries up to two counts:
 ### Who can use it
 
 The **Sidebar: HITL Button & Modal** permission, under **Settings › Access › Feature
-Locks**, decides who may use the window: with **View** off the button does nothing, and with
-**Edit** off the window opens read-only. The window also needs **View** on **Chat Pipeline
-Runner**, and approving or rejecting a task needs **Edit** on both. Administrators always
-pass.
+Locks**, is the only one the window needs. **View** opens it and lists what waits there;
+with **View** off the button does nothing. **Edit** is what every decision in it needs:
+approving or rejecting a task, the review queues' buttons, and **Mute Noise** and
+**Unmute**. With **Edit** off the window opens read-only. **Chat Pipeline Runner** plays no
+part. Administrators always pass.
 
 **Guardian blocks** and **Teach the classifier** are for administrators, and never on a
 device paired through [Remote Control](/c5/remote-control/overview). The account needs a
@@ -66,9 +68,10 @@ too: what counts is the role, not where the browser runs.
 ## Tasks
 
 Each paused task shows what it is waiting on. Write a review note, then choose **Approve** or
-**Reject**; neither is offered until the note has text. With more than one task waiting,
-**Approve All (N)** approves them together, after you add a note to each. Once the last task
-is decided, the window closes itself after a short countdown.
+**Reject**; neither is offered until the note has text. Without **Edit**, the note box is
+greyed out and says _Needs HITL edit permission to approve or reject tasks._ With more than
+one task waiting, **Approve All (N)** approves them together, after you add a note to each.
+Once the last task is decided, the window closes itself after a short countdown.
 
 ## Guardian blocks
 
@@ -98,6 +101,15 @@ whether the guardian was right.
 
 A guardian block's row in the notification list's **Tool Activity** opens this tab, for an
 administrator who is not on a paired device.
+
+**If the list cannot be loaded**, the tab says why instead of showing an empty list. An
+administrator without a second factor reads _Only an administrator with multi-factor
+authentication can review guardian blocks._, followed by how to add one (_Add a passkey to
+your profile — that is what counts as MFA here — then try again._, or your identity
+provider's advice for a directory account). On a paired device it reads _You can review
+guardian blocks only on the machine running C5._, and for an account that is no longer an
+administrator _Only an administrator can review guardian blocks._ A session that expired
+says _Your session has expired. Sign in again to load guardian blocks._
 
 ## Teach the classifier
 
@@ -143,14 +155,18 @@ running at that time; a night it is off is not made up.
 administrator to **Confirm Defect** or **Reject**; **Verified Training Signal Dataset (N)**
 holds the confirmed ones. A finding about a step that has since been pruned can no longer be
 judged, so it expires, on the same nightly pass. Answering one that expired while the tab was
-open is refused: _This finding expired: the step it asks about was pruned, so it can no
-longer be judged. Nothing was changed._ Reopen the tab to refresh the list.
+open is refused: its card leaves the list, and the reason stays above the list: _This
+finding expired: the step it asks about was pruned, so it can no longer be judged. Nothing
+was changed._ Where the expired finding stood for a group of similar ones, the next finding
+in the group takes its place.
 
 ## Errors
 
 The **Auto-Suppression Ledger** lists the errors that keep coming back. **Mute Noise** hides
-one as noise: later occurrences are discarded. **Unmute** brings it back. Muting and unmuting also count as answers for the classifier's **Alert
-triage**, when C5 triaged that alert while Alert triage was recording.
+one as noise: later occurrences are discarded. **Unmute** brings it back. Both need **Edit**
+on the window, as its other decisions do; without it the ledger still shows each error and
+its status, with neither button. Muting and unmuting also count as answers for the
+classifier's **Alert triage**, when C5 triaged that alert while Alert triage was recording.
 
 ## Going back to an earlier version
 
