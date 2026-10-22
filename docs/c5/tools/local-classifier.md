@@ -385,7 +385,9 @@ labelled tasks.
 question both the classifier and the usual model answered, and a person or an outcome
 labelled. When the last 30 days hold 200 of them, the gate measures those 30 days; otherwise
 it reaches back as far as it takes to hold 200, but never past 180 days. Only the answers of
-the model answering now count, so a model new to C5 starts from none. The nightly re-check
+the model answering now count, so a model new to C5 starts from none. People's labels are
+read apart from the teacher model's, so a large batch of the teacher model's answers never
+pushes yours out of the count. The nightly re-check
 and the calibration fit read the same window, and **Teach the classifier** asks about task
 categories up to 180 days old for the same reason.
 
@@ -459,7 +461,15 @@ gave a task, fixes that.
   on it, and a kind already acting on it stops acting at its next fit (nightly, or
   **Fit calibration now**) and is fitted again.
 - Nothing raises the classifier for you. Someone with permission to change settings chooses the
-  mode.
+  mode. A raise is measured first, ahead of the measurements C5 makes in the background, and
+  no other change on the card waits for it. It is judged on the newest measurement there
+  is, the nightly re-check's included, so a kind the night just moved back is judged on the
+  result that moved it. If the kind, or the model it is judged on, changed while it was
+  measured, nothing is saved: _… another change to it, or to which model it is judged on, was
+  saved while its promotion gate was being measured. Raise it again to have it judged as it
+  stands now. Nothing was saved._
+- Lowering a kind is always saved, by you or by the nightly re-check, however many kinds an
+  older install has stored.
 - Even when raised, it acts only at the confidence level its gate measured, only on answers
   from the model the gate measured, and only on answers calibrated the way the gate measured
   them. Below that level, the usual model answers.
@@ -473,12 +483,20 @@ gave a task, fixes that.
   - the calibration its confidence level was measured on has been replaced; or
   - its calibration error has more than doubled since it was raised.
 - If the gate only lacks enough new evidence, it keeps acting for up to 60 days after its
-  last verification: a night it passed on something answered or labelled since the one
-  before. Because the window reaches back for its 200 answers, a kind nobody labels any more
-  would otherwise pass every night on the answers it was raised on; a pass on nothing new
-  counts as too little evidence. Administrators are told that its evidence is thin (**Local
-  classifier: … is acting on evidence from …**), and after the 60 days it goes back to
-  Shadow. Answering its questions in **Teach the classifier** re-checks it.
+  last verification: a night it passed on something labelled since the one before. Because
+  the window reaches back for its 200 answers, a kind nobody labels any more would otherwise
+  pass every night on the answers it was raised on; a pass on nothing new counts as too
+  little evidence. Only a new label is new: a question that comes up again and is answered
+  on the label it already had does not re-verify the kind. Administrators are told that its
+  evidence is thin (**Local classifier: … is acting on evidence from …**, saying that nothing
+  was labelled since it was last verified), and after the 60 days it goes back to Shadow.
+  Answering its questions in **Teach the classifier** re-checks it.
+- If moving a kind back fails part-way, the notification says exactly what changed and what
+  did not, for example _'categories' was moved back to shadow. The local classifier's
+  promotion record for it could not be removed._, and is titled **… could not be moved back
+  to shadow** when the kind itself is still acting. The next night judges it again. A night
+  on which none of the checks could run is not counted as done: it is tried again before
+  midnight.
 - On a machine where the classifier is too slow (see [Slow machines](#slow-machines)), only
   kinds set to Shadow run. A kind set to Assisted or Authoritative is not asked at all: it
   does not even record, so it gathers no new evidence for its promotion gate while the
