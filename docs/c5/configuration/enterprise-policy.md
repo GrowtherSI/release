@@ -92,8 +92,10 @@ Growther › C5**, in both Computer Configuration and User Configuration:
 - **Computer Configuration locks.** The value lands in `HKLM\SOFTWARE\Policies\Growther\C5`,
   and users see the setting disabled with a lock; a change made in C5 is ignored and
   audited.
-- **The Recommended twins**, under **C5 (Recommended: defaults the user may change)**, do
-  not lock. Their values land in `…\C5\Recommended`.
+- **The Recommended twins**, under **C5 (Recommended: values that do not lock)**, do not
+  lock. Their values land in `…\C5\Recommended`. Templates written by earlier versions
+  titled this folder _C5 (Recommended: defaults the user may change)_, which was not true of
+  the eight keys below.
 - **User Configuration never locks.** A policy set there lands under `HKCU`, and C5 reads it
   as it reads a Recommended value.
 - **Disabled** on a policy that holds a value (a folder, a port, a choice from a list) works
@@ -104,9 +106,8 @@ A value that does not lock — Recommended, or under User Configuration — is f
 default: C5 uses it while the setting has no value of its own in C5. Eight keys apply only
 when locked, and a value that does not lock does nothing for them: `GROWTHER_HOME`,
 `GROWTHER_DATA_DIR`, `GROWTHER_SECRETS_DIR`, `GROWTHER_CACHE_DIR`, `PORT`,
-`GROWTHER_BIND_HOST`, `GROWTHER_ALLOW_REMOTE_NONE_LOGIN` and `GROWTHER_ALLOWED_HOSTS`. (The
-Recommended category's name does not make that exception.) The proxy and certificate keys
-have rules of their own; see [How a policy sets the proxy](#how-a-policy-sets-the-proxy).
+`GROWTHER_BIND_HOST`, `GROWTHER_ALLOW_REMOTE_NONE_LOGIN` and `GROWTHER_ALLOWED_HOSTS`. The
+proxy and certificate keys have rules of their own; see [How a policy sets the proxy](#how-a-policy-sets-the-proxy).
 Each policy's explanation in the templates says which applies to it.
 
 ### macOS: Jamf or Intune
