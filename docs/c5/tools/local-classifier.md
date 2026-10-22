@@ -440,18 +440,32 @@ If a mode cannot be chosen, the option says why; see
 
 ### Teaching it
 
-The answers people give are what the gate measures. While some model answers the classifier's
-questions — the built-in model, or a [model from your providers](#a-model-from-your-providers)
-that C5 asks — and has something to ask, administrators on the machine running C5 (never on a
-paired device) see a
-**Teach the classifier** tab in the **HITL: Human-in-the-Loop Signoffs** window, which opens
-from the HITL (clipboard) button in the sidebar. It shows a task's categories to confirm, or a
-step's output to rate. It never shows what the classifier answered, so your answer cannot lean
-towards it.
+The answers people give are what the gate measures. While some model answers the
+classifier's questions — the built-in model, or a
+[model from your providers](#a-model-from-your-providers) that C5 asks — and has something
+to ask, administrators see a **Teach the classifier** tab in the **HITL: Human-in-the-Loop
+Signoffs** window, which opens from the HITL (clipboard) button in the sidebar (see
+[Human review (HITL)](../using-c5/hitl.md)). It is never shown on a paired device, and the
+account needs a second factor, unless the install was set up without any sign-in. What
+counts is the administrator role, not where the browser runs: on an install bound beyond
+this machine (`GROWTHER_BIND_HOST`), an administrator signed in from another computer sees
+it too. It shows a task's categories to confirm, or a step's output to rate. It never shows
+what the classifier answered, so your answer cannot lean towards it.
 
-Two other actions count as answers too:
+You need not open the window to find out whether anything is asked. A small grey count on
+the lower corner of the HITL button says how many questions are waiting here and in
+**Guardian blocks**. It is never added to the button's own count and never plays a sound:
+these questions hold up no work. It is shown only to administrators, never on a paired
+device, and is hidden while no model answers. See
+[Opening it](../using-c5/hitl.md#opening-it).
 
-- **Changing the categories C5 gave a task.**
+Three other actions count as answers too:
+
+- **Changing the categories C5 gave a task**, a task one of your schedules created included.
+- **A verdict in Guardian blocks**, for tool-call safety. **Confirm block** says the
+  guardian was right to refuse the call; **Dismiss** says it was a false alarm. These are
+  the only answers people give tool-call safety there, and they cover only calls the
+  guardian blocked (see [Guardian blocks](../using-c5/hitl.md#guardian-blocks)).
 - **Muting or unmuting an alert**, for alert triage. The **Auto-Suppression Ledger**, in the
   **Errors** tab of the same HITL window, has **Mute Noise** and **Unmute** beside each
   repeating error. Muting says "this is noise, hide it"; unmuting says "this should not have
