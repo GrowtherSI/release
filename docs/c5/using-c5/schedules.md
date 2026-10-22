@@ -21,8 +21,9 @@ If you find yourself asking for the same thing over and over, make it a schedule
 ## Making one
 
 1. Go to **Schedules**.
-2. Click **New schedule**.
-3. Write what you want done, the same way you would in Chat.
+2. Click **New Schedule**.
+3. Choose what it does — **Use Recipe**, **Create Task** or **Send Request** — and write
+   what you want done, the same way you would in Chat.
 4. Pick when it should run.
 5. Save.
 
@@ -65,11 +66,18 @@ Deleting removes the schedule. Work it already finished stays in your Library.
 
 ## If a run fails
 
-C5 tells you and keeps the schedule alive. It will try again at the next normal time.
-It does not quietly stop.
+A failed run does not stop the schedule: it runs again at its next normal time. Open the
+failed run to see what went wrong. Common causes are an expired API key or a spending
+limit that was already used up.
 
-Open the failed run to see what went wrong. Common causes are an expired API key or a
-spending limit that was already used up.
+**A Send Request schedule tries again sooner.** When its request to the model fails, or
+comes back empty, C5 tries it again about a minute later, up to 5 attempts in all. If the
+fifth fails too, it gives up on that occurrence, and the schedule's recipients get
+**Scheduled Request Failed: <title>**, _Giving up after 5 attempts. Last error: …_ The
+attempts before that send no notification.
+
+**Each occurrence starts one run.** A scheduled task is started once for each time it is
+due; versions before v327 could start two or three runs of the same occurrence.
 
 > **Tip**
 > Set up an alert so you hear about failures right away instead of finding out later.
