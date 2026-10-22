@@ -1024,6 +1024,35 @@ given up after a minute's wait (see
 Settings see this tab. It only reports; the switch and the modes are in **Settings ›
 Learning**.
 
+**Labels** counts, for the kind of decision you pick, the answered questions still waiting
+for a label (_Answered states waiting_), how far it is from its gate's floor (_Toward the
+gate's floor_), and the held-out answers an acting kind needs to stay verified. Where
+questions wait for a kind that **Teach the classifier** asks about, an administrator gets
+**Answer in Teach the classifier**, which opens that tab of the HITL window and waits for its
+questions to load; if they cannot be read, the tab says why. On a paired device the panel
+says _Answer them in Teach the classifier on the machine running C5._, and to anyone else
+that an administrator answers them.
+
+### Analytics › Classifier and Labs › Classifier
+
+Two more tabs show the classifier's record in detail. Both need permission to view Settings,
+and both show the built-in model's record; a model from your providers has no view of its
+own there yet.
+
+- **Analytics › Classifier** follows one kind of decision at a time (**Family**), over 7, 14
+  or 30 days (**Window**): how it does against the usual model on the answers people or
+  outcomes labelled, with 95% intervals; its gate's history, day by day; a calibration chart
+  of its confidence against how often it was right; how often it gives the same answer as
+  the usual model, week by week (agreement, not accuracy); Cohen's κ against each source of
+  answers; and how the questions people answered were chosen. For Step quality it also
+  compares the reward model with people's ratings. It reads once when opened; press
+  **Refresh** to read again.
+- **Labs › Classifier** has **What a threshold would do**: pick a confidence threshold (τ)
+  and see how many decisions it would cover, how many tasks the classifier would answer
+  alone, the error it would make and the calls it would replace a week. _This changes
+  nothing._ Beside it, **Evidence budget** says how many questions it is asked a week and
+  how many have been labelled so far.
+
 ## The Terms that cover it
 
 The **Terms** button on the card opens **The classifier — Terms of Service, Section 14**:
