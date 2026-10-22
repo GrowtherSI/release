@@ -139,7 +139,7 @@ above work one way round:
   Control restriction._ A switch on the other side stays live, so it can be tightened, and
   put back before saving. If a loosening is refused all the same, nothing in that save is
   stored: _Forbidden: only an administrator can lift these Remote Control restrictions:
-  Read-only for all remote devices. Turning one on is allowed._
+  Read-only for remote devices. Turning one on is allowed._
 
 A paired device can change none of them. Every change to these three is recorded in the
 audit log.

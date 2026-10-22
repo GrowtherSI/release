@@ -174,9 +174,10 @@ stands in for the signature, and a signature is verified when present.
    user's value. A teammate's save that changes a locked setting is refused, nothing in it
    is stored, and the message names the setting as the policy templates do, for example
    _Forbidden: Share improvements with the Mothership is managed by your organisation's
-   policy._ An administrator's save goes through without the locked settings; on
-   **Settings › Budget** a message names the ones left out: _Not saved — managed by your
-   organisation's policy: …_
+   policy._ An administrator's save goes through without the locked settings, and on
+   **Settings › Budget** and **Settings › Remote Control** a message names the ones left out
+   as the tab does: _Not saved — managed by your organisation's policy: Hard Budget Cap spend
+   limit._, or _Policy on this machine refused: Read-only for remote devices._
 5. If the source becomes unreachable, the last verified policy holds for the grace
    window (default fourteen days). After that, locked keys fall to their safest
    defaults and C5 says so. It never quietly runs unmanaged.
