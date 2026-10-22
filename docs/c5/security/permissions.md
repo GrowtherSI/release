@@ -239,7 +239,7 @@ and the message names each setting as Settings does:
 | The message | What it means |
 | --- | --- |
 | _Forbidden: Guardian Vetting is admin-only._ | A setting in the table above; ask an administrator at the machine to change it |
-| _Forbidden: only an administrator can lift these Remote Control restrictions: Read-only for all remote devices. Turning one on is allowed._ | Loosening a Remote Control restriction; see [Who can change these switches](/c5/remote-control/setup#who-can-change-these-switches) |
+| _Forbidden: only an administrator can lift these Remote Control restrictions: Read-only for remote devices. Turning one on is allowed._ | Loosening a Remote Control restriction; see [Who can change these switches](/c5/remote-control/setup#who-can-change-these-switches) |
 | _Forbidden: only an administrator can turn on Voice on remote devices. Turning it off is allowed._ | See [Voice from a paired phone](/c5/using-c5/voice#voice-from-a-paired-phone) |
 | _Forbidden: Retrospective Loop needs the HITL edit permission (Settings › Access)._ | The Retrospective Loop's switch, schedule and token cap need **Edit** on **Sidebar: HITL Button & Modal** |
 | _Forbidden: … is managed by your organisation's policy._ | A setting your organisation's policy locks; see [How a policy is applied](/c5/configuration/enterprise-policy#how-a-policy-is-applied) |
