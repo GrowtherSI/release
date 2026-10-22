@@ -1111,13 +1111,17 @@ Under each setting you see:
 ## What you see in Ops › Classifier
 
 The **Classifier** tab on the **Ops** page shows the classifier as it runs: whether it is on
-and acting, how many decisions it made and how fast, the calls to the usual model it replaced,
-the labels still waiting, and where each learning loop stands. Its **Since the server
-started** chart counts every question by outcome, including the background questions
+and acting, how many decisions it made and how fast, the calls to the usual model it
+replaced, the labels still waiting, and where each learning loop stands. Its **Since the
+server started** chart counts every question by outcome, including the background questions
 given up after a minute's wait (see
 [When the classifier is busy](#when-the-classifier-is-busy)). Only accounts that may view
 Settings see this tab. It only reports; the switch and the modes are in **Settings ›
-Learning**.
+Learning**. Its charts are the built-in model's; a model from your providers has its own
+gate and record (see
+[How a chosen model earns its place](#how-a-chosen-model-earns-its-place)) but no charts of
+its own here yet, and with the built-in model off the tab says it is showing what the
+built-in model recorded before.
 
 For the kind of decision you pick, it also shows:
 
