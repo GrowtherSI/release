@@ -207,11 +207,13 @@ is there and serving.
 ## The words that bind
 
 This page describes; the Terms bind. Section 15 of the Growther.si Terms of Service, Remote
-Control, is the text you accept in C5 (it was Section 14 before Terms version 1.7), and it is
-at
-[growther.si/t=remote-control](https://growther.si/t=remote-control). Cloudflare's own
+Control, is the text you accept in C5 (it was Section 14 before Terms version 1.7), and it
+is at [growther.si/t=remote-control](https://growther.si/t=remote-control). Cloudflare's own
 [terms](https://www.cloudflare.com/terms/) and
-[privacy policy](https://www.cloudflare.com/privacypolicy/) govern Cloudflare's part.
+[privacy policy](https://www.cloudflare.com/privacypolicy/) govern Cloudflare's part. How
+Growther.si handles personal data is in its
+[Privacy Policy](https://license.growther.si/privacy), and, for an organisation that signs
+one, the [Data Processing Agreement](https://license.growther.si/dpa).
 
 **The Terms are now version 1.10.** Since version 1.8, three things changed about Remote
 Control, without renumbering any section:
