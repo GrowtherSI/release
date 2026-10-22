@@ -23,11 +23,12 @@ workshop without stopping the work happening next door.
 
 | Tab            | What it is for                                                    |
 | -------------- | ----------------------------------------------------------------- |
-| **Recipes**    | Saved sets of steps for jobs you do again and again.               |
-| **Skills**     | Specific abilities your agents can use.                            |
-| **Variants**   | Different versions of a setup, so you can compare them.            |
-| **Experiments**| Structured tests that compare options fairly.                      |
 | **Evolution**  | A record of what improved over time.                               |
+| **Factorial**  | Structured tests that compare options fairly.                      |
+| **Classifier** | A what-if for the [classifier](/c5/tools/local-classifier)'s confidence threshold. It changes nothing. Shown to accounts that may view Settings. |
+| **Variants**   | Different versions of a setup, so you can compare them.            |
+| **Skills**     | Specific abilities your agents can use.                            |
+| **Recipes**    | Saved sets of steps for jobs you do again and again.               |
 
 ## Recipes
 
@@ -78,6 +79,30 @@ differences are hard to see by eye but easy to see in a comparison.
 
 > **Note**
 > Comparisons need a few runs before they mean anything. One good result can be luck.
+
+A variant's scores start again when the way its role is graded changes. From v327 the
+analyst is graded on a rubric of its own, so after updating, the analyst's variants show
+**—** under **Avg Score** and **Win Rate** until steps graded the new way score them; their
+**Runs** are kept. See [Analytics](/c5/using-c5/analytics#reading-the-charts).
+
+## Evolution
+
+Evolution follows how C5's improvements progress, including what is shared with the
+[Mothership](/c5/mothership/overview). A defect C5 found in a past step cannot be confirmed
+once that step has been pruned, so it expires (see
+[Human review](/c5/using-c5/hitl#training)). When nothing else is shared or on its way, the
+sharing panel can say so: _2 findings expired unconfirmed because the steps they ask about
+were pruned, so there is nothing to share._ Sharing counts are shown only to an
+administrator, on the machine running C5.
+
+## Classifier
+
+**What a threshold would do** shows what the classifier would do at a confidence threshold
+(τ) you pick: the decisions it would cover, the tasks it would answer alone, the error it
+would make and the calls to the usual model it would replace a week. **Evidence budget**
+says how many questions it is asked a week and how many have been labelled so far. Nothing
+you do here changes anything: a kind of decision acts on the threshold its promotion gate
+measured. See [When it starts to act](/c5/tools/local-classifier#when-it-starts-to-act).
 
 ### Automated promotion
 
