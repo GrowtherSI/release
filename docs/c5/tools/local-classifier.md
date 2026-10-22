@@ -826,11 +826,27 @@ Once a billed model is in use:
   so: _Every question C5 asks this model carries your OpenRouter routing limits from
   OpenRouter's Config tab in Settings (…), never its fallback models._ A model tested by an
   earlier version shows that note in these words too, without a new test.
-- The list offers every model OpenRouter lists, not only those under **Model Selection** on
-  OpenRouter's **Config** tab, and choosing one never adds it there: the models your chats
-  and tasks fall back to stay as you set them. If C5 cannot read OpenRouter's list, the
-  group says so and offers only the **Model Selection** models. A model OpenRouter no longer
-  lists is refused: _OpenRouter no longer lists M. Nothing was changed._
+- The list offers the models OpenRouter lists that could be chosen here, not only those
+  under **Model Selection** on OpenRouter's **Config** tab, and choosing one never adds it
+  there: the models your chats and tasks fall back to stay as you set them.
+  - **C5 reads OpenRouter's list only where a model from it could be chosen**: with **Models
+    allowed from** at **Anywhere**, OpenRouter turned on in **Settings › Integrations**, and
+    your organisation's policy allowing it. Below Anywhere, the group says why in the
+    setting's own words, for example _Runs online through OpenRouter, and Models allowed
+    from is This machine: set it to Anywhere on the Classifier card to choose it._, never
+    that OpenRouter lists no models. A policy's refusal is given in its own words, followed
+    by _This shows only the models under Model Selection on OpenRouter's Config tab._ when
+    that list has some.
+  - **Only the models your organisation's policy allows** are offered, where its
+    `allowedModels` names some: the others are left out of the list.
+  - If C5 could not read the list, the group says so: _C5 could not read the models
+    OpenRouter lists._, or, beside your **Model Selection** models, _C5 could not read the
+    models OpenRouter lists, so this shows only those under Model Selection on its Config
+    tab. Choosing one here never changes that list._ _OpenRouter lists no models right now._
+    means OpenRouter answered with none.
+
+  A model OpenRouter no longer lists is refused: _OpenRouter no longer lists M. Nothing was
+  changed._
 - A name the provider moves to another model by itself cannot be chosen — one ending in
   `latest`, `openrouter/auto`, or a name starting with `~`: _choose a dated or versioned model
   instead_.
