@@ -206,6 +206,27 @@ and [Use as fallback](/c5/tools/local-classifier#use-as-fallback). The policy ke
 again to get it (see
 [Managed configuration](/c5/configuration/enterprise-policy#classifier_builtin_fallback)).
 
+**The classifier is measured more fairly.** Nothing you set changes, but its numbers move:
+
+- **The promotion gate counts the last 200 labelled answers**, reaching back up to 180 days
+  when the last 30 do not hold 200, and the gate line says over how many days it measured
+  and how long 200 take at the current pace. **Teach the classifier** asks about task
+  categories up to 180 days old.
+- **Speed counts only for Task categories**, the one kind of decision something waits for.
+- **Step quality no longer sees the rubric's score** it is compared with, so its gate starts
+  again from the steps recorded after this update.
+- **Agreement with the usual model** is shown beside what always giving its commonest answer
+  would score.
+- **Teach the classifier** starts one category question in four blank, and asks about a few
+  of the tool calls the guardian allowed (**Tool calls to check**).
+- **The built-in model stays loaded for an hour** after its last question on a machine with
+  32 GB of memory or more, instead of 10 minutes.
+- **Ops › Classifier** counts what became of every question from this update on, across
+  restarts, and shows the usual model's own calls.
+
+See [When it starts to act](/c5/tools/local-classifier#when-it-starts-to-act) and
+[Teaching it](/c5/tools/local-classifier#teaching-it).
+
 **From v326 or earlier: the classifier can use a model from your providers.** The section in
 **Settings › Learning** is now called **Classifier**, and the local classifier's switch is
 now **Built-in model**. An administrator at the machine can choose a model that one of your
