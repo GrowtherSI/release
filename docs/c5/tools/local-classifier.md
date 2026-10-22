@@ -1367,7 +1367,14 @@ For the kind of decision you pick, it also shows:
   left out, since a question may still be waiting for the model to load. C5 began keeping
   these counts when it updated to this version; until that day is older than the panel's
   window, the heading says so (_Every question since Oct 15 (UTC), when counting began, kept
-  across restarts_).
+  across restarts_). A question in a language the built-in model skips (see
+  [Languages](#languages)) is counted **Skipped: language** with Use as fallback off too,
+  since that, not the setting, is why it went unanswered.
+
+**One answer is counted once.** When the usual model fails on a task's categories and the
+classifier's confident answer is used instead, C5 records that answer twice — as the answer
+used, and as a sample for the promotion gate — but the daily answers and answer times count
+it once.
 
 **Saved** counts only the calls the usual model actually made, never a replay, and prices
 them at the usual model's fresh calls. The early guess C5 makes at a draft's categories in
