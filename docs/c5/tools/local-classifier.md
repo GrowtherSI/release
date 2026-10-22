@@ -139,8 +139,8 @@ To check the training mixture, see the publisher's page for the model:
 Anyone with permission to change settings can turn it off.
 
 1. Go to **Settings › Learning**.
-2. On the **Classifier** card, flip the **Built-in model** switch off. It is in the
-   **Built-in model** row, under **Classifier models**.
+2. On the **Classifier** card, flip the **Enabled** switch on the **Built-in model** panel
+   off. It is under **Classifier models**.
 3. C5 asks **Turn off the local classifier?** and explains that, while off, it stops learning and
    C5 answers those questions as it did before. Choose one:
 
@@ -957,9 +957,10 @@ the chosen model is never measured on the built-in model's answers, nor the othe
 
 ### Turn the chosen model off for a while
 
-The chosen model's panel has a switch of its own, at its top right. Turned off, the model
-stays chosen, with its test and its records, but C5 asks it nothing until it is turned on
-again. Meanwhile the built-in model answers as it does with nothing chosen, while it is on.
+The chosen model's panel has a switch of its own, **Enabled**, at its top right. Turned off,
+the model stays chosen, with its test and its records, but C5 asks it nothing until it is
+turned on again. Meanwhile the built-in model answers as it does with nothing chosen, while
+it is on.
 
 1. Flip the switch off. A small box under it asks **Turn off M?** and says what happens:
    _The built-in model answers instead._ (or _Nothing answers; C5 uses its usual checks._
@@ -1009,8 +1010,8 @@ it can be._ Nothing needs doing: the switch catches up when the status can be re
 ### Use as fallback
 
 **Use as fallback** is a switch on the built-in model's panel, directly under the built-in
-model's own switch. It is there while a model from your providers is chosen and turned on,
-and the built-in model is on. It is on by default.
+model's own **Enabled** switch. It is there while a model from your providers is chosen and
+turned on, and the built-in model is on. It is on by default.
 
 - **On**: whenever the chosen model cannot be asked — not loaded, busy, not answering,
   paused after failures, waiting for a test, changed since its test, or not allowed for now
@@ -1113,12 +1114,13 @@ The **Classifier** card has a **Terms** button and a short status badge in its h
 once a model is chosen, its panel comes first, whether it is on or off:
 
 - **A model from your providers**: what is chosen and where it runs, its last test, its
-  state and what answers meanwhile, **Models allowed from**, its own switch at the top right
-  (see [Turn the chosen model off for a while](#turn-the-chosen-model-off-for-a-while)), and
-  the buttons **Choose a model…** (**Change…** once one is chosen), **Test again** and
+  state and what answers meanwhile, **Models allowed from**, its own **Enabled** switch at
+  the top right (see [Turn the chosen model off for a while](#turn-the-chosen-model-off-for-a-while)),
+  and the buttons **Choose a model…** (**Change…** once one is chosen), **Test again** and
   **Remove**. See [A model from your providers](#a-model-from-your-providers).
-- **Built-in model**, with its switch, **Use as fallback** under it while a model is chosen
-  and on (see [Use as fallback](#use-as-fallback)), and the status lines below.
+- **Built-in model**, with its **Enabled** switch, **Use as fallback** under it while a
+  model is chosen and on (see [Use as fallback](#use-as-fallback)), and the status lines
+  below.
 
 Two tags beside the panels' titles say how they stand. **Primary**, on the chosen model's
 panel, is shown only while the built-in model stands behind it: C5 asks the chosen model,
