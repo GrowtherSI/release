@@ -60,6 +60,35 @@ which command. Then you choose:
 > Be slow with **Always Allow**. It is the choice people regret. **Approve Once** costs you
 > two seconds and keeps you in the loop.
 
+### When an agent lacks a tool
+
+An agent sometimes needs something C5 has not been set up with — a local tool, or a way to
+make video or audio. With **Tool & Web Escalation** on, it can ask for one. The checkbox is
+in **Settings › Tools**, in the **Tool Use** panel; it is off by default, and takes effect
+when you press **Save**.
+
+The request comes as a **Tool Authorization Required** dialog, marked **Tool Capability
+Escalation**, **Free Web Resource Escalation** or **System Control & Web Escalation**, and
+saying why: _Agent … is requesting tool escalation because a local capability is
+unconfigured._ It shows the **Missing Capability**, the **Free Web Resource** where there is
+one, and the **Escalation Target**. You answer it like any other request. What an approval
+grants is fixed:
+
+- **A local tool** (`request_tool_escalation`): that tool, for that agent, for up to 10 uses
+  within 30 minutes.
+- **A public web resource** (`request_web_resource_escalation`): reading that address, and —
+  unless the agent asked without it — **System Control** for that agent: C5's tools that
+  drive the screen, mouse and keyboard, each for up to 25 uses within 30 minutes. Approve
+  this only if you would let the agent drive your screen.
+
+An approval replaces that agent's own rule for those tools, an **Always Deny** included.
+When its uses or its time run out, the tool asks again; it does not go back to the rule it
+replaced.
+
+With the checkbox off, an agent's request for escalation is answered that escalation is off,
+and you are not asked — unless the request tool is set to **On** or **Prompt** under
+**Master Tool Authorizations** (below), or you gave that agent an **Always** for it.
+
 ## Setting the level
 
 Which tools ask you first is set per tool, in **Settings → Extensions**, and by your answers
@@ -71,6 +100,21 @@ positions:
 | **On**     | Every agent may use this tool without asking.  |
 | **Prompt** | Agents must ask you each time, even an agent you gave **Always Allow** for the whole tool. An **Always** answer for one file or address still applies to that file or address. |
 | **Off**    | No override: the tool's own per-agent rules decide, and anything you have not answered with an **Always** still asks you. It is not a block. To stop a tool, choose **Always Deny** when it asks. |
+
+**Master Tool Authorizations**, in **Settings → Extensions**, is where those positions are
+set, one switch per tool, listed by the tool's own name. Besides the tools agents already
+have, it lists:
+
+| Tool | Group | What it does |
+| --- | --- | --- |
+| `render_video` | Media — generate | Makes a video with captions from slides, on this machine |
+| `fetch_web_image` | Media — generate | Downloads one image from the web into the task |
+| `create_file` | Files — write | Another name for `write_file`, with its rules |
+| `request_tool_escalation` | Capability & Web Escalation | Lets an agent ask for a local tool it lacks |
+| `request_web_resource_escalation` | Capability & Web Escalation | Lets an agent ask for a public web resource, and System Control with it |
+
+**On** for `request_web_resource_escalation` approves every such request without asking,
+System Control included. Changing a switch needs edit permission.
 
 **Settings → Autonomy** (headed **Autonomy Policies**) sets how far agents may go without
 you for each type of work: under **Work Type Thresholds**, the minimum autonomy level that
