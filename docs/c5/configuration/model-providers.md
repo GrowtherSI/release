@@ -161,8 +161,9 @@ stored is not a settings object — it never sends that request without them:
   Check them in OpenRouter's Config tab in Settings._ The request is not retried on its own.
 
 (That is the **Config** tab with OpenRouter's icon, the same place the classifier's notes
-name.) C5 writes this to its log once per start, not once per request. If the refusal persists, open the
-**Config** tab: if the tab cannot show your settings either, run `growther doctor`.
+name.) C5 writes this to its log once per start, not once per request. If the refusal
+persists, open the **Config** tab: if the tab cannot show your settings either, run
+`growther doctor`.
 
 **Fleet › Assignment** never erases these settings either. Giving agents an OpenRouter
 model there saves it with the rest of OpenRouter's settings, so when C5 cannot read them
