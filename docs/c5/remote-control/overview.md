@@ -90,4 +90,4 @@ directory, not a relay.
 - [Privacy and Cloudflare](/c5/remote-control/privacy-and-cloudflare) — read this before
   you use an issued address for anything sensitive.
 - The Terms section you accept: [Section 15, Remote Control](https://growther.si/t=remote-control).
-  It was Section 14 until Terms version 1.8 added a new Section 14 before it.
+  It was Section 14 until Terms version 1.7 added a new Section 14 before it.

@@ -28,9 +28,8 @@ Remote Control on again later, after the terms have already been accepted.
 
 The dialog is headed **Remote Control — Terms of Service, Section 15**. It shows the Terms
 version and its effective date, and the full text of Section 15, Remote Control, of the
-[Growther.si Terms of Service](https://growther.si/t=remote-control). (Until Terms version
-1.8 this was Section 14; version 1.8 added a new Section 14, about the models C5 downloads,
-before it.) It
+[Growther.si Terms of Service](https://growther.si/t=remote-control). (It was Section 14
+until Terms version 1.7 added a new Section 14, about the models C5 downloads, before it.) It
 also links to [Cloudflare's terms](https://www.cloudflare.com/terms/) and
 [Cloudflare's privacy policy](https://www.cloudflare.com/privacypolicy/), because the address
 Growther.si issues is carried by Cloudflare under Cloudflare's own agreements.
