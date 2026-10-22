@@ -258,6 +258,12 @@ now takes effect as soon as it is saved: before, a non-administrator's paired de
 working until C5 restarted. See
 [Who can change these switches](/c5/remote-control/setup#who-can-change-these-switches).
 
+**Master Pause has its own permission.** Pausing or resuming all orchestration needs
+**Edit** on **Orchestration Master Pause Button** in **Settings › Access**, which
+administrators always have. That permission alone is now enough, and the right to change
+other settings no longer includes it. See
+[Pausing everything](/c5/using-c5/productivity#pausing-everything).
+
 **OpenRouter keeps your limits.** Nothing you set changes:
 
 - **A chat or task request never goes out without your price caps and provider limits.** If

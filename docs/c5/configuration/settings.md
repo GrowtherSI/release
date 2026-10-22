@@ -411,7 +411,7 @@ Granular controls over specific high-impact capabilities:
 | --- | :---: | :---: | --- |
 | **Chat Pipeline Runner** | Toggle | Toggle | Authorize starting/stopping unprompted, looped orchestration pipelines on the Chat page. |
 | **Kanban Deleted Column** | Toggle | Toggle | View reveals the trash icon to see deleted tasks; Edit unlocks the *Undelete → Todo* action. |
-| **Orchestration Master Pause Button** | — | Toggle | Access to the master pause button on Chat. |
+| **Orchestration Master Pause Button** | — | Toggle | Lets a standard user use **Master Pause**, the pause button in the **Productivity** header, which halts all new AI task steps for everyone. Without it the button is greyed out. See [Pausing everything](/c5/using-c5/productivity#pausing-everything). |
 | **Sidebar: HITL Button & Modal** | Toggle | Toggle | View off disables the sidebar's HITL (clipboard) button; Edit off opens the window read-only. The window also needs **Chat Pipeline Runner** View, and approving a task its Edit. See [Human review (HITL)](/c5/using-c5/hitl). |
 | **Sidebar: Notifications Button & List** | Toggle | Toggle | View shows notifications; Edit permits acknowledging or deleting individual notifications. |
 | **Sidebar: Remote Control Button** | Toggle | Disabled | Shows the **Remote Control** button in the sidebar `⋯` menu to standard users. Kept in step with **Enable Remote Control for non-admin accounts** in **Settings → Remote Control**. Administrators always see it. |

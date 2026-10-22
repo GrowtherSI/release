@@ -78,6 +78,18 @@ You are not stuck with the plan C5 made. You can:
 - **Cancel** a task you no longer want
 - **Retry** a task that failed, after you fix what caused it
 
+## Pausing everything
+
+**Master Pause**, the pause button in the page header, halts all new AI task steps, for
+everyone using this C5. Its tooltip says _Halt all new AI task steps. Click to pause._, and
+while it is on the button glows red: _AI orchestration is halted. Click to resume._ Click it
+again to resume.
+
+It is for administrators, and for anyone given **Edit** on **Orchestration Master Pause
+Button** in **Settings › Access**. For anyone else it is greyed out, with _Master Pause
+permitted only for Admin users._ in its tooltip. Permission to change other settings does
+not include it. If C5 refuses the change, the button goes back to how it was.
+
 ## When something fails
 
 Failed tasks turn red and move to **Blocked**. Open the card and C5 tells you what went
