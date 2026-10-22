@@ -86,9 +86,10 @@ while it is on the button glows red: _AI orchestration is halted. Click to resum
 again to resume.
 
 It is for administrators, and for anyone given **Edit** on **Orchestration Master Pause
-Button** in **Settings › Access**. For anyone else it is greyed out, with _Master Pause
-permitted only for Admin users._ in its tooltip. Permission to change other settings does
-not include it. If C5 refuses the change, the button goes back to how it was.
+Button** in **Settings › Access**, which is enough on its own. For anyone else it is greyed
+out, with _Needs the Orchestration Master Pause permission (Settings › Access)._ in its
+tooltip. Permission to change other settings does not include it. If C5 refuses the change,
+the button goes back to how it was.
 
 ## When something fails
 
