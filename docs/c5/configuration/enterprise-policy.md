@@ -302,7 +302,10 @@ Highest first:
    organisation**). Nobody in C5 can change it.
 2. **What an administrator at the machine chose** on the card.
 3. **A value that does not lock**: a **Recommended** value, or one set under User
-   Configuration. It is a default the administrator may change on the card.
+   Configuration. It is a default the administrator may change on the card. A recommended
+   `off` also shows **Off — set by your organisation**, but there it can be changed:
+   choosing **This machine**, **Your network** or **Anywhere** replaces it. Nobody can
+   choose `off` on the card itself.
 4. **Nothing set**: `loopback`, shown as **This machine**.
 
 ### What each value lets through
