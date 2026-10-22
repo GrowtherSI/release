@@ -80,7 +80,7 @@ task that caused it.
 | **Memory**   | What C5 has remembered from your past work.                         |
 | **Audit**    | A record of what happened and when.                                 |
 | **Learning** | Reward signals by agent and gate, so you can see which prompts and routes are improving. |
-| **Classifier** | How the [classifier](/c5/tools/local-classifier) is doing: its decisions, its speed, the calls it replaced and the labels waiting. Only accounts that may view Settings see it. |
+| **Classifier** | How the [classifier](/c5/tools/local-classifier) is doing: its decisions, its speed, the calls it replaced and the labels waiting. **Whose answers** switches between the built-in model's record and a chosen model's. Only accounts that may view Settings see it. |
 | **Errors**   | Problems that came up, grouped so you can spot patterns.            |
 
 **Background LLM Jobs**, on **Triage**, counts the background improvement work waiting for a

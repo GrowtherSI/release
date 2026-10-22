@@ -27,7 +27,7 @@ angle:
 | **Accountability** | Each agent's penalties, autopsies and quality over the last day, as a leaderboard. |
 | **Autonomy**       | How much work finished without needing you.                     |
 | **Quality**        | How often work comes out right the first time.                  |
-| **Classifier**     | How the [classifier](/c5/tools/local-classifier) does against the usual model, its gate's history and its calibration. Needs permission to view Settings; see [Analytics › Classifier and Labs › Classifier](/c5/tools/local-classifier#analytics-classifier-and-labs-classifier). |
+| **Classifier**     | How the [classifier](/c5/tools/local-classifier) does against the usual model, its gate's history and its calibration, for the built-in model or a model chosen from your providers. Needs permission to view Settings; see [Analytics › Classifier and Labs › Classifier](/c5/tools/local-classifier#analytics-classifier-and-labs-classifier). |
 | **Resilience**     | How well the system recovers when something goes wrong.         |
 | **Retro**          | What the Retrospective Loop found and proposed.                 |
 | **Rework**         | How often work had to be done twice.                            |
