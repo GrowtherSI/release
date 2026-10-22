@@ -18,9 +18,11 @@ where you look.
 | ------------ | -------------------------------------------------------------- |
 | **Summary**  | One screen with the overall state of things.                    |
 | **Health**   | Whether each part of C5 is responding normally.                 |
-| **Queueing** | How much work is waiting, and whether it is moving.             |
 | **Database** | The state of your stored data, its size, and its backups.       |
-| **Security** | Recent blocked actions and anything unusual.                    |
+| **Tools**    | How reliable and fast each tool is, and whether any is paused after failures. |
+| **Queueing** | How much work is waiting, and whether it is moving.             |
+
+Blocked actions and anything unusual are on the **Security** page, not here.
 
 ## Reading the health view
 
@@ -34,7 +36,22 @@ Click any item that is not green. C5 explains what it means and usually what to 
 
 ## When work seems stuck
 
-Open **Queueing**. It shows how many tasks are waiting and how fast they are moving.
+Open **Queueing**. It shows the jobs waiting and how fast they are moving, in three tables:
+
+- **Task Jobs** — the steps of your tasks: **Pending**, **Active**, **Completed** or
+  **Failed**.
+- **LLM Leases** — the model slots C5 hands out to the work that runs.
+- **System Jobs** — C5's background requests to a model, such as improving a task's
+  description or the self-improvement work that runs in the gaps between real work. These
+  show **Pending**, **Success** (a check mark) or **Expired** (a muted timer): a background
+  job still waiting 7 days after it was queued expires without running, and is kept in the
+  list (a request to improve a task's description never expires). After an update, a System
+  Jobs list where everything is **Expired** is normal: those jobs had been waiting since
+  before the update.
+
+Each table's filter starts at **All Statuses**; System Jobs filters by **Pending**,
+**Success** and **Expired**, the other two by **Pending**, **Active**, **Completed** and
+**Failed**. Rows come newest first.
 
 A queue that is long but shrinking is fine — it is just busy. A queue that is not moving
 at all points at something blocking, usually a missing API key, a spending limit, or a
