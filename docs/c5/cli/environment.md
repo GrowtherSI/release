@@ -97,7 +97,7 @@ See [Local model servers and gateways](#local-model-servers-and-gateways) below.
 
 | Variable      | What it does |
 | ------------- | ------------ |
-| `FFMPEG_PATH` | The ffmpeg program `render_video` uses. Looked at first; then `ffmpeg` on your `PATH`, `/opt/homebrew/bin`, `/usr/local/bin` and `/usr/bin`. Read once per run of C5. See [Pictures and video](/c5/tools/what-tools-do#pictures-and-video). |
+| `FFMPEG_PATH` | The ffmpeg program `render_video` uses. Looked at after the **FFmpeg location** in **Settings › Tools**; then `ffmpeg` on your `PATH`, `/opt/homebrew/bin`, `/usr/local/bin`, `/opt/local/bin` and `/usr/bin`. See [Pictures and video](/c5/tools/what-tools-do#pictures-and-video). |
 
 ## Common things people do
 
@@ -401,8 +401,9 @@ The Linux and Windows places work for the other variables on this page too. On m
 keeps only `GROWTHER_LIBVIPS_DIR` across its rewrite, so for anything else use another
 route: the three download switches can go in `c5.yaml` as custom keys, and the models'
 location is better moved with `growther cache relocate`, which records it for every
-start. `FFMPEG_PATH` has no such route on macOS: there, install ffmpeg in
-`/opt/homebrew/bin` or `/usr/local/bin`, where C5 looks for it anyway.
+start. For ffmpeg, set **FFmpeg location** in **Settings › Tools** instead of
+`FFMPEG_PATH`: it is kept in C5's settings, which the rewrite does not touch. Or install
+ffmpeg in `/opt/homebrew/bin` or `/usr/local/bin`, where C5 looks for it anyway.
 
 ## What is in your data folder
 
