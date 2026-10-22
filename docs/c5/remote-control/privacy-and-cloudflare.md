@@ -207,7 +207,7 @@ is there and serving.
 ## The words that bind
 
 This page describes; the Terms bind. Section 15 of the Growther.si Terms of Service, Remote
-Control, is the text you accept in C5 (it was Section 14 before Terms version 1.8), and it is
+Control, is the text you accept in C5 (it was Section 14 before Terms version 1.7), and it is
 at
 [growther.si/t=remote-control](https://growther.si/t=remote-control). Cloudflare's own
 [terms](https://www.cloudflare.com/terms/) and
