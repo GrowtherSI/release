@@ -1,5 +1,46 @@
 [
   {
+    "tag": "v2026.10.23-v331",
+    "version": "2026.10.23-v331",
+    "build": 331,
+    "releasedAt": "2026-10-22T23:51:59-07:00",
+    "bullets": [
+      {
+        "kind": "new",
+        "text": "Classifier: Terms now let you turn off the built-in model as a fallback."
+      },
+      {
+        "kind": "new",
+        "text": "Classifier: You can now switch off the model you chose without removing it."
+      },
+      {
+        "kind": "new",
+        "text": "Classifier: Ops now shows how many questions the model answered."
+      },
+      {
+        "kind": "new",
+        "text": "Classifier: On 32 GB machines, the model now stays ready an hour."
+      },
+      {
+        "kind": "fixed",
+        "text": "Classifier: Settings now says where unanswered questions went."
+      },
+      {
+        "kind": "fixed",
+        "text": "The turn-off popover and the picker's fallback line stay on a phone's screen."
+      },
+      {
+        "kind": "fixed",
+        "text": "The nightly calibration pass fits only families whose fit can be stored."
+      },
+      {
+        "kind": "fixed",
+        "text": "Fit calibration now's reason says how many labelled answers there are, once."
+      }
+    ],
+    "more": 533
+  },
+  {
     "tag": "v2026.10.19-v329",
     "version": "2026.10.19-v329",
     "build": 329,
