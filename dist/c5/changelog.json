@@ -1,5 +1,22 @@
 [
   {
+    "tag": "v2026.10.26-v333",
+    "version": "2026.10.26-v333",
+    "build": 333,
+    "releasedAt": "2026-10-26T07:28:32-07:00",
+    "bullets": [
+      {
+        "kind": "new",
+        "text": "Turning 3D animations back on now restarts them without a reload."
+      },
+      {
+        "kind": "new",
+        "text": "Extraction and enhancement now recover from errors, with a manual retry button."
+      }
+    ],
+    "more": 8
+  },
+  {
     "tag": "v2026.10.23-v331",
     "version": "2026.10.23-v331",
     "build": 331,
