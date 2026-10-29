@@ -1,7 +1,7 @@
 {
   "stable": {
     "version": "2026.10.29-v335",
-    "releasedAt": "2026-10-29T14:40:41.071Z",
+    "releasedAt": "2026-10-29T14:50:41.053Z",
     "commitHash": "70de839e165809c500cbd499b3ef9de4a4dbcdb7",
     "notes": "C5 v2026.10.29-v335",
     "assets": [
@@ -54,6 +54,19 @@
         "installerUrl": "https://github.com/GrowtherSI/release/releases/download/v2026.10.29-v335/growther-c5-macos-x64-node24-v2026.10.29-v335.pkg",
         "installerSha256": "bb40b414642e45b93b8652d0931f1ef8426598a581eb8d9a1230f06b53bc5d3b",
         "installerSizeBytes": 83570552
+      },
+      {
+        "os": "win",
+        "arch": "arm64",
+        "filename": "growther-c5-win-arm64-node24.zip",
+        "url": "https://raw.githubusercontent.com/GrowtherSI/release/main/dist/c5/v2026.10.29-v335/growther-c5-win-arm64-node24.zip",
+        "sha256": "23de74422e16c473276b53d6f2daae7196b73a024c7590663ee30c6f6e830e70",
+        "sizeBytes": 82961206,
+        "binaryFilename": "growther-c5-win-arm64-node24-v2026.10.29-v335.zip",
+        "binaryEntry": "growther-c5-win-arm64-node24-v2026.10.29-v335.exe",
+        "binaryUrl": "https://github.com/GrowtherSI/release/releases/download/v2026.10.29-v335/growther-c5-win-arm64-node24-v2026.10.29-v335.zip",
+        "binarySha256": "49309bb57043a8d39db40f8a0f520d9bc11af59fc0e10c05a0e86f097ecf8d12",
+        "binarySizeBytes": 82889775
       },
       {
         "os": "win",
