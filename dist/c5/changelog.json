@@ -1,5 +1,38 @@
 [
   {
+    "tag": "v2026.10.29-v335",
+    "version": "2026.10.29-v335",
+    "build": 335,
+    "releasedAt": "2026-10-29T05:00:00-07:00",
+    "bullets": [
+      {
+        "kind": "new",
+        "text": "Settings: Classifier changes now wait until you press Save."
+      },
+      {
+        "kind": "new",
+        "text": "Settings tabs now sit in colour-coded groups that are easier to scan."
+      },
+      {
+        "kind": "fixed",
+        "text": "Attachments: The Library keeps one copy of an image per task."
+      },
+      {
+        "kind": "fixed",
+        "text": "Attachments: Agents no longer re-save a file that is already in the Library."
+      },
+      {
+        "kind": "fixed",
+        "text": "Deliverables still find a figure by any name it was attached under."
+      },
+      {
+        "kind": "fixed",
+        "text": "Settings now correctly call it Classifier, not Learning."
+      }
+    ],
+    "more": 2
+  },
+  {
     "tag": "v2026.10.26-v333",
     "version": "2026.10.26-v333",
     "build": 333,
