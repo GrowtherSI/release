@@ -262,7 +262,7 @@ next time it is used or C5 starts.
 
 **The local classifier is handled differently.** A wrong file at its name is not renamed:
 it is left where it is, never loaded, and replaced by the next download that passes its
-check. **Settings › Learning** says _The file at the model's path is not the model (…), so
+check. **Settings › Classifier** says _The file at the model's path is not the model (…), so
 C5 does not use it._, and `growther classifier status` reports it (*is not the pinned model
 … `growther classifier pull` replaces it*). A **symbolic link** at its name is never
 downloaded over or replaced, whatever it points to: one whose file cannot be reached (a
@@ -290,7 +290,7 @@ everywhere:
      already there straight away, before it downloads anything. The search engine uses a
      placed file only once C5 has checked it.
    - **Voice**: the next time someone uses the offline speech engine.
-   - **Local classifier**: while it is on, the next time **Settings › Learning** is
+   - **Local classifier**: while it is on, the next time **Settings › Classifier** is
      opened, or at the next start, with no restart needed. While it is off, when it is
      next turned on.
 
@@ -306,7 +306,7 @@ own, and how big that is.
 
 | To free | Do this | What happens next |
 | --- | --- | --- |
-| The local classifier's model (812 MB) | As an administrator, **Delete the model** in **Settings › Learning**. Or stop C5 and delete `classifier/` by hand | Turned off first, it stays gone. If it is still on, C5 downloads it again at the next start, unless the machine is offline or opted out |
+| The local classifier's model (812 MB) | As an administrator, **Delete the model** in **Settings › Classifier**. Or stop C5 and delete `classifier/` by hand | Turned off first, it stays gone. If it is still on, C5 downloads it again at the next start, unless the machine is offline or opted out |
 | The memory-search models (about 2.3 GB) | Stop C5 and delete `qmd/cache/qmd/models/` | C5 downloads them again at the next start, unless the egress posture is offline or `GROWTHER_QMD_NO_AUTO_DOWNLOAD=1`. Until they are back, memory search works by keywords only |
 | The whole `qmd/` folder | Avoid this unless you mean to start memory search over: stop C5 and delete it | The engine is unpacked again from the C5 program and the models are downloaded again as above. It also deletes memory search's **index** of your folders, which does not come back by itself: memory search finds nothing in them until an administrator presses **Sync Now** on the **QMD Data Folders** card under **Settings › Locations**. Delete only `qmd/cache/qmd/models/` if model space is all you want back |
 | The offline speech model (60 MB) | Stop C5 and delete `speech/` | Downloaded again at the next start while the built-in speech engine is on, unless offline or `GROWTHER_VOICE_NO_AUTO_DOWNLOAD=1` |

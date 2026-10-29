@@ -157,7 +157,7 @@ first time it is needed:
 | --- | --- | --- |
 | Memory search | about 2.3 GB | At start, for any of the three models that has no file yet |
 | Offline speech | about 60 MB | At start, while the built-in voice engine is switched on and the model is missing |
-| Local classifier | about 812 MB | At start while the classifier is on, and when someone switches it on in **Settings › Learning** |
+| Local classifier | about 812 MB | At start while the classifier is on, and when someone switches it on in **Settings › Classifier** and saves |
 
 To stop the automatic download of one of them, set its variable to `1`:
 

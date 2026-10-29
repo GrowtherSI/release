@@ -47,7 +47,7 @@ To accept:
 **Cancel** leaves the switch off. Only this dialog records an acceptance, under the account
 that ticked the box: saving settings any other way cannot record one. Once accepted, the
 dialog is not shown again unless C5 brings newer Terms than the ones accepted. The tab shows
-a line like _Terms v1.10 accepted by Ana Ruiz on Nov 2, 2026_ — the name of whoever
+a line like _Terms v1.13 accepted by Ana Ruiz on Nov 2, 2026_ — the name of whoever
 accepted, your own included — with a **View** link that reopens the text. Only when that
 account no longer exists on the install — deleted since — does the line fall back to the
 account id.
@@ -59,12 +59,12 @@ that describes all three ways in.
 ### If the Terms changed after you accepted them
 
 An acceptance counts for the version accepted and any older one. When an update brings a
-newer version — as the update to version 1.10 does — an install that already had Remote
+newer version — as the update to version 1.13 does — an install that already had Remote
 Control on keeps working: nothing is torn down, no device is signed out, and the address
 stays up. What changes is on the tab:
 
-- the _accepted_ line adds _— v1.10 now needs accepting_;
-- a warning reads _Remote Control is on, but Terms v1.10 have not been accepted on this
+- the _accepted_ line adds _— v1.13 now needs accepting_;
+- a warning reads _Remote Control is on, but Terms v1.13 have not been accepted on this
   machine._ with a **Review and accept** link that opens the dialog. The link works only on
   the machine, for someone who may change settings: a paired device cannot accept.
 

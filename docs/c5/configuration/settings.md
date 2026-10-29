@@ -1,6 +1,6 @@
 ---
 title: Settings
-description: A map of every settings area and what it controls, including the Learning tab and its classifier.
+description: A map of every settings area and what it controls, including the Learning and Classifier tabs.
 order: 1
 ---
 
@@ -26,7 +26,8 @@ You do not need to change most of these. C5 works sensibly out of the box.
 | **Alerts**        | When and how C5 tells you something happened.                 |
 | **Communications**| How C5 reaches you — email and other channels.                |
 | **Voice**         | Speech-to-text and text-to-speech providers, including the built-in ones. |
-| **Learning**      | How much C5 adapts from your usage, and the classifier (its built-in model is on by default). |
+| **Learning**      | How much C5 adapts from your usage.                           |
+| **Classifier**    | The small model that answers C5's routine questions (its built-in model is on by default). |
 | **Locations**     | Folders C5 brings documents in from and writes results into.  |
 | **Storage**       | Your data, its encryption, and export.                        |
 | **System**        | Ports, paths, and how C5 runs on this machine.                |
@@ -152,7 +153,7 @@ Without alerts you will find out when you next open C5, which might be tomorrow.
 ## Learning
 
 **Settings › Learning** (headed **Learning Pipeline**) is where you tune how C5 improves
-itself from your work. It has six sections:
+itself from your work. It has five sections:
 
 | Section | What it controls |
 | --- | --- |
@@ -161,14 +162,16 @@ itself from your work. It has six sections:
 | **Prompt Self-Improvement** | Prompt telemetry, and whether better prompt variants are promoted automatically |
 | **Quality vs Efficiency Balance** | How much C5 weighs answer quality against cost |
 | **Reward Pipeline Automation** | Which roles use the learned reward model, and the retrospective loop's frequency and token limits (shown only with **Edit** on **Sidebar: HITL Button & Modal**) |
-| **Classifier** | The small model that answers C5's routine questions: the built-in one on this machine, or one you choose from your providers (below) |
 
-The first five save together with the tab's **Save** button. **Classifier** is
-different: each change there saves the moment you make it, and never needs **Save**.
-(Before C5 could use a model from your providers, this section was called **Local
-Classifier**.)
+They save together with the tab's **Save** button. The classifier used to be a section of
+this tab; it now has a tab of its own, right after this one — see [Classifier](#classifier).
 
-### The classifier
+## Classifier
+
+**Settings › Classifier** is where you control the classifier. (It used to be a section of
+the **Learning** tab, called **Local Classifier** before C5 could use a model from your
+providers.) Its tab comes right after **Learning**, and its settings save with the tab's
+**Save** button (see [Saving your changes](#saving-your-changes)).
 
 The classifier answers some of the routine questions C5 asks itself while it works —
 starting with which categories a new task belongs to — beside the model that answers
@@ -220,7 +223,38 @@ keeps answering on its own, and when it cannot, C5 answers as it did before.) Of
 silent: the built-in model's process is not started, nothing is downloaded, and it prints
 nothing to the log.
 
-#### The card
+### Saving your changes
+
+Like the other tabs, **Settings › Classifier** has a **Save** button in its header, and its
+settings wait for it:
+
+- the **Built-in model** switch;
+- each kind of decision's mode (including a raise with **Raise anyway**);
+- **Models allowed from**;
+- **Use as fallback**;
+- the chosen model's own switch.
+
+A question that goes with a change — the download notice the first time you turn the
+built-in model on, the turn-off question, the warning before **Raise anyway** — still
+appears when you make the change; your answer sets it, and **Save** then does it. Set a
+control back to what it was, and that change is gone. Leave the tab with changes unsaved
+and C5 asks whether to **Save** or **Discard** them.
+
+**Save** makes each change on its own. If one is refused, the message says why, and that
+change and the ones after it stay unsaved, so you can fix the cause and save again.
+
+These are not settings, so they happen as soon as you confirm them, without **Save**:
+**Choose a model…** (or **Change…**), **Test again**, **Remove**, **Delete the model**,
+**Turn off and delete the model**, **Fit calibration now**, and **Act on M's answers**.
+
+A change can also go from the unsaved ones without a word from you. A raise C5 refuses
+goes back to the saved mode, and the message says why. Choosing or removing a model drops
+the unsaved changes about the one before it. And when a policy locks a control, or a
+change needs an administrator at the machine and you are not one, the changes it covers
+are dropped, and C5 says why. Setting the built-in model's switch back to off, while
+nothing else answers, also drops the mode changes made after you set it on.
+
+### The card
 
 The card's header has a **Terms** button and a short status badge. The **Built-in model**
 panel has the switch. Under it:
@@ -240,7 +274,7 @@ a button that opens the tab), its promotion gate (the measurement), its calibrat
 last seven days' counts. A gate with no answers at all to compare reads *nothing to measure
 yet*, not *not enough evidence yet*.
 
-#### Which machines can run it
+### Which machines can run it
 
 | Requirement | |
 | --- | --- |
@@ -264,7 +298,7 @@ for decisions that do not wait on it. A slow test answer is timed again two and 
 minutes later, and a fast one clears the mark without a restart. On the CPU, or on a slow
 machine, Step quality records one question in four (above).
 
-#### Read the Terms that cover it
+### Read the Terms that cover it
 
 Select **Terms** on the card. The dialog shows Section 14 of the Terms of Service, *Models
 C5 downloads and runs on your machine*, word for word; this install's model with its size,
@@ -279,31 +313,31 @@ also offers **Turn off the local classifier…** (**Turn off the built-in model�
 model from your providers is chosen). Nothing in the dialog asks you to accept anything.
 Section 14 also covers a model from your providers, if you choose one.
 
-#### Turn the classifier off
+### Turn the classifier off
 
 1. Turn the **Built-in model** switch off, or select **Turn off the local classifier…** in
    the Terms dialog (**Turn off the built-in model…** while a model from your providers is
    chosen).
 2. C5 asks first, because nobody chose to turn it on. The question says what off means
    and what is on the disk.
-3. Choose **Turn off**. The model stays on the machine, so turning it back on costs no
-   download.
+3. Choose **Turn off**, then **Save**. The model stays on the machine, so turning it back
+   on costs no download.
 
 Anyone with permission to edit settings can do this. If an organisation's policy keeps
 the classifier on or off, the switch is disabled and the card says so — see
 [Managed configuration](enterprise-policy.md#keep-the-local-classifier-on-or-off).
 
-Turning it off also stops a download in progress. The part already downloaded is kept,
-and turning it back on resumes from there.
+Once saved, turning it off also stops a download in progress. The part already downloaded
+is kept, and turning it back on resumes from there.
 
-#### Delete the model
+### Delete the model
 
 An administrator can delete the model to free its 812 MB:
 
 - While it is on, choose **Turn off and delete the model** in the turn-off question
-  (**Turn off and remove the link** when the model is a link). C5 turns it off first,
-  stops it, and then deletes. The question offers this only when there is something of
-  the model on this machine to delete (the model or a partial download).
+  (**Turn off and remove the link** when the model is a link). This happens at once,
+  without **Save**: C5 turns it off first, stops it, and then deletes. The question offers
+  this only when there is something of the model on this machine to delete (the model or a partial download).
 - While it is off, choose **Delete the model (812 MB)** under **Model** on the card, or
   **Delete the partly downloaded model** if only part of it is there.
 - If the file at the model's path is not the model (a copy that failed, or the wrong file),
@@ -330,10 +364,11 @@ If another C5 process is downloading the model at that moment (for example
 says so. (If you chose **Turn off and delete the model**, the classifier is still turned
 off.) Wait for that download to finish, or stop it, and delete again.
 
-#### Turn it back on
+### Turn it back on
 
-Turn the switch on. If the model is not here, C5 asks first and shows the model, its size,
-its licence and its notice; only **Download and turn on** starts the download. Where this
+Turn the switch on, then select **Save**. If the model is not here, C5 asks first and shows
+the model, its size, its licence and its notice; only **Download and turn on** sets the
+switch, and the download starts when you save. Where this
 machine will not download it — the offline posture is on,
 `GROWTHER_CLASSIFIER_NO_AUTO_DOWNLOAD=1` is set, it is a CI runner, there is not
 enough free disk, or the model's path is a symbolic link (C5 never downloads over a link) —
@@ -343,9 +378,9 @@ model instead: `growther classifier pull`, freeing space, placing the file by ha
 file it points to reachable, pointing it at the model, or removing it.
 
 A model placed by hand while the classifier is on is picked up the next time
-**Settings › Learning** is opened, or at the next start. No restart is needed.
+**Settings › Classifier** is opened, or at the next start. No restart is needed.
 
-#### Modes: what each kind of decision is allowed to do
+### Modes: what each kind of decision is allowed to do
 
 | Kind of decision | Default | Modes offered here |
 | --- | --- | --- |
@@ -382,7 +417,7 @@ is moved back only if the model or its calibration changes, or its calibration e
 doubles.
 
 An administrator can raise a kind on a gate that has not passed, after a warning
-(**Raise anyway**). The kind then reads *Unvalidated: an administrator raised it on a
+(**Raise anyway**), then **Save**. The kind then reads *Unvalidated: an administrator raised it on a
 gate that had not passed*. This is not offered from a device paired through Remote
 Control, and never without a fitted calibration. Lowering a mode never needs a gate.
 

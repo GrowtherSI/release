@@ -40,7 +40,7 @@ when your licence is paused, lapsed or revoked. The licences ask that their noti
 every copy of the software, so C5 does not lock them away.
 
 The same **Third-party notices** button is in the classifier's Terms window
-(**Settings › Learning**, then **Terms** on the **Classifier** card).
+(**Settings › Classifier**, then **Terms** on the card).
 
 **If the notices do not load:**
 
@@ -287,7 +287,7 @@ terms on unchanged. Two points to check:
   research use. The publisher's page for the model,
   [huggingface.co/Mapika/decider-0.8b](https://huggingface.co/Mapika/decider-0.8b), is where to
   check that training mixture against your use. C5 shows that notice beside the model in
-  **Settings › Learning**. If research-use data does not fit your use, turn the local classifier off there, and
+  **Settings › Classifier**. If research-use data does not fit your use, turn the local classifier off there, and
   [delete the model](/c5/tools/local-classifier#delete-the-model) if you do not want it on the
   machine.
 

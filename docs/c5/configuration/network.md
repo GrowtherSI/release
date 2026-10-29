@@ -105,13 +105,14 @@ by hand is used. Each command tells you what to do instead of downloading:
 - `growther qmd-run pull` points you at `qmd/README.md` in the cache folder,
   which lists each memory-search model's address, size and sha256.
 
-All three exit with code 1. **Settings › Learning** says the same for the local
+All three exit with code 1. **Settings › Classifier** says the same for the local
 classifier: *Not downloaded: This deployment's network posture is offline, so
 the classifier model is not downloaded.*, followed by the placement step.
 
 When you switch back to **Online**, the automatic downloads happen at the next
 start of C5. You can also run the `pull` command for the one you want, or — for
-the local classifier — turn it off and on again in **Settings › Learning**.
+the local classifier — turn it off and on again in **Settings › Classifier**, selecting
+**Save** after each.
 
 ### What offline does not cover
 
@@ -298,7 +299,7 @@ search falls back to keyword search. To find out which model is missing and why:
 1. Run `growther doctor`. Its **Local classifier** and **Offline speech** rows
    say whether each model is here and checked, and if not, why. For memory
    search, run `growther qmd-run doctor`.
-2. For the local classifier, **Settings › Learning** shows the same under
+2. For the local classifier, **Settings › Classifier** shows the same under
    **Model**.
 3. If the reason is the network, check that `huggingface.co` and the five
    download-network hosts above are allowed, through your proxy if you use one.

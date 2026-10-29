@@ -220,8 +220,8 @@ when someone with permission to change settings chooses to. No policy key does i
 machine where it runs on the CPU, Step quality records one question in four; every other
 kind is recorded every time.
 What it does, and what users see, is described in [Classifier](../tools/local-classifier.md) and
-under [Settings › Learning](settings.md#learning), where its switch is **Built-in model**
-on the **Classifier** card. One policy key decides it for a fleet:
+under [Settings › Classifier](settings.md#classifier), where its switch is
+**Built-in model**. One policy key decides it for a fleet:
 
 | | |
 | --- | --- |
@@ -270,7 +270,7 @@ is not on the machine, `growther classifier status` says so too, rather than sug
 pull: *model not downloaded: your organisation's policy keeps the local classifier off*.
 Both read a lock in a signed policy document as well as one in the device's own policy. A
 model already on the machine stays there until an administrator deletes it; the
-**Delete the model** button in **Settings › Learning** still works while the classifier is
+**Delete the model** button in **Settings › Classifier** still works while the classifier is
 off.
 
 A lock to `false` also keeps off every classifier model from your providers, unless your
@@ -287,7 +287,7 @@ the model's path is not the model, the card says so and that *Your organisation'
 keeps the classifier on, so the file cannot be deleted here.* An administrator at the
 machine can put the model in its place by hand.
 
-**In Settings › Learning**, either way, the **Built-in model** switch is shown disabled
+**In Settings › Classifier**, either way, the **Built-in model** switch is shown disabled
 with the managed badge, and the card says why in words a phone user can read without
 hovering: *Your organisation's policy keeps the local classifier off, so it cannot be
 turned on here. The policy is set by* … followed by where the policy came from. Where the
@@ -318,8 +318,7 @@ None is chosen by default. One key decides how far away such a model may run:
 | When no policy sets it | An administrator at the machine chooses it in C5. Until they do, `loopback` |
 | If a locked value is malformed, or the policy expires | `off` |
 
-In C5 this is **Models allowed from**, on the **Classifier** card in **Settings ›
-Learning**: **This machine** (`loopback`), **Your network** (`lan`) or **Anywhere** (`any`).
+In C5 this is **Models allowed from**, in **Settings › Classifier**: **This machine** (`loopback`), **Your network** (`lan`) or **Anywhere** (`any`).
 Only an administrator at the machine can change it there — never from a device paired
 through Remote Control.
 

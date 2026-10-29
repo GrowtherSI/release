@@ -215,7 +215,7 @@ Growther.si handles personal data is in its
 [Privacy Policy](https://license.growther.si/privacy), and, for an organisation that signs
 one, the [Data Processing Agreement](https://license.growther.si/dpa).
 
-**The Terms are now version 1.10.** Since version 1.8, three things changed about Remote
+**The Terms are now version 1.13.** Since version 1.8, three things changed about Remote
 Control, without renumbering any section:
 
 - **Section 3** now says that C5 downloads and runs `cloudflared` for any Cloudflare Tunnel
@@ -230,9 +230,11 @@ Control, without renumbering any section:
   tunnel you supply among the ways that keep everyone else out.
 
 The first two came in version 1.9, which C5 v327 to v329 carried; the third is new in
-version 1.10. All three describe what C5 already did; only the wording changed. An install
-that already has Remote Control on keeps running after the update: nobody is signed out and
-the address stays up. The next time someone saves Remote Control's settings on the machine,
-C5 asks them to accept version 1.10 first, including an install that accepted version 1.9; a
-paired device cannot accept it. See
+version 1.10. All three describe what C5 already did; only the wording changed. Versions
+1.11 to 1.13 changed nothing about Remote Control (see
+[Updating to the release with Terms v1.13](/c5/getting-started/updating#updating-to-the-release-with-terms-v113)).
+An install that already has Remote Control on keeps running after an update: nobody is
+signed out and the address stays up. The next time someone saves Remote Control's settings
+on the machine, C5 asks them to accept version 1.13 first, including an install that
+accepted an earlier version; a paired device cannot accept it. See
 [If the Terms changed after you accepted them](/c5/remote-control/setup#if-the-terms-changed-after-you-accepted-them).
