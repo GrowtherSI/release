@@ -222,7 +222,7 @@ looks at the file and the record of its last check — it does not read all 812 
 | You see | What it means | What to do |
 | --- | --- | --- |
 | ✓ `not available here (optional): <reason>` | This machine cannot run the classifier, and C5 will not download its model. The reason says why: too little memory (it needs 8 GB), a platform it does not ship for, an operating system or system library too old for its runtime, or, on Windows, the Microsoft Visual C++ 2015-2022 Redistributable (x64, or arm64 on Windows on Arm) missing | Nothing, unless you want the classifier. For the Visual C++ runtime the line gives Microsoft's download link; install it and restart C5 |
-| ✓ `model not downloaded yet — it is fetched while the classifier is on (Settings › Learning), or by growther classifier pull` | Normal on a new install, or while the download runs | Nothing. Run `growther classifier pull` if you want it now |
+| ✓ `model not downloaded yet — it is fetched while the classifier is on (Settings › Classifier), or by growther classifier pull` | Normal on a new install, or while the download runs | Nothing. Run `growther classifier pull` if you want it now |
 | ✓ `model not downloaded — this install's network posture is offline, so C5 never downloads it. Fetch … and place it at … (sha256 …)` | C5 is set to Offline | Place the file by hand, as the line says |
 | ✓ `model not downloaded — GROWTHER_CLASSIFIER_NO_AUTO_DOWNLOAD=1, so C5 does not fetch it on its own …` | Automatic download is turned off | Run `growther classifier pull`, or place the file by hand |
 | ✓ `model verified — <path>` | Ready | Nothing |
@@ -234,7 +234,7 @@ If the model's path is a symbolic link whose file cannot be reached (a share tha
 mounted, say), doctor reports it as not downloaded. Run `growther classifier status`, which
 says so: C5 never downloads over a link, and uses the model once the file can be reached.
 
-To turn the classifier off or delete its model, use **Settings › Learning** (see
+To turn the classifier off or delete its model, use **Settings › Classifier** (see
 [Local classifier](/c5/tools/local-classifier#turn-the-classifier-off)). Doctor reports
 the model file whether the classifier is on or off.
 

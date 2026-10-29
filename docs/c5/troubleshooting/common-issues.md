@@ -239,7 +239,7 @@ start C5 again. On Windows this happens when another program has the file open.
 
 The local classifier works differently: a wrong file at its model's name is left where it
 is and never loaded, and the next download — automatic, or `growther classifier pull` —
-replaces it with the right one. **Settings › Learning** says so: _The file at the model's
+replaces it with the right one. **Settings › Classifier** says so: _The file at the model's
 path is not the model (…), so C5 does not use it._ On an offline install nothing replaces
 it, so delete it (an administrator at the machine can press **Delete the file** on the card
 while the classifier is off) and copy the right file in; see
@@ -249,7 +249,7 @@ remove it.
 
 ### The local classifier says this machine cannot run it
 
-The **Classifier** card under **Settings › Learning** shows **Unsupported** for its
+**Settings › Classifier** shows **Unsupported** for its
 **Built-in model** and a reason, `growther doctor` shows the same reason in its **Local
 classifier** row, and C5 downloads nothing. This is not a fault: C5 works exactly as it did
 before the classifier existed, and an administrator can still choose a
@@ -287,7 +287,7 @@ machine. The usual causes:
   Mount the share or restore the file, or remove the link to have C5 fetch the model.
 
 After `growther classifier pull` or placing the file by hand, you do not need to restart
-C5: open **Settings › Learning**, and C5 checks the new file and starts the classifier.
+C5: open **Settings › Classifier**, and C5 checks the new file and starts the classifier.
 (C5 looks for a new model file whenever that page asks for the classifier's status.)
 Otherwise it picks the file up at its next start.
 
@@ -327,7 +327,7 @@ the proxy, and so do `growther qmd-run pull`, `growther voice pull` and
 [mcp] QMD model download did not complete (embedding: fetch failed: the proxy http://proxy.example:3128 refused to open a tunnel to huggingface.co:443: it answered CONNECT with 403 Forbidden; …). …
 ```
 
-The card in **Settings › Learning** leaves the proxy's address out, and says what starts
+The card in **Settings › Classifier** leaves the proxy's address out, and says what starts
 the download again once the proxy is fixed:
 
 ```text
@@ -410,7 +410,7 @@ folders under your C5 folder (`~/.growther` by default), outside the databases e
 | Folder | What it holds | Typically | If you delete it |
 | --- | --- | --- | --- |
 | `qmd/` | The memory-search engine, its three models (in `qmd/cache/qmd/models/`), its search index of your folders, and C5's own checked copies of the models (in `qmd/model-view/checked/`) | about 2.3 GB, and up to about 2.3 GB more for the checked copies on a disk that cannot clone files. `growther cache show` does not count the copies | To free model space, delete only `qmd/cache/qmd/models/`: C5 downloads the models again at its next start, unless downloads are off. Deleting all of `qmd/` also deletes the search index, and memory search finds nothing in your folders until they are indexed again: an administrator presses **Sync Now** on the **QMD Data Folders** card under **Settings › Locations**. See [What is safe to delete](/c5/configuration/data-location#what-is-safe-to-delete) |
-| `classifier/` | The local classifier's model | about 812 MB | Downloaded again while the classifier is on. Delete it from **Settings › Learning** instead — see below |
+| `classifier/` | The local classifier's model | about 812 MB | Downloaded again while the classifier is on. Delete it from **Settings › Classifier** instead — see below |
 | `speech/` | The offline speech model | about 60 MB | Downloaded again at the next start while **Built-in (on-device)** voice is on |
 | `cache/` | Working files | varies | Recreated as needed |
 | `lib/` | Unpacked runtime libraries | varies | Unpacked again at the next start |
@@ -419,7 +419,7 @@ Delete these folders only while C5 is stopped. "Unless downloads are off" means 
 posture is **Offline**, or C5 was started with one of the `GROWTHER_*_NO_AUTO_DOWNLOAD`
 switches; on such an install a deleted model stays gone until you place it again.
 
-**To remove the local classifier's model, use Settings › Learning.** An administrator,
+**To remove the local classifier's model, use Settings › Classifier.** An administrator,
 signed in at the machine itself (not from a paired phone), can press
 **Delete the model (… MB)** on the card while the classifier is off, or
 **Turn off and delete the model** in the question that turning it off asks. (For an

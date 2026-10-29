@@ -608,7 +608,7 @@ You do not need to switch the built-in voice engine on in Settings to run `pull`
 ### `growther classifier`
 
 The local classifier is on by default. These two commands only check and fetch its
-model. To turn the classifier off or delete its model, go to **Settings › Learning**
+model. To turn the classifier off or delete its model, go to **Settings › Classifier**
 (see [Local classifier](/c5/tools/local-classifier#turn-the-classifier-off)).
 
 ```bash
@@ -649,7 +649,7 @@ a few seconds the first time on Windows.
 The second line says where the classifier runs. On Apple silicon it reads as above: if you
 also run a local model server such as LM Studio or Ollama, the classifier uses the CPU so the
 two do not compete for the GPU. (This command cannot see which model servers are configured,
-so it says both; **Settings › Learning** says which applies.) Elsewhere it gives the reason and
+so it says both; **Settings › Classifier** says which applies.) Elsewhere it gives the reason and
 the thread count, for example
 `CPU: GPU acceleration is only used on Apple silicon (this is linux-x64). It uses 8 CPU threads.`
 You do not need to do anything.
@@ -713,7 +713,7 @@ Downloading decider-0.8b-q8_0 (~812 MB) to <path>…
   10%
   …
 ✓ downloaded and verified — <path>
-While the classifier is on, a running C5 starts using the model when Settings › Learning is next opened, or when C5 next starts. …
+While the classifier is on, a running C5 starts using the model when Settings › Classifier is next opened, or when C5 next starts. …
 ```
 
 The `About 812 MB …` and `Downloading …` lines appear only once the first bytes arrive. A
@@ -723,7 +723,7 @@ Progress is printed in 5% steps from where the download starts; a resumed downlo
 at its own percentage.
 
 You do not need to restart C5 afterwards. While the classifier is on, a running C5 picks
-up the new model the next time **Settings › Learning** is opened, or at its next start.
+up the new model the next time **Settings › Classifier** is opened, or at its next start.
 
 It works whether the classifier is switched on or off, and it does not check whether
 this machine can run the model — run `status` first. It refuses, and exits with `1`,
@@ -917,7 +917,7 @@ again where the policy says. Ask whoever manages the policy to change it instead
 **Can I just delete these folders?** Yes, with C5 stopped. C5 downloads a model again the
 next time it needs it, unless the automatic download is turned off or C5 is set to
 Offline. For the classifier's model there is a better way: an administrator at the
-machine can delete it in **Settings › Learning**, which also works while the classifier
+machine can delete it in **Settings › Classifier**, which also works while the classifier
 is off.
 
 `show` exits with `0`. `relocate` exits with `0` once the move is done, and `1` when it

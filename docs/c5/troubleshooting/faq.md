@@ -110,9 +110,10 @@ your schedules — a frequent schedule is usually the biggest line on the bill.
 A small model, decider-0.8b, that C5 runs on your own computer to answer some of the
 routine questions it asks itself while it works — for example, which categories a new task
 belongs to. Without it, C5 sends each of those questions to the AI provider you
-configured. It is the **Built-in model** on the **Classifier** card in **Settings ›
-Learning** (the card was called **Local Classifier** before C5 could also use a model from
-your providers) — see [Settings › Learning](/c5/configuration/settings#learning). The full
+configured. It is the **Built-in model** in **Settings ›
+Classifier** (it used to be the **Classifier** card in **Settings › Learning**, called
+**Local Classifier** before C5 could also use a model from your providers) — see
+[Settings › Classifier](/c5/configuration/settings#classifier). The full
 guide is [Classifier](/c5/tools/local-classifier).
 
 ### Does it change what C5 does?
@@ -121,7 +122,7 @@ Not at first. When it is first on, it only **records** its answers beside the us
 every kind of decision it can answer starts in **Shadow**. C5 lets it decide something only
 after it has been measured, on your own install, against the answers people gave or the
 outcomes that followed — and only for the kinds of decision allowed under **Settings ›
-Learning**. Until then, everything is decided the way it was before. See
+Classifier**. Until then, everything is decided the way it was before. See
 [When it starts to act](/c5/tools/local-classifier#when-it-starts-to-act).
 
 ### Will it slow my computer down?
@@ -131,7 +132,7 @@ second. Where it runs on the CPU — every other machine, and a Mac whose GPU is
 local model such as LM Studio — step quality, the kind of decision that arrives in bursts,
 records only one question in four, always the same ones, so for it the classifier uses about
 a quarter of the processor time it otherwise would. Every other kind is recorded every time.
-The card in **Settings › Learning** says _Sampling 1 in 4 on this machine_ under Step quality
+The card in **Settings › Classifier** says _Sampling 1 in 4 on this machine_ under Step quality
 where this applies. It never holds up your work while it only records: those questions take
 turns in the background, one at a time, and none starts while C5 is waiting for an answer it
 will use. The one wait is for a kind of decision set to act (Assisted or Authoritative): if a
@@ -161,15 +162,16 @@ will be downloaded, is already there, or cannot be downloaded here and why. A ma
 cannot run it is told nothing, and nothing is downloaded there.
 
 The model's publisher says its training mixture includes datasets released for research
-use. C5 shows that notice beside the model in **Settings › Learning**. If it does not fit
+use. C5 shows that notice beside the model in **Settings › Classifier**. If it does not fit
 your use, turn the classifier off. See
 [Why it is on by default](/c5/tools/local-classifier#why-it-is-on-by-default).
 
 ### How do I turn it off?
 
-In **Settings › Learning**, on the **Classifier** card, switch off **Built-in model**. C5
-asks first. **Turn off** leaves the model on disk, so turning it back on costs no download. **Turn off and delete
-the model** also frees the space; it is offered only to an administrator signed in at the
+In **Settings › Classifier**, switch off **Built-in model**. C5 asks first. **Turn off**
+leaves the model on disk, so turning it back on costs no download; then select **Save** to
+turn it off. **Turn off and delete the model** turns it off and frees the space at once,
+without **Save**; it is offered only to an administrator signed in at the
 machine itself (not from a paired phone). Anyone with permission to change settings can
 turn the classifier off. With it off, an administrator at the machine can still press
 **Delete the model (… MB)** on the card later. Step by step:
@@ -201,7 +203,7 @@ classifier's `models` folder, and run `growther classifier status` to check it. 
 address, size, sha256 and folder for each platform are in
 [Offline and air-gapped installs](/c5/tools/local-classifier#offline-and-air-gapped-installs).
 
-You do not need to restart C5: open **Settings › Learning**, and C5 checks the new file
+You do not need to restart C5: open **Settings › Classifier**, and C5 checks the new file
 and starts the classifier. (C5 looks for a new model file whenever that page asks for the
 classifier's status.) Otherwise it picks the file up at its next start.
 
@@ -217,7 +219,7 @@ keeps the classifier off.
 
 Yes. An administrator at the machine can choose a model that one of your providers serves —
 on llama.cpp, Ollama, LM Studio or vLLM, or a cloud API such as OpenAI, OpenRouter or
-DeepSeek — under **Settings › Learning › Classifier › Choose a model…**. C5 tests it first,
+DeepSeek — under **Settings › Classifier › Choose a model…**. C5 tests it first,
 and asks it before the built-in model. While the built-in model is on, it answers whenever
 the chosen model cannot, unless **Use as fallback**, under its switch, has been turned off;
 with the built-in model off, the chosen model is the only one, and when it cannot answer C5

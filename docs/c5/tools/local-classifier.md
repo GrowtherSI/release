@@ -27,9 +27,11 @@ The built-in model runs in a process of its own, apart from C5's server, so if i
 carries on. C5 never depends on the classifier: whenever it is off, busy, slow, unsure or
 broken, C5 asks the usual model, exactly as before.
 
-The section in **Settings › Learning** is called **Classifier**. Before C5 could use a model
-from your providers it was called **Local Classifier**, and this page was called _Local
-classifier_; its address has not changed. Outside the section on
+Its controls are in **Settings › Classifier**, a tab of its own right after **Learning**.
+They used to be a section of **Settings › Learning**, called **Local Classifier** before C5
+could use a model from your providers; this page was called _Local classifier_, and its
+address has not changed. The tab's settings wait for its **Save** button — see
+[Saving your changes](#saving-your-changes). Outside the section on
 [a model from your providers](#a-model-from-your-providers), **the classifier** on this page
 means the built-in model.
 
@@ -106,20 +108,20 @@ these hold:
 - there is enough free space for the rest of the model plus about 64 MB to spare.
 
 C5 keeps working while the model arrives. The download picks up where it stopped if it is
-interrupted. Turning the classifier off stops the download and keeps what has arrived; turning
-it back on carries on from there.
+interrupted. Turning the classifier off (once saved) stops the download and keeps what has
+arrived; turning it back on carries on from there.
 
 If an automatic download fails, C5 does not keep retrying it while it runs. It tries again the
-next time C5 starts, or when you turn the classifier off and on, or when you run
+next time C5 starts, or when you turn the classifier off and on (saving each time), or when you run
 `growther classifier pull`.
 
 The model's publisher states that its training data includes datasets released for research
-use. C5 shows the model's notice next to it in **Settings › Learning**:
+use. C5 shows the model's notice next to it in **Settings › Classifier**:
 
 > decider-0.8b by Mapika (Apache-2.0), fine-tuned from Qwen3.5-0.8B-Base (Apache-2.0) on public
 > datasets and labels from local Qwen models. Its published training mixture includes datasets
 > released for research use; check that this fits your use, and if it does not, turn the local
-> classifier off in Settings › Learning. About 812 MB is downloaded once from Hugging Face.
+> classifier off in Settings › Classifier. About 812 MB is downloaded once from Hugging Face.
 
 To check the training mixture, see the publisher's page for the model:
 [huggingface.co/Mapika/decider-0.8b](https://huggingface.co/Mapika/decider-0.8b).
@@ -138,17 +140,20 @@ To check the training mixture, see the publisher's page for the model:
 
 Anyone with permission to change settings can turn it off.
 
-1. Go to **Settings › Learning**.
-2. On the **Classifier** card, flip the **Enabled** switch on the **Built-in model** panel
-   off. It is under **Classifier models**.
+1. Go to **Settings › Classifier**.
+2. Flip the **Enabled** switch on the **Built-in model** panel off. It is under
+   **Classifier models**.
 3. C5 asks **Turn off the local classifier?** and explains that, while off, it stops learning and
    C5 answers those questions as it did before. Choose one:
 
 | Button | What happens |
 | --- | --- |
-| **Turn off** | The classifier stops. The model stays on this machine, so turning it back on costs no download. |
-| **Turn off and delete the model** (**Turn off and remove the link** when the model is a symbolic link; **Turn off and delete the file** when the file at the model's path is not the model) | The classifier stops, and the model is deleted from this machine (for a link, only the link is removed). Only shown to an administrator, not on a paired device, and only when something is on this machine to delete: the model, a partial download, or a file at the model's path that is not the model. |
+| **Turn off** | The switch is set to off, and the classifier stops when you select **Save** at the top of the tab. The model stays on this machine, so turning it back on costs no download. |
+| **Turn off and delete the model** (**Turn off and remove the link** when the model is a symbolic link; **Turn off and delete the file** when the file at the model's path is not the model) | At once, without **Save**: the classifier stops, and the model is deleted from this machine (for a link, only the link is removed). Only shown to an administrator, not on a paired device, and only when something is on this machine to delete: the model, a partial download, or a file at the model's path that is not the model. |
 | **Cancel** | Nothing changes. Closing the dialog or pressing Escape does the same. |
+
+Until you save, the switch shows off but the classifier is still running; flip it back on
+before saving and nothing changes.
 
 The question also says what is on the disk. If the file at the model's path is not the model,
 it says so (_The file at the model's path is not the model (…), so C5 does not use it._) and
@@ -176,13 +181,14 @@ classifier…** (**Turn off the built-in model…** while a model from your prov
 
 ## Turn it back on
 
-Flip the switch on again.
+Flip the switch on again, then select **Save**.
 
 - If the checked model is already here, or the model's path is a symbolic link to the checked
-  model, it turns on at once.
+  model, nothing is asked: it turns on when you save.
 - If the model is missing, partly downloaded, or not yet checked, C5 asks first:
   **Turn on the local classifier?** The dialog shows the model, its size, its licence and its
-  notice. **Download and turn on** turns it on and starts the download; **Cancel** leaves it off.
+  notice. **Download and turn on** sets the switch on, and **Save** then turns it on and starts
+  the download; **Cancel** leaves it off.
 - If a file is at the model's path but C5 already knows it is not the model, the dialog says
   so, and that C5 downloads the model and replaces that file.
 - With a [model from your providers](#a-model-from-your-providers) chosen, the question is
@@ -208,7 +214,8 @@ Flip the switch on again.
 The model takes about 812 MB. To get that space back:
 
 - **While the classifier is on**: turn it off and choose **Turn off and delete the model**
-  (**Turn off and remove the link** for a symbolic link).
+  (**Turn off and remove the link** for a symbolic link). This happens at once; there is
+  nothing to save.
 - **While it is already off**: the **Model** line has a delete button, and C5 asks before it
   deletes anything. What you see depends on what is at the model's path:
 
@@ -253,7 +260,7 @@ next time it starts.
 ## What it does at first
 
 The classifier is asked about one **kind of decision** at a time. Each kind has its own setting
-in **Settings › Learning**:
+in **Settings › Classifier**:
 
 | Setting | What the classifier is asked | Its answer is recorded beside | Default | What it can do |
 | --- | --- | --- | --- | --- |
@@ -312,7 +319,7 @@ version with the new defaults, C5 looks in its audit log for the kinds someone a
   were chosen, so none is taken for a default`.
 
 A kind that was reset is recorded in the audit log as a change made by `system`. **Settings ›
-Learning** shows every kind's mode, so you can check the result and change any of them.
+Classifier** shows every kind's mode, so you can check the result and change any of them.
 
 ### On a machine where it runs on the CPU
 
@@ -506,7 +513,9 @@ gave a task, fixes that.
 An administrator can raise Task categories on a gate that has not passed, after a warning. That
 needs an administrator account with MFA (see [Who can](#delete-the-model)), on the machine
 running C5 rather than from a paired device. It is recorded in the audit log, and the setting
-shows **Unvalidated** until it is raised again on a passing gate. It still needs a fitted
+shows **Unvalidated** until it is raised again on a passing gate. Like any mode, the raise
+is made when you select **Save**; if C5 refuses it then, the kind goes back to its saved
+mode and the message says why. It still needs a fitted
 calibration. A kind raised this way is not moved back for its gate result, only for the other
 reasons above.
 
@@ -518,7 +527,7 @@ reasons above.
 3. Wait until the **Promotion gate** line under Task categories reads _passed_ and a
    **Calibration** is listed. C5 fits one every night at 23:50, or an administrator can press
    **Fit calibration now**.
-4. Choose **Assisted** or **Authoritative**.
+4. Choose **Assisted** or **Authoritative**, then select **Save**.
 
 If a mode cannot be chosen, the option says why; see
 [I cannot choose Assisted or Authoritative](#troubleshooting).
@@ -567,8 +576,8 @@ the lower corner of the HITL button says how many questions are waiting here and
 **Guardian blocks**. It is never added to the button's own count and never plays a sound:
 these questions hold up no work. It is shown only to administrators, never on a paired
 device, and is hidden while no model answers. See
-[Opening it](../using-c5/hitl.md#opening-it). The **Classifier** card in **Settings ›
-Learning** also says, under each kind of decision, where its labels come from and how many
+[Opening it](../using-c5/hitl.md#opening-it). **Settings › Classifier** also
+says, under each kind of decision, where its labels come from and how many
 of its questions wait, with a button to the tab (see
 [Each kind of decision](#each-kind-of-decision)).
 
@@ -672,8 +681,9 @@ Remote Control.
 
 1. Make sure the provider is turned on in **Settings › Integrations**. If it runs the model
    on your machine or network, load the model there first: C5 never loads a model itself.
-2. In **Settings › Learning**, on the **Classifier** card, under **A model from your
-   providers**, choose **Choose a model…** (**Change…** once one is chosen).
+2. In **Settings › Classifier**, under **A model from your providers**, choose **Choose a
+   model…** (**Change…** once one is chosen). This, like the test that follows, happens at
+   once, without the tab's **Save**.
 3. Pick a model. The list has one group for each provider you turned on, in the same order
    as the cards in Integrations, and a search box. A group's heading says where its models
    run (_On this machine_, _At this machine's address_, _Your network_ or _Online_). A provider
@@ -682,6 +692,9 @@ Remote Control.
    _C5 cannot tell that it runs on this machine, and Models allowed from is This machine: set
    it to Your network on the Classifier card to choose it._ LM Studio's models need **Your
    network**: C5 cannot see past LM Studio to tell that a model runs only on this machine.
+   The list goes by the saved **Models allowed from**, so after changing it, select **Save**
+   before you choose. Choosing (or removing) a model drops any unsaved change about the
+   model chosen before it.
 4. For a model on this machine, choose **Test and use**. For a model on your network or
    online, choose **Next**: C5 first shows where it runs and what it would send there, and
    asks you to confirm (see [Before a model off this machine is asked](#before-a-model-off-this-machine-is-asked)).
@@ -747,7 +760,7 @@ its card in **Settings › Integrations**):
 | _M cannot answer the classifier's questions now. … The result was not kept, so nothing was changed: C5 still asks M._ | The test was refused before C5 could tell which model answered (its provider refused the key, or its answer could not be read), so nothing was kept. The last passing test stands, and C5 goes on asking the model. Without _C5 still asks M_ when C5 was not asking it, for example while it is turned off |
 | _Could not test M: M runs on your network, … (10.0.0.7:8080), and you consented to sending the classifier's questions to 10.0.0.9:8080, not there: choose it again to confirm it there. C5 asked it none of the test's questions. Nothing was changed._ | Its provider now points at another address than the one you confirmed when you chose it. Choose it again with **Change…** and confirm the new address |
 | _M was tested, but its result could not be saved, so nothing was changed._ | Try again; if it repeats, run `growther doctor` |
-| _M was tested and its result kept, but the classifier's status could not be read. Settings › Learning shows it once it can be._ | The test is done. Only the card's refresh failed; it catches up by itself |
+| _M was tested and its result kept, but the classifier's status could not be read. Settings › Classifier shows it once it can be._ | The test is done. Only the card's refresh failed; it catches up by itself |
 
 **Test again asks only where you consented.** A model off this machine is tested again
 only at the address you confirmed for it, and a billed one only after its cost is shown;
@@ -785,13 +798,15 @@ model may run:
 | **Your network** | Also a model on another computer on your network, and LM Studio or vLLM |
 | **Anywhere** | Also a cloud provider's models |
 
+A new choice takes effect when you select **Save** at the top of the tab.
+
 Under it, the card always reminds you: _LM Studio counts as Your network: C5 cannot show that
 a model it serves runs on this machine._ and _Widening this does not skip your confirmation:
 C5 still asks you before it sends questions to each model that is not on this machine._
 
 - **Who can change it.** An administrator at the machine. A paired device, or an account that
   is not an administrator, sees it with the reason it cannot be changed. An administrator
-  without a second factor is refused and told how to add one; **Models allowed from**,
+  without a second factor is refused when they save, and told how to add one; **Models allowed from**,
   **Choose a model…** and **Test again** then stay unavailable until the page is opened
   again, because each refused attempt is a critical entry in the audit log.
 - **In the list.** A model the setting does not reach says what to change, for example
@@ -850,7 +865,7 @@ address) and choose **Allow and test**. **Back** returns to the list with your c
 
 The confirmation is for that address. A model at another address asks again. The Terms
 dialog then shows the chosen model and when you allowed it, for example _M through LM
-Studio, at localhost:1234. You allowed this on 2026-11-02 under Terms v1.10._
+Studio, at localhost:1234. You allowed this on 2026-11-02 under Terms v1.13._
 
 Those questions then go from your machine to that provider like any other work you send it,
 under your agreement with the provider. They do not go through Growther.si.
@@ -956,7 +971,8 @@ the chosen model is never measured on the built-in model's answers, nor the othe
   chosen model's answers only once that model has been measured, however well the built-in
   model did.
 - **Act on M's answers** moves a kind that already acts onto the chosen model's own record,
-  once that model's gate has passed on a fitted calibration. Nothing stops acting in
+  once that model's gate has passed on a fitted calibration. It happens at once, without
+  **Save**. Nothing stops acting in
   between. If the gate refuses, the kind says _Not acting on M's answers: …_
 - **Fit calibration now** is offered once per model, each named for whose calibration it
   fits (… _on M_, … _on the built-in model_), to an administrator at the machine.
@@ -975,7 +991,8 @@ it is on.
    _The built-in model answers instead._ (or _Nothing answers; C5 uses its usual checks._
    while the built-in model is off or cannot run here), then _C5 keeps it chosen, with its
    test and its records; turn it on again to use it._
-2. Choose **Turn off**. **Cancel**, where the focus starts, or Escape leaves it on.
+2. Choose **Turn off**, then select **Save** at the top of the tab. **Cancel**, where the
+   focus starts, or Escape leaves it on.
 
 While it is off, its panel reads _Turned off. C5 keeps it chosen, with its test and its
 records, and asks it nothing until it is turned on again._, followed by what answers
@@ -987,11 +1004,12 @@ too. Turning it on is for an administrator at the machine running C5, with a sec
 as for choosing a model; anyone else sees why beside the switch, for example _Only an
 administrator can turn on the classifier's model._
 
-**Turning it on checks it again.** One click turns it on, and C5 first judges it as it would
+**Turning it on checks it again.** Flip the switch on and select **Save**, and C5 first judges it as it would
 a model being chosen: the Terms, your organisation's policy (and the providers and models it
 allows), **Models allowed from**, its provider turned on in **Settings › Integrations**, a
 passing test, your confirmation for a model off this machine, and whether it has changed
-since its test. If anything fails, it stays off, and a message says why:
+since its test. If anything fails, it stays off, the change stays unsaved, and a message
+says why:
 
 | The message says | What to do |
 | --- | --- |
@@ -1003,7 +1021,7 @@ since its test. If anything fails, it stays off, and a message says why:
 | _Could not turn on M: The provider … is not turned on in Settings › Integrations. …_ | Turn the provider on, then turn the model on |
 
 **Change…** offers the model again while it is off: choosing it tests it again and turns it
-on.
+on, at once, without **Save**.
 
 Turning it on asks the model nothing: it judges the choice C5 kept. So a model that has
 changed since it was chosen turns on with a warning, not a test result: _M is turned on, but
@@ -1013,7 +1031,7 @@ it has changed since it was chosen, so C5 does not ask it. Choose it again to us
 so once: _Could not turn off M; it may still be on._ or _Could not turn on M; it may still
 be off._ Look at the switch once the card has refreshed, and try again. If the change was
 made and only the card's refresh failed, you get a warning instead, for example _M was
-turned off, but the classifier's status could not be read. Settings › Learning shows it once
+turned off, but the classifier's status could not be read. Settings › Classifier shows it once
 it can be._ Nothing needs doing: the switch catches up when the status can be read.
 
 ### Use as fallback
@@ -1044,7 +1062,8 @@ The last step of choosing a model shows the same line, before anything is tested
 paired device too. Turning it back on is for an administrator at the machine running C5,
 with a second factor; anyone else sees why under the switch, for example _Only an
 administrator can use the built-in model as a fallback._ or _You can use the built-in model
-as a fallback only on the machine running C5._ Each change is recorded in the audit log.
+as a fallback only on the machine running C5._ A change takes effect when you select
+**Save** at the top of the tab, and each one is recorded in the audit log.
 
 **Your organisation's policy** can set it, with `classifier_builtin_fallback` (see
 [For administrators](#managed-policy-classifier_builtin_fallback)). Locked, the switch is
@@ -1057,7 +1076,9 @@ built-in model need not answer in the chosen model's place (see
 
 ### Remove, or choose another
 
-- **Remove**, on the chosen model's panel, clears the choice. It is open to anyone who may
+- **Remove**, on the chosen model's panel, clears the choice at once, without **Save**, and
+  drops any unsaved change about that model (its switch, **Use as fallback**, a raise judged
+  on its record). It is open to anyone who may
   change settings, from a paired device too, whatever your organisation's policy says:
   removing is always the safe direction. Where a kind of decision acts on the model's
   answers, C5 asks first (**Remove M?**) and says what acts there afterwards, for example
@@ -1067,7 +1088,7 @@ built-in model need not answer in the chosen model's place (see
   and it picks them up. Done, it says _M was removed._ and what answers now. If C5 could not
   remove it, the message says so once: _Could not remove M; it may still be chosen._ If it
   was removed and only the card's refresh failed, a warning says _M was removed, but the
-  classifier's status could not be read. Settings › Learning shows it once it can be._
+  classifier's status could not be read. Settings › Classifier shows it once it can be._
 - To stop asking it for a while and keep it chosen, turn it off instead (see
   [Turn the chosen model off for a while](#turn-the-chosen-model-off-for-a-while)).
 - **Change…** opens the list to choose another model. If a kind of decision acts on the
@@ -1082,7 +1103,7 @@ built-in model need not answer in the chosen model's place (see
   in Settings › Integrations._
 - **A choice that was made but not shown.** If the model was chosen and only the card's
   refresh failed, the list closes and a warning says _M was chosen, but the classifier's
-  status could not be read. Settings › Learning shows it once it can be._ Do not choose it
+  status could not be read. Settings › Classifier shows it once it can be._ Do not choose it
   again: the card catches up by itself.
 
 ### When the chosen model is not answering
@@ -1119,7 +1140,7 @@ cannot be set to assisted on the chosen model qwen3:0.6b: …_ Each kind of deci
 as the card names it, in every message and notification: **Task categories**, **Skill
 routing**, **Step quality**, **Tool-call safety** and **Alert triage**.
 
-## What you see in Settings › Learning
+## What you see in Settings › Classifier
 
 The **Classifier** card has a **Terms** button and a short status badge in its header. Under
 **Classifier models** are two panels. With nothing chosen, the built-in model's comes first;
@@ -1141,6 +1162,49 @@ answers in the chosen model's place, so there is no order to show and the tag is
 **Fallback**, on the built-in model's panel, is shown while it stands behind a chosen model
 that is answering, with Use as fallback on. Under both panels a line says who answers now
 (see [Who answers](#who-answers)). Then comes one row for each kind of decision.
+
+### Saving your changes
+
+The tab has a **Save** button in its header, as the other Settings tabs do. These are
+settings, and a change to them waits for **Save**:
+
+| Setting | What waits |
+| --- | --- |
+| The built-in model's **Enabled** switch | Turning it on (and the download, if the model is not here) or off |
+| Each kind of decision's mode | A new mode, including a raise with **Raise anyway** |
+| **Models allowed from** | The new choice |
+| **Use as fallback** | Turning it off or on |
+| The chosen model's own **Enabled** switch | Turning it off or on |
+
+The questions that go with a change still come when you make it: **Turn on the local
+classifier?** with the model's notice, **Turn off the local classifier?**, the warning before
+**Raise anyway**, and the chosen model's **Turn off M?**. Your answer sets the control, and
+**Save** then makes the change. Until then the card shows what you set, and C5 carries on as
+before. Set a control back to what it was and that change is gone, with nothing to save.
+
+**Save** makes each change on its own, in this order: **Models allowed from**, the built-in
+model's switch, the chosen model's switch, **Use as fallback**, then each kind's mode. If one
+is refused, the message says why, and Save stops there: that change and the ones after it
+stay unsaved, so you can deal with the cause and save again.
+
+Some changes go without being saved:
+
+- A raise C5 refuses, because the gate no longer passes when it is measured again, goes back
+  to the saved mode, and the message or the line under the kind says why.
+- Choosing a model, or removing one, drops the unsaved changes about the model chosen before:
+  its switch, **Use as fallback**, and any raise judged on its record.
+- A control your organisation's policy locks, or one an administrator's refusal holds for the
+  rest of the visit, drops the changes it covers.
+- Setting the built-in model's switch back to off, while nothing else answers, also drops the
+  mode changes made after you set it on.
+
+Leave the tab with changes unsaved, and C5 asks first, with **Save** and **Discard**, as it
+does on the other tabs.
+
+**What does not wait for Save.** These are acts, not settings, and happen as soon as you
+confirm them: **Choose a model…** and **Change…**, **Test again**, **Remove**, **Delete the
+model** (and the other delete buttons on the **Model** line), **Turn off and delete the
+model**, **Fit calibration now**, and **Act on M's answers**.
 
 ### The badge
 
@@ -1315,20 +1379,21 @@ Under each setting you see:
 
 ### When a change does not save, or saves in part
 
-A change on the card saves the moment you make it. If it could not be saved at all, the
+A change is saved when you select **Save** (see [Saving your changes](#saving-your-changes)),
+and an act such as **Remove** when you confirm it. If one could not be saved at all, the
 card says so as an error, for example _Could not change the classifier's mode: The
 classifier's settings could not be saved, so nothing was saved_, and nothing changed.
 
 Some changes write more than one thing — raising a kind writes its mode and the model's
 promotion record — and a fault can stop the write part-way. Then the card says exactly what
 was kept, as a warning, not as a failure: _Only part of the change was saved: the families'
-modes were saved, and the built-in model's promotion records were not. Settings › Learning
+modes were saved, and the built-in model's promotion records were not. Settings › Classifier
 shows what is stored now._ The card reads the status again, so what it shows afterwards is
 what is stored.
 
 A change that was saved, where only reading the status back failed, is said as done, also
 as a warning: _The local classifier was switched on, but the classifier's status could not
-be read. Settings › Learning shows it once it can be._ (for a mode, _Task categories was set
+be read. Settings › Classifier shows it once it can be._ (for a mode, _Task categories was set
 to assisted, but …_). Nothing needs doing: the card catches up once it can read the status.
 
 **When the card cannot read the models from your providers** for a moment, it says so
@@ -1348,7 +1413,7 @@ server started** chart counts every question by outcome, including the backgroun
 given up after a minute's wait (see
 [When the classifier is busy](#when-the-classifier-is-busy)). Only accounts that may view
 Settings see this tab. It only reports; the switch and the modes are in **Settings ›
-Learning**. With the built-in model off, the tab says it is showing what
+Classifier**. With the built-in model off, the tab says it is showing what
 the built-in model recorded before.
 
 **Whose answers.** The charts are the built-in model's. While a model from your providers
@@ -1357,7 +1422,7 @@ or that model by name, and the chosen model's own record — its answers, speed,
 savings, labels, gate and history (see
 [How a chosen model earns its place](#how-a-chosen-model-earns-its-place)) — shows under
 _Showing M's record: a model from your providers, read-only. Its controls are in Settings ›
-Learning._ The built-in model's switch and its process counters are not drawn for it. The
+Classifier._ The built-in model's switch and its process counters are not drawn for it. The
 choice is kept in the page's address, and a link to a model no longer chosen shows the
 built-in model's record instead.
 
@@ -1365,7 +1430,7 @@ built-in model's record instead.
 model chosen at that moment. If someone chooses another model in Settings while the tab is
 open, the next read is the new model's, so C5 asks again which model that is, and names it
 once it knows. Until then the record is not named: _Showing the record of the model from
-your providers chosen now, read-only. Its controls are in Settings › Learning._
+your providers chosen now, read-only. Its controls are in Settings › Classifier._
 
 For the kind of decision you pick, it also shows:
 
@@ -1458,8 +1523,8 @@ while a model from your providers is chosen.
 
 The **Terms** button on the card opens **The classifier — Terms of Service, Section 14**:
 section 14 of the Growther.si Terms of Service, _Models C5 downloads and runs on your
-machine_, word for word, under the Terms version and its effective date (_Terms v1.10 ·
-effective October 22, 2026_ in this release). Below it are this install's built-in model, its size, its
+machine_, word for word, under the Terms version and its effective date (_Terms v1.13 ·
+effective October 28, 2026_ in this release). Below it are this install's built-in model, its size, its
 licence, whether it is on this machine, and its notice. The **On this machine** row says
 what is at the model's path, without claiming C5 downloaded it (you may have placed it by
 hand):
@@ -1481,7 +1546,7 @@ _On this machine it is not downloaded: …_
 With a [model from your providers](#a-model-from-your-providers) chosen, a **Your model**
 row names it too: _M through Ollama, on this machine._, or, for a model off this machine,
 where it runs and when an administrator allowed it, for example _M through LM Studio, at
-localhost:1234. You allowed this on 2026-11-02 under Terms v1.10._
+localhost:1234. You allowed this on 2026-11-02 under Terms v1.13._
 
 At the bottom are **Full Terms of Service**
 ([growther.si/t=models](https://growther.si/t=models)), **Third-party notices** (the licences of
@@ -1504,7 +1569,7 @@ and does not receive them, and the provider may charge you for them. It is measu
 own record and acts only where it has been measured. While the built-in model is on, it
 keeps acting where it has been measured and the chosen model has not, and answers whenever
 the chosen model cannot be reached, unless its use as a fallback has been turned off in
-Settings › Learning or by your organisation's policy. While the built-in model is off, or
+Settings › Classifier or by your organisation's policy. While the built-in model is off, or
 its use as a fallback is turned off, no classifier answers when the chosen model cannot be
 reached, and C5 answers as it did before. (Version 1.10 of the Terms added the words about
 its use as a fallback.) A model not served on your machine can be chosen only where your
@@ -1669,7 +1734,7 @@ classifier can be on or off while you do this; it uses the file once it is on.
    else, see [Troubleshooting](#troubleshooting).
 
 You do not need to restart C5. While the classifier is on, a running C5 notices the file the
-next time **Settings › Learning** is opened, checks it and starts the classifier. Otherwise it
+next time **Settings › Classifier** is opened, checks it and starts the classifier. Otherwise it
 picks it up at its next start.
 
 **How C5 checks the file.** First its size, which must be exactly 811,844,032 bytes. Then its
@@ -1823,7 +1888,7 @@ that allows only `huggingface.co` makes every model download fail:
 - `cdn-lfs.huggingface.co`
 
 When the download fails on the network, the message gives the cause itself. The **Model**
-line in **Settings › Learning** reads, after _The download failed:_
+line in **Settings › Classifier** reads, after _The download failed:_
 
 ```text
 Could not download the classifier model: the proxy refused to open a tunnel to huggingface.co:443: it answered CONNECT with 407 Proxy Authentication Required; it wants credentials — put them in the proxy URL (http://user:password@host:port), C5 speaks Basic proxy authentication only. Once that is fixed, turn the classifier off and on, restart C5 or run `growther classifier pull` to download it; or fetch https://huggingface.co/… on a connected machine and place it at … (sha256 …).
@@ -1889,7 +1954,7 @@ and memory, for example
 
 On Apple silicon the second line gives both possibilities, as above, because this command
 does not read C5's settings and so cannot see which model providers are configured. The
-**This Mac** line in **Settings › Learning** says which one applies (see
+**This Mac** line in **Settings › Classifier** says which one applies (see
 [GPU or CPU](#gpu-or-cpu)). Off Apple silicon, the second line says why it runs on the CPU,
 and with how many threads, for example
 `CPU: GPU acceleration is only used on Apple silicon (this is linux-x64). It uses 8 CPU threads.`
@@ -1947,7 +2012,7 @@ it says `✓ already present and verified — <path>` and downloads nothing.
   refused (see [Network](#network)).
 
 While the classifier is on, a running C5 starts using a model you pulled the next time
-**Settings › Learning** is opened, or at its next start.
+**Settings › Classifier** is opened, or at its next start.
 
 ### `growther doctor`
 
@@ -1957,7 +2022,7 @@ does not work out the model's fingerprint; it reads the record C5 keeps beside i
 | Result | What it means |
 | --- | --- |
 | OK — _not available here (optional): …_ | This machine cannot run it; the reason follows. |
-| OK — _model not downloaded yet — it is fetched while the classifier is on (Settings › Learning), or by `growther classifier pull`_ | Normal on a new install. |
+| OK — _model not downloaded yet — it is fetched while the classifier is on (Settings › Classifier), or by `growther classifier pull`_ | Normal on a new install. |
 | OK — _model not downloaded — this install's network posture is offline, so C5 never downloads it._ | The Egress posture is Offline. Followed by the address, path and fingerprint to place it by hand. |
 | OK — _model not downloaded — GROWTHER_CLASSIFIER_NO_AUTO_DOWNLOAD=1, so C5 does not fetch it on its own._ | Run `growther classifier pull`, or place it by hand. |
 | OK — _model verified — \<path\>_ | All good. |
@@ -1977,7 +2042,7 @@ C5 prints these lines to its own output:
 | From a terminal | In that terminal |
 | At sign-in on macOS | `logs/service.out.log` in your C5 folder; warnings and errors in `logs/service.err.log` beside it |
 | At sign-in on Linux, through systemd | In the journal: `journalctl --user -u growther-c5` |
-| At sign-in on Windows, or from a Linux desktop's autostart | Not kept in a file. Use the card in **Settings › Learning** and `growther doctor` |
+| At sign-in on Windows, or from a Linux desktop's autostart | Not kept in a file. Use the card in **Settings › Classifier** and `growther doctor` |
 
 While the classifier is on, C5 may print:
 
@@ -1993,7 +2058,7 @@ While the classifier is on, C5 may print:
 | `[classifier] settings unreadable at boot: …` | C5 could not read the switch from its database when it started. This is not the same as off; C5 tries again when the policy next refreshes. Run `growther doctor`. |
 | `[classifier] its settings could not be read (…); it is not asked until they can be` | The same kind of database fault, later on. |
 | `[classifier] local classifier lifecycle failed: …` | An unexpected fault while starting or stopping it. C5 itself carries on. |
-| `[classifier] site modes kept as stored: the audit trail no longer shows which were chosen, so none is taken for a default` | Once, after an update: C5 could not tell which kinds of decision someone had set, so it changed none of them (see [What it does at first](#what-it-does-at-first)). Check the modes in **Settings › Learning** if you want today's defaults. |
+| `[classifier] site modes kept as stored: the audit trail no longer shows which were chosen, so none is taken for a default` | Once, after an update: C5 could not tell which kinds of decision someone had set, so it changed none of them (see [What it does at first](#what-it-does-at-first)). Check the modes in **Settings › Classifier** if you want today's defaults. |
 | `[classifier-drift] categories: assisted → shadow — …` | The nightly re-check moved that kind of question back to Shadow, for the reason given. Administrators also get a notification. |
 | `[classifier-drift] Check was PARTIAL — …`, `[classifier-gate-history] Nightly pass was PARTIAL — …`, `[classifier-calibration] Fit was PARTIAL — …` | A nightly job could not finish every part of its work; the failures follow. It runs again the next night. |
 | `[classifier-drift] Nightly check failed: …`, `[classifier-gate-history] Nightly pass failed: …`, `[classifier-calibration] Nightly fit failed: …` | A nightly job failed outright; the error follows. It runs again the next night. |
@@ -2121,7 +2186,7 @@ model again.
 **The Runtime line says the model could not be loaded, for example for lack of memory.**
 C5 tries again by itself: a minute after the failure, then after twice as long each time it
 fails again, up to 15 minutes, so the classifier comes back once memory frees up. The usual
-model answers meanwhile. Turning the classifier off and on tries at once. A model this
+model answers meanwhile. Turning the classifier off and on (saving each time) tries at once. A model this
 machine or this build cannot run at all is not tried again until you do that.
 
 **I cannot choose Assisted or Authoritative.**
@@ -2222,7 +2287,7 @@ used.
 The name moves to a newer model by itself (one ending in `latest`, or `openrouter/auto`), so
 its record would mean nothing. Choose a dated or versioned name.
 
-**_This machine now requires Terms v1.10, and this page shows v1.9. Reload C5 to read the current text._**
+**_This machine now requires Terms v1.13, and this page shows v1.12. Reload C5 to read the current text._**
 The page was loaded before C5 was updated. Reload it, read Section 14 again, and confirm.
 
 **The chosen model's panel says _Not used._, _Paused._ or _Changed since it was tested._**

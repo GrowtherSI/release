@@ -160,6 +160,28 @@ versions after v322 read it too: C5 started from that shell dials that gateway, 
 OpenClaw card's **Host** and **Port** lock. See
 [Local model servers and gateways](/c5/cli/environment#local-model-servers-and-gateways).
 
+### Updating to the release with Terms v1.13
+
+**The Terms of Service are now version 1.13**, effective October 28, 2026. No section is
+added or renumbered. The only change from version 1.12 is in **Section 14**, which now says
+**Settings > Classifier** in the four places it said **Settings > Learning**: the classifier's
+controls moved to a tab of their own (below). Nothing you may do, and nothing C5 does,
+changes with it.
+
+If Remote Control is on, it keeps running and nobody is signed out. The **Settings › Remote
+Control** tab says that version 1.13 has not been accepted on this machine, and the next save
+on that tab asks someone at the machine to accept it. See
+[If the Terms changed after you accepted them](/c5/remote-control/setup#if-the-terms-changed-after-you-accepted-them).
+
+**The classifier has its own tab, Settings › Classifier**, right after **Learning**, which
+keeps its other five sections. The classifier's settings now wait for the tab's **Save**
+button, as other settings do: the **Built-in model** switch, each kind of decision's mode,
+**Models allowed from**, **Use as fallback** and the chosen model's own switch. The questions
+that go with them still come when you move the control. Choosing, testing and removing a
+model, deleting the built-in model, fitting a calibration, and **Act on M's answers** still
+happen as soon as you confirm them. See
+[Saving your changes](/c5/tools/local-classifier#saving-your-changes).
+
 ### Updating to the release with Terms v1.10
 
 **The Terms of Service are now version 1.10**, effective October 22, 2026. No section is
@@ -463,7 +485,7 @@ kind of decision it can answer — task categories, skill routing, step quality,
 safety and alert triage each start in **Shadow** — and it decides nothing until it has been
 measured on your install. On a machine where it runs on the CPU, step quality, tool-call
 safety and skill routing record only one question in four, so it stays out of your agents'
-way. To turn it off, or delete its model, go to **Settings › Learning** — see
+way. To turn it off, or delete its model, go to **Settings › Classifier** — see
 [Turn the classifier off](/c5/tools/local-classifier#turn-the-classifier-off). The
 [FAQ](/c5/troubleshooting/faq#the-local-classifier) answers what it is and what it sends
 (nothing to Growther.si).
@@ -488,7 +510,7 @@ The reset is recorded in the audit log as a change made by `system`. If the audi
 longer reaches back far enough to tell (to 27 September 2026), C5 changes nothing, and while
 the classifier is on it logs
 `[classifier] site modes kept as stored: the audit trail no longer shows which were chosen, so none is taken for a default`.
-You can set any kind's mode yourself in **Settings › Learning**. See
+You can set any kind's mode yourself in **Settings › Classifier**. See
 [What it does at first](/c5/tools/local-classifier#what-it-does-at-first).
 
 **In versions after v322, the promotion gate also checks _Telling cases apart_**: whether
