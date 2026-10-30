@@ -1,5 +1,26 @@
 [
   {
+    "tag": "v2026.10.30-v336",
+    "version": "2026.10.30-v336",
+    "build": 336,
+    "releasedAt": "2026-10-30T13:54:57-07:00",
+    "bullets": [
+      {
+        "kind": "new",
+        "text": "The LLM Queue badge now shows local and cloud agents separately."
+      },
+      {
+        "kind": "new",
+        "text": "Slot rows now show an icon for where they run."
+      },
+      {
+        "kind": "fixed",
+        "text": "Cloud Concurrent Agents now controls how many cloud jobs run."
+      }
+    ],
+    "more": 1
+  },
+  {
     "tag": "v2026.10.29-v335",
     "version": "2026.10.29-v335",
     "build": 335,
