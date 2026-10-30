@@ -86,6 +86,28 @@ You are not stuck with the plan C5 made. You can:
 - **Cancel** a task you no longer want
 - **Retry** a task that failed, after you fix what caused it
 
+## The LLM Queue badge
+
+The small badge in the page header, beside the title, is the **LLM Queue**: how many agents
+are running right now against how many may run at once, for example **2/3**. Its dot is the
+queue's health — green while agents are working, grey while nothing is queued, yellow while
+a step is waiting to retry, red when a step has been stuck for longer than your stalled-job
+timeout, and grey again while **Master Pause** is on.
+
+When a paid provider is first in **Task Priority**, the badge shows one pair per kind of
+provider, each behind an icon: a **server** for local models and gateways (OpenClaw, Hermes
+Agent, PicoClaw, LM Studio, Ollama), a **cloud** for paid providers. So **⛁ 1/1 · ☁ 0/2**
+means one local agent running of one allowed, and none of two cloud agents. The two
+allowances are the **Concurrent Agents** and **Cloud Concurrent Agents** sliders in
+**Settings › General** — see [Settings](/c5/configuration/settings#general-how-many-agents-run-at-once).
+
+Hover the badge for the detail: a row per kind of provider named after its slider, and
+**Active Agent Slots**, one line per running agent with the provider serving it, the
+server or cloud icon beside it, its role, and the step it is on. A gateway always shows
+under the server icon, because that is the allowance it counts against — a gateway may
+still forward a request to a paid model. Administrators also get a restart button here
+for stalled steps.
+
 ## Pausing everything
 
 **Master Pause**, the pause button in the page header, halts all new AI task steps, for

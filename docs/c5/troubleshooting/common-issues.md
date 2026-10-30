@@ -387,6 +387,20 @@ a budget limit, and that no task is waiting on your approval.
 waiting 7 days after it was queued expires without running, and stays in the list. Expired
 jobs never run. See [When work seems stuck](/c5/using-c5/monitor#when-work-seems-stuck).
 
+### Only one task step runs at a time
+
+Open **Settings › General › Adaptive Parallel Agents**. **Concurrent Agents** is how many
+steps may run at once on local models and gateways; **Cloud Concurrent Agents** adds steps
+on paid providers, but only while a paid provider is **first** in **Task Priority**
+(**Settings › Integrations › Coordinator Priority**). If a paid provider is connected but
+not first, the cloud slider's card says so and it adds nothing.
+
+The **LLM Queue** badge on [Productivity](/c5/using-c5/productivity#the-llm-queue-badge)
+shows what is in use: one pair behind a server icon for local models and gateways, and,
+once a paid provider is first, a second pair behind a cloud icon. If the badge shows
+**1/1** with a slider set higher, the slider is in automatic mode and C5 has backed off
+— the card shows the live value — or a paid provider is not first.
+
 ### A schedule did not run
 
 Schedules need C5 running. If your computer was asleep or off, the run was missed — C5
