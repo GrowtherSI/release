@@ -79,6 +79,11 @@ connections and a dead gateway (see
 
 Cancelling a task is not a failure: C5 stops there and tries no other model.
 
+The order matters for one more thing: how many task steps may run at once. **Cloud
+Concurrent Agents** in **Settings › General** only adds running agents while a paid
+provider is first in the **tasks** column; see
+[Settings](/c5/configuration/settings#general-how-many-agents-run-at-once).
+
 This is worth setting up if you rely on schedules that run while you are not watching.
 
 ## Watching the cost

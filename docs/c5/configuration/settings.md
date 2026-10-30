@@ -50,6 +50,28 @@ started with), which outranks these fields. Change or remove it there.* Remove t
 and once C5 restarts the card's own **Host** and **Port** apply again. See
 [Local model servers and gateways](/c5/cli/environment#local-model-servers-and-gateways).
 
+### General: how many agents run at once
+
+Under **Adaptive Parallel Agents**, two sliders say how many task steps may run at the same
+time:
+
+- **Concurrent Agents** counts steps served by local models and by gateways (OpenClaw,
+  Hermes Agent, PicoClaw). This is the allowance every C5 has.
+- **Cloud Concurrent Agents** counts steps served by paid providers. It only takes effect
+  while a paid provider is **first** in **Task Priority** (**Settings › Integrations ›
+  Coordinator Priority**); while a paid provider is merely connected, it limits C5's cloud
+  requests but adds no running agents, and the card says so. With a paid provider first,
+  both allowances add up: **1** local and **2** cloud lets three steps run at once.
+
+Each slider has a **Manual** switch. Off, C5 raises and lowers the number itself, backing
+off when a provider slows down or returns errors and probing up again when it recovers;
+the slider then shows the live value. On, your number is the fixed ceiling. Setting the
+cloud allowance to zero stops it adding agents, but does not stop C5 using the paid
+provider for the steps it is first for.
+
+The **LLM Queue** badge on [Productivity](/c5/using-c5/productivity#the-llm-queue-badge)
+shows both allowances in use, each behind a server or cloud icon.
+
 ### Budget
 
 Set a spending limit on your first day. It is the cheapest mistake-insurance available.
