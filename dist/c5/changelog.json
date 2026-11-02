@@ -20,6 +20,26 @@
     ]
   },
   {
+    "tag": "v2026.10.31-v337",
+    "version": "2026.10.31-v337",
+    "build": 337,
+    "releasedAt": "2026-10-31T02:00:06-07:00",
+    "bullets": [
+      {
+        "kind": "new",
+        "text": "Chat and the sidebar logo now show local and cloud slots."
+      },
+      {
+        "kind": "fixed",
+        "text": "You can queue more tasks while their images are still being described."
+      },
+      {
+        "kind": "fixed",
+        "text": "Cloud chat replies now count toward your cloud agent limit."
+      }
+    ]
+  },
+  {
     "tag": "v2026.10.30-v336",
     "version": "2026.10.30-v336",
     "build": 336,
