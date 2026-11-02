@@ -100,7 +100,9 @@ growther activate        # first‑run license / device activation
 ## Updating
 
 ```bash
-growther update          # self‑update to the latest signed release (verifies the hash)
+growther update          # self‑update (restarts if running, asks to start if stopped)
+growther update --only   # update binary only (do not restart or ask to start)
+growther update --start  # update and automatically start or restart without asking
 growther update --check  # just check whether a newer version exists
 ```
 

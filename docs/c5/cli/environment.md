@@ -42,7 +42,7 @@ See [When C5 starts at sign-in](#when-c5-starts-at-sign-in) below.
 | `GROWTHER_CHANNEL`         | Which releases you get: `stable`, `beta`, or `dev`.                 | `stable` |
 | `GROWTHER_NO_SELF_INSTALL` | Set to `1` to run the program where it sits.                        | off      |
 | `GROWTHER_NO_MODIFY_PATH`  | Set to `1` so C5 never edits your shell files.                      | off      |
-| `GROWTHER_UPDATE_RESTART`  | Set to exactly `0` so C5 does not restart after an update. See [`growther update`](/c5/cli/commands#growther-update). | restarts the service, if one runs this copy |
+| `GROWTHER_UPDATE_RESTART`  | Set to exactly `0` (or pass `--only`) so C5 does not restart or ask to start after an update. See [`growther update`](/c5/cli/commands#growther-update). | restarts if running, asks to start if stopped |
 | `GROWTHER_ROLLBACK_FORCE`  | Set to `1` to roll back past the keystore check, like `--force`.    | off      |
 
 **Model downloads**

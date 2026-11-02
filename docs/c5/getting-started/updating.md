@@ -16,6 +16,31 @@ growther update
 
 This downloads the latest release, checks that it is genuine, and installs it.
 
+Before updating, C5 checks whether it is currently running:
+
+- **If C5 is running**, it installs the update and restarts C5 for you automatically.
+- **If C5 is not running**, it installs the update and asks:
+
+  ```text
+  Start growther? Y/n
+  ```
+
+  Press **Return** (or type `y`) to start C5 right away. Type `n` or press **Ctrl-C** to exit without starting.
+
+## Flags for updates
+
+You can tell `growther update` what to do in advance:
+
+```bash
+growther update --only     # only update; do not restart or ask to start
+growther update --start    # update and automatically start or restart without asking
+growther update --check    # only check if an update is available
+```
+
+- **`--only`** (or `-o`): Downloads and installs the update, but leaves C5 alone. It never asks to start C5 and never restarts a running server. Use this in automated maintenance or when you want to update now and start later.
+- **`--start`** (or `-s`): Ensures C5 is running after the update without asking. If C5 was stopped, it starts it; if C5 was already running, it restarts it.
+- **`--check`**: Shows the latest version and tells you if an update is available, without downloading or changing anything.
+
 If there is a `THIRD-PARTY-NOTICES.txt` file beside the program — as there is in a copy
 unpacked from a release archive — the update brings it up to date with the new release
 too. C5 does not create one where there was none. See
@@ -49,11 +74,13 @@ It tells you your version, the latest version, and whether you should update.
 
 ## Update and restart
 
-If you run C5 as a background service on macOS or Linux, plain `growther update` restarts
-it for you once the new version is in place. There is no `--restart` flag. To pick the moment
-yourself, for example during a maintenance window, set `GROWTHER_UPDATE_RESTART=0`; C5 then
-tells you to restart it to finish. On Windows the update is staged and applies the next time
-C5 restarts. See [`growther update`](/c5/cli/commands#growther-update) for each case.
+When C5 is already running, `growther update` restarts it for you once the new version is in place:
+
+- If C5 was running in a terminal or in the background, it gracefully stops the old process and starts the new one.
+- If you run C5 as a background service on macOS or Linux (using `growther service install`), it restarts that service.
+- On Windows, the update is staged and applies the next time C5 restarts.
+
+To prevent automatic restarts or prompts (for example during a maintenance window), pass `--only` or set `GROWTHER_UPDATE_RESTART=0` in your environment. See [`growther update`](/c5/cli/commands#growther-update) for each case.
 
 ## Update the way you installed
 

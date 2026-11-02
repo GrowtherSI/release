@@ -60,7 +60,7 @@ See [Log filtering](/c5/cli/log-filtering) for the full list of hotkeys and conf
 | `growther service`    | Manage starting C5 automatically. See below.                          |
 | `growther activate`   | Pair this computer with your licence.                                 |
 | `growther rekey`      | Give this computer a new key, keeping the same licence.               |
-| `growther update`     | Get the newest version.                                               |
+| `growther update`     | Get the newest version (restarts if running, asks to start if stopped). |
 | `growther rollback`   | Go back to the version you had before.                                |
 | `growther doctor`     | Check your setup and report anything wrong.                           |
 | `growther home`       | Show, check or move where C5 keeps its files. See below.              |
@@ -190,9 +190,33 @@ Gets the newest version. See [Updating C5](/c5/getting-started/updating) for the
 full story.
 
 ```bash
-growther update            # update now
+growther update            # update now (restarts if running, asks if stopped)
+growther update --only     # only update; do not restart or ask to start
+growther update --start    # update and automatically start or restart without asking
 growther update --check    # only check, do not install
 ```
+
+Before updating, C5 checks whether it is currently running:
+
+- **If C5 is already running:** It installs the update and restarts C5 for you so the
+  new version is active right away.
+- **If C5 is stopped:** It installs the update and asks:
+
+  ```text
+  Start growther? Y/n
+  ```
+
+  Press **Return** (or type `y`) to start C5. Type `n` or press **Ctrl-C** to exit
+  without starting.
+
+#### Flags
+
+- **`--only`** (or `-o`): Updates the program on disk only. It will not ask to start
+  C5 and will not restart an already running server.
+- **`--start`** (or `-s`): Updates and automatically starts or restarts C5 without
+  asking. If C5 is stopped, it starts it; if C5 is running, it restarts it.
+- **`--check`**: Reports whether a newer version is available without downloading or
+  changing anything.
 
 What it does, in order:
 
@@ -233,23 +257,23 @@ followed, when the notices were rewritten, by
 `✓ the notices beside the binary now describe this release`. This repair is skipped on
 `--check`, and on a copy a package manager installed.
 
-When the swap is done it prints `✓ Updated <old> → <new>. Restart C5 to apply.` The
-new version runs from the next start. What happens next depends on how C5 runs:
+When the swap is done it prints `✓ Updated <old> → <new>. Restart C5 to apply.`
+Unless `--only` was used, what happens next depends on whether C5 was running:
 
-- **C5 runs as a background service** (you ran `growther service install`) on macOS or
-  Linux, and that service runs this same copy of the program: C5 restarts the service
-  for you and prints `↻ requested managed-service restart (update)`.
+- **C5 was running**: It gently stops the old process and starts the new version.
+  If C5 runs as a background service on macOS or Linux (you ran `growther service install`)
+  and that service runs this copy of the program, C5 restarts the service for you
+  and prints `↻ requested managed-service restart (update)`.
 - **The service runs a different copy**: it is left alone. You see
-  `(the C5 service runs <program>, not this copy; it is left running)`, followed by the
-  "restart C5 manually" line below.
-- **No service**: you see `(no managed service detected — restart C5 manually)`. Stop
-  C5 with `growther stop` and start it again.
+  `(the C5 service runs <program>, not this copy; it is left running)`.
+- **C5 was stopped**: It prompts `Start growther? Y/n ` (or starts automatically if
+  you passed `--start`).
 - **Windows**: the update is staged and applies when C5 restarts. You see
   `(restart C5 to apply the staged update)`.
 
-To stop C5 restarting the service by itself, for example during a maintenance window,
-set `GROWTHER_UPDATE_RESTART=0` (exactly `0`) in the environment you run
-`growther update` from. There is no `--restart` flag.
+To stop C5 restarting or prompting by itself, for example during a maintenance window,
+pass `--only` or set `GROWTHER_UPDATE_RESTART=0` (exactly `0`) in the environment you run
+`growther update` from.
 
 Updating from the app instead restarts C5 for you, on every platform, unless
 `GROWTHER_UPDATE_RESTART=0` is set in the environment C5 itself runs in.
