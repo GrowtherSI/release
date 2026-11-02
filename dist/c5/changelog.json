@@ -10,24 +10,16 @@
         "text": "Blocked tasks waiting for your approval now show their files to review."
       },
       {
+        "kind": "new",
+        "text": "Chat and the sidebar logo now show local and cloud slots."
+      },
+      {
         "kind": "fixed",
         "text": "Creating a task with the wizard no longer gets stuck after a reload."
       },
       {
         "kind": "fixed",
         "text": "The Intent Wizard's Next button no longer hangs or runs twice."
-      }
-    ]
-  },
-  {
-    "tag": "v2026.10.31-v337",
-    "version": "2026.10.31-v337",
-    "build": 337,
-    "releasedAt": "2026-10-31T02:00:06-07:00",
-    "bullets": [
-      {
-        "kind": "new",
-        "text": "Chat and the sidebar logo now show local and cloud slots."
       },
       {
         "kind": "fixed",
