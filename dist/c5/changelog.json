@@ -1,5 +1,25 @@
 [
   {
+    "tag": "v2026.11.2-v338",
+    "version": "2026.11.2-v338",
+    "build": 338,
+    "releasedAt": "2026-11-01T16:03:14-08:00",
+    "bullets": [
+      {
+        "kind": "new",
+        "text": "Blocked tasks waiting for your approval now show their files to review."
+      },
+      {
+        "kind": "fixed",
+        "text": "Creating a task with the wizard no longer gets stuck after a reload."
+      },
+      {
+        "kind": "fixed",
+        "text": "The Intent Wizard's Next button no longer hangs or runs twice."
+      }
+    ]
+  },
+  {
     "tag": "v2026.10.30-v336",
     "version": "2026.10.30-v336",
     "build": 336,
