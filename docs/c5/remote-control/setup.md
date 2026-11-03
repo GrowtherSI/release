@@ -158,15 +158,42 @@ Pairing needs Remote Control on and saved; the tab says so if it is not.
    it per device afterwards. Only an administrator at the machine can change the default;
    anyone else sees the slider read-only, with _Only an administrator can change the default
    sign-in lease._
-2. Press **Show pairing code**. C5 shows a QR code and, under it, one chip per address it can
-   be paired against — your network addresses and, when the tunnel is up, the issued one.
-   Press a chip to point the code at that address; pressing it also copies the link, for a
-   device that cannot scan.
-3. Open the camera on your phone or tablet and scan the code. It offers to open the link.
-4. Follow the pairing screen on the phone.
+2. Press **Show pairing code**. C5 shows the code once this machine's roaming address — the
+   issued address, `https://<label>.rc.growther.si` — is proven to reach it, so the phone you
+   pair can use it from anywhere. Until then, the square where the code goes shows the
+   address and what is happening:
+   - _Asking Growther for this machine's roaming address…_
+   - _Connecting this machine to Cloudflare. The first time, this can take a minute or two._
+     The first time, C5 downloads Cloudflare's connector.
+   - _Checking the address reaches this machine…_
 
-The code **expires in three minutes and works once**. If it lapses, press
-**Generate new code**.
+   No code exists while it waits — a code lasts three minutes, and a first tunnel can take
+   longer — so nothing expires behind the square. If something goes wrong, the reason
+   appears under it, and after ninety seconds it also says _This is taking longer than
+   usual._ If the address cannot come without someone changing something, the square says
+   why and the animation stops. See
+   [The pairing code does not appear](/c5/remote-control/troubleshooting#the-pairing-code-does-not-appear).
+3. Under the code there is one chip per address it can be paired against: the roaming address
+   first, then your network addresses. A **Public address** you configured, or the name on
+   your own certificate, comes before them all. Press a chip to point the code at that
+   address; pressing it also copies the link, for a device that cannot scan. A chip marked
+   _· getting ready_ or _· unavailable_ is the roaming address while it is not ready: it shows
+   the waiting square instead of a code, and copies nothing.
+4. Open the camera on your phone or tablet and scan the code. It offers to open the link.
+5. Follow the pairing screen on the phone.
+
+The code **expires in three minutes and works once**. Press **Generate new code** for a new
+one while a code is showing, or **Show pairing code** once it has lapsed. The install keeps
+one pairing code per person, so a new code — in this window or another — retires the last
+one. In the same browser, a window whose code was replaced in another window says so.
+
+**Pair over this Wi-Fi instead.** While the square waits, you can pair against this machine's
+address on your own network instead. That is your call to make, so the screen spells out the
+cost first: it works only while the phone is on the same network as the machine, the phone
+warns about the certificate (see the note below), and the phone keeps that address — to use
+it away from your network later, pair it again. The button appears only when the machine
+has a secure address on your network; if the secure port did not open, the screen says that
+instead.
 
 Each device creates its own key during pairing. The key never leaves the device; the machine
 stores only the matching public half. Treat the code like a key while it is on screen: anyone
@@ -181,10 +208,16 @@ who scans it first is the device that gets paired.
 ## Finding the machine later
 
 Once paired, the phone connects straight to the machine at the address it was paired
-against. If that address changes — a different Wi-Fi network, a restart — sign in at
-[rc.growther.si](https://rc.growther.si) with your licence email. It lists your installs and
-their current addresses and hands you off to the right one with a link. **Open the portal**
-on the tab takes you there.
+against — and a pairing belongs to that address: the phone's key is stored for it alone. A
+phone paired with the roaming address reaches the machine from anywhere. A phone paired with
+a network address works only on that network; if the machine's network address changes — a
+different Wi-Fi network, a new address from your router — or you want to use the phone
+elsewhere, pair it again (preferably with the roaming address), then **Revoke** the old entry
+under **Paired devices**.
+
+To find an install from a browser, sign in at [rc.growther.si](https://rc.growther.si) with
+your licence email. It lists your installs and their current addresses and hands you off to
+the right one with a link. **Open the portal** on the tab takes you there.
 
 A portal sign-in lasts seven days. **Sign out everywhere** on the portal ends portal
 sign-ins only; it does not touch paired devices.

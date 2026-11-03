@@ -1,6 +1,6 @@
 ---
 title: Troubleshooting Remote Control
-description: The address is not reachable, the tunnel program will not download, certificate warnings, two copies of an install fighting over one address, DNS rebinding, replies arriving late through the tunnel, rate limits, refused sign-ins, what to do when a lease expires, and what the no-longer-paired screen means.
+description: The address is not reachable, the pairing code does not appear, the tunnel program will not download, certificate warnings, two copies of an install fighting over one address, DNS rebinding, replies arriving late through the tunnel, rate limits, refused sign-ins, what to do when a lease expires, and what the no-longer-paired screen means.
 order: 5
 ---
 
@@ -9,7 +9,8 @@ order: 5
 Most answers are on the tab itself, under **Settings › Remote Control** on the machine.
 Start with the line under **Reach this machine from anywhere** — it says what the tunnel is
 doing right now — and with **Paired devices**, which says what the machine last heard from
-each phone.
+each phone. While you pair, the square where the code goes says whether the roaming address
+has been proven to reach this machine.
 
 ## The address is not reachable
 
@@ -17,7 +18,7 @@ Read the status line under **Reach this machine from anywhere**:
 
 | It says                                                         | What it means                                                                                                                                                             |
 | --------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| _Connected. This machine is online and reachable at …_          | The tunnel is up. If the phone still cannot connect, the problem is on the phone's side: check it has a connection at all, and that it is opening the exact address shown |
+| _Connected. This machine is online and reachable at …_          | The tunnel is up. If **Show pairing code** still says _Checking the address reaches this machine…_, the address is not answering from this machine yet — see [The pairing code does not appear](#the-pairing-code-does-not-appear). Otherwise the problem is on the phone's side: check it has a connection at all, and that it is opening the exact address shown |
 | _Connecting…_                                                   | Wait a moment. The address is not live until this changes                                                                                                                 |
 | _The connection stopped. It will be retried._                   | The machine lost its outbound connection. It reconnects on its own; check the machine's own internet access                                                               |
 | _Not connected. Only addresses on your own network work today._ | No tunnel is running. Remote Control was just turned on, or the request for an address was refused. Save the tab to ask again immediately                                 |
@@ -39,6 +40,34 @@ Two things outside the tab:
 
 If nothing helps, `growther doctor` on the machine and `growther remote status` say what the
 install believes its state to be.
+
+## The pairing code does not appear
+
+After **Show pairing code**, C5 waits until the roaming address — the issued address,
+`https://<label>.rc.growther.si` — is proven to reach this machine before it shows a code, so
+the phone you pair can use it from anywhere. No code exists while it waits, so none expires.
+The square where the code goes says what it is waiting for:
+
+| It says | What it means |
+| --- | --- |
+| _Asking Growther for this machine's roaming address…_ | The machine is asking Growther.si for its address and tunnel. A reason under it — _Growther's licence service did not answer. Trying again._, or an HTTP status — means the request is failing. While the screen is open, C5 asks again with growing gaps, up to half an hour apart |
+| _Connecting this machine to Cloudflare. The first time, this can take a minute or two._ | The connector is starting. The first time, it is downloaded first |
+| _Trying to connect this machine to Cloudflare again…_ | An attempt failed and is being retried. The reason is under it — see [The address is not reachable](#the-address-is-not-reachable) for what each one means |
+| _Checking the address reaches this machine…_ | The tunnel is up, and C5 is checking that the address answers from this machine and not from something else. A reason under it says what it found instead: _Something other than this machine is answering at this address._ points at a DNS record or a Cloudflare Worker route claiming the name; _This address reaches a different C5 installation, not this one._ points at [two machines sharing one install's identity](#two-machines-keep-taking-the-address-from-each-other) |
+| A reason, and no animation | The address cannot come without someone changing something: a proxy or security product blocking the connector's download, an **Offline** network posture, a licensing service that does not issue addresses, or Cloudflare refusing the tunnel. Fix what it names, then press **Show pairing code** again |
+
+_This is taking longer than usual._ appears after ninety seconds of waiting; the reason, if
+there is one, is already under the square.
+
+While the square waits, **Pair over this Wi-Fi instead** pairs against the machine's address
+on your own network. It works only while the phone is on the same network as the machine,
+the phone warns about the certificate, and the phone keeps that address — to use it away
+from your network later, pair it again. The button is not offered when the machine has no
+secure address on your network; the screen says the secure port may not have opened.
+
+The install keeps one pairing code per person. Pressing **Show pairing code** in a second
+window retires the first window's code; in the same browser, the first window says _A newer
+pairing code is showing in another window._ and offers a new one there.
 
 ## The tunnel program will not download
 
