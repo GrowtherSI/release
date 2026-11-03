@@ -1,5 +1,34 @@
 [
   {
+    "tag": "v2026.11.3-v339",
+    "version": "2026.11.3-v339",
+    "build": 339,
+    "releasedAt": "2026-11-02T17:34:06-08:00",
+    "bullets": [
+      {
+        "kind": "fixed",
+        "text": "C5 now updates and restarts itself correctly every time."
+      },
+      {
+        "kind": "fixed",
+        "text": "The classifier metrics screen no longer gets stuck when busy."
+      },
+      {
+        "kind": "fixed",
+        "text": "Sending another request after hitting the limit no longer gets stuck."
+      },
+      {
+        "kind": "fixed",
+        "text": "Merging two error clusters no longer fails with an error."
+      },
+      {
+        "kind": "fixed",
+        "text": "Restoring a deleted task keeps its shared attachments intact."
+      }
+    ],
+    "more": 100
+  },
+  {
     "tag": "v2026.11.2-v338",
     "version": "2026.11.2-v338",
     "build": 338,
