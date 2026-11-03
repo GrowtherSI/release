@@ -1,5 +1,46 @@
 [
   {
+    "tag": "v2026.11.3-v340",
+    "version": "2026.11.3-v340",
+    "build": 340,
+    "releasedAt": "2026-11-03T12:12:45-08:00",
+    "bullets": [
+      {
+        "kind": "new",
+        "text": "The update notice now links to what changed in each version."
+      },
+      {
+        "kind": "new",
+        "text": "You can now approve or reject a blocked task from its details."
+      },
+      {
+        "kind": "new",
+        "text": "Pairing a phone now waits for an address that works anywhere."
+      },
+      {
+        "kind": "new",
+        "text": "Opening pairing in two windows now shows which code is current."
+      },
+      {
+        "kind": "new",
+        "text": "Blocked cards now always explain why they are blocked."
+      },
+      {
+        "kind": "new",
+        "text": "You must now give a reason when approving or rejecting work."
+      },
+      {
+        "kind": "fixed",
+        "text": "Task cards now show the correct status after review decisions."
+      },
+      {
+        "kind": "fixed",
+        "text": "Approving or rejecting work now finishes and reworks it correctly."
+      }
+    ],
+    "more": 4
+  },
+  {
     "tag": "v2026.11.3-v339",
     "version": "2026.11.3-v339",
     "build": 339,
