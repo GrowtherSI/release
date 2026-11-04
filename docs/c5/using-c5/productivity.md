@@ -31,6 +31,7 @@ Click any card to open it. Inside you will find:
 - **The work** — what each agent did and what came back
 - **The cost** — how much this task has used so far
 - **The files** — anything made along the way
+- **Post-completion recipes** — follow-up recipes that start automatically once this task's work is approved
 - **The history** — a full record of what happened, in order
 
 This is the place to look when you want to know *why* something turned out the way it
@@ -58,6 +59,83 @@ can have their own children.
 On the board, a parent card shows how many of its children are done. Open it to see them
 all. This is how one sentence from you can turn into twenty small pieces of work that
 run at the same time.
+
+## Running recipes after a task finishes
+
+Sometimes finishing a task is only the first step. For example, one task might write a
+social post and make an image for it. Once that post and image are ready, you might want a
+recipe that posts to X.com and another recipe that posts to LinkedIn.
+
+**Post-Completion Recipes** let you line up recipes on a task so they start automatically
+as soon as the task's deliverables are approved — using the finished work and images the
+task just made.
+
+### When they start
+
+Post-completion recipes wait until the task is approved and moves to **Done**:
+
+- If **Automated Review** is on, the recipes start as soon as C5's review passes the work.
+- If the task waits for your sign-off (**Human Review Required**), the recipes start right
+  after you click **Approve**.
+
+You can add, remove, or reorder post-completion recipes at any time before the task is
+**Done**.
+
+### Setting up a recipe list
+
+1. Open the task and click **Edit** (or click **Configure** in the **Post-Completion
+   Recipes** section, or double-click that section).
+2. Under **Post-Completion Recipes**, open **Add a recipe to trigger after completion…**
+   and pick a recipe.
+3. Add as many recipes as you need.
+4. Drag the handle on the left of any recipe — or use its up and down arrows — to put the
+   list in the order you want. Click the trash button to take one off the list.
+5. Click **Save**.
+
+### One after another, or all at once
+
+When your list has two or more recipes, choose how they should run at the top of the
+section:
+
+- **Serial Order** runs them one by one from top to bottom. Recipe 1 starts when your task
+  is approved. Once Recipe 1 finishes and its work is approved, Recipe 2 starts next, and
+  so on down the list.
+- **Parallel** starts every recipe on the list at the same time as soon as your task is
+  approved.
+
+### Extra instructions and file filters for a recipe
+
+Click the sliders button on any recipe in your list to tailor what that step gets:
+
+- **Custom instructions / channel overrides** — write a short note for just that recipe.
+  For example, tell your X.com recipe _"Keep it punchy and add 3 hashtags"_ and your
+  LinkedIn recipe _"Use a warm, professional tone for founders."_
+- **Deliverables to pass to this recipe** — by default (**All types**), C5 hands every
+  approved piece of work and image from the task to the recipe. If a recipe only needs
+  certain kinds of output, click **Documents**, **Code**, **Designs**, or **Images** so it
+  receives only what you picked.
+
+### Watching the chain and jumping between tasks
+
+On the board, any card that has post-completion recipes — or was started by one — wears a
+small **Chain** badge:
+
+- **Chain 2** (indigo) — 2 recipes are lined up and waiting for this task to finish.
+- **Chain 1/2** (amber) — step 1 of 2 is running now.
+- **Chain 2/2 ✓** (green) — every recipe in the chain has finished.
+- **Chain 1/2 !** (red) — the chain stopped and needs your attention.
+
+Inside the task, the **Post-Completion Recipes** section shows which step is running and
+gives you one-click buttons — **Jump to Triggered Task**, **Parent Task**, and **Root
+Task** — so you can hop straight from the original task to the follow-up tasks it created,
+and back again.
+
+### If a chain stops
+
+If a recipe in the chain cannot start (for example, because that recipe was deleted) or a
+step in a serial chain fails, the chain stops and tells you why in plain words. Once you
+fix the problem, open the task and click **Resume Chain** to start the stopped step and
+keep the rest of the chain going.
 
 ## Seeing your agents work together
 

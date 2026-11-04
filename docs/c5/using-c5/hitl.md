@@ -80,6 +80,10 @@ greyed out and says _Needs HITL edit permission to approve or reject tasks._ Wit
 one task waiting, **Approve All (N)** approves them together, after you add a note to each.
 Once the last task is decided, the window closes itself after a short countdown.
 
+If a task has [post-completion recipes](/c5/using-c5/productivity#running-recipes-after-a-task-finishes)
+lined up on it, approving the task also starts those recipes automatically with the
+deliverables you just signed off.
+
 ## Guardian blocks
 
 The **guardian** checks agents' tool calls before they run. When it refuses one, the block
