@@ -46,8 +46,9 @@ The kinds of job this tends to produce a recipe for:
 You choose when to use one. Pick a recipe in Chat when you create a task, in the
 task editor on the board, or put one on a timer with
 [Schedules](/c5/using-c5/schedules). You can also attach one or more recipes to an
-existing task as **Post-Completion Recipes**, so they run in order (or all at once)
-using that task's finished work as soon as it is approved — see
+existing task as **Post-Completion Recipes** — complete with auto-matched file
+filters, step delay timers, and reusable **Recipe Bundles** — so they run in order
+(or all at once) using that task's finished work as soon as it is approved; see
 [Running recipes after a task finishes](/c5/using-c5/productivity#running-recipes-after-a-task-finishes).
 If what you have written closely matches a
 task an existing recipe came from, C5 will point that recipe out beside the

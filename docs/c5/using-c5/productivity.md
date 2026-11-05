@@ -95,6 +95,19 @@ lined up, or _No post-completion recipes configured for this task._ if none are 
    list in the order you want. Click the trash button to take one off the list.
 5. Click **Save**.
 
+### Saving and reusing Recipe Bundles
+
+If there is a set of follow-up recipes you use often — like posting to X.com, then
+LinkedIn two hours later, then drafting a newsletter — you can save the whole setup as a
+**Recipe Bundle** and apply it to future tasks in one click:
+
+1. In the **Post-Completion Recipes** editor, click **Recipe Bundles** in the top-right
+   corner of the section.
+2. To save your current list (including its Serial or Parallel mode, custom notes, file
+   filters, and wait timers), type a name in **Bundle name** and click **Save Bundle**.
+3. On any future task, open **Recipe Bundles** and click **Apply** next to a saved bundle
+   to load the entire chain right away.
+
 ### One after another, or all at once
 
 When your list has two or more recipes, choose how they should run at the top of the
@@ -106,17 +119,25 @@ section:
 - **Parallel** starts every recipe on the list at the same time as soon as your task is
   approved.
 
-### Extra instructions and file filters for a recipe
+### Extra instructions, auto-matched file filters, and step delays
 
-Click the sliders button on any recipe in your list to tailor what that step gets:
+Click **Options** on any recipe in your list to tailor how that step runs:
 
 - **Custom instructions / channel overrides** — write a short note for just that recipe.
   For example, tell your X.com recipe _"Keep it punchy and add 3 hashtags"_ and your
   LinkedIn recipe _"Use a warm, professional tone for founders."_
-- **Deliverables to pass to this recipe** — by default (**All types**), C5 hands every
-  approved piece of work and image from the task to the recipe. If a recipe only needs
-  certain kinds of output, click **Documents**, **Code**, **Designs**, or **Images** so it
-  receives only what you picked.
+- **Deliverables to pass to this recipe (with Auto-match)** — by default (**All types**),
+  C5 hands every approved piece of work and image from the task to the recipe. When you
+  add a recipe whose purpose is clear (such as a social graphic post, a code deployment,
+  or a design review), C5 automatically pre-selects the matching file types (**Document**,
+  **Code**, **Design**, or **Image**) and marks them **Auto-matched**. You can click any
+  filter pill to change the selection, or click **Auto-match** to restore C5's suggested
+  file types.
+- **Step Delay Offset (Wait Before Trigger)** — if you want a pause before a recipe
+  starts (for example, waiting **+2 hours** after an X.com post before publishing on
+  LinkedIn, or **+24 hours** before sending a follow-up summary), pick a delay from the
+  dropdown (**Immediate**, **+15 minutes**, **+30 minutes**, **+1 hour**, **+2 hours**,
+  **+4 hours**, **+12 hours**, or **+24 hours**).
 
 ### Watching the chain and jumping between tasks
 
@@ -132,6 +153,10 @@ Inside the task, the **Post-Completion Recipes** section shows which step is run
 gives you one-click buttons — **Jump to Triggered Task**, **Parent Task**, and **Root
 Task** — so you can hop straight from the original task to the follow-up tasks it created,
 and back again.
+
+When a recipe step is waiting on a **Step Delay** timer, the task shows a **Chain
+scheduled** badge along with the time the next recipe is set to start. If you do not want
+to wait, click **Run Now** to skip the timer and start that recipe immediately.
 
 ### If a chain stops
 
