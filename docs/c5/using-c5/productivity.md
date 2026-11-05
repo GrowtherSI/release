@@ -83,8 +83,11 @@ You can add, remove, or reorder post-completion recipes at any time before the t
 
 ### Setting up a recipe list
 
-1. Open the task and click **Edit** (or click **Configure** in the **Post-Completion
-   Recipes** section, or double-click that section).
+When you open a task, the **Post-Completion Recipes** section shows any recipes already
+lined up, or _No post-completion recipes configured for this task._ if none are set yet.
+
+1. Open the task and click **+ Add Recipes** (or **Manage** if recipes are already set,
+   or double-click the **Post-Completion Recipes** section, or click **Edit** at the top).
 2. Under **Post-Completion Recipes**, open **Add a recipe to trigger after completion…**
    and pick a recipe.
 3. Add as many recipes as you need.
