@@ -1,5 +1,38 @@
 [
   {
+    "tag": "v2026.11.5-v341",
+    "version": "2026.11.5-v341",
+    "build": 341,
+    "releasedAt": "2026-11-05T12:10:09-08:00",
+    "bullets": [
+      {
+        "kind": "new",
+        "text": "Add deliverable format auto-matching for recipe steps."
+      },
+      {
+        "kind": "new",
+        "text": "Reconcile makes the explicit config key win over stale agent profiles."
+      },
+      {
+        "kind": "new",
+        "text": "Say when a coordinator's own key is refused."
+      },
+      {
+        "kind": "fixed",
+        "text": "Hermes agents now get your provider keys from C5 automatically."
+      },
+      {
+        "kind": "fixed",
+        "text": "An interrupted turn is not an answer, an exhausted budget is not truncation."
+      },
+      {
+        "kind": "fixed",
+        "text": "A step's failure mode reads the provider verdict, not body digits."
+      }
+    ],
+    "more": 183
+  },
+  {
     "tag": "v2026.11.3-v340",
     "version": "2026.11.3-v340",
     "build": 340,
