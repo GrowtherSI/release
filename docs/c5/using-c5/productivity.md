@@ -17,11 +17,54 @@ Work moves across columns from left to right as it goes:
 | ------------ | ------------------------------------------------- |
 | **To do**    | Lined up and waiting to start.                    |
 | **In progress** | An agent is working on it right now.           |
-| **Blocked**  | Stuck. Usually waiting for you to answer something. |
+| **Blocked**  | The work stopped before it passed. The card says why. |
+| **Review**   | The work passed C5's final check and waits for you to approve it. |
 | **Done**     | Finished. Results are in your Library.            |
+
+For work your agents do, **Review** means the work passed. C5 moves a task there once its
+final check has passed the work, while **Automated Review** is off; with it on, work that
+passes goes straight to **Done**. Open the task to approve or deny it (see below).
+
+**Blocked** means the work stopped before it passed. When C5 stops it, the card says why. If
+C5 needs a decision from you, the card asks for it: write a note, then click **Approve** or
+**Reject**. Otherwise it shows the reason. A long one is cut to two lines: point at it or tap
+it to read the rest, or open the task to see it in full under **Why this is blocked**.
 
 You can drag cards between columns to change what happens next. Move something into
 **To do** to queue it up, or out of the way if you changed your mind.
+
+## Creating a task
+
+Click **New Task**, describe the work, and click **Create Task**.
+
+### Picking a recipe
+
+Under **Recipe**, pick one of your [recipes](/c5/using-c5/labs#recipes), and the task
+follows it. Leave it on **— No Recipe (Standard Planning) —**, and C5 plans the work from
+scratch. If the recipe you picked has been deleted by the time the work starts, C5 plans
+from scratch instead.
+
+If C5 knows a recipe that suits what you wrote, it suggests it under the picker, as
+**Suggested recipe:** and the recipe's name. **Use** picks it; **Dismiss** hides the
+suggestion.
+
+If the picker is still there when you edit the task later, you can change the recipe and
+click **Save**. Once the work has started, the picker is gone.
+
+A recipe you chose on the **Create Task** card in [Chat](/c5/using-c5/chat#asking-for-something)
+comes with you: click **User Defined** on the card, and the task window opens with that recipe
+already chosen.
+
+### If the pipeline hand-off fails
+
+With **AI Enabled** and **Orchestration** both on, **Create Task** saves the task first, then
+hands it to the pipeline. If that hand-off fails, you see _Task created, but its pipeline
+hand-off failed. The pipeline will start on its own within a few minutes._
+
+You do not need to do anything. The task is saved, and within a few minutes of creating it
+C5 starts its pipeline itself, as long as the task is still in **To do** with **AI Enabled**
+on, and has not been archived or deleted. If C5 restarts before then, it starts the pipeline
+once it is running again, as long as that is within a day of creating the task.
 
 ## Looking inside a task
 
@@ -88,8 +131,8 @@ lined up, or _No post-completion recipes configured for this task._ if none are 
 
 1. Open the task and click **+ Add Recipes** (or **Manage** if recipes are already set,
    or double-click the **Post-Completion Recipes** section, or click **Edit** at the top).
-2. Under **Post-Completion Recipes**, open **Add a recipe to trigger after completion…**
-   and pick a recipe.
+2. Under **Post-Completion Recipes**, open **Select a recipe to trigger after completion...**,
+   pick a recipe and click **Add Recipe**.
 3. Add as many recipes as you need.
 4. Drag the handle on the left of any recipe — or use its up and down arrows — to put the
    list in the order you want. Click the trash button to take one off the list.
@@ -110,14 +153,20 @@ LinkedIn two hours later, then drafting a newsletter — you can save the whole 
 
 ### One after another, or all at once
 
-When your list has two or more recipes, choose how they should run at the top of the
-section:
+Choose how the recipes run with the **Serial** and **Parallel** buttons at the top of the
+section. The choice matters once your list has two or more recipes:
 
-- **Serial Order** runs them one by one from top to bottom. Recipe 1 starts when your task
+- **Serial** runs them one by one from top to bottom. Recipe 1 starts when your task
   is approved. Once Recipe 1 finishes and its work is approved, Recipe 2 starts next, and
   so on down the list.
 - **Parallel** starts every recipe on the list at the same time as soon as your task is
   approved.
+
+The editor follows the button you choose. Once recipes are on the list, the line under them
+starts with **Serial order:** or **Parallel fan-out:**. While the list is still empty, the
+example under the picker changes with it: with **Serial** it describes
+_posting to X.com, then LinkedIn_ in serial order, and with **Parallel**,
+_posting to X.com and LinkedIn_ in parallel order.
 
 ### Extra instructions, auto-matched file filters, and step delays
 

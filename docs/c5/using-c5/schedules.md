@@ -29,6 +29,82 @@ If you find yourself asking for the same thing over and over, make it a schedule
 
 That is it. C5 takes it from there.
 
+## What each action does
+
+- **Create Task** — C5 makes a new task from your instructions and works on it. It shows up
+  on the [board](/c5/using-c5/productivity) like any other task.
+- **Use Recipe** — the same, but the task follows a [recipe](/c5/using-c5/labs#recipes) you
+  pick.
+- **Send Request** — C5 sends your request to the model and delivers its answer as a
+  notification.
+
+When you choose **Use Recipe**, a recipe picker appears beside the three buttons. It says
+**No Recipe** until you pick one, and **Save Schedule** stays greyed out until you do. If C5
+has not made any recipes yet, no picker appears — use **Create Task** instead.
+
+Each task a **Use Recipe** schedule makes uses the newest version of its recipe at the time
+that task starts. If the recipe has been deleted, the task is planned from scratch.
+
+If you edit a **Use Recipe** schedule whose recipe has since been deleted, the picker says
+**No Recipe**, but **Save Schedule** still works. Its tasks go on being planned from scratch
+until you pick another recipe.
+
+Up to v341, a **Use Recipe** schedule made nothing when it ran. A repeating one made in one of
+those versions needs nothing from you: it makes its first task at its next run (once you
+resume it, if it is paused). A one-off that one of those versions marked **Completed** made
+nothing either. Editing it will not make it run, so if you still want it, make a new one with
+**New Schedule**.
+
+## Running recipes after each task
+
+A **Create Task** or **Use Recipe** schedule can line up follow-up recipes, just like a task
+can. Each task the schedule makes gets the list. Once that task's work is approved, its
+recipes start, using what the task just made.
+
+1. In **Add Schedule** or **Edit Schedule**, find **Post-Completion Recipes**, below the task
+   options. It is the same editor you use on a task.
+   While the list is empty, the note at the bottom of the editor follows your **Serial** /
+   **Parallel** choice: it says _in serial order_ or _in parallel order_.
+2. Open **Select a recipe to trigger after completion...**, pick a recipe and click
+   **Add Recipe**. Do this for each recipe you want, then drag them into order. If C5 has not
+   made any recipes yet, the list says **No proven recipes available yet** and there is
+   nothing to add.
+3. Choose **Serial** to run them one after another, or **Parallel** to start them all at
+   once. Once recipes are on the list, the line under them starts with **Serial order:** or
+   **Parallel fan-out:** to match.
+4. Click **Save Schedule**.
+
+**Auto Review** decides when they start. It is ticked on a new schedule. With it ticked, the
+badge at the top of the editor says **Triggers after Automated deliverables approval**, and
+the recipes start as soon as C5's review passes the task. Untick it and the badge says
+**HITL** in place of **Automated**: the recipes wait until you approve the task. See
+[Human review (HITL)](/c5/using-c5/hitl).
+
+Each follow-up task gets the same review setting as the scheduled task. With **Auto Review**
+unticked, every follow-up task waits for your approval too, and in **Serial** the next recipe
+does not start until you approve the one before it. A schedule with three serial recipes then
+needs four approvals each time it runs, so tick **Auto Review** for work you want to run
+unattended.
+
+Each follow-up task shows up on the board as its own task, named
+_[Recipe: recipe name] scheduled task's title_. See
+[Watching the chain and jumping between tasks](/c5/using-c5/productivity#watching-the-chain-and-jumping-between-tasks)
+to follow it, and [If a chain stops](/c5/using-c5/productivity#if-a-chain-stops) to get it
+going again.
+
+**Options** and **Recipe Bundles** work the same as on a task. See
+[Running recipes after a task finishes](/c5/using-c5/productivity#running-recipes-after-a-task-finishes).
+
+Changing the list changes the tasks the schedule makes from then on. A task it already made
+keeps its own list, which you can still change on that task until it is **Done**.
+
+Every follow-up recipe is one more task each time the schedule runs, so it adds to what the
+schedule costs.
+
+**Send Request** schedules cannot have follow-up recipes. A request just sends back an answer,
+with nothing to approve. If you switch a schedule to **Send Request**, its follow-up recipes
+are dropped when you save.
+
 ## Picking when it runs
 
 You can choose simple timing in plain words — every day, every Monday, every hour, the

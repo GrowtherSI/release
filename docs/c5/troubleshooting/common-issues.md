@@ -353,8 +353,22 @@ proxy's root certificate. See
 
 ### A task is stuck as "Blocked"
 
-Open it. Blocked almost always means it is waiting for you to approve something, or it
-hit a limit.
+The card says why.
+
+- **It is waiting for your decision.** The card shows what it is asking, with a note box,
+  **Reject** and **Approve**. Write a note, then choose; see
+  [A decision will not submit](#a-decision-will-not-submit). Answer it rather than dragging
+  the card.
+- **It stopped.** The reason is in a box under the card's title. If it is cut short, hover
+  or tap it to read the rest; the task window shows all of it under **Why this is
+  blocked**. Many reasons also say what to do next. Otherwise, once you have dealt with the
+  cause, drag the card to **In Progress** to pick the work up now, or to **To Do** to send
+  it back through the queue.
+
+If the card says nothing — one blocked before v340, for example, or one you dragged there
+yourself — open it and read its latest comments. Work that passed C5's review and is
+waiting for your approval goes to **Review** instead, with **Human Review Required** inside
+it.
 
 **If its comments end with a 🩺 note**, C5 found the run stuck for good: _🩺 Run `run_…`
 cancelled: nothing in it could ever run again._, followed by why — for example, review steps
@@ -364,6 +378,26 @@ a person to decide; a task waiting to start is picked up again with a fresh run,
 one C5 runs on its own. The reason is also under
 **Latest Error** in the job's details in **Monitor › Queueing**, and **Ops › Audit** lists
 what C5 did, under **Stuck-run recoveries** in its **Source** column.
+
+### A decision will not submit
+
+Approving or rejecting a task needs a reason. A sentence saying why is enough. Until you
+write one:
+
+- On a blocked card, in the task window and on the **Tasks** tab of the
+  [HITL window](/c5/using-c5/hitl), **Reject** and **Approve** stay greyed out:
+  _Enter a review note before approving_. **Approve All (N)** waits for a note on every
+  task.
+- For a task in **Review**, the card's **Review…** menu keeps **Deny** and **Approve**
+  greyed out the same way, and **Human Review Required** in the task window answers
+  _Reasoning required — please enter your reasoning before submitting._
+- In chat, put the reason after the decision:
+  `/c5 review 2 approve It covers every point we asked for.`
+
+Without permission to decide, the HITL window's note box and **Human Review Required** say
+so instead: _Needs HITL edit permission to approve or reject tasks._ In the task window, a
+task someone else owns may say _Only this task's owner or an administrator can approve or
+reject it._ See [Who can use it](/c5/using-c5/hitl#who-can-use-it).
 
 ### A task keeps failing
 
@@ -375,6 +409,22 @@ Open it and read the error. The usual causes:
 - A website or service it needed is down
 
 Fix the cause, then click **Retry**.
+
+### "Task created, but its pipeline hand-off failed …"
+
+You may see this after **Create Task**: _Task created, but its pipeline hand-off failed.
+The pipeline will start on its own within a few minutes._ The task was saved; only the
+request that starts its work did not get through. You do not need to do anything: C5
+checks every minute, and starts the work itself once the task is two minutes old.
+
+Leave the task in **To Do** until then. C5 starts it only while it is in **To Do** with
+**AI Enabled** on: if you move it, turn AI off, archive it or delete it, C5 leaves it to
+you.
+
+If it is still in **To Do** after ten minutes, see
+[Everything is queued and nothing starts](#everything-is-queued-and-nothing-starts). If the
+rest of your work is moving, restart C5: at start-up it starts any task like this one that
+was created in the last 24 hours.
 
 ### Everything is queued and nothing starts
 
@@ -407,6 +457,14 @@ Schedules need C5 running. If your computer was asleep or off, the run was misse
 catches up when it wakes.
 
 If C5 was running and it still did not fire, open the schedule's history for the error.
+
+### A "Use Recipe" schedule never did anything
+
+In v341 and earlier, a **Use Recipe** schedule did nothing when it was due: it created no
+task and reported no error. Later versions fix this. Each time it is due, it creates a task
+on the board, as **Create Task** does, and that task follows the recipe chosen in the
+schedule. Your existing **Use Recipe** schedules need no change: each starts working at its
+next run after you update.
 
 ## Performance
 

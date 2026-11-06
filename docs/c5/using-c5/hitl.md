@@ -80,9 +80,67 @@ greyed out and says _Needs HITL edit permission to approve or reject tasks._ Wit
 one task waiting, **Approve All (N)** approves them together, after you add a note to each.
 Once the last task is decided, the window closes itself after a short countdown.
 
+A **Blocked** task that waits on one of these requests offers the same decision on its card on
+the board, and at the top of the task under **HITL Approval Required**: the same note box,
+**Approve** and **Reject**.
+
 If a task has [post-completion recipes](/c5/using-c5/productivity#running-recipes-after-a-task-finishes)
-lined up on it, approving the task also starts those recipes automatically with the
+lined up on it, those recipes start automatically once the task reaches **Done**, with the
 deliverables you just signed off.
+
+### Every decision needs a reason
+
+The note is your reason, and C5 keeps it with your decision. Every approval and every
+rejection needs one, wherever you make it:
+
+- **Here, on a card or in a task**, **Approve** and **Reject** wait for the note. With
+  **Approve All**, each task's note is the reason for that task.
+- **A task waiting in Review** is decided in the task itself, under **Human Review
+  Required**, or from **Review…** in its card's `⋯` menu. Both ask for your reasoning first
+  (see [Looking inside a task](/c5/using-c5/productivity#looking-inside-a-task)).
+- **In chat**, the reason follows `approve` or `deny` in
+  [`/c5 review`](/c5/using-c5/chat#commands):
+
+> /c5 review 2 approve The summary covers all three reports and says where they disagree.
+
+Without a reason, C5 answers _A reason is required: /c5 review 2 approve <why>. Nothing was
+changed._ However a decision reaches C5, it is refused without a reason, and nothing changes:
+_A reason is required to approve or reject — say why, in a sentence._
+
+`/c5 review` decides only a task waiting in **Review**; a request on a **Blocked** task is
+decided here, or on its card. A decision made in chat counts as a person's decision, as one
+made here does: C5 records it as a human label and learns from it.
+
+### What approving does
+
+Approving a task waiting in **Review** moves it to **Done**. Approving one of these requests,
+here or on its task, follows what the task's run does next:
+
+- **The run paused to wait for you.** It picks up where it paused.
+- **The run is still going.** A step whose output was held for your check is completed with
+  the output you approved, and the run carries on from it.
+- **The run stopped, and C5 needs your decision.** When a task stops without passing C5's
+  quality gates, C5 asks you what to do with the work; its notification reads **Needs your
+  decision:** and the task's name. Approving accepts the work as it stands: the task moves to
+  **Done**, and nothing more runs on it. The task says so, in amber rather than green: the
+  review at its top reads **Review: ACCEPTED AS IS**, and its **Review History** lists the
+  decision as **ACCEPTED AS IT STANDS**, never as a pass. A task with a pull request moves to
+  **Review** instead, where approving it merges the pull request.
+- **Any other request on a stopped run** has nothing left to deliver. Approving it leaves the
+  task **Blocked**, and its card, and the task under **Why this is blocked**, say why: _A
+  sign-off on this task was approved, but its run had already failed, so approving it
+  delivered nothing. Move the card to To Do to run the work again._
+
+When the run picks up again or carries on, a **Blocked** task moves to **In Progress**.
+
+### What rejecting does
+
+Rejecting sends the work back. The task returns to the top of **To Do**, and C5 routes the
+correction. If a budget limit stopped the task with its fix already worked out, rejecting runs
+exactly that fix under a fresh budget instead, and the task moves to **In Progress**.
+
+Reject a step's output that was held for your check, and C5 sets it aside: the step is not
+run again, and the steps after it are not given what it produced.
 
 ## Guardian blocks
 

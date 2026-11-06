@@ -28,6 +28,13 @@ The card that shows it also holds the task's options, such as **Tools**, **Orche
 wrote. Once you pick one yourself, a suggestion that arrives later leaves your pick alone,
 and the card keeps what you chose if you reload the page or come back to the chat.
 
+With **Orchestration** on, the card also offers your [recipes](/c5/using-c5/labs#recipes),
+plans C5 saved from work that went well. It reads **No Recipe** until you pick one. The
+recipe you pick is the recipe the task runs, whether you click **Auto Create** or
+**User Defined**. **User Defined** opens the full task window with your recipe still
+chosen, and the task follows it once you click **Create Task** there. Your pick holds even
+if C5 restarts before the work begins.
+
 ## Bringing back something you sent
 
 Press **↑** in the message box to bring back the last thing you sent, the same way a
