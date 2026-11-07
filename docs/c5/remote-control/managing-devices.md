@@ -21,8 +21,14 @@ revoked. For each one:
 - **Last seen** — when it last reached the machine, accurate to a few minutes;
 - a pencil to change the lease, and **Revoke**.
 
-An administrator at the machine sees **every** user's devices, each marked with its owner.
-Everyone else sees their own.
+An administrator at the machine sees **every** user's devices. A device that belongs to
+someone else shows that person's account picture beside its name; hover over it, or tap it,
+for their name. Everyone else sees their own.
+
+Everyone can also see and revoke their own devices from the **⋯** menu at the bottom of the
+sidebar: **Remote Control** opens a window listing the devices paired to your account, each
+with **Revoke**. See
+[Pairing from the sidebar](/c5/remote-control/setup#pairing-from-the-sidebar-for-every-account).
 
 ## Revoke
 
@@ -48,6 +54,8 @@ days. The pairing itself does not expire; only the sign-in does.
 
 - The **Default sign-in lease** on the tab applies to devices that have not been given their
   own. Twenty-four hours unless you change it.
+- An administrator pairing from the sidebar's **Remote Control** window can give the new
+  device its own lease before showing the code, with **Sign-in lease for this device**.
 - The pencil next to a device sets a lease for that device alone. Shortening takes effect on
   the current sign-in immediately; you cannot shorten it below the time already used.
 - When a device's sign-in has run out, the list says **Expired** and the pencil offers to

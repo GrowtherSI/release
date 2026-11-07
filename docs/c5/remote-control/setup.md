@@ -173,6 +173,7 @@ Pairing needs Remote Control on and saved; the tab says so if it is not.
    usual._ If the address cannot come without someone changing something, the square says
    why and the animation stops. See
    [The pairing code does not appear](/c5/remote-control/troubleshooting#the-pairing-code-does-not-appear).
+
 3. Under the code there is one chip per address it can be paired against: the roaming address
    first, then your network addresses. A **Public address** you configured, or the name on
    your own certificate, comes before them all. Press a chip to point the code at that
@@ -204,6 +205,36 @@ who scans it first is the device that gets paired.
 > that the certificate is not trusted. That is expected — this machine signed it itself.
 > Accept it once per device, and only on a network you trust. Pairing against the issued
 > address, or supplying your own certificate, removes the warning.
+
+## Pairing from the sidebar — for every account
+
+A phone signs in as the account that was signed in at the machine when its code was shown.
+**Settings › Remote Control** is for people who can change settings, so everyone else pairs
+from the sidebar: open the **⋯** menu at the bottom of the sidebar and choose
+**Remote Control**. The item is there for an administrator, and for anyone an administrator
+gave **Sidebar: Remote Control Button** on the **Access** tab; it is greyed out while Remote
+Control is off.
+
+The **Remote Control** window has three parts:
+
+- **Pair a phone or tablet** — the same **Show pairing code** steps as Step 2 above, with
+  the same waiting square, address chips, and **Pair over this Wi-Fi instead**. The device you
+  pair signs in as you, so sign in at the machine as the person whose phone it is.
+  - An administrator gets a **Sign-in lease for this device** slider. It starts at the
+    **Default sign-in lease**; move it and the device you pair now gets that lease of its own.
+    Leave it alone and the device follows the default. The lease goes with the code when the
+    code is made, so if you move the slider while a code is showing, the window says the code
+    still carries the old lease; press **Generate new code** to use the new one.
+  - Anyone else is told the lease instead — for example _Devices you pair stay signed in for
+    24 hours at a time, as your administrator set._
+- **Your paired devices** — the devices paired to your account, each with **Revoke** on the
+  right. An administrator also gets the pencil to change a device's lease.
+- **Open the portal** — the same link to [rc.growther.si](https://rc.growther.si) the menu
+  item used to open.
+
+An account that is not an administrator can pair only while **Enable Remote Control for
+non-admin accounts** is on; otherwise the window shows why the code was refused. A paired
+device cannot pair another: on a phone, the window says to open it on the machine instead.
 
 ## Finding the machine later
 
