@@ -1,5 +1,46 @@
 [
   {
+    "tag": "v2026.11.7-v342",
+    "version": "2026.11.7-v342",
+    "build": 342,
+    "releasedAt": "2026-11-06T20:55:03-08:00",
+    "bullets": [
+      {
+        "kind": "new",
+        "text": "Scheduled tasks can now chain recipes after they finish, like regular tasks."
+      },
+      {
+        "kind": "new",
+        "text": "Remote Control: you can now pair a device from the sidebar."
+      },
+      {
+        "kind": "new",
+        "text": "You can now start a stopped C5 from its waiting screens."
+      },
+      {
+        "kind": "fixed",
+        "text": "A recipe picked in chat now stays chosen in the task window."
+      },
+      {
+        "kind": "fixed",
+        "text": "Scheduled tasks with follow-up recipes no longer start twice."
+      },
+      {
+        "kind": "fixed",
+        "text": "A task created in the task window no longer runs twice."
+      },
+      {
+        "kind": "fixed",
+        "text": "Picked recipes now run correctly in chat, tasks, and schedules."
+      },
+      {
+        "kind": "fixed",
+        "text": "Thorough threat audit clears all module risks and updates."
+      }
+    ],
+    "more": 4
+  },
+  {
     "tag": "v2026.11.5-v341",
     "version": "2026.11.5-v341",
     "build": 341,
