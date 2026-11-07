@@ -61,10 +61,10 @@ With **AI Enabled** and **Orchestration** both on, **Create Task** saves the tas
 hands it to the pipeline. If that hand-off fails, you see _Task created, but its pipeline
 hand-off failed. The pipeline will start on its own within a few minutes._
 
-You do not need to do anything. The task is saved, and within a few minutes of creating it
-C5 starts its pipeline itself, as long as the task is still in **To do** with **AI Enabled**
-on, and has not been archived or deleted. If C5 restarts before then, it starts the pipeline
-once it is running again, as long as that is within a day of creating the task.
+You do not need to do anything. The task is saved. If you created it in **To do**, C5 starts
+its pipeline itself within a few minutes, as long as the task is still in **To do** with
+**AI Enabled** on, and has not been archived or deleted. If you created it in another column,
+its pipeline already started when you created it.
 
 ## Looking inside a task
 

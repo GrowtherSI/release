@@ -74,16 +74,16 @@ recipes start, using what the task just made.
    **Parallel fan-out:** to match.
 4. Click **Save Schedule**.
 
-**Auto Review** decides when they start. It is ticked on a new schedule. With it ticked, the
+**Auto Review** decides when they start. It is on for a new schedule. With it on, the
 badge at the top of the editor says **Triggers after Automated deliverables approval**, and
-the recipes start as soon as C5's review passes the task. Untick it and the badge says
+the recipes start as soon as C5's review passes the task. Turn it off and the badge says
 **HITL** in place of **Automated**: the recipes wait until you approve the task. See
 [Human review (HITL)](/c5/using-c5/hitl).
 
 Each follow-up task gets the same review setting as the scheduled task. With **Auto Review**
-unticked, every follow-up task waits for your approval too, and in **Serial** the next recipe
+off, every follow-up task waits for your approval too, and in **Serial** the next recipe
 does not start until you approve the one before it. A schedule with three serial recipes then
-needs four approvals each time it runs, so tick **Auto Review** for work you want to run
+needs four approvals each time it runs, so turn on **Auto Review** for work you want to run
 unattended.
 
 Each follow-up task shows up on the board as its own task, named

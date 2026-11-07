@@ -385,9 +385,9 @@ Approving or rejecting a task needs a reason. A sentence saying why is enough. U
 write one:
 
 - On a blocked card, in the task window and on the **Tasks** tab of the
-  [HITL window](/c5/using-c5/hitl), **Reject** and **Approve** stay greyed out:
-  _Enter a review note before approving_. **Approve All (N)** waits for a note on every
-  task.
+  [HITL window](/c5/using-c5/hitl), **Reject** and **Approve** stay greyed out, and
+  pointing at **Approve** says _Enter a review note before approving_. **Approve All (N)**
+  waits for a note on every task.
 - For a task in **Review**, the card's **Review…** menu keeps **Deny** and **Approve**
   greyed out the same way, and **Human Review Required** in the task window answers
   _Reasoning required — please enter your reasoning before submitting._
@@ -414,17 +414,16 @@ Fix the cause, then click **Retry**.
 
 You may see this after **Create Task**: _Task created, but its pipeline hand-off failed.
 The pipeline will start on its own within a few minutes._ The task was saved; only the
-request that starts its work did not get through. You do not need to do anything: C5
-checks every minute, and starts the work itself once the task is two minutes old.
+request that starts its work did not get through. You do not need to do anything. If you
+created the task in another column, its work already started when you created it. If you
+created it in **To Do**, C5 starts the work itself within a few minutes.
 
 Leave the task in **To Do** until then. C5 starts it only while it is in **To Do** with
 **AI Enabled** on: if you move it, turn AI off, archive it or delete it, C5 leaves it to
 you.
 
 If it is still in **To Do** after ten minutes, see
-[Everything is queued and nothing starts](#everything-is-queued-and-nothing-starts). If the
-rest of your work is moving, restart C5: at start-up it starts any task like this one that
-was created in the last 24 hours.
+[Everything is queued and nothing starts](#everything-is-queued-and-nothing-starts).
 
 ### Everything is queued and nothing starts
 
@@ -463,8 +462,9 @@ If C5 was running and it still did not fire, open the schedule's history for the
 In v341 and earlier, a **Use Recipe** schedule did nothing when it was due: it created no
 task and reported no error. Later versions fix this. Each time it is due, it creates a task
 on the board, as **Create Task** does, and that task follows the recipe chosen in the
-schedule. Your existing **Use Recipe** schedules need no change: each starts working at its
-next run after you update.
+schedule. Your existing repeating **Use Recipe** schedules need no change: each starts
+working at its next run after you update. A one-off that already ran will not run again; see
+[What each action does](/c5/using-c5/schedules#what-each-action-does).
 
 ## Performance
 
