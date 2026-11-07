@@ -1,7 +1,7 @@
 {
   "stable": {
     "version": "2026.11.7-v342",
-    "releasedAt": "2026-11-07T09:31:21.181Z",
+    "releasedAt": "2026-11-07T09:59:03.800Z",
     "commitHash": "9d829d964214cffefb701363426ae69806c1d26c",
     "notes": "C5 v2026.11.7-v342",
     "assets": [
@@ -31,7 +31,11 @@
         "binaryEntry": "growther-c5-macos-arm64-node24-v2026_11_7-v342",
         "binaryUrl": "https://github.com/GrowtherSI/release/releases/download/v2026.11.7-v342/growther-c5-macos-arm64-node24-v2026.11.7-v342.zip",
         "binarySha256": "65e8ba7e541f4b025a6cdac3190b7581db5b8cc29539155dd1ee9f42de51c31b",
-        "binarySizeBytes": 78163521
+        "binarySizeBytes": 78163521,
+        "installerFilename": "growther-c5-macos-arm64-node24-v2026.11.7-v342.pkg",
+        "installerUrl": "https://github.com/GrowtherSI/release/releases/download/v2026.11.7-v342/growther-c5-macos-arm64-node24-v2026.11.7-v342.pkg",
+        "installerSha256": "ebb3f27d3648ce183edad3e9ccabc09ab939568900c9a63015ac34d259852e6a",
+        "installerSizeBytes": 76550115
       },
       {
         "os": "macos",
@@ -45,7 +49,11 @@
         "binaryEntry": "growther-c5-macos-x64-node24-v2026_11_7-v342",
         "binaryUrl": "https://github.com/GrowtherSI/release/releases/download/v2026.11.7-v342/growther-c5-macos-x64-node24-v2026.11.7-v342.zip",
         "binarySha256": "47439269b314765c0a4a2caaec4e66822169976ef7efc62d96e9e598790d398e",
-        "binarySizeBytes": 85649235
+        "binarySizeBytes": 85649235,
+        "installerFilename": "growther-c5-macos-x64-node24-v2026.11.7-v342.pkg",
+        "installerUrl": "https://github.com/GrowtherSI/release/releases/download/v2026.11.7-v342/growther-c5-macos-x64-node24-v2026.11.7-v342.pkg",
+        "installerSha256": "8d9b778ca07103ba34416663de73393afe9ccb4f8791761d5f231e82075e171a",
+        "installerSizeBytes": 84047014
       },
       {
         "os": "win",
