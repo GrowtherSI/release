@@ -151,3 +151,5 @@ See [Common issues](/c5/troubleshooting/common-issues) for more help.
 - [Updating C5](/c5/getting-started/updating) — keep C5 current.
 - [Deploying across an organisation](/c5/configuration/deploying) — for IT, the Windows and
   macOS installer packages.
+- [Running a self-hosted AI agent](https://growther.si/self-hosted-ai-agent) — on growther.si:
+  servers, headless boxes, and reaching the install from other devices.

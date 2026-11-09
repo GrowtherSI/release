@@ -91,3 +91,5 @@ directory, not a relay.
   you use an issued address for anything sensitive.
 - The Terms section you accept: [Section 15, Remote Control](https://growther.si/t=remote-control).
   It was Section 14 until Terms version 1.7 added a new Section 14 before it.
+- [Remote control for the AI agent on your own computer](https://growther.si/ai-agent-remote-control) —
+  the overview on growther.si, with the three ways in side by side.

@@ -120,6 +120,9 @@ Your work is stored in encrypted databases in your data folder. See
 
 ## Questions this page does not answer
 
+For the plain-words version of what stays on your machine and what can leave, see
+[what a private AI agent means](https://growther.si/private-ai-agent) on growther.si.
+
 For formal terms — the legal agreement, the data processing agreement, and the privacy
 policy — see the links in the footer of [growther.si](https://growther.si).
 

@@ -85,3 +85,5 @@ and what that protection does not cover.
 
 - [Permissions](/c5/security/permissions) — where the limits are set.
 - [What tools do](/c5/tools/what-tools-do) — the safer alternatives to reach for first.
+- [AI automation on your own computer](https://growther.si/ai-automation-on-your-computer) — on
+  growther.si: tools first, screen last, and the approvals around it.

@@ -208,4 +208,5 @@ See [Voice](/c5/using-c5/voice) for turning it on.
 - [Budgets & costs](/c5/using-c5/ops) — spending limits and cost tracking.
 - [Analytics](/c5/using-c5/analytics) — charts showing agent quality over time.
 - [Recipes](/c5/using-c5/labs) — save repeating jobs in Labs.
-
+- [How a scheduled AI agent fits the rest of your week](https://growther.si/scheduled-ai-agent) — the
+  plain-words guide on growther.si: what to schedule, and the trade-offs against cron.

@@ -468,3 +468,5 @@ download, set
   every model C5 downloads, its licence, and the notices that ship with C5
 - [Environment variables](../cli/environment.md) — where to set
   `GROWTHER_QMD_NO_AUTO_DOWNLOAD` when C5 starts at sign-in
+- [An AI agent that works with your local data](https://growther.si/ai-agent-local-data) — on
+  growther.si: what the agents can read, and how local search fits in.
