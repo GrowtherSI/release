@@ -1,5 +1,30 @@
 [
   {
+    "tag": "v2026.11.9-v343",
+    "version": "2026.11.9-v343",
+    "build": 343,
+    "releasedAt": "2026-11-09T14:28:43-08:00",
+    "bullets": [
+      {
+        "kind": "new",
+        "text": "Check for updates now also picks up a renewed license."
+      },
+      {
+        "kind": "new",
+        "text": "High-risk actions now ask for extra confirmation before running."
+      },
+      {
+        "kind": "new",
+        "text": "C5 will encrypt all network requests and runs tools inside a safe sandbox."
+      },
+      {
+        "kind": "fixed",
+        "text": "C5 now keeps your tasks private from other people's controls."
+      }
+    ],
+    "more": 12
+  },
+  {
     "tag": "v2026.11.7-v342",
     "version": "2026.11.7-v342",
     "build": 342,
