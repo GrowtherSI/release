@@ -1,5 +1,25 @@
 [
   {
+    "tag": "v2026.11.11-v344",
+    "version": "2026.11.11-v344",
+    "build": 344,
+    "releasedAt": "2026-11-10T16:02:49-08:00",
+    "bullets": [
+      {
+        "kind": "fixed",
+        "text": "Agent Training Prompts Update."
+      },
+      {
+        "kind": "fixed",
+        "text": "Task reviews now check saved file attachments in the database first."
+      },
+      {
+        "kind": "fixed",
+        "text": "Task card pulse lines now align properly with card borders."
+      }
+    ]
+  },
+  {
     "tag": "v2026.11.9-v343",
     "version": "2026.11.9-v343",
     "build": 343,
