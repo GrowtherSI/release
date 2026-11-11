@@ -1,5 +1,26 @@
 [
   {
+    "tag": "v2026.11.11-v345",
+    "version": "2026.11.11-v345",
+    "build": 345,
+    "releasedAt": "2026-11-11T12:11:08-08:00",
+    "bullets": [
+      {
+        "kind": "new",
+        "text": "Resetting a task now saves your old work and notes safely."
+      },
+      {
+        "kind": "new",
+        "text": "Reviews now follow workspace rules more fairly and consistently."
+      },
+      {
+        "kind": "fixed",
+        "text": "C5 no longer mistakes extra planning details for your actual requests."
+      }
+    ],
+    "more": 1
+  },
+  {
     "tag": "v2026.11.11-v344",
     "version": "2026.11.11-v344",
     "build": 344,
