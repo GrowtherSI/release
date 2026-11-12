@@ -1,5 +1,18 @@
 [
   {
+    "tag": "v2026.11.12-v348",
+    "version": "2026.11.12-v348",
+    "build": 348,
+    "releasedAt": "2026-11-11T22:47:14-08:00",
+    "bullets": [
+      {
+        "kind": "fixed",
+        "text": "Stability and reliability improvements."
+      }
+    ],
+    "more": 1
+  },
+  {
     "tag": "v2026.11.12-v347",
     "version": "2026.11.12-v347",
     "build": 347,
