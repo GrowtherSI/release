@@ -1,5 +1,17 @@
 [
   {
+    "tag": "v2026.11.12-v347",
+    "version": "2026.11.12-v347",
+    "build": 347,
+    "releasedAt": "2026-11-11T17:06:11-08:00",
+    "bullets": [
+      {
+        "kind": "fixed",
+        "text": "C5 no longer gets stuck looping when a step fails."
+      }
+    ]
+  },
+  {
     "tag": "v2026.11.11-v345",
     "version": "2026.11.11-v345",
     "build": 345,
