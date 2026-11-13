@@ -21,9 +21,9 @@ Optionally supercharged by **Mothership**, the Growther.si cloud.
 
 <br>
 
-**Growther.si Comprehensive Platform Suite**&nbsp; [![Full Platform Tests](https://img.shields.io/badge/62%2C411%20passed-success?style=plastic&logo=vitest&logoColor=white&color=FFD700)](#)
+**Growther.si Comprehensive Platform Suite**&nbsp; [![Full Platform Tests](https://img.shields.io/badge/63%2C362%20passed-success?style=plastic&logo=vitest&logoColor=white&color=FFD700)](#)
 
-[![API & Server Tests](https://img.shields.io/badge/All%20APIs%20%2B%20Servers%20%2B%20Cloud-34%2C368%20passed-green?style=plastic&logo=node.js)](#) &nbsp;&nbsp; [![App Tests](https://img.shields.io/badge/All%20Apps-28%2C043%20passed-blue?style=plastic&logo=react)](#)
+[![API & Server Tests](https://img.shields.io/badge/All%20APIs%20%2B%20Servers%20%2B%20Cloud-35%2C168%20passed-green?style=plastic&logo=node.js)](#) &nbsp;&nbsp; [![App Tests](https://img.shields.io/badge/All%20Apps-28%2C194%20passed-blue?style=plastic&logo=react)](#)
 
 <br>
 
