@@ -1,5 +1,46 @@
 [
   {
+    "tag": "v2026.11.13-v349",
+    "version": "2026.11.13-v349",
+    "build": 349,
+    "releasedAt": "2026-11-13T09:57:28-08:00",
+    "bullets": [
+      {
+        "kind": "new",
+        "text": "Per-workspace WS pushes for tasks, runs and signoffs."
+      },
+      {
+        "kind": "new",
+        "text": "New users get Library and Tags by default."
+      },
+      {
+        "kind": "fixed",
+        "text": "Runs, steps and orchestration reads per workspace."
+      },
+      {
+        "kind": "fixed",
+        "text": "Token usage stamped and read per workspace."
+      },
+      {
+        "kind": "fixed",
+        "text": "Schedules listed, stamped and run per workspace."
+      },
+      {
+        "kind": "fixed",
+        "text": "Workspace membership is admin-managed."
+      },
+      {
+        "kind": "fixed",
+        "text": "Library scoped per workspace; read isolation folded in."
+      },
+      {
+        "kind": "fixed",
+        "text": "Ops reads honour the admin All-workspaces scope."
+      }
+    ],
+    "more": 33
+  },
+  {
     "tag": "v2026.11.12-v348",
     "version": "2026.11.12-v348",
     "build": 348,
