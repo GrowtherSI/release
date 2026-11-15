@@ -1,15 +1,42 @@
 ---
 title: Productivity
-description: Watch, manage, and organize the work your agents are doing.
+description: The Kanban board — watch, manage, and organize the work your agents are doing, from To do to Done.
 order: 3
+keywords:
+  - kanban
+  - kanban board
+  - task board
+  - board
+  - columns
+  - to do
+  - in progress
+  - blocked
+  - review
+  - done
+  - drag and drop
+  - sub-tasks
+  - pending sub-tasks
+  - task queue
+  - task orchestration
+  - agent network
+  - virtual office
 ---
 
 # Productivity
 
-Productivity is the task board. Every job your agents are doing shows up here, so you can
-see the whole picture at once.
+Productivity is the task board — a **Kanban** board. Every job your agents are doing shows
+up here as a card, so you can see the whole picture at once.
 
-## The board
+The tabs at the top of the page switch between four views of the same work:
+
+| Tab                    | What it shows                                                   |
+| ---------------------- | --------------------------------------------------------------- |
+| **Kanban**             | The board: one card per task, in columns from **To do** to **Done**. |
+| **Task Orchestration** | How a task's steps connect and where each one stands.           |
+| **Agent Network**      | Your agents, and the work passing between them.                 |
+| **Virtual Office**     | Your agents at work in a 3D office, with a small Kanban board on the wall. |
+
+## The Kanban board
 
 Work moves across columns from left to right as it goes:
 

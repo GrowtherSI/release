@@ -43,7 +43,7 @@ and it will plan again. This is much cheaper than letting it finish and starting
 Big tasks become smaller ones. Those can become smaller still, if needed.
 
 This is why one sentence from you can turn into twenty items on the
-[Productivity](/c5/using-c5/productivity) board. Each one is small enough to check and
+[Productivity](/c5/using-c5/productivity) Kanban board. Each one is small enough to check and
 fix on its own.
 
 ## Checking the work

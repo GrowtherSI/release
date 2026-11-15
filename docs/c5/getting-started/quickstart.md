@@ -58,8 +58,9 @@ You will see it working as it goes. Nothing is hidden.
 
 ## Step 4 — Watch the work happen
 
-Open **Productivity** in the left menu while your task runs. You will see your task on a
-board, moving from column to column as it goes: waiting, working, done.
+Open **Productivity** in the left menu while your task runs. You will see your task as a
+card on the **Kanban** board, moving from column to column as it goes: waiting, working,
+done.
 
 Click any task to open it. You can see the steps, the tools used, and how much it cost.
 

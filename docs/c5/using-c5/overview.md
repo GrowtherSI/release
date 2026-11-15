@@ -17,7 +17,7 @@ You do not need all of these to get work done. Most people live in **Chat**,
 | Area             | What it is for                                                  |
 | ---------------- | --------------------------------------------------------------- |
 | **Overview**     | Your home screen. A quick look at everything happening right now. |
-| **Productivity** | The task board. Watch and manage the work your agents are doing.  |
+| **Productivity** | The Kanban task board. Watch and manage the work your agents are doing. |
 | **Schedules**    | Set up work that repeats, like a weekly report.                   |
 | **Chat**         | Talk to your agents and hand them new work.                       |
 | **Library**      | Your finished files, notes, projects, and deliverables.           |
@@ -94,6 +94,6 @@ Most areas have their own page in these docs, and the rest are covered in
 [Security & Privacy](/c5/security/permissions) and
 [Configuration](/c5/configuration/settings). Start with the ones you will use most:
 
-- [Productivity](/c5/using-c5/productivity) — the task board.
+- [Productivity](/c5/using-c5/productivity) — the Kanban task board.
 - [Chat](/c5/using-c5/chat) — how to ask for things well.
 - [Library](/c5/using-c5/library) — where your results live.
