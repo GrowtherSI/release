@@ -1,5 +1,46 @@
 [
   {
+    "tag": "v2026.11.15-v350",
+    "version": "2026.11.15-v350",
+    "build": 350,
+    "releasedAt": "2026-11-15T02:25:00-08:00",
+    "bullets": [
+      {
+        "kind": "new",
+        "text": "Settings now has a Tasks panel with a sub-task switch."
+      },
+      {
+        "kind": "new",
+        "text": "You can now approve sub-tasks by dragging them up in To Do."
+      },
+      {
+        "kind": "new",
+        "text": "Sub-tasks now wait for approval before they start."
+      },
+      {
+        "kind": "new",
+        "text": "Task creation now shows clearer readiness checks and tips."
+      },
+      {
+        "kind": "fixed",
+        "text": "Cards with AI off now stay in In Progress until you move them."
+      },
+      {
+        "kind": "fixed",
+        "text": "Sub-task approvals and holds now behave the same from every column."
+      },
+      {
+        "kind": "fixed",
+        "text": "Anyone with access to a task can now open its files."
+      },
+      {
+        "kind": "fixed",
+        "text": "Clicking a sub-task's parent link now opens the parent task."
+      }
+    ],
+    "more": 3
+  },
+  {
     "tag": "v2026.11.13-v349",
     "version": "2026.11.13-v349",
     "build": 349,
