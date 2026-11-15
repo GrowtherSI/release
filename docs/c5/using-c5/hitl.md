@@ -84,6 +84,11 @@ A **Blocked** task that waits on one of these requests offers the same decision 
 the board, and at the top of the task under **HITL Approval Required**: the same note box,
 **Approve** and **Reject**.
 
+A [sub-task](/c5/using-c5/productivity#sub-tasks) waiting in the **Pending sub-tasks**
+block on the board asks for no sign-off here. Dragging a sub-task into that block withdraws
+any sign-off it was waiting on, and approving or rejecting one is refused while it is
+there. Drag it out of the block first; that is also how you approve the sub-task itself.
+
 If a task has [post-completion recipes](/c5/using-c5/productivity#running-recipes-after-a-task-finishes)
 lined up on it, those recipes start automatically once the task reaches **Done**, with the
 deliverables you just signed off.

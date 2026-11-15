@@ -48,6 +48,14 @@ Beyond asking you, C5 has guards that work on their own:
   leak. It catches common patterns, not everything — do not rely on it to notice a
   secret.
 - **Everything is recorded**, so you can look back at what happened.
+- **The same web request is not made twice in one task.** While a task runs, a
+  `web_search` or `read_url` that asks for exactly what was already fetched in the last 15
+  minutes gets the earlier answer, and two steps asking for the same thing at once share one
+  request. A `read_url` that attaches the page's image always fetches afresh.
+- **A busy search provider is waited for.** When Brave search answers that too many
+  requests were made, C5 pauses — for as long as Brave asks, when it says — and tries
+  again, up to three times, holding back other searches meanwhile, instead of failing the
+  step at once.
 - **A placeholder is never saved as a result.** `write_file` (and its other name,
   `create_file`) refuses to write an empty file, and refuses any text written to a video,
   image, PDF, Office or ZIP file (`.mp4`, `.mov`, `.webm`, `.mkv`, `.avi`, `.png`, `.jpg`,

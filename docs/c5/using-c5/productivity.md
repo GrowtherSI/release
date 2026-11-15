@@ -33,9 +33,61 @@ it to read the rest, or open the task to see it in full under **Why this is bloc
 You can drag cards between columns to change what happens next. Move something into
 **To do** to queue it up, or out of the way if you changed your mind.
 
+A card with **AI Enabled** off is work for people, and it stays where you put it. Drag one
+into **In progress** and it stays there until someone moves it; C5 no longer sends it back
+to **To do** after a few idle minutes. A card with **AI Enabled** on that sits in **In
+progress** with nothing running is still moved back to **To do**, so C5 can start it again.
+
+A sub-task that orchestration created waits in its own block under **To do** until you
+approve it. See [Sub-tasks](#sub-tasks).
+
 ## Creating a task
 
 Click **New Task**, describe the work, and click **Create Task**.
+
+### The readiness check
+
+Before a new task is created, C5 takes a quick look at its title and description to see
+whether they say enough for the work to start well. The check runs whether **AI Enabled**
+is on or off. While it runs, **Create Task** shows a few moving dots, and pointing at it
+says _Checking task description readiness_. It gives up after 90 seconds at most.
+
+If the description looks thin, a box opens under the button: **More detail recommended**,
+a short reason, and a list of what seems to be missing. You choose what happens next:
+
+- **Edit** closes the box so you can add detail. So does **Esc**, or simply typing in the
+  title or description. Click **Create Task** again when you are ready, and C5 checks the
+  new text.
+- **Intent Wizard** opens the wizard to sharpen the description with you. It is offered
+  when the wizard is available and you have not used it on this task yet.
+- **Create Anyway** creates the task as it is. C5 does not ask again about the same text.
+- **Cancel** asks first: _Cancel task creation?_ _This task has not been created yet.
+  Cancelling now will discard it._ **Keep** goes back; **Discard** throws the new task away.
+
+The check never stops you creating a task. If it cannot get an answer — the model is busy
+or offline, or it takes too long — the task is created as if the check had passed. A
+description the Intent Wizard has already sharpened, and that you have not changed since,
+is usually not checked again.
+
+The same check runs when you click **Auto Create** on a task card in
+[Chat](/c5/using-c5/chat#asking-for-something), with the same box and the same choices.
+
+### Images and files you attach
+
+When an agent works on a step, it is given the task's attached images, with a few limits
+so a request is never too big for the model to accept:
+
+- At most **five images** per step, and about **1.5 MB** of images in all. An image sent
+  twice counts once. Large images are scaled down to fit within 1024 × 1024 pixels first.
+- Images beyond the limit are not sent, but the agent is told their names, so it knows they
+  are on the task.
+- Steps that plan or check the work are told the images' names instead of being sent the
+  images themselves.
+- Other files, such as PDFs and documents, are passed on as text where C5 can read them,
+  up to 12,000 characters each, and never as images.
+
+If a model still refuses a request because of the images in it, C5 tries that step once
+more with the images left out (the agent is told their names), so the work can carry on.
 
 ### Picking a recipe
 
@@ -80,6 +132,17 @@ Click any card to open it. Inside you will find:
 This is the place to look when you want to know *why* something turned out the way it
 did.
 
+### Opening a task's files
+
+Once a task has made something, its card lists the files, with **Open Directory** for its working folder.
+Anyone who can see a task can open its files and folder this way, not only administrators.
+Files open on the computer running C5. If one cannot be opened, the card says why:
+
+- _That file is no longer on disk, or is not one you can open._
+- _That file is outside C5's working folder, so it cannot be opened from here._
+- _Files open on the machine running C5, not from a remote device._ — you are using C5
+  through [Remote Control](/c5/remote-control/overview).
+
 **A task waiting for review** shows **Human Review Required** inside it. Enter your
 reasoning, then choose **Approve** or **Deny**. The ruling is offered to someone with
 **Edit** on **Sidebar: HITL Button & Modal** in **Settings › Access** who is also the task's
@@ -94,14 +157,83 @@ them over before saving. Reasoning is the one people dictate most: it is the fie
 explaining yourself rather than naming something, and it is quicker said than typed. See
 [Voice](/c5/using-c5/voice).
 
-## Tasks with steps inside steps
+## Sub-tasks
 
-Big jobs get broken into smaller ones. A task can have child tasks under it, and those
-can have their own children.
+While it works on a task, orchestration can split part of the task into a **sub-task**: a
+separate task on the board for one piece of the work. This only happens with **Create
+Sub-Tasks** turned on in **Settings › General › Tasks**. It is **off** by default, and while
+it is off, tasks are never split. See
+[the Tasks panel](/c5/configuration/settings#general-the-tasks-panel).
 
-On the board, a parent card shows how many of its children are done. Open it to see them
-all. This is how one sentence from you can turn into twenty small pieces of work that
-run at the same time.
+Nothing a sub-task does starts without you. Every new sub-task waits for your approval.
+
+### Telling a sub-task apart
+
+A sub-task's id starts with `task_`, like many other tasks, so look at its id badge
+instead: on a sub-task it is **yellow with black text**, on its card and in its task window.
+Point at the badge and, under the usual _Click to copy Task ID_ line, it shows **Parent
+task:** and the parent's title. Click the title to open the parent task. While you are
+editing the sub-task, the parent's name is shown as plain text, so a click cannot throw
+your changes away; **Save** or **Cancel** brings the link back.
+
+If a link to a task cannot be opened — the task was removed, or it is not one you may see —
+C5 says _That task is not available. It may have been removed, or you may not have access to
+it._, and the window stays on what you had open.
+
+### Pending sub-tasks
+
+New sub-tasks wait in a separate block at the bottom of **To do**, headed **Pending
+sub-tasks** with a count. The block only appears while there are sub-tasks in it, or while
+you are dragging a sub-task.
+
+Nothing in that block is picked up by orchestration. Agents cannot move a pending sub-task
+either; only a person dragging it on the board can. Point at the block's heading or the
+space between its cards (not at a card) to see a reminder of how it works.
+
+### Approving a sub-task
+
+Drag a sub-task up out of the block into **To do** to approve it. Approving does not start
+it at once:
+
+- **Sub-tasks are created with AI Enabled off.** An approved sub-task with AI still off
+  stays in **To do** for people to work on.
+- **With AI Enabled on,** an approved sub-task is picked up in the normal task order, like
+  any other task waiting in **To do**.
+
+To let agents do a sub-task, open it, turn **AI Enabled** on, and click **Save**. You can do
+this while it is still pending; it then starts in the normal order once you approve it. On
+a sub-task that is pending, or approved but not started yet, the **Orchestration** switch
+follows **AI Enabled** and cannot be set on its own. The line under it says where the
+sub-task stands: _On with AI Enabled. Waiting for approval — once moved into the upper To Do
+area it is picked up by the normal task order._, or, once approved, _On with AI Enabled.
+Approved — starts by the normal task order._
+
+You can also drag a pending sub-task straight to another column. Dragged to **In
+progress**, it is released for work there: with **AI Enabled** on, its work starts; with it
+off, it stays in **In progress** for people.
+
+### Stopping a sub-task
+
+Drag a sub-task back into the **Pending sub-tasks** block, from **To do** or any other
+column, to stop work on it. It stays stopped until someone drags it out again. A pending
+sub-task asks for no sign-offs, and dragging one into the block withdraws any it was
+waiting on; to decide it, drag it out first.
+
+Only sub-tasks can go in the block. Normal tasks cannot be dropped there.
+
+Turning **Create Sub-Tasks** off stops new sub-tasks from being made. Sub-tasks that already
+exist stay where they are, pending ones included, until someone moves them.
+
+### The To do count
+
+The count beside **To do** counts tasks and sub-tasks separately. It shows one number when
+only one kind is there (**0** when the column is empty), and two when both are: **3/2** means
+three tasks and two sub-tasks. Sub-tasks you approved still count as sub-tasks. Point at
+the count to see **Tasks: 3** and **Sub-Tasks: 2**, listing only the kinds that are there.
+
+The **ⓘ** beside the page title explains the same rules under **💡 How Sub-Tasks Are
+Approved**. That is the place to look on a phone, where the block's own reminder does not
+appear.
 
 ## Running recipes after a task finishes
 

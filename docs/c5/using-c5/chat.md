@@ -35,6 +35,14 @@ recipe you pick is the recipe the task runs, whether you click **Auto Create** o
 chosen, and the task follows it once you click **Create Task** there. Your pick holds even
 if C5 restarts before the work begins.
 
+**Auto Create** first checks that the request says enough for the work to start well. While
+it checks, the button shows a few moving dots. If the request looks thin, a box opens,
+**More detail recommended**, with what seems to be missing, and you can **Edit** the
+request, sharpen it with the **Intent Wizard** (when the wizard is on and you have not used it yet), **Create Anyway**, or **Cancel**. The check
+never stops you: if it cannot get an answer, the task is created. The task window runs the
+same check on **Create Task**; see
+[The readiness check](/c5/using-c5/productivity#the-readiness-check).
+
 ## Bringing back something you sent
 
 Press **↑** in the message box to bring back the last thing you sent, the same way a

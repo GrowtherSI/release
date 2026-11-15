@@ -425,6 +425,31 @@ you.
 If it is still in **To Do** after ten minutes, see
 [Everything is queued and nothing starts](#everything-is-queued-and-nothing-starts).
 
+### A sub-task never starts
+
+A sub-task — a card with a yellow id badge — never starts on its own:
+
+- **It is still in the Pending sub-tasks block** at the bottom of **To Do**. Nothing there
+  runs. Drag it up into **To Do** to approve it.
+- **It is approved, but AI is off.** Sub-tasks are created with **AI Enabled** off, and an
+  approved one with AI off waits in **To Do** for people. Open it, turn **AI Enabled** on,
+  and click **Save**; it is then picked up in the normal task order.
+
+See [Sub-tasks](/c5/using-c5/productivity#sub-tasks).
+
+### No sub-tasks appear
+
+Orchestration only creates sub-tasks while **Create Sub-Tasks** is on in **Settings ›
+General › Tasks**, and it is off by default. See
+[the Tasks panel](/c5/configuration/settings#general-the-tasks-panel).
+
+### "That task is not available …"
+
+You followed a link to a task — for example the **Parent task** link on a sub-task's id
+badge — that you cannot open: _That task is not available. It may have been removed, or you
+may not have access to it._ The task was removed, or it is one you are not allowed to see. Nothing else changes; ask its owner or an administrator if you need
+it.
+
 ### Everything is queued and nothing starts
 
 Open [Monitor](/c5/using-c5/monitor) → **Queueing**.

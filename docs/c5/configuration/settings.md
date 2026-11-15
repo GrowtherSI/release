@@ -15,7 +15,7 @@ You do not need to change most of these. C5 works sensibly out of the box.
 
 | Area              | What it controls                                             |
 | ----------------- | ------------------------------------------------------------- |
-| **General**       | Basic behavior and appearance.                                |
+| **General**       | Basic behavior and appearance, and how tasks are run.         |
 | **Integrations**  | Model providers, third-party services and their keys.         |
 | **Autonomy**      | How much your agents may do without asking you.               |
 | **Guardrails**    | Hard limits agents cannot cross.                              |
@@ -71,6 +71,48 @@ provider for the steps it is first for.
 
 The **LLM Queue** badge on [Productivity](/c5/using-c5/productivity#the-llm-queue-badge)
 shows both allowances in use, each behind a server or cloud icon.
+
+### General: the Tasks panel
+
+**Settings › General** opens with a card that now holds only **3D Animations**. Right under
+it, above **Schedules**, is the **Tasks** panel: how orchestration works a task. Everything
+that used to share the top card with **3D Animations** is here now, working as before, and
+it saves with the tab's **Save** button.
+
+The switches, in order:
+
+| Control | What it does |
+| --- | --- |
+| **Create Sub-Tasks** | New. Whether orchestration may split a task into sub-tasks that wait for your approval. **Off** by default (_Off — tasks never split_); on, it reads _On — sub-tasks await approval_. See [Sub-tasks](/c5/using-c5/productivity#sub-tasks) |
+| **LLM Preemption** | Whether a chat request may stop long-running background work to free a slot on your hardware, instead of running on top of it |
+| **Human-in-the-Loop (HITL)** | **Require approval for DB writes**: agents ask a person before they write to the database |
+| **Execution Observability** | **Enable Global Telemetry Broadcast**: streams agents' live reasoning to the screen. Turning it off saves bandwidth with many agents running |
+
+And the limits under them:
+
+| Control | What it does |
+| --- | --- |
+| **Automated Review Threshold** | The lowest score, from 50% to 100%, that passes C5's automated review of a task. Lower scores send the work back for rework. It only applies to tasks with **Automated Review** on |
+| **No-Progress Rework Limit** | How many reworks in a row may come back unchanged, with the same review, before C5 stops trying (1–10; 2 is recommended) |
+| **Task Max Rework Attempts** | How many rework rounds a task may go through before C5 moves it on (1–50; 3–15 is recommended) |
+| **Telemetry Retention** | How long agents' detailed reasoning logs are kept: 1, 3, 7, 14 or 30 days |
+
+**Configure** on a notification that a task reached its rework limit, and the **Settings**
+link where a task offers to retry its rework, both open this panel.
+
+#### Create Sub-Tasks
+
+With **Create Sub-Tasks** on, orchestration may split a task into sub-tasks. Each one lands
+in the **Pending sub-tasks** block at the bottom of the **To do** column on the board and
+waits there; nothing in that block runs. Drag one up into **To do** to approve it.
+Sub-tasks are created with **AI Enabled** off, so an approved one is picked up like any other
+task only once its **AI Enabled** and **Orchestration** switches are on; otherwise it stays
+in **To do** for people to work on. Drag a sub-task back into the block to stop it.
+
+With it off, agents are never offered a way to create sub-tasks while they work on a task.
+Turning it off does not touch sub-tasks that already exist: they stay where they are.
+
+Tasks you create yourself, including from [Chat](/c5/using-c5/chat), are never sub-tasks.
 
 ### Budget
 
