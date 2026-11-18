@@ -1,5 +1,34 @@
 [
   {
+    "tag": "v2026.11.18-v351",
+    "version": "2026.11.18-v351",
+    "build": 351,
+    "releasedAt": "2026-11-18T00:24:52-08:00",
+    "bullets": [
+      {
+        "kind": "new",
+        "text": "You can now watch short video tutorials for every page."
+      },
+      {
+        "kind": "new",
+        "text": "Tutorial videos will show multi-line descriptions and lists."
+      },
+      {
+        "kind": "fixed",
+        "text": "The Mothership status now says why a connection failed."
+      },
+      {
+        "kind": "fixed",
+        "text": "The Mothership status now updates soon after you set up C5."
+      },
+      {
+        "kind": "fixed",
+        "text": "Profile auth options stay off until you type a name."
+      }
+    ],
+    "more": 8
+  },
+  {
     "tag": "v2026.11.15-v350",
     "version": "2026.11.15-v350",
     "build": 350,
