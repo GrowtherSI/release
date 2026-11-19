@@ -398,6 +398,15 @@ pushes yours out of the count. The nightly re-check
 and the calibration fit read the same window, and **Teach the classifier** asks about task
 categories up to 180 days old for the same reason.
 
+**Not every answer you give counts toward promotion.** **Teach the classifier** mostly asks
+about questions it picked because the classifier and the usual model disagreed, or because
+the classifier was unsure. Those are the hard cases, where one of the two is wrong almost
+by definition, so judging promotion on them would be unfair to both. They still teach the
+classifier how far to trust itself (its calibration). Promotion is judged only on the
+questions picked at random, on held-back checks, and on labels you gave outside the queue,
+such as correcting a task's categories. Expect promotion to take longer as a result: from
+the queue alone, labelled answers that count build up about four times more slowly.
+
 Its line in Settings says when it was measured and over what, for example _Promotion gate:
 not enough evidence yet (12 labelled states), measured at 14:05 over the last 180 days._
 Until a kind has its 200 labelled answers, the parts that cannot be judged yet are one line,
