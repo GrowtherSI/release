@@ -139,6 +139,15 @@ You can attach files to a message. Drag them onto the chat box or click the pape
 C5 can read most common file types — documents, spreadsheets, PDFs, images, code, and
 plain text. Once a file is attached, you can ask questions about it or ask for changes.
 
+> **Note**
+> In versions before this update, the installed app could quietly skip PDF, Word, Excel,
+> PowerPoint and web-page attachments, and could stop after a `.rar` file. Those are
+> fixed, and every release now checks them on each platform before it ships.
+
+Images go only to a model that can see them. If the model doing the work cannot read
+images, C5 switches to one that can on the same service when you have one set up;
+otherwise the image is held back rather than sent to a model that would ignore it.
+
 > **Tip**
 > Attach the file first, then ask your question. That way the agent has everything it
 > needs from the start.

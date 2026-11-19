@@ -44,6 +44,27 @@ your own.
 If you run several C5 installs — across a team, or on several machines — Mothership also
 gives you one place to see them all, and one place to manage updates and billing.
 
+## How shared improvements are chosen
+
+An improvement only reaches the fleet when the evidence for it is solid:
+
+- **It is judged on all the results together.** Mothership pools every report it has
+  received and publishes only when the combined result is confidently good. One unlucky
+  report cannot sink a well-proven improvement, and the order reports arrive in never
+  changes the verdict.
+- **Trials are shared fairly.** New ideas are offered to installs that have volunteered
+  for trials, spread evenly, and each idea is tried on only as many installs as it needs.
+  If you leave a trial switched off, your install tells Mothership it declined, and the
+  trial is offered elsewhere instead of waiting on you.
+- **Model settings are checked before use.** Shared settings for a model (how to tidy up
+  its replies, for example) are screened on both sides. Any pattern that could make C5
+  hang on an unusual reply is refused, as are patterns that do not match the model they
+  claim to be for.
+- **Your own results still decide.** Anything you adopt is watched against your own
+  results, and is switched back off if it does worse for you than what it replaced.
+
+How C5 itself decides what works is explained in [How C5 learns](/c5/agents/how-c5-learns).
+
 ## What it does not do
 
 Connecting does **not**:

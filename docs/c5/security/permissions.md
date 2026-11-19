@@ -275,6 +275,39 @@ Guardrails beat permissions. If the two disagree, the guardrail wins.
 > If you need a genuine boundary, run C5 under a user account that only has access to
 > what you are willing to expose.
 
+### Your choices follow the tool that actually runs
+
+Some tools have more than one name. A model may ask for `bash` when it means C5's
+`run_command`, or `create_file` when it means `write_file`. When that happens, C5 looks up
+your choices under **both** names and uses the stricter one. Setting `run_command` to
+**No** for an agent therefore also stops it asking for `bash`.
+
+Only C5's own read-only tools are approved unattended for being read-only. A tool
+from an add-on (MCP) server is never trusted just because its name sounds harmless:
+a third-party tool called `search` still asks, and still goes through Guardian.
+
+### When C5 cannot read a setting
+
+If C5 cannot read a safety setting (the database is busy or a value is damaged), it never
+takes that as permission:
+
+- An agent's tool list that cannot be read refuses that call rather than allowing it.
+- A damaged list of denied tools refuses every call for that agent until the list is saved
+  again.
+- A damaged **Master** mode setting makes every tool ask, and C5 records a system event so
+  you know to re-save it.
+- A data-loss-prevention setting C5 does not recognise is treated as **Block**. Only an
+  explicit **Off** turns scanning off.
+
+### Autonomy thresholds apply to every run
+
+The per-work-type thresholds under **Settings → Autonomy** apply to every step C5 runs,
+not only to agents that claim work from outside. When a step matches several kinds of
+work (say, both "billing" and "running code"), **every** matching rule is checked and the
+strictest outcome wins. An agent below a rule's level is either stopped or told what it
+may not do, as that rule says. Tasks involving personal data always run at level 1 with
+sign-off.
+
 ## Never hand over credentials
 
 C5's guardrails watch for private information leaving your machine, but **do not rely on

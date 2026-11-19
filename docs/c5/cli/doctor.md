@@ -410,6 +410,27 @@ The program file does not match what was published.
 > Growther.si signed. Reinstall from the official installer, and see
 > [Verifying releases](/c5/security/verifying-releases).
 
+## Checking the built-in components
+
+Doctor checks your setup. A second command checks the program itself: that every
+component built into C5 works on this machine, exactly as installed.
+
+```bash
+growther packaged-selftest
+```
+
+It runs about fifteen quick checks without touching the network or your data, including:
+opening an encrypted database, reading PDF, Office and web-page attachments, opening
+`.rar` and `.sqlite` attachments, resizing images, loading the offline speech engine,
+counting tokens, time zones, and the bundled legal notices. It prints one report and ends
+with code `0` when everything works and `1` when something does not; the report names
+the check that failed.
+
+Every release runs the same checks on each platform before it is published, so a build
+whose attachments or voice would not work never reaches you. Run it yourself if a feature
+that depends on one of these components behaves oddly, and include the report when you
+ask for help.
+
 ## When you ask for help
 
 Run doctor first and include its output. It answers most of the questions a support

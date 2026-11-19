@@ -116,6 +116,14 @@ _A reason is required to approve or reject — say why, in a sentence._
 decided here, or on its card. A decision made in chat counts as a person's decision, as one
 made here does: C5 records it as a human label and learns from it.
 
+### When a step runs out of retries
+
+If a step keeps failing on a run at autonomy level 1, 2 or 3, the run stops and its task
+waits in **Blocked** with a request here asking what to do. Nothing else happens until you
+decide: C5 does not hand a run you chose to supervise to an unsupervised recovery team,
+and it never raises the run's autonomy level on its own. Runs at level 4 or 5 already work
+on their own, so a recovery team takes over and the request is there for you to review.
+
 ### What approving does
 
 Approving a task waiting in **Review** moves it to **Done**. Approving one of these requests,

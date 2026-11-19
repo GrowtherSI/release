@@ -69,8 +69,15 @@ the slider then shows the live value. On, your number is the fixed ceiling. Sett
 cloud allowance to zero stops it adding agents, but does not stop C5 using the paid
 provider for the steps it is first for.
 
+Until you save a number (or C5 has measured your machine once a model provider is set
+up), **Concurrent Agents** shows **1**, the number C5 really runs. Saving another tab no
+longer writes a value you never chose.
+
 The **LLM Queue** badge on [Productivity](/c5/using-c5/productivity#the-llm-queue-badge)
 shows both allowances in use, each behind a server or cloud icon.
+
+A queued card's tooltip shows its real place in line: **Next in line.** or **Number 3 in
+line.**
 
 ### General: the Tasks panel
 
@@ -226,6 +233,10 @@ itself from your work. It has five sections:
 | **Prompt Self-Improvement** | Prompt telemetry, and whether better prompt variants are promoted automatically |
 | **Quality vs Efficiency Balance** | How much C5 weighs answer quality against cost |
 | **Reward Pipeline Automation** | Which roles use the learned reward model, and the retrospective loop's frequency and token limits (shown only with **Edit** on **Sidebar: HITL Button & Modal**) |
+
+How the learning itself decides what works (counting real results, giving new ideas a fair
+trial, suggesting rather than assigning skills) is explained in
+[How C5 learns](/c5/agents/how-c5-learns).
 
 They save together with the tab's **Save** button. The classifier used to be a section of
 this tab; it now has a tab of its own, right after this one — see [Classifier](#classifier).

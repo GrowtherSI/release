@@ -33,6 +33,10 @@ Every skill is scanned before it can be used. The scanner looks for:
 - Installs that resolve to "whatever is newest" instead of a fixed version
 - Anything that quietly survives a restart
 
+The scanner follows a downloaded file wherever it goes. Renaming it, copying it, moving
+it into a system folder, saving it through a variable or making it executable before
+running it is treated the same as running it straight after the download.
+
 A skill with a serious finding is **switched off automatically**. It does not wait for
 someone to notice.
 

@@ -32,7 +32,9 @@ That is it. C5 takes it from there.
 ## What each action does
 
 - **Create Task** — C5 makes a new task from your instructions and works on it. It shows up
-  on the [Kanban board](/c5/using-c5/productivity) like any other task.
+  on the [Kanban board](/c5/using-c5/productivity) like any other task, at **Medium**
+  priority, the same as a task you create yourself, so a schedule never jumps ahead of
+  your own work. Change the card's priority if you want it sooner.
 - **Use Recipe** — the same, but the task follows a [recipe](/c5/using-c5/labs#recipes) you
   pick.
 - **Send Request** — C5 sends your request to the model and delivers its answer as a

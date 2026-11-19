@@ -60,7 +60,22 @@ When agents use System Control to drive your screen, keyboard, or mouse, extra s
 - **Screenshot preview** — Attaches a live screenshot to interactive approval prompts so you see exactly what the agent is looking at before you approve an action.
 - **Fail closed on engine timeout** — If an external policy engine is configured but unreachable, C5 blocks the action rather than silently allowing it through.
 
-## 4. How changes are saved
+## 4. The hard-deny list
+
+Some commands are refused outright, whatever else is configured. Examples include
+deleting your home folder or the whole disk (`rm -rf ~`, `rm -rf "$HOME"`, `rm -rf /`),
+and reading private keys such as `~/.ssh/id_rsa`.
+
+- The list is checked **first**, for **every** agent, before any other review.
+- It stays on even when Guardian is switched off. Switching Guardian off turns off the AI
+  review of tool calls, not this list.
+- Guardian's own agent gets no exemption: its tool calls are checked like everyone
+  else's.
+- The same list protects both C5 itself and the Guardian hook installed into your agent
+  gateways, so the two can never disagree.
+- If C5 cannot write the audit record for a refusal, the command is still refused.
+
+## 5. How changes are saved
 
 When you save changes in **Settings › Guardrails**:
 
