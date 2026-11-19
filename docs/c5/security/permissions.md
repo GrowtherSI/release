@@ -315,7 +315,9 @@ are never told to hold back this way (a reviewer checking a deployment is not de
 though a rule set to stop work still stops them, and their tools still follow the ladder.
 A stopped step keeps its instructions, so once you raise the agent's level and move the
 card back, it picks up exactly where it was. Tasks involving personal data always run at
-level 1 with sign-off.
+level 1 with sign-off, and an agent below level 3 that handles personal data is also told
+to keep it inside the task's workspace, never send it to an outside tool, service or web
+address, and mask it in what it writes unless the task needs it.
 
 ## Never hand over credentials
 

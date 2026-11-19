@@ -24,7 +24,7 @@ workshop without stopping the work happening next door.
 | Tab            | What it is for                                                    |
 | -------------- | ----------------------------------------------------------------- |
 | **Evolution**  | A record of what improved over time.                               |
-| **Factorial**  | Structured tests that compare options fairly.                      |
+| **Factorial**  | Structured tests that compare options fairly. C5 quietly re-runs a small share of steps with deliberate obstacles (time pressure, a nudge to doubt itself, a misleading hint, missing context, or the task reworded), in a balanced rotation, and the **Main effects** table shows how much each obstacle costs in quality, with a range. A wide range just means there are not enough runs yet. |
 | **Classifier** | A what-if for the [classifier](/c5/tools/local-classifier)'s confidence threshold, for the built-in model or a model chosen from your providers. It changes nothing. Shown to accounts that may view Settings. |
 | **Variants**   | Different versions of a setup, so you can compare them.            |
 | **Skills**     | Specific abilities your agents can use.                            |

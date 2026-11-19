@@ -56,6 +56,17 @@ When a skill is clearly helping an agent role, C5 now **suggests** adding it to 
 role. You get a notification and decide. It no longer adds skills to roles by itself,
 because those assignments are yours to make.
 
+Earlier versions did add some skills to roles automatically. After this update, an
+administrator gets one notification listing the assignments that look like they were made
+that way, so you can review them. Nothing is removed for you; keep the ones you want.
+
+## Trusted specialists go first
+
+C5 keeps a trust score for each specialist, built from how its past work was judged. When
+the planner chooses who does a step, specialists are listed most trusted first. Nobody is
+left off the list, and the planner still picks. A small share of tasks keeps the old order
+on purpose, so C5 can tell whether listing by trust actually helps.
+
 ## Every choice is recorded
 
 Whenever C5 picks between options (which prompt variant, which helper service), it
