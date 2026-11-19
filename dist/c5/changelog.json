@@ -1,5 +1,30 @@
 [
   {
+    "tag": "v2026.11.19-v352",
+    "version": "2026.11.19-v352",
+    "build": 352,
+    "releasedAt": "2026-11-19T00:30:30-08:00",
+    "bullets": [
+      {
+        "kind": "new",
+        "text": "C5 now has tutorials for Onboarding and the Overview and Chat pages."
+      },
+      {
+        "kind": "new",
+        "text": "Training prompts now show a progress indicator."
+      },
+      {
+        "kind": "fixed",
+        "text": "C5 keeps running reliably after you attach an archive."
+      },
+      {
+        "kind": "fixed",
+        "text": "Database and archive attachments now open in the installed app."
+      }
+    ],
+    "more": 1
+  },
+  {
     "tag": "v2026.11.18-v351",
     "version": "2026.11.18-v351",
     "build": 351,
