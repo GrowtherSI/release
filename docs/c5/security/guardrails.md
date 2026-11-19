@@ -66,6 +66,10 @@ Some commands are refused outright, whatever else is configured. Examples includ
 deleting your home folder or the whole disk (`rm -rf ~`, `rm -rf "$HOME"`, `rm -rf /`),
 and reading private keys such as `~/.ssh/id_rsa`.
 
+- It is aimed at the truly catastrophic, so ordinary work is not caught: deleting a
+  build folder or a path under `/tmp` is fine, and so are value-free templates such as
+  `.env.example`. A delete is refused if **any** of its targets is the root or your home
+  folder (`rm -rf build /` included).
 - The list is checked **first**, for **every** agent, before any other review.
 - It stays on even when Guardian is switched off. Switching Guardian off turns off the AI
   review of tool calls, not this list.

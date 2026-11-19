@@ -280,11 +280,15 @@ Guardrails beat permissions. If the two disagree, the guardrail wins.
 Some tools have more than one name. A model may ask for `bash` when it means C5's
 `run_command`, or `create_file` when it means `write_file`. When that happens, C5 looks up
 your choices under **both** names and uses the stricter one. Setting `run_command` to
-**No** for an agent therefore also stops it asking for `bash`.
+**No** for an agent therefore also stops it asking for `bash`, and **Always Allow** given
+when it asked for `bash` is remembered for `run_command` too, so you are not asked again.
 
 Only C5's own read-only tools are approved unattended for being read-only. A tool
 from an add-on (MCP) server is never trusted just because its name sounds harmless:
-a third-party tool called `search` still asks, and still goes through Guardian.
+a third-party tool called `search` still asks, and still goes through Guardian. The one
+exception is C5's own web search and page reading: when you connect one of the search
+services C5 knows (such as Brave, DuckDuckGo or SearXNG) and C5 uses it to carry out its
+`web_search`, it stays approved, as native search is.
 
 ### When C5 cannot read a setting
 
@@ -305,8 +309,13 @@ The per-work-type thresholds under **Settings → Autonomy** apply to every step
 not only to agents that claim work from outside. When a step matches several kinds of
 work (say, both "billing" and "running code"), **every** matching rule is checked and the
 strictest outcome wins. An agent below a rule's level is either stopped or told what it
-may not do, as that rule says. Tasks involving personal data always run at level 1 with
-sign-off.
+may not do, as that rule says. The kind of work is read from the task's tags and the step's
+own instructions, not from the earlier results it was given. Reviewing and planning steps
+are never told to hold back this way (a reviewer checking a deployment is not deploying),
+though a rule set to stop work still stops them, and their tools still follow the ladder.
+A stopped step keeps its instructions, so once you raise the agent's level and move the
+card back, it picks up exactly where it was. Tasks involving personal data always run at
+level 1 with sign-off.
 
 ## Never hand over credentials
 
