@@ -194,6 +194,7 @@ reason beside them (below).
 | **Permitted Directory Paths**, read and write | **Settings › Extensions**, on the **Saved Tool Authorizations** card |
 | **State Machine HITL Decay Threshold**: how many approvals of a recipe step skip its sign-off from then on | **Settings › Autonomy**, under **Global Rules** |
 | **Guardian Vetting**: the guardian's check of agents' tool calls | **Settings › Budget**, under **System-Level Prompting** |
+| **Voice Spending Limit**: its switch, amount, per-person limit and reset period (see [Keeping the cost down](/c5/using-c5/voice#keeping-the-cost-down)) | **Settings › Budget** |
 | **Back up secret files** | **Settings › Integrations**, on the **GitHub** card, under **C5 Data** (see [Backing up to GitHub](/c5/security/backups#backing-up-to-github)) |
 
 C5 also strips credentials from the environment of every command an agent runs. That has
@@ -210,7 +211,7 @@ greyed out, with the reason beside them:
 | **Settings › Tools** | Every panel is greyed out and **Save** is held back, with _Only an administrator can change tool settings._ under the heading. The list of rate-limited agents at the foot of the tab, which only reads, is not |
 | **Settings › Extensions** | The **Saved Tool Authorizations** card is read-only, with no **Save** for it and _Only an administrator can change tool authorizations._ under its heading |
 | **Settings › Autonomy** | The decay slider, with _Only an administrator can change the HITL decay threshold._ |
-| **Settings › Budget** | The **Guardian Vetting** switch, with _Only an administrator can change Guardian vetting._ |
+| **Settings › Budget** | The **Guardian Vetting** switch, with _Only an administrator can change Guardian vetting._ The **Voice Spending Limit** panel, with _Only an administrator can change the voice spending limit._ |
 | **Settings › Integrations** | The **Back up secret files** switch, with _Only an administrator can change whether secret files are backed up._ |
 
 On a paired device each reads _You can … only on the machine running C5._ instead, for

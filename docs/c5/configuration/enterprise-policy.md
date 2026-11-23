@@ -43,7 +43,7 @@ under **Settings › Enterprise › Policy** on any C5. In short:
   answers in its place when it cannot be reached (`classifier_builtin_fallback`). All three
   are described below.
 - **Security**: elevated exec, workspace-only edits, autonomy ceilings, the global cost
-  cap, allowed domains.
+  cap, the voice spending limit (`globalVoiceCapUsd`), allowed domains.
 - **Retention and audit**: audit and event retention, legal hold, the audit shipping
   endpoint.
 - **Identity**: the sign-in provider, admin role, whether single sign-on is required.

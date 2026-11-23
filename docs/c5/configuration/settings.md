@@ -536,6 +536,7 @@ Granular controls over specific high-impact capabilities:
 | ↳ *Remote Control: Restart, Quit* | Toggle | Disabled | Whether Restart and Quit, and the Remote Control launcher, are offered over Remote Control. A standard user needs this row and the row above it. Administrators always have it. |
 | **System Killswitch Execution** | Toggle | Toggle | Grants access to the global Killswitch banner on Settings and Dashboard. |
 | **Teammate Profiles & Roles** | Toggle | Toggle | Permits editing team member permissions and autonomy bounds via Profile modal. |
+| **Voice** | — | Toggle | Whether the account may use speech at all: the microphone, reading replies aloud, audio attachments and voice notes. **On** for everyone by default. See [Who can use voice](/c5/using-c5/voice#who-can-use-voice). |
 | **Tool Activity Button & List** | Toggle | Toggle | View shows the Tool Activity button and its list; Edit lets a standard user acknowledge and delete the items in it. Approving or denying a tool request, and remembering that choice, is for administrators only; see [When an agent asks](/c5/security/permissions#when-an-agent-asks). |
 
 > **User self-help: Missing Restart, Quit, or Start buttons**

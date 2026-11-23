@@ -57,9 +57,22 @@ not on this page. It is separate on purpose: voice is charged by the minute of a
 character of speech read aloud, which is a different shape of spending from the work your agents
 do, and most people want a much smaller ceiling on it.
 
-It works the same way as the main cap — a switch, an amount, and a choice of daily, weekly,
-monthly or yearly, resetting on the day you pick. C5 works out what a request will cost *before*
-making it and refuses rather than overshooting.
+It works the same way as the main cap: a switch, an amount, and a choice of daily, weekly,
+monthly or yearly, resetting on the day you pick. It is **on from the start at $10 a month**,
+and only an administrator at the machine can change it. An optional per-person limit stops one
+account using up everyone's allowance. C5 works out what a request will cost *before*
+making it, and skips a paid provider rather than going over.
+
+### Voice Spend
+
+The **Voice Spend** section at the foot of **Ops → Token Budget** shows what speech has cost:
+
+- **This period against the limit**, as a meter that warns from 80% and says when the limit is
+  reached. If the limit is switched off, it says so.
+- **Spend per day**, split into speech-to-text and read-aloud.
+- **Where it went**: by provider, by where it came from (dictation, read-aloud, attachments,
+  voice notes), and, for administrators, by person. Spend recorded before this tracking
+  existed shows as **Before tracking**.
 
 Two things never count against it:
 
