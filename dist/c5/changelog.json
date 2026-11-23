@@ -1,5 +1,46 @@
 [
   {
+    "tag": "v2026.11.20-v353",
+    "version": "2026.11.20-v353",
+    "build": 353,
+    "releasedAt": "2026-11-19T21:33:13-08:00",
+    "bullets": [
+      {
+        "kind": "new",
+        "text": "The Factorial tab now shows how much each stress test costs."
+      },
+      {
+        "kind": "fixed",
+        "text": "Agents now always get their full working context for each task."
+      },
+      {
+        "kind": "fixed",
+        "text": "Only prompts with a proven track record are shared with the fleet."
+      },
+      {
+        "kind": "fixed",
+        "text": "A task now records when its chosen coordinator was switched off."
+      },
+      {
+        "kind": "fixed",
+        "text": "Escalation notes now count repeated problems correctly when reworded."
+      },
+      {
+        "kind": "fixed",
+        "text": "Read the routing criteria apart from the task lookup."
+      },
+      {
+        "kind": "fixed",
+        "text": "Let preflight prompt arms learn from their labels."
+      },
+      {
+        "kind": "fixed",
+        "text": "Complete a parallel chain's root with a conditional update."
+      }
+    ],
+    "more": 135
+  },
+  {
     "tag": "v2026.11.19-v352",
     "version": "2026.11.19-v352",
     "build": 352,
