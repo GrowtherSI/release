@@ -7,7 +7,7 @@
     "bullets": [
       {
         "kind": "new",
-        "text": "Speech now has a spending limit, switched on by default."
+        "text": "Voice now has a spending limit, switched on by default."
       },
       {
         "kind": "new",
@@ -24,10 +24,6 @@
       {
         "kind": "new",
         "text": "C5 now tells you exactly why voice input isn't available."
-      },
-      {
-        "kind": "new",
-        "text": "You can now set a separate voice spending limit for each person."
       },
       {
         "kind": "fixed",
