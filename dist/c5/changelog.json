@@ -1,5 +1,21 @@
 [
   {
+    "tag": "v2026.11.23-v356",
+    "version": "2026.11.23-v356",
+    "build": 356,
+    "releasedAt": "2026-11-23T07:41:11-08:00",
+    "bullets": [
+      {
+        "kind": "new",
+        "text": "Repeating schedules now remember earlier runs and can avoid repeats."
+      },
+      {
+        "kind": "new",
+        "text": "Each schedule now keeps its past results together in one project."
+      }
+    ]
+  },
+  {
     "tag": "v2026.11.23-v355",
     "version": "2026.11.23-v355",
     "build": 355,
