@@ -1,5 +1,46 @@
 [
   {
+    "tag": "v2026.11.23-v355",
+    "version": "2026.11.23-v355",
+    "build": 355,
+    "releasedAt": "2026-11-22T22:00:42-08:00",
+    "bullets": [
+      {
+        "kind": "new",
+        "text": "Speech now has a spending limit, switched on by default."
+      },
+      {
+        "kind": "new",
+        "text": "Administrators can now turn voice off for individual accounts."
+      },
+      {
+        "kind": "new",
+        "text": "You can now set a voice spending limit for each person."
+      },
+      {
+        "kind": "new",
+        "text": "The Ops page now charts voice spending against its limit."
+      },
+      {
+        "kind": "new",
+        "text": "C5 now tells you exactly why voice input isn't available."
+      },
+      {
+        "kind": "new",
+        "text": "You can now set a separate voice spending limit for each person."
+      },
+      {
+        "kind": "fixed",
+        "text": "Slow replies now show the real timeout reason, not a confusing error."
+      },
+      {
+        "kind": "fixed",
+        "text": "Voice spending limits now apply correctly to every speech provider."
+      }
+    ],
+    "more": 3
+  },
+  {
     "tag": "v2026.11.23-v354",
     "version": "2026.11.23-v354",
     "build": 354,
