@@ -1,5 +1,18 @@
 [
   {
+    "tag": "v2026.11.23-v354",
+    "version": "2026.11.23-v354",
+    "build": 354,
+    "releasedAt": "2026-11-22T16:47:31-08:00",
+    "bullets": [
+      {
+        "kind": "new",
+        "text": "C5 will show accurate progress updates as it works."
+      }
+    ],
+    "more": 1
+  },
+  {
     "tag": "v2026.11.20-v353",
     "version": "2026.11.20-v353",
     "build": 353,
