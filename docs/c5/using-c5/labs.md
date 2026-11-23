@@ -120,6 +120,17 @@ Once your system reaches 100 completed tasks, C5 can automatically promote top-p
 prompt variants into production using learned reward models. See
 [Self-improvement milestones](/c5/using-c5/ops) for how this milestone unlocks.
 
+## Whose results you see
+
+Labs shows results from **your own workspace**: the runs, tests and scores of the work
+done there. Someone in another workspace on the same install never sees yours, and you
+never see theirs.
+
+Admins have one extra switch. **All workspaces** sits in the page header (the stacked
+layers icon). Turn it on to see every workspace on this install combined. Turn it off
+to go back to your own. It is off until you turn it on, and C5 remembers your choice in
+this browser. The same switch is on Ops and Analytics.
+
 ## Should you use Labs?
 
 Not at first. Get comfortable with Chat, Productivity, and Library before you come here.
