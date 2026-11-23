@@ -38,7 +38,8 @@ That is it. C5 takes it from there.
 - **Use Recipe** — the same, but the task follows a [recipe](/c5/using-c5/labs#recipes) you
   pick.
 - **Send Request** — C5 sends your request to the model and delivers its answer as a
-  notification.
+  notification. The answer is also kept on the run, so you can open it later, and later
+  runs can read it (see [Runs that remember the earlier ones](#runs-that-remember-the-earlier-ones)).
 
 When you choose **Use Recipe**, a recipe picker appears beside the three buttons. It says
 **No Recipe** until you pick one, and **Save Schedule** stays greyed out until you do. If C5
@@ -56,6 +57,58 @@ those versions needs nothing from you: it makes its first task at its next run (
 resume it, if it is paused). A one-off that one of those versions marked **Completed** made
 nothing either. Editing it will not make it run, so if you still want it, make a new one with
 **New Schedule**.
+
+## Runs that remember the earlier ones
+
+Some schedules only make sense if each run knows what the earlier ones did — _a dinner idea
+every evening, never a repeat from the past month_, or _this week's news, leaving out what
+last week already covered_. C5 keeps all the runs of a schedule together, so each new run
+can look back at them.
+
+### Each schedule has its own project
+
+The first time you save a **Create Task**, **Use Recipe** or **Send Request** schedule, C5
+makes a [project](/c5/using-c5/library#a-schedules-project) for it in your Library, named
+after the schedule, and files every run there. You do not need to make one yourself.
+
+- **Edit Schedule** shows it on the **Project** line, as a link to the project. If you have
+  changes you have not saved, the link opens in a new tab, so your edits stay where they
+  are.
+- In **Add Schedule**, the same line says _Saving creates a project for this schedule's
+  runs_ until you save.
+
+### Each run is told what came before
+
+When a run starts, C5 adds a short list to its instructions: the schedule's runs from the
+last 31 days (up to 31 of them), newest first, each with its date and time and a short
+summary of what it produced, or a note that it failed or has not finished. If none fall in
+that month but older runs exist, the run is told so. The very first run is told it is the
+first.
+
+So you can write the rule straight into your instructions:
+
+> Suggest a vegetarian dinner for the family. It must not be a repeat from the past month.
+
+An agent that needs more than the summary can use the **read_prior_runs** tool: it gives a
+longer piece of each earlier result, reaches runs older than a month, and can search earlier
+runs' titles, instructions and **Send Request** answers ("did we ever suggest risotto?"). It
+only reads, and only runs in your own workspace.
+
+A task you add to the schedule's project yourself is read back alongside its runs.
+
+### Send Request answers are kept
+
+A **Send Request** answer still arrives as a notification, and it is now also saved on the
+run. Open the run and its **Result** section shows the answer and when it was delivered.
+That saved answer is what later runs read, so deleting the notification does not take it
+out of the schedule's history. An answer longer than 20,000 characters is saved up to that
+length.
+
+### Schedules made before this
+
+A schedule made in v355 or earlier gets its project the next time you save it or it runs.
+The runs it already made are filed under the project then, apart from any that were
+deleted.
 
 ## Running recipes after each task
 
@@ -135,12 +188,17 @@ Each schedule has a history. You can see:
 
 Click any run to open it like a normal task and see every step.
 
+The schedule's project in the [Library](/c5/using-c5/library#a-schedules-project) lists
+every run it has made, newest first, with the date and time of each.
+
 ## Pausing and stopping
 
 You can pause a schedule and turn it back on later. Pausing keeps the setup and the
 history — it just stops running for now.
 
-Deleting removes the schedule. Work it already finished stays in your Library.
+Deleting removes the schedule. Work it already finished stays in your Library, in the
+schedule's project. If the schedule never ran and nothing else was put in its project, that
+empty project is removed with it.
 
 ## If a run fails
 

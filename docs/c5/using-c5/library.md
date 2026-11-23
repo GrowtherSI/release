@@ -42,6 +42,28 @@ weeks, make it a project. Then every task, file, and note about it stays togethe
 To start one, click **New project** and give it a name. After that you can point new
 work at it, and C5 files the results in the right place.
 
+### A schedule's project
+
+Every **Create Task**, **Use Recipe** or **Send Request** schedule files its runs in a
+project of its own, which C5 makes for it (see
+[Runs that remember the earlier ones](/c5/using-c5/schedules#runs-that-remember-the-earlier-ones)).
+Open one and its **Schedule runs** section shows:
+
+- **The schedule**, as a link back to it on the Schedules page, with what it does
+  (**Task**, **Recipe** or **Request**), **paused** if it is paused, and when it runs next.
+- **Its runs** underneath, newest first, each with its date and time and how it went.
+  Click a run to open it.
+
+The ten newest runs show first. **Show all N runs** shows the rest, and **Show fewer** folds
+them away again. A schedule that has not run yet says _No runs yet_. The project's
+**Activity** starts with a line saying which schedule it was made for.
+
+It is an ordinary project otherwise: you can rename it, tag it, or add your own tasks to it,
+and later runs read the tasks you add alongside the schedule's own.
+
+If you delete the project, the schedule makes a new one the next time you save it or it
+runs, and files its runs there.
+
 ## Deliverables
 
 A deliverable is a finished piece of work. It is separate from your everyday files
