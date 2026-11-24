@@ -1,5 +1,33 @@
 [
   {
+    "tag": "v2026.11.24-v357",
+    "version": "2026.11.24-v357",
+    "build": 357,
+    "releasedAt": "2026-11-23T17:27:42-08:00",
+    "bullets": [
+      {
+        "kind": "new",
+        "text": "A suggested recipe is now used unless you dismiss it."
+      },
+      {
+        "kind": "new",
+        "text": "C5 will show progress updates as it works."
+      },
+      {
+        "kind": "fixed",
+        "text": "Chat icons now show the coordinator that really did the work."
+      },
+      {
+        "kind": "fixed",
+        "text": "The task card now fits the chat on phones and small windows."
+      },
+      {
+        "kind": "fixed",
+        "text": "Chat avatars no longer show the wrong picture when offline."
+      }
+    ]
+  },
+  {
     "tag": "v2026.11.23-v356",
     "version": "2026.11.23-v356",
     "build": 356,
