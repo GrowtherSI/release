@@ -1,5 +1,25 @@
 [
   {
+    "tag": "v2026.11.25-v358",
+    "version": "2026.11.25-v358",
+    "build": 358,
+    "releasedAt": "2026-11-24T17:55:57-08:00",
+    "bullets": [
+      {
+        "kind": "new",
+        "text": "You can now optimize Hermes settings and gateway health in Settings."
+      },
+      {
+        "kind": "new",
+        "text": "Added progress updates so you can track what's happening."
+      },
+      {
+        "kind": "fixed",
+        "text": "Page subtitles no longer get cut off next to controls."
+      }
+    ]
+  },
+  {
     "tag": "v2026.11.24-v357",
     "version": "2026.11.24-v357",
     "build": 357,
