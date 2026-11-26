@@ -83,7 +83,12 @@ provide.
 
 **The exact error message**, copied and pasted rather than described. C5 also keeps its
 errors in `logs/errors.log` in your C5 folder (`~/.growther` unless you moved it); the lines
-from around the time it went wrong are worth including.
+from around the time it went wrong are worth including. A line that starts
+`[Aggregated 12x]` counts repeats of the same error. The first one was written on its own
+line, with its details; the summary gives the count (`includesFirst: true` means the count
+includes that first line) and, in `firstSeen` and `lastSeen`, when they happened. Its own time
+is when it was written, which can be a few minutes later. C5 keeps up to two weeks of this log,
+within about 40 MB.
 
 > **Warning**
 > Before you paste anything, take out API keys, passwords, and anything private. Error

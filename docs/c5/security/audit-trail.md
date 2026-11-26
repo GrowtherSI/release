@@ -22,8 +22,21 @@ You will find it in **Ops › Audit**.
 - **Storage changes** — turning database encryption on or off.
 - **Tool and extension permissions** — changes to what an agent is allowed to use, and to
   search providers and integrations.
-- **Model calls** — `LLM_DISPATCH`, written when C5 sends a request to a model. It names the
-  model and the agent the request was for. It never holds the text of the request.
+- **Model calls** — `LLM_DISPATCH`, written when C5 sends a request to a model, streamed
+  chat replies included. It names the model and the agent the request was for and, for work
+  in a task or schedule, the run, step, role and user. It is written as the request is sent,
+  so it records that data went to a model, not whether the call worked. It never holds the
+  text of the request. C5's own health checks of a gateway are not written.
+- **C5 starting and stopping** — `SERVER_START` once C5 is listening (with its version and,
+  after a restart C5 made itself, why), and `SERVER_STOP` as a stop begins (with what stopped
+  it). Use them to line a problem up with a restart, and to tell a quiet day from a day C5 was
+  not running.
+- **Network connections through the [egress gateway](/c5/security/egress-gateway)** —
+  `EGRESS_GATEWAY`: which program and agent, which host and port, allowed or refused, and how
+  much data went each way. Never the page, query or content.
+- **Changes C5 makes to other programs' settings** — saving LM Studio's settings from C5
+  (`LMSTUDIO_SETTINGS_WRITE`, including refused saves), and Hermes Agent's automatic clean-up
+  and recovery (`HERMES_AUTO_CLEAN`, `HERMES_RECOVERED`).
 - **The trail's own upkeep** — `AUDIT_CHAIN_BROKEN` if a check finds the chain broken (see
   [Why you can trust it](#why-you-can-trust-it)).
 
