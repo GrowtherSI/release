@@ -51,9 +51,9 @@ are allowed to connect.
 | **Allowed Protocols** | Which ports and schemes are permitted (e.g. `HTTPS (443)` and `HTTP (80)`). | Both |
 
 > **Warning: What network containment covers**  
-> The allowlist is enforced inside C5's own web tools (`read_url`, `web_search`). It is not a system-level firewall: raw shell commands (`run_command`), MCP servers, and traffic to your configured model providers do not pass through this filter.
+> The allowlist is enforced inside C5's own web tools (`read_url`, `web_search`) and, through the [egress gateway](/c5/security/egress-gateway), for the commands agents run (`run_command`, confined by default). It is not a system-level firewall: MCP servers C5 starts are pointed at the egress gateway only while an administrator routes through it, and can ignore it, and traffic to your configured model providers is recorded but not filtered.
 >
-> Nor do the built-in tools of an agent gateway C5 drives, such as OpenClaw's own web search and page fetch, or a model provider's own web search. Those run inside the gateway or at the provider, so C5's allowlist and its [data-loss checks](/c5/security/data-protection) never see what they send. For everything C5 itself connects to, and how to turn it all off, see [Network and egress](/c5/configuration/network).
+> Nor do the built-in tools of an agent gateway C5 drives, such as OpenClaw's own web search and page fetch, or a model provider's own web search. Those run inside the gateway or at the provider, so C5's allowlist and its [data-loss checks](/c5/security/data-protection) never see what they send. An administrator can route the gateways through the [egress gateway](/c5/security/egress-gateway) so that their connections are checked too. For everything C5 itself connects to, and how to turn it all off, see [Network and egress](/c5/configuration/network).
 
 ## 3. System Control guardrails
 

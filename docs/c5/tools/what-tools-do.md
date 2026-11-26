@@ -55,7 +55,9 @@ Beyond asking you, C5 has guards that work on their own:
 - **A busy search provider is waited for.** When Brave search answers that too many
   requests were made, C5 pauses — for as long as Brave asks, when it says — and tries
   again, up to three times, holding back other searches meanwhile, instead of failing the
-  step at once.
+  step at once. If Brave still refuses after that, C5 skips Brave for a while (a minute at
+  first, up to 15 minutes) and uses your next search provider, so later searches do not
+  wait for the same refusal.
 - **A placeholder is never saved as a result.** `write_file` (and its other name,
   `create_file`) refuses to write an empty file, and refuses any text written to a video,
   image, PDF, Office or ZIP file (`.mp4`, `.mov`, `.webm`, `.mkv`, `.avi`, `.png`, `.jpg`,
@@ -63,6 +65,23 @@ Beyond asking you, C5 has guards that work on their own:
   text really is a PDF. Its refusal tells the agent which tool makes the real thing, or to
   write Markdown that C5 turns into the deliverable. So an agent that cannot make a file
   says so, rather than leaving a file that only looks like one.
+
+## Reading documents
+
+`read_file` reads a **PDF**, a **Word document (`.docx`)** or a **PowerPoint (`.pptx`)** as
+its text, so an agent can work with a document in its task folder rather than seeing raw file
+data. The text is extracted on this machine; nothing is sent anywhere. It works for files up
+to 25 MB. A scanned PDF that is only pictures has no text to read, and the agent is told so.
+Spreadsheets (`.xlsx`) are not read this way.
+
+## Commands and the network
+
+When an agent runs a command, it can reach other machines only through C5's
+[egress gateway](/c5/security/egress-gateway), which applies your network rules and records
+each connection. Web downloads over HTTPS (`git clone https://…`, `npm`, `pip`) still work,
+and so do services on this machine while Network Containment and offline are off. `ssh` and
+`git@host:` remotes to other machines are blocked; use an `https://` remote instead. An
+administrator can turn this off in **Settings › Tools › Command network confinement**.
 
 ## Pictures and video
 
@@ -104,12 +123,17 @@ Agents that run in an OpenClaw or Hermes Agent gateway have tools of their own. 
 its tools to an OpenClaw agent's: that is **Supplement Gateway with C5 Tools** in
 **Settings › Tools**, on by default, for models that can call tools. C5 then runs those
 tool calls itself, with its usual permission checks and records. C5 does not add its
-tools to Hermes Agent agents.
+tools to Hermes Agent agents directly; an administrator can offer them to Hermes Agent and
+PicoClaw through C5's local MCP server (see
+[Egress gateway](/c5/security/egress-gateway#c5s-tools-for-hermes-agent-and-picoclaw)).
 
-C5 does not check which tools an OpenClaw agent already has, so an agent with OpenClaw's
-own web search can be offered C5's as well. Only C5's tools pass through its checks:
-OpenClaw's own run inside the gateway, outside them (see
-[What offline does not cover](/c5/configuration/network#what-offline-does-not-cover)).
+C5 asks the gateway which tools each agent already has and adds only what is missing, so an
+agent with OpenClaw's own web search is not offered C5's as well, unless your data-loss
+checks or Network Containment are on: then C5's web search and page reader are used, because
+only they pass through those checks. C5's file, command and media tools are always offered.
+OpenClaw's own tools run inside the gateway, outside C5's checks, unless an administrator
+routes the gateway through the [egress gateway](/c5/security/egress-gateway); see
+[OpenClaw and Hermes](/c5/configuration/agent-gateways#your-agents-own-tools-come-first).
 
 ## Adding more tools
 

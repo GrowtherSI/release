@@ -145,9 +145,11 @@ These connections are not stopped by the offline posture either:
   OpenRouter's `web` plugin or an `:online` model, for example — does it at the provider.
   Neither passes through C5, so the offline posture, the
   [Network Containment allowlist](../security/guardrails.md) and
-  the [data-loss checks](../security/data-protection.md) never see what they send. C5 does
-  not remove these tools. To keep an agent inside C5's checks, turn them off in the
-  gateway's own configuration, and turn off the provider's web search where you set it.
+  the [data-loss checks](../security/data-protection.md) never see what they send, unless
+  an administrator routes the gateways through the
+  [egress gateway](../security/egress-gateway.md), which applies offline, the allowlist and
+  the audit trail to their connections. C5 does not remove these tools by default; see
+  [Native network tools](agent-gateways.md#native-network-tools).
 
 `growther update` run by hand still contacts the platform. The three model
 `pull` commands do not: the offline posture refuses them too. To get a model
