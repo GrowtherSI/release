@@ -36,12 +36,21 @@ C5 sets sensible defaults so this works reasonably well before you touch anythin
 
 ## Changing the defaults
 
-1. Go to **Settings**.
-2. Open the model routing section.
-3. Choose which model handles which kind of work.
-4. Save.
+C5 sorts each task into one of four kinds of work — **Trivial**, **Simple**, **Standard** and
+**Complex** — and you can choose a model for each:
 
-You can also set a single model for everything if you prefer simplicity over savings.
+1. Go to **Settings**.
+2. Open the **Config** tab of the provider or gateway you want to change. Each one you turn on
+   in **Settings › Integrations** adds a tab of its own, marked with its icon.
+3. Under **Complexity Routing**, choose a **Primary** model for each kind of work, and a
+   **Fallback** if you want one. On a gateway's tab the section is **Complexity → Agent
+   Routing**, and you choose an agent instead, which brings its own model.
+4. Click **Save**.
+
+Leave a kind of work blank and C5 keeps whatever model it would have used anyway. A blank
+is "leave it alone", not a cheaper choice. Local providers also have a **Default Model**,
+used wherever nothing else names one. To give particular agents a
+model, use **Fleet › Assignment** (see [Giving agents a model](/c5/agents/fleet#giving-agents-a-model)).
 
 ## Running models on your own machine
 
@@ -62,8 +71,13 @@ Providers have outages. When one is down, C5 can fall back to another model rath
 stopping. You choose the order it tries, in **Settings › Integrations › Coordinator
 Priority** (with its own column for chats, tasks and C5's background work).
 
-That order holds among the coordinators that are working. One that keeps failing is tried
-last, until it recovers:
+That order holds among the coordinators that are working, with one exception. For task
+steps the order is a strong starting preference, not a fixed rule. C5 keeps score of how well
+each working coordinator does each kind of agent's work, and leans toward the one doing best.
+It also leans toward the cheaper one, more so for simple work. For a paid provider, "cheaper"
+is judged from the price of the model you set it to run. Your first choice keeps a head start.
+
+One that keeps failing is tried last, until it recovers:
 
 - when 3 of its last 5 answers came back as an error or empty, or
 - when 3 of its last 5 attempts got a server error (5xx), a refused connection, or a

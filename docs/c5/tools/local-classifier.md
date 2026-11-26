@@ -28,32 +28,61 @@ carries on. C5 never depends on the classifier: whenever it is off, busy, slow, 
 broken, C5 asks the usual model, exactly as before.
 
 Its controls are in **Settings › Classifier**, a tab of its own right after **Learning**.
-They used to be a section of **Settings › Learning**, called **Local Classifier** before C5
-could use a model from your providers; this page was called _Local classifier_, and its
-address has not changed. The tab's settings wait for its **Save** button — see
-[Saving your changes](#saving-your-changes). Outside the section on
-[a model from your providers](#a-model-from-your-providers), **the classifier** on this page
-means the built-in model.
+(Older versions kept them in **Settings › Learning**, as **Local Classifier**.) The tab's
+settings wait for its **Save** button — see [Saving your changes](#saving-your-changes).
+Outside the section on [a model from your providers](#a-model-from-your-providers),
+**the classifier** on this page means the built-in model.
 
 **In short:**
 
-- You do not need to do anything. C5 downloads the model (about 812 MB) once, and at first
-  only records the classifier's answers beside the usual ones, for every kind of decision.
-- Want a model you already run to answer instead — on llama.cpp, Ollama, LM Studio, vLLM or a
-  cloud API? An administrator can choose one; see
-  [A model from your providers](#a-model-from-your-providers).
+- **You do not need to do anything.** The classifier is on by default. C5 downloads the
+  built-in model (about 812 MB) once, from Hugging Face, and checks it before it is ever
+  used.
+- **At first it changes nothing.** It only records its answers beside the usual ones, for
+  every kind of decision. Only **Task categories** can act on its answers, and only once
+  someone with permission raises it after it has been measured on your own install; see [When it starts to act](#when-it-starts-to-act).
+- **It stays on your machine.** The built-in model runs here, what it is asked and answers
+  stays in C5's database here, and nothing about it is sent to Growther.si; see
+  [Privacy](#privacy).
+- **It needs at least 8 GB of memory** and runs on macOS, Linux (x64) and Windows (x64 and
+  Arm64). If this machine cannot run it, nothing is downloaded and C5 works as before; see
+  [Machines it cannot run on](#machines-it-cannot-run-on).
 - On a machine where it runs on the CPU, it records only one in four Step quality questions,
   so it stays out of your agents' way; see
   [On a machine where it runs on the CPU](#on-a-machine-where-it-runs-on-the-cpu).
-- To stop it, see [Turn the classifier off](#turn-the-classifier-off).
+- To stop it, see [Turn the classifier off](#turn-the-classifier-off). To get the disk space
+  back, see [Delete the model](#delete-the-model).
+- Want a model you already run to answer instead — on llama.cpp, Ollama, LM Studio, vLLM or a
+  cloud API? An administrator can choose one; see
+  [A model from your providers](#a-model-from-your-providers).
 - Managing many machines? Lock `classifier_enabled` to `false` in your organisation's policy before
   C5 first starts, and the model is never downloaded; see
   [For administrators](#for-administrators). To let the download through a proxy, allow
   `huggingface.co` and the five download hosts listed under [Network](#network).
-- To get the disk space back, see [Delete the model](#delete-the-model).
-- If this machine cannot run it, nothing is downloaded; see
-  [Machines it cannot run on](#machines-it-cannot-run-on).
 - No network access? See [Offline and air-gapped installs](#offline-and-air-gapped-installs).
+
+**On this page**
+
+- **Everyone:** [What it downloads](#what-it-downloads) ·
+  [Turn the classifier off](#turn-the-classifier-off) · [Turn it back on](#turn-it-back-on) ·
+  [Delete the model](#delete-the-model) · [What it does at first](#what-it-does-at-first) ·
+  [What you see in Settings › Classifier](#what-you-see-in-settings-classifier) ·
+  [Privacy](#privacy)
+- **Letting it act, and teaching it:** [When it starts to act](#when-it-starts-to-act) ·
+  [Let task categories act](#let-task-categories-act) · [Teaching it](#teaching-it) ·
+  [What you see in Ops › Classifier](#what-you-see-in-ops-classifier)
+- **Choosing a model from your providers:** [Who answers](#who-answers) ·
+  [Choose a model](#choose-a-model) · [What each provider needs](#what-each-provider-needs) ·
+  [Models allowed from](#models-allowed-from) ·
+  [Models your provider bills](#models-your-provider-bills) ·
+  [Use as fallback](#use-as-fallback) · [The Terms that cover it](#the-terms-that-cover-it)
+- **Administrators:** [For administrators](#for-administrators) (the managed policy keys,
+  downloads and network hosts) ·
+  [Offline and air-gapped installs](#offline-and-air-gapped-installs) ·
+  [Machines it cannot run on](#machines-it-cannot-run-on) · [Command line](#command-line)
+- **Troubleshooting:** [Troubleshooting](#troubleshooting) ·
+  [Problems choosing a model from your providers](#choosing-a-model-from-your-providers) ·
+  [Log lines](#log-lines) · [`growther doctor`](#growther-doctor)
 
 ## Why it is on by default
 
@@ -294,32 +323,23 @@ If you do not want a kind recorded, set it to **Off**, and that choice is kept.
 title and the step's name, and the start and end of the step's own instruction and of its
 output — never the rubric's score it is compared with. (The instruction is what the step was
 asked to do, before C5 adds the tools to use, the quality rules learned from past reviews
-and the like, which are much the same for every step of a role.) Earlier versions showed it
-the rubric's breakdown too, so it was judged with the answer in front of it. The gate
-therefore counts only steps recorded since your install updated to this version; a rating
-you gave an older step still counts for the reward model.
+and the like, which are much the same for every step of a role.) Older versions also showed
+it the rubric's breakdown, so the gate counts only steps recorded since your install updated;
+a rating you gave an older step still counts for the reward model.
 
 **A mode someone chose is kept.** The defaults apply only to a kind of decision nobody has
 set. If you set a kind to **Off**, it stays off. Nothing ever raises a kind into **Assisted**
 or **Authoritative** for you. With the built-in model switched off and no model from your
 providers in use, none of them is asked, whatever its mode says.
 
-**After updating from an earlier version.** Earlier versions saved the mode of every kind as
-soon as anyone changed one of them. So a kind nobody chose could be saved at the old default:
-Task categories in Shadow, every other kind Off. Once per install, at the first start of a
-version with the new defaults, C5 looks in its audit log for the kinds someone actually set:
-
-- a kind still at its old default, with no record that anyone chose it, is reset, so it takes
-  today's default (Shadow);
-- a kind someone set is kept exactly as they set it, and so is a kind at any mode that was
-  never a default;
-- if the audit log may no longer reach back to 27 September 2026, when C5 first saved these
-  modes, C5 cannot tell which were chosen, so it changes nothing. While the classifier is on,
-  it then logs `[classifier] site modes kept as stored: the audit trail no longer shows which
-  were chosen, so none is taken for a default`.
-
-A kind that was reset is recorded in the audit log as a change made by `system`. **Settings ›
-Classifier** shows every kind's mode, so you can check the result and change any of them.
+**After updating from an earlier version.** Older versions could store a kind nobody chose
+at the old default (Task categories in Shadow, every other kind Off). Once per install, C5
+checks its audit log: a kind still at its old default that nobody chose is reset to today's
+default (Shadow), and a kind someone set is kept exactly as they set it. If the audit log no
+longer reaches back to 27 September 2026, C5 cannot tell which were chosen, so it changes
+nothing and, while the classifier is on, logs the `site modes kept as stored` line (see [Log lines](#log-lines)). A reset
+is recorded in the audit log as a change made by `system`. **Settings › Classifier** shows
+every kind's mode, so you can check the result and change any of them.
 
 ### On a machine where it runs on the CPU
 
@@ -492,9 +512,8 @@ gave a task, fixes that.
 - Every night C5 re-checks each kind of decision that acts. It moves it back to **Shadow**, and
   sends administrators a notification, **Local classifier: … moved back to shadow**, saying
   why, when:
-  - its gate now fails. This includes **Telling cases apart**, which v322 and earlier did
-    not measure: a kind raised before the update is moved back the first night after it if
-    its answers do not tell cases apart;
+  - its gate now fails, **Telling cases apart** included (see
+    [Task categories went back to Shadow after an update](#troubleshooting));
   - the classifier now answers as a different model;
   - the calibration its confidence level was measured on has been replaced; or
   - its calibration error has more than doubled since it was raised.
@@ -900,8 +919,7 @@ Once a billed model is in use:
 - While your **Hard Budget Cap** is reached and set to block, C5 asks the model nothing. The
   built-in model answers meanwhile, if it is on and [Use as fallback](#use-as-fallback) is
   on. The cap counts these questions with the rest of the period's spending (see
-  [How the cap counts](/c5/using-c5/ops#how-the-cap-counts)); up to v329 the installed app
-  filed them under a date the cap could not read in order, so it could fail to stop them.
+  [How the cap counts](/c5/using-c5/ops#how-the-cap-counts)).
 - Every question to OpenRouter carries the routing limits you set on OpenRouter's **Config**
   tab in Settings — data collection, the providers allowed, ignored or preferred,
   quantizations and price caps, never its fallback models (see
@@ -909,8 +927,7 @@ Once a billed model is in use:
   — and asks OpenRouter to use only a provider that returns the probabilities. If C5 cannot
   read those limits, it asks OpenRouter nothing they might rule out. The model's note says
   so: _Every question C5 asks this model carries your OpenRouter routing limits from
-  OpenRouter's Config tab in Settings (…), never its fallback models._ A model tested by an
-  earlier version shows that note in these words too, without a new test.
+  OpenRouter's Config tab in Settings (…), never its fallback models._
 - The list offers the models OpenRouter lists that could be chosen here, not only those
   under **Model Selection** on OpenRouter's **Config** tab, and choosing one never adds it
   there: the models your chats and tasks fall back to stay as you set them.
@@ -1224,8 +1241,7 @@ cannot be asked now, and the built-in model answers in its place), **Unavailable
 cannot be asked now, and nothing answers in its place: always so with Use as fallback off,
 even where the built-in model still answers some kinds of decision), **Testing** (a test of
 it is running) or **Off** (your organisation's policy keeps every model off) — and the
-built-in model's own badge moves into its panel. While a change is being saved, the badge
-says **Turning off…**, **Turning on…** or **Saving…** instead.
+built-in model's own badge moves into its panel.
 
 | Badge | What it means | What to do |
 | --- | --- | --- |
@@ -1939,14 +1955,16 @@ See [Network and egress](../configuration/network.md).
 
 ## Command line
 
+Two commands check and fetch the built-in model from a terminal. Every line they can print is
+in [`growther classifier`](../cli/commands.md#growther-classifier) in the CLI reference.
+
 ```bash
-growther classifier status
-growther classifier pull
+growther classifier status   # can this machine run it, and is the model here and checked?
+growther classifier pull     # download the model now (about 812 MB)
 ```
 
-`status` checks whether this machine can run the classifier and whether the model is here and
-checked. It works out the model's SHA-256 fingerprint if that has not been done, which reads
-all 812 MB and can take a few seconds. It prints, for example:
+`status` answers two questions — can this machine run the classifier, and is the model here
+and checked — and then names the model:
 
 ```text
 ✓ supported on Mac Studio (darwin-arm64): Apple M4 Max, 16 cores (12 performance and 4 efficiency), 64 GB memory
@@ -1956,91 +1974,48 @@ all 812 MB and can take a few seconds. It prints, for example:
   sha256 2665d08c1052b4e01dabcb08771d25579f6776f7066355e4a0ccc5f74e32d4a2
 ```
 
-The first line describes the machine as the card does, from the operating system's own
-figures: its name where the system gives one, then the platform, processor, physical cores
-and memory, for example
-`✓ supported on linux-x64: AMD Ryzen 9 7950X, 16 cores, 31.1 GB usable memory`.
+- The first time, it works out the model's SHA-256 fingerprint, which reads all 812 MB and
+  can take a few seconds.
+- On Apple silicon the second line gives both possibilities, because this command cannot see
+  which model providers are configured. The **This Mac** line in **Settings › Classifier**
+  says which applies (see [GPU or CPU](#gpu-or-cpu)).
+- It never suggests a pull that Offline, your organisation's policy or a link would refuse.
+  To check, it reads your organisation's policy whenever the model is not here and checked.
+  **If you use a signed policy document at a web address, each such run makes one request to
+  it, even while C5 is set to Offline.** It never creates or changes a database.
+- It exits with `0` when the machine is supported and the model is verified, and `1`
+  otherwise.
 
-On Apple silicon the second line gives both possibilities, as above, because this command
-does not read C5's settings and so cannot see which model providers are configured. The
-**This Mac** line in **Settings › Classifier** says which one applies (see
-[GPU or CPU](#gpu-or-cpu)). Off Apple silicon, the second line says why it runs on the CPU,
-and with how many threads, for example
-`CPU: GPU acceleration is only used on Apple silicon (this is linux-x64). It uses 8 CPU threads.`
+`pull` prints the model's notice, then downloads it with progress in 5% steps, and ends with
+`✓ downloaded and verified — <path>` (or `✓ already present and verified — <path>`).
 
-The model line can also say:
-
-- `` ✗ model not downloaded (run `growther classifier pull`, or place … at …) ``
-- `✗ model not downloaded: this deployment's network posture is offline, so C5 does not
-  download it.`, then the address, path and fingerprint to place it by hand — the Egress
-  posture is **Offline**.
-- `✗ model not downloaded: your organisation's policy keeps the local classifier off`
-- `✗ <path> is a link whose file cannot be reached (a share that is not mounted?); it is used
-  once it can be, and never downloaded over`
-- `✗ <path> is not the pinned model (wrong size)` (or `sha256 mismatch`), followed by what
-  happens to it: `` `growther classifier pull` replaces it `` for a file; for a link to the
-  wrong file, _it is a link, and C5 does not replace a link: point it at the model …, or
-  remove it to have C5 fetch the model_; under Offline or a policy that keeps the classifier
-  off, the same reason as the lines above.
-
-`status` does not suggest a pull that Offline, your organisation's policy or a link would
-refuse. To check, it reads your organisation's policy whenever the model is not here and
-checked, as `pull` does: the device's own policy and, if you use one, the signed policy
-document. **If that document is at a web address, each such `status` run makes one request
-to it, even while C5 is set to Offline.** `status` never creates or changes a database.
-
-It exits with `0` when the machine is supported and the model is verified, and `1` otherwise.
-
-`pull` downloads the model now. It prints the model's notice, then, once the first bytes
-arrive, _About 812 MB is downloaded once from Hugging Face._ and
-`Downloading decider-0.8b-q8_0 (~812 MB) to <path>…`, then progress in 5% steps, and
-finally `✓ downloaded and verified — <path>`. A pull that is refused, or finds the model
-already here, prints neither of those two lines. If the model is already here and checked,
-it says `✓ already present and verified — <path>` and downloads nothing.
-
-- It exits with `0` when the checked model is in place (downloaded now or already there) and
-  `1` when it is refused or fails. The reason is printed on one line starting with `✗`.
-- It does not check whether this machine can run the classifier. Run
-  `growther classifier status` first: on an unsupported machine the model downloads but never
-  loads.
+- It exits with `0` when the checked model is in place and `1` when it is refused or fails.
+  The reason is printed on one line starting with `✗`; a network failure names its cause, and
+  the proxy if one refused (see [Network](#network)).
 - It works while the classifier is switched off, and while
   `GROWTHER_CLASSIFIER_NO_AUTO_DOWNLOAD=1` is set: running it is your explicit request.
-- It goes through the proxy and certificate authorities set for C5.
-- It is refused when the Egress posture is **Offline**, and prints the address, folder and
-  fingerprint to place the file by hand instead.
-- It is refused when your organisation's policy locks the classifier off: _Your organisation's
-  policy keeps the local classifier off, so its model is not downloaded._
-- It resumes an unfinished download, and replaces a wrong file at the model's name once the new
-  one is checked.
-- It is refused when the model's path is a symbolic link whose file cannot be reached, or a
-  link to a file that is not the model: C5 never downloads over a link. The message says what to
-  do: make the file reachable, point the link at the model, or remove the link.
-- If C5 itself is downloading the model at the same time, `pull` says another C5 process is
-  downloading and stops; C5's download carries on.
-- When the download fails, the `✗` line gives the cause itself, naming the proxy if one
-  refused (see [Network](#network)).
+- It does not check whether this machine can run the classifier. Run `status` first: on an
+  unsupported machine the model downloads but never loads.
+- It resumes an unfinished download, and replaces a wrong file at the model's name once the
+  new one is checked.
+- It is refused when the Egress posture is **Offline** (it prints how to place the file by
+  hand instead), when your organisation's policy locks the classifier off, when another C5
+  process is already downloading it, and when the model's path is a symbolic link whose file
+  cannot be reached or that leads to a file that is not the model: C5 never downloads over a
+  link.
 
 While the classifier is on, a running C5 starts using a model you pulled the next time
-**Settings › Classifier** is opened, or at its next start.
+**Settings › Classifier** is opened, or at its next start. You do not need to restart C5.
 
 ### `growther doctor`
 
-[`growther doctor`](../cli/doctor.md#local-classifier) has a **Local classifier** row. Doctor
-does not work out the model's fingerprint; it reads the record C5 keeps beside it.
+[`growther doctor`](../cli/doctor.md#local-classifier) has a **Local classifier** row. It
+reads the record C5 keeps beside the model rather than the whole file, so it is quick. A
+missing model is never a failure: C5 works without it. The doctor page lists every result
+and what to do about each.
 
-| Result | What it means |
-| --- | --- |
-| OK — _not available here (optional): …_ | This machine cannot run it; the reason follows. |
-| OK — _model not downloaded yet — it is fetched while the classifier is on (Settings › Classifier), or by `growther classifier pull`_ | Normal on a new install. |
-| OK — _model not downloaded — this install's network posture is offline, so C5 never downloads it._ | The Egress posture is Offline. Followed by the address, path and fingerprint to place it by hand. |
-| OK — _model not downloaded — GROWTHER_CLASSIFIER_NO_AUTO_DOWNLOAD=1, so C5 does not fetch it on its own._ | Run `growther classifier pull`, or place it by hand. |
-| OK — _model verified — \<path\>_ | All good. |
-| OK — _model present, not yet verified — \<path\>_ | The file is the right size but has not been checked yet. `growther classifier status` checks it. |
-| Warning — _\<path\> is N bytes, not the pinned model's 811844032; it will not load_ | A wrong file. `growther classifier pull` replaces it (by hand when offline). If the path is a symbolic link, pull does not replace it: point the link at the model, or remove it. |
-
-A missing model is never a failure: C5 works without it. Doctor does not tell a symbolic link
-whose file cannot be reached from a missing model: both read _model not downloaded_.
-`growther classifier status` tells you about the link.
+Doctor does not tell a symbolic link whose file cannot be reached from a missing model: both
+read _model not downloaded_. `growther classifier status` tells you about the link.
 
 ## Log lines
 

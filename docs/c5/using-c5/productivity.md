@@ -70,7 +70,44 @@ approve it. See [Sub-tasks](#sub-tasks).
 
 ## Creating a task
 
-Click **New Task**, describe the work, and click **Create Task**.
+1. Click **New Task** at the top right of the page.
+2. Give the task a title and describe the work.
+3. Click **Create Task**.
+
+You can also create a task from [Chat](/c5/using-c5/chat#asking-for-something).
+
+### The Intent Wizard in the task window
+
+The **Intent Wizard** under the description of a new task helps you turn a short
+description into a clear brief: what to do, how and why, what to leave out, and what a good
+result looks like. It works the same way as on the
+[Create Task card in Chat](/c5/using-c5/chat#sharpening-a-request-with-the-intent-wizard).
+The button can be clicked once the description has some text in it, while **Intent
+Wizard** is on in **Settings › Budget** (it is to begin with).
+
+1. Click **Intent Wizard**. C5 fills in **Depth (What/How/Why)** and **Exclusions (What
+   to avoid)** from what you wrote. Change anything you like.
+2. Click **Next** to have C5 rewrite the description. **Skip** puts your answers into the
+   description as they are, and the **×** closes the wizard.
+3. While C5 works, the wizard says **Enhancing Intent** (or **Queued** while it waits its
+   turn), and the description cannot be edited.
+4. Read the new description over, change it if you want, and click **Create Task**.
+
+While the description is being rewritten, or an attached image is still being described,
+**Create Task** shows moving dots and waits. Point at it for the reason: _Waiting for the
+intent enhancement to finish_, or _Waiting for the image analysis to finish_.
+
+**Abort**, beside **Enhancing Intent**, stops the rewrite for good. Your description goes
+back to what it was before you clicked **Next**, and C5 does not try that rewrite again: an
+answer that arrives late from it is ignored.
+
+If something goes wrong:
+
+- **You reload the page, or C5 restarts.** The wizard picks up where it was: it finishes,
+  or says what went wrong. **Abort** still puts your earlier description back.
+- **The rewrite fails.** The wizard says why, with **Retry** and **Abort**.
+- **A budget cap is holding it.** The wizard says _Held by the budget cap — Abort to create
+  the task without enhancement_. Click **Abort**, then **Create Task**.
 
 ### The readiness check
 
@@ -385,11 +422,16 @@ will see it right away.
 
 As you use C5 more, the board fills up. A few ways to keep it under control:
 
-- **Filter** by status, agent, or date using the controls at the top.
+- **Archive** finished work you no longer need to see. **Archived** on the board (_Show
+  archived tasks_) opens the archived tasks, and **Filter archived…** finds one again.
+- **Deleted** tasks have a drawer of their own (_Show deleted tasks_), with **Filter
+  deleted…**, for those allowed to see it.
+- **Scheduled** work is hidden until you ask for it: _Show scheduled requests_ puts it on
+  the board.
 - **Tag** related work so you can pull it up together later. See
   [Tags](/c5/configuration/tags).
-- **Group by project** so client work stays separate from your own.
-- **Archive** finished work you no longer need to see.
+- **Put tasks in a project** so client work stays separate from your own. See
+  [Projects](/c5/using-c5/library#projects).
 
 ## Changing what happens next
 
@@ -447,6 +489,8 @@ If a task keeps failing, see [Common issues](/c5/troubleshooting/common-issues).
 
 ## Where to go next
 
+- [Chat](/c5/using-c5/chat) — hand your agents new work in plain words.
+- [Library](/c5/using-c5/library) — pick up what your finished tasks made.
 - [Schedules](/c5/using-c5/schedules) — run work on a timer.
 - [Ops](/c5/using-c5/ops) — set spending limits.
 - [Analytics](/c5/using-c5/analytics) — see how your agents are trending.

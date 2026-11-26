@@ -467,6 +467,10 @@ growther policy reload
 
 `validate` prints one row per key and exits non-zero if anything would be rejected.
 
+`reload` asks the running C5 to read its policy again now. On Windows it cannot reach a
+running C5: select **Reload policy** in **Settings › Enterprise › Policy** instead, or wait
+for the next fifteen-minute read.
+
 ## Unattended installs
 
 To push C5 itself, use the Windows or macOS installer package — see

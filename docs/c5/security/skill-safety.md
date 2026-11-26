@@ -8,7 +8,8 @@ order: 7
 
 A skill is instructions your agents follow. That makes skills powerful, and it makes an
 unsafe one worth taking seriously: an agent reading a bad instruction will simply do what
-it says. This page explains what C5 checks, and what it does not.
+it says. This page explains what C5 checks, and what it does not. It matters to anyone who
+turns skills on or adds their own.
 
 ## The risk that matters most
 

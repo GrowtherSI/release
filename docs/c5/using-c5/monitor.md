@@ -59,8 +59,9 @@ LLM Leases **Active**, **Completed** and **Failed** (a lease is never pending); 
 **Pending**, **Success** and **Expired**. Rows come newest first.
 
 A queue that is long but shrinking is fine — it is just busy. A queue that is not moving
-at all points at something blocking, usually a missing API key, a spending limit, or a
-task waiting for your approval.
+at all points at something blocking, usually a missing API key, a
+[spending limit](/c5/using-c5/ops#what-happens-at-the-limit), or a task waiting for
+[your approval](/c5/using-c5/hitl).
 
 ## Self-healing
 

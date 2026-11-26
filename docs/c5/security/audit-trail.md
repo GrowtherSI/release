@@ -7,7 +7,8 @@ order: 8
 # Audit trail
 
 C5 keeps a running record of what it did. This page explains what is in it, why it can be
-trusted, how long it is kept, and how to take a copy away with you.
+trusted, how long it is kept, and how to take a copy away with you. It is mainly for
+administrators, and for whoever answers questions about security or compliance.
 
 You will find it in **Ops › Audit**.
 
@@ -21,6 +22,10 @@ You will find it in **Ops › Audit**.
 - **Storage changes** — turning database encryption on or off.
 - **Tool and extension permissions** — changes to what an agent is allowed to use, and to
   search providers and integrations.
+- **Model calls** — `LLM_DISPATCH`, written when C5 sends a request to a model. It names the
+  model and the agent the request was for. It never holds the text of the request.
+- **The trail's own upkeep** — `AUDIT_CHAIN_BROKEN` if a check finds the chain broken (see
+  [Why you can trust it](#why-you-can-trust-it)).
 
 Three further records are shown in the same list, so one timeline covers everything:
 
@@ -59,6 +64,11 @@ shows up at the exact entry that was touched.
 
 Tamper-evident is not the same as tamper-proof. Someone with access to your computer can
 still delete the whole file. What they cannot do is alter it and have it still look right.
+
+**C5 checks the chain itself.** It checks the current day's entries (days run midnight to
+midnight UTC) when it starts and every hour while it runs. A break is recorded as
+`AUDIT_CHAIN_BROKEN`, naming the entry where the chain broke, and administrators are shown a
+live security alert.
 
 Every audit entry is also written twice — once where you can search and filter it, and once as
 a dated file in your C5 folder. The two are kept in step with each other, so they cannot end up
@@ -160,7 +170,8 @@ turn on **Legal hold**, which suspends audit pruning entirely: nothing ages out 
 it is on, so the record stays complete and in place rather than depending on somebody having
 remembered to export the right days. It is a lockable policy key, so your organisation can set
 it centrally and stop it being turned off on the device. `growther doctor` reports whether a
-hold is active, and `growther evidence` exports the held record for an auditor.
+hold is active, and `growther evidence export` exports the held record for an auditor. See
+[Audit shipping and evidence](/c5/security/audit-shipping#retention-and-legal-hold).
 
 ## What this is not
 
@@ -170,7 +181,7 @@ hold is active, and `growther evidence` exports the held record for an auditor.
   [Permissions](/c5/security/permissions).
 - **It does not leave your machine unless you send it.** Nothing is shipped by default.
   An administrator can configure a destination — OpenTelemetry, Microsoft Sentinel, Splunk
-  HEC or syslog — under **Settings › Enterprise › Audit**, and from then on every sealed
+  HEC or syslog — under **Settings › Enterprise › Audit shipping**, and from then on every sealed
   entry is spooled and delivered there. A remote syslog collector must be `tls://`; plain
   `tcp://` is accepted only to a loopback forwarder on this machine. See
   [Shipping audit events](/c5/security/audit-shipping).
@@ -180,3 +191,5 @@ hold is active, and `growther evidence` exports the held record for an auditor.
 - [Settings](/c5/configuration/settings) — where the retention sliders live.
 - [Permissions](/c5/security/permissions) — what your agents may do in the first place.
 - [Backups & recovery](/c5/security/backups) — keeping your own copy of everything.
+- [Audit shipping and evidence](/c5/security/audit-shipping) — sending the trail to your
+  security team's system, and producing evidence for an auditor.

@@ -16,7 +16,16 @@ When you run `growther` in an interactive terminal, C5 shows a startup banner an
 ┗━━━ ctrl+r restart ━━━ ctrl+c quit ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ```
 
-All log categories are **OFF by default** so your terminal stays clean, quiet, and easy to read. Errors, warnings, and startup notices are always printed so you never miss important events.
+All log categories are **OFF by default** so your terminal stays clean, quiet, and easy to read. What still prints with every category off:
+
+- **Errors**, always, whatever their category.
+- **Startup, restart and shutdown notices**, and lines about settings, the local classifier
+  and the Offline network setting.
+- **Lines that belong to no category**: anything that does not start with a `[tag]`, and
+  warnings whose tag is in none of the categories below.
+
+A warning from a category that is off is hidden with the rest of that category. If you are
+chasing a problem in one area, turn its category on.
 
 ## Turning categories on and off
 
@@ -51,9 +60,9 @@ Categories that are **ON** show in **green**. Categories that are **OFF** show i
   session. Nothing in your terminal needs restarting, and you do not need to
   run `growther` again.
 - `Ctrl+C` — **Quit**: Stops C5 cleanly. This is an intentional close, so
-  "Restart automatically if it stops unexpectedly" does **not** bring it back —
-  that setting is for crashes, not for you deciding to stop. If "Start when I
-  sign in" is on, C5 returns at your next sign-in.
+  **Keep Growther running** does **not** bring it back —
+  that setting is for crashes, not for you deciding to stop. If **Start when I
+  sign in** is on, C5 returns at your next sign-in.
 
 When C5 is started by a service rather than by you — a login item, `launchd`,
 `systemd` — there is no terminal to return to, so `Ctrl+R` is not available and
@@ -66,6 +75,11 @@ You never have to re-enable your favorite categories every time you launch C5. Y
 ```text
 ~/.growther/config/cli.yaml
 ```
+
+The file is in the `config` folder of your C5 home, so if you set `GROWTHER_HOME` it moves
+with it. If you already have a `cli.yml` there instead, C5 uses that. To keep your choices
+somewhere else entirely, set `GROWTHER_CLI_CONFIG_PATH` to the file you want (see
+[Environment variables](/c5/cli/environment)).
 
 - **First run**: C5 creates this file automatically the first time you run `growther`.
 - **Automatic saving**: Whenever you press a hotkey in the terminal, C5 updates `cli.yaml` immediately.

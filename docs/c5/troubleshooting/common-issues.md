@@ -98,7 +98,7 @@ started, the boot log says so:
 ```
 
 Use the address that line names. See
-[Why C5 listens on two addresses](../configuration/network.md).
+[Why C5 listens on two addresses](/c5/configuration/network#why-c5-listens-on-two-addresses).
 
 ### Restart is greyed out or C5 is offline
 
@@ -192,6 +192,26 @@ _Scoring check: <role> steps fail "<check>" almost every time_ means nearly ever
 step of that role failed one check of its rubric. That usually says the check does not fit
 what the role is asked to do, not that the work is bad. Nothing changes on its own; see
 [When one check fails almost every step](/c5/using-c5/analytics#when-one-check-fails-almost-every-step).
+
+## Voice
+
+### The microphone button is greyed out, or voice is unavailable
+
+Point at the button: it says why. If voice is off for your account or for remote devices,
+replies have no read-aloud speaker either. Otherwise, when read-aloud fails, point at the
+speaker for the reason.
+
+| C5 says | What to do |
+| --- | --- |
+| _Voice isn't switched on for your account._ | An administrator turned voice off for you. They can turn it back on in **Settings › Access**, on the **Voice** row |
+| _Voice is switched off for remote devices._ | You are on a paired phone or tablet. An administrator at the machine running C5 can turn on **Voice on remote devices** in **Settings › Voice** |
+| _The voice spending limit has been reached_ (or _Your own voice spending limit …_) | Paid voice is paused until the period resets. An administrator can raise the limit in **Settings › Budget**. The built-in offline engine still works, and costs nothing |
+| _Microphone unavailable on this connection_ | Your browser allows the microphone only at `localhost` or an `https://` address. Open C5 at `http://localhost:4299`, or forward the port with [`growther connect`](/c5/cli/commands#growther-connect) |
+| _No speech-to-text provider is set up yet._ | Add one in **Settings › Voice**. Right after an install, the built-in engine may still be downloading: **Settings › Voice** shows its progress |
+| _Too many voice requests in a short time._ | Wait a moment and try again |
+
+See [If something is not working](/c5/using-c5/voice#if-something-is-not-working) on the
+Voice page for more.
 
 ## Downloaded models
 

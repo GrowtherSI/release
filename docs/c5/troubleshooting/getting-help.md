@@ -8,17 +8,43 @@ order: 3
 
 ## Before you ask
 
-Two things solve most problems and save you a wait:
+A few things solve most problems and save you a wait:
 
-1. **Run the checkup.** `growther doctor` names the cause more often than not.
-2. **Check [Common issues](/c5/troubleshooting/common-issues).** Most first-week problems
-   are there.
+1. **Run the checkup.** It names the cause more often than not:
+
+   ```bash
+   growther doctor
+   ```
+
+   See [Running doctor](/c5/cli/doctor) for how to read it.
+2. **Check [Common issues](/c5/troubleshooting/common-issues)** and the
+   [FAQ](/c5/troubleshooting/faq). Most first-week problems are there.
+3. **Watch a tutorial.** Open the **Options** menu (`⋮`) at the bottom of the sidebar and
+   choose **Tutorials** for short videos on each part of the app. **Docs** in the same menu
+   links to these pages.
 
 ## Where to ask
 
+### From inside C5
+
+The quickest way to reach us is the **Feedback** form in the app:
+
+1. Open the **Options** menu (`⋮`) at the bottom of the sidebar.
+2. Choose **Feedback**.
+3. Pick a **Category**: **Bug**, **Idea**, **Question** or **Other**.
+4. Describe the problem in the box (up to 4,000 characters), using the checklist under
+   [What to include](#what-to-include).
+5. Select **Send**.
+
+Your message goes to the Growther.si team with the version of C5 you run, so you do not need
+to add it. If they reply, the answer arrives in your notifications in C5. The form needs C5
+to be activated, and an internet connection to send.
+
+### Everywhere else
+
 | Where | Best for |
 | --- | --- |
-| [Help & Feedback](https://growther.si/#modal=help) | Questions, problems, and feature ideas. |
+| [Help & Feedback](https://growther.si/#modal=help) | Questions, problems, and feature ideas — also when C5 will not start, so the form inside it cannot be reached. |
 | [GitHub](https://github.com/GrowtherSI) | Release notes and public discussion. |
 
 ## What to include
@@ -37,6 +63,15 @@ growther version
 growther doctor
 ```
 
+If a feature that reads attachments, images or speech behaves oddly, also include the report
+of the built-in component check:
+
+```bash
+growther packaged-selftest
+```
+
+See [Checking the built-in components](/c5/cli/doctor#checking-the-built-in-components).
+
 **Your system** — macOS, Windows, or Linux, and which version.
 
 **What you expected to happen**, in one sentence.
@@ -46,7 +81,9 @@ growther doctor
 **How to make it happen again**, if you can. This is the single most useful thing you can
 provide.
 
-**The exact error message**, copied and pasted rather than described.
+**The exact error message**, copied and pasted rather than described. C5 also keeps its
+errors in `logs/errors.log` in your C5 folder (`~/.growther` unless you moved it); the lines
+from around the time it went wrong are worth including.
 
 > **Warning**
 > Before you paste anything, take out API keys, passwords, and anything private. Error
@@ -54,7 +91,7 @@ provide.
 
 ## A good example
 
-> **Version:** 2026.1.0 on macOS 15.2
+> **Version:** 2026.11.25-v358 on macOS 15.2
 >
 > **Expected:** My Monday schedule should produce a weekly summary.
 >
@@ -75,7 +112,8 @@ That gives someone everything they need to start looking, with no back and forth
 
 ## Feature ideas
 
-Send them to [Help & Feedback](https://growther.si/#modal=help). Say what you are trying
+Send them with **Feedback** in the app, choosing **Idea**, or through
+[Help & Feedback](https://growther.si/#modal=help). Say what you are trying
 to achieve, not only what feature you want — often there is already a way, and if there
 is not, knowing the goal makes for a better feature.
 

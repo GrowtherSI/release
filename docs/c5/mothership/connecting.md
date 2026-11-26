@@ -31,6 +31,34 @@ growther doctor
 The output includes your license and Mothership state. You can also see it inside the
 app, in Settings.
 
+### The Mothership status in the sidebar
+
+The Mothership icon in the sidebar shows the link at a glance. Hover over it for the detail:
+
+| It says | What it means |
+| --- | --- |
+| **Mothership interconnection**, _Cloud API securely bridged_ | Connected. The rows below give the latency and when the last and next check-ins are |
+| **Mothership interconnection**, _Cloud API synchronizing..._ | Connected, and sending or receiving right now |
+| **Mothership unreachable**, _Connection problem_ | The last check-in failed. The **Error** row says why (see below) |
+| **Mothership nonintegrated**, _Cloud flywheel disconnected_ | Your licence does not include Mothership. An administrator sees a **License** button |
+
+The icon is not shown at all when Mothership is switched off.
+
+The **Error** row names the cause in words, with the system's own code beside it:
+
+| The Error row says | What to check |
+| --- | --- |
+| _Address lookup failed (ENOTFOUND)_ | The machine cannot look up the Mothership's name: DNS, or no network |
+| _Connection refused_, _Connection dropped_, _No network_ | The network, or a firewall between you and the Mothership |
+| _Timed out_ | A slow or blocking network or proxy |
+| _Certificate expired_, _Certificate not trusted_ | A proxy that inspects HTTPS may be re-signing the connection. See [Network and egress](/c5/configuration/network#behind-a-tls-inspecting-proxy) |
+| _Certificate pin mismatch_ | The certificate presented was not the one C5 expects. See [Network and egress](/c5/configuration/network#the-certificate-pin-and-your-proxy) |
+| _Mothership returned an error_ | The Mothership answered, but not with success. Try again later |
+
+Right after you set C5 up, the status can read _Couldn't read C5's status (sign in, or reload
+the page) — the Mothership was not reached_. That is C5 asking itself before you have
+signed in. It clears on its own within half a minute of signing in.
+
 ## Connecting more machines
 
 Run `growther activate` on each one. Every machine gets its own code and its own

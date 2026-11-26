@@ -24,23 +24,29 @@ The Library is split into tabs:
 
 ## Finding things
 
-There is a search box at the top of every tab. It looks inside your files, not just at
-their names, so you can search for a phrase you remember — except on **Attachments**, which
-searches names, descriptions and C5's analysis of each file (see below).
+**Projects**, **Deliverables**, **Documents** and **Notes** each have a search box at the
+top of their list. It searches titles, so search for a word you remember from the name.
+**Attachments** searches names, descriptions and C5's analysis of each file (see below).
 
-You can also:
+Beside the search box:
 
-- **Filter by date** to see only recent work
-- **Filter by tag** to pull up everything about one topic
-- **Sort** by newest, oldest, or name
+- **Show archived** switches the list to the things you archived, and **Show active**
+  switches back.
+- **Edit mode** adds a tick box to each item, with **Select all**, so you can archive
+  several at once.
 
 ## Projects
 
 A project is a folder for related work. If you are working on one big thing over several
 weeks, make it a project. Then every task, file, and note about it stays together.
 
-To start one, click **New project** and give it a name. After that you can point new
-work at it, and C5 files the results in the right place.
+To start one:
+
+1. Open the **Projects** tab.
+2. Click **Add Project**.
+3. Give it a title, and a description if you like.
+
+After that you can point new work at it, and C5 files the results in the right place.
 
 ### A schedule's project
 
@@ -135,15 +141,20 @@ Everything can be downloaded — an attachment from its preview, or several at o
 Attachments tab. There is nothing locking your work inside C5 — files are files, and you
 can take them whenever you like.
 
-You can also download a whole project at once as a zip.
-
 ## Cleaning up
 
 Over time the Library fills up. To keep it useful:
 
-- **Archive** finished projects. They leave your main view but stay searchable.
+- **Archive** finished projects. They leave the list, and **Show archived** brings them
+  back into view.
 - **Delete** things you truly do not need. This cannot be undone.
 - **Tag** as you go, so search stays quick. See [Tags](/c5/configuration/tags).
+
+## Whose work you see
+
+The Library shows the work of **your own workspace**: its projects, deliverables,
+documents, notes and files. Someone in another workspace on the same install never sees
+yours, and you never see theirs. See [Workspaces](/c5/configuration/workspaces).
 
 ## Where your files really are
 

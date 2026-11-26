@@ -75,7 +75,7 @@ See [Log filtering](/c5/cli/log-filtering) for the full list of hotkeys and conf
 | `growther verify`     | Prove a file really came from us. Works offline.                      |
 | `growther uninstall`  | Remove C5 from your computer.                                         |
 | `growther version`    | Print which version you have.                                         |
-| `growther login`      | Sign in from the command line, for a machine with no browser.         |
+| `growther login`      | Sign in through your organisation's identity provider, for a machine with no browser. |
 | `growther connect`    | Reach a C5 on another machine over your own SSH connection.           |
 | `growther remote`     | Say whether Remote Control is on, and list the paired devices.        |
 | `growther secrets`    | Move API keys into a keystore, and check what is stored where.        |
@@ -141,11 +141,22 @@ Controls whether C5 starts by itself and stays running.
 ```bash
 growther service install     # start C5 automatically from now on
 growther service status      # check whether that is set up
+growther service start       # start the registered service now
 growther service uninstall   # stop starting automatically
 ```
 
 Use `install` if you want C5 always ready. Use `uninstall` to go back to starting it
-by hand.
+by hand. `growther service` on its own does the same as `status`.
+
+`install` turns on two things: starting C5 when you sign in, and restarting it if it stops
+unexpectedly. Turn either off with a flag:
+
+- `--no-start` — do not start C5 at sign-in.
+- `--no-keepalive` — do not restart C5 if it stops unexpectedly.
+
+The change takes effect at your next sign-in. The same two choices are **Start when I sign
+in** and **Keep Growther running** in **Settings › System** (see
+[Starting, restarting and quitting C5](/c5/configuration/settings#starting-restarting-and-quitting-c5)).
 
 ### `growther activate`
 
@@ -433,9 +444,17 @@ growther policy keygen --out ./policy-keys            # an Ed25519 signing pair
 growther policy sign policy.yaml --key ./policy-keys/policy-signing.key
 sudo growther policy pin ./policy-keys/policy-signing.pub
 growther policy expect                                # mark this install as managed
+growther policy unexpect                              # undo expect
 growther policy reload                                # re-read the policy now
 growther policy templates --out ./c5-mdm               # the ADMX, profile, schema and samples
 ```
+
+`show` and `validate` take `--json` for a machine-readable answer.
+
+C5 re-reads its policy every 15 minutes on its own. `reload` asks a running C5 to do it now.
+On macOS and Linux it signals the running C5 directly. On Windows it cannot signal C5, so it
+says so and exits with `1`: use **Reload policy** on the **Settings › Enterprise** tab
+instead, or wait for the next 15-minute check.
 
 ### `growther user`
 
@@ -445,6 +464,13 @@ administrator from the device instead:
 ```bash
 growther user bootstrap-admin --name "IT Admin"
 ```
+
+Add `--external-id <issuer>|<subject>` to tie the account to the person's identity in your
+organisation's single sign-on, so their first single sign-on lands on this account. Run it on
+the machine that hosts C5, as the account that runs C5; the person then opens C5 there and
+chooses a passkey, password or PIN.
+It asks before it creates anything; `--yes` skips the question and `--json` prints a
+machine report.
 
 ### `growther webauthn`
 
@@ -879,6 +905,9 @@ growther key unwrap                          # move it back to a file
 growther key recover --escrow key-escrow.blob --private-key ./kek/kek.pem
 ```
 
+`growther key escrow disable` removes the escrow blob. It is refused while the device key is
+kept in a keystore, for the reason below.
+
 `wrap` needs a verified escrow and will refuse without one — wrapping makes the OS
 keystore a boot dependency, and escrow is the only way back from a destroyed keystore
 entry.
@@ -954,14 +983,25 @@ target, or the subcommand is not `show` or `relocate`.
 growther secrets status                # what is stored where, and what is still in the clear
 growther secrets migrate               # move API keys out of the config file into a keystore
 growther secrets revert                # move them back into the config file
-growther restore --from <backup>       # restore from an encrypted backup
+growther restore --from <backup-set-folder> --escrow key-escrow.blob --private-key ./kek/kek.pem
 ```
+
+`migrate` uses this computer's preferred keystore unless you name another with
+`--to <backend>`; `growther secrets status` lists the keystores and vaults this computer can use.
+`--keys A,B` limits `migrate` or `revert` to those keys, and `--json` prints a machine
+report.
 
 `revert` copies the secrets back into `c5.yaml` in plain text and removes them from the
 keystore. You need it before rolling back to a version older than the keystore support
 (see [`growther rollback`](#growther-rollback)). `migrate` and `revert` both ask before
 they change anything; `--yes` skips the question. See
 [Secrets and keys](/c5/security/secrets-and-keys).
+
+`restore` rebuilds this machine from a backup set and the escrow blob, so it needs the
+escrow's private key (`--private-key`) or a key vault (`--keyvault <vault>/<key>`). Stop C5
+first: it refuses while C5 is running. It checks the backup set, keeps a copy of the
+databases it replaces, and checks every restored database with the recovered key before it
+finishes.
 
 ### `growther evidence`
 
@@ -972,6 +1012,10 @@ Export the audit record for an auditor or a legal hold. See
 growther evidence export --from 2026-07-01 --to 2026-07-31
 growther evidence export --from 2026-07-01 --to 2026-07-31 --out /mnt/evidence/july.tar.gz
 ```
+
+Without `--out`, the bundle is written as an archive under `logs/audit/evidence/` in your C5
+folder. `--sign-key <file>` signs it with your own Ed25519 private key, and `--json` prints
+the result as JSON.
 
 It exits with `0` when the bundle is written and every day's audit chain checks out, `1`
 when the bundle is written but a chain is broken or a part is missing, and `2` when the
@@ -986,11 +1030,24 @@ input.
 ### `growther login` and `growther reset-auth`
 
 ```bash
-growther login                 # sign in from the command line, for a host with no browser
+growther login                 # sign in with your organisation's identity provider, for a host with no browser
 growther reset-auth <user>     # clear a user's credentials so they can enrol again
 ```
 
-`reset-auth` is the way back in when somebody has lost the device holding their passkey.
+`login` shows a short code and an address. Open the address on any device, sign in to your
+organisation's identity provider there, and enter the code. It waits up to 10 minutes. Its
+options:
+
+- `--server <url>` — the C5 to sign in to (default: this machine's, `http://127.0.0.1:4299`).
+- `--issuer <url>`, `--client-id <id>`, `--scope <list>` — override the identity provider
+  settings C5 would use.
+- `--timeout <seconds>` — how long to wait for you (default `600`).
+- `--no-open` — do not try to open a browser.
+- `--json` — print one JSON object instead of sentences.
+
+`reset-auth` is the way back in when somebody has lost the device holding their passkey, or
+forgotten their password or PIN. It works on this machine only and asks first (`--yes`
+skips the question). The person then picks a new way to sign in when they next open C5.
 
 ### `growther connect`
 
@@ -1008,6 +1065,7 @@ Leave it running; press Ctrl+C to close the forward.
 - `--local-port N` picks another local port. `4399` is the default on purpose: it is not the
   port a C5 on _this_ machine serves on, so the forward cannot land on the wrong C5.
 - `--remote-port N` if the far C5 is not on `4299`.
+- `--no-open` sets up the forward without opening your browser.
 
 `growther connect` checks that the two ends really are different machines and refuses if the
 forward has looped back to the C5 you started from.
@@ -1046,13 +1104,19 @@ growther uninstall --purge-data
 
 `--purge-data` removes every folder C5 owns, not only the main one: a data or key folder
 you moved to another disk, and the small pointer file that records where the folder is.
-It lists each one before removing it. Leaving the pointer behind used to stop the next
-fresh install from starting, so a purge is now genuinely complete.
+It lists each one before removing it, so nothing C5 made is left to trip up a fresh install.
+
+To see what `uninstall` would remove without removing anything, add `--dry-run`:
+
+```bash
+growther uninstall --purge-data --dry-run
+```
 
 ## Getting the version
 
 ```bash
 growther version
+growther version --json   # the version as JSON, for scripts
 ```
 
 Useful when reporting a problem — see [Getting help](/c5/troubleshooting/getting-help).

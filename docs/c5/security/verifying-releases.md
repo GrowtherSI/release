@@ -7,7 +7,8 @@ order: 5
 # Verifying releases
 
 Every copy of C5 is checked before it runs. This page explains how, and what to do if a
-check ever fails.
+check ever fails. You do not need to do anything for the checks to happen; read on if you
+want to check a download yourself, or if a check has failed.
 
 ## The problem this solves
 

@@ -98,6 +98,19 @@ A result is kept with the task, up to 25 MB; a larger one is refused, as a video
 image, by its kind. Each of these tools has a switch under **Master
 Tool Authorizations** (see [Permissions](/c5/security/permissions#setting-the-level)).
 
+## Tools for gateway agents
+
+Agents that run in an OpenClaw or Hermes Agent gateway have tools of their own. C5 can add
+its tools to an OpenClaw agent's: that is **Supplement Gateway with C5 Tools** in
+**Settings › Tools**, on by default, for models that can call tools. C5 then runs those
+tool calls itself, with its usual permission checks and records. C5 does not add its
+tools to Hermes Agent agents.
+
+C5 does not check which tools an OpenClaw agent already has, so an agent with OpenClaw's
+own web search can be offered C5's as well. Only C5's tools pass through its checks:
+OpenClaw's own run inside the gateway, outside them (see
+[What offline does not cover](/c5/configuration/network#what-offline-does-not-cover)).
+
 ## Adding more tools
 
 Two ways:

@@ -16,23 +16,28 @@ You do not need to change most of these. C5 works sensibly out of the box.
 | Area              | What it controls                                             |
 | ----------------- | ------------------------------------------------------------- |
 | **General**       | Basic behavior and appearance, and how tasks are run.         |
-| **Integrations**  | Model providers, third-party services and their keys.         |
-| **Autonomy**      | How much your agents may do without asking you.               |
-| **Guardrails**    | Hard limits agents cannot cross.                              |
-| **Budget**        | Spending caps and warnings.                                   |
 | **Tools**         | Which tools exist and how each one is allowed to be used.     |
 | **Extensions**    | Optional capabilities and MCP servers, each on, prompt, or off. |
-| **Access**        | Who can use this C5, UI feature & page locks (RBAC), and gateway restrictions. |
-| **Alerts**        | When and how C5 tells you something happened.                 |
-| **Communications**| How C5 reaches you — email and other channels.                |
-| **Voice**         | Speech-to-text and text-to-speech providers, including the built-in ones. |
+| **Guardrails**    | Hard limits agents cannot cross.                              |
+| **Autonomy**      | How much your agents may do without asking you.               |
+| **Budget**        | Spending caps and warnings.                                   |
 | **Learning**      | How much C5 adapts from your usage.                           |
 | **Classifier**    | The small model that answers C5's routine questions (its built-in model is on by default). |
+| **Alerts**        | When and how C5 tells you something happened.                 |
+| **Voice**         | Speech-to-text and text-to-speech providers, including the built-in ones. |
+| **Communications**| How C5 reaches you — email and other channels.                |
+| **Access**        | Who can use this C5, UI feature & page locks (RBAC), and gateway restrictions. |
+| **Remote Control**| Reaching this C5 from a phone or another computer, and the paired devices. |
+| **Enterprise**    | Managed policy, directory sign-in, secrets custody, audit shipping, storage. |
 | **Locations**     | Folders C5 brings documents in from and writes results into.  |
 | **Storage**       | Your data, its encryption, and export.                        |
 | **System**        | Ports, paths, and how C5 runs on this machine.                |
-| **Remote Control**| Reaching this C5 from a phone or another computer, and the paired devices. |
-| **Enterprise**    | Managed policy, directory sign-in, secrets custody, audit shipping, storage. |
+| **Integrations**  | Model providers, agent gateways and GitHub backups, and their keys. |
+| **Config**        | One tab for each gateway or model provider you turn on, with that provider's icon. Hover it to read its name, such as _OpenClaw Config_. |
+
+The tabs appear in this order. The **Config** tabs come last, and only for providers that
+are turned on in **Integrations**; see
+[Config tabs and optimizers](/c5/configuration/model-providers#config-tabs-and-optimizers).
 
 ## The ones worth setting early
 
@@ -50,47 +55,35 @@ started with), which outranks these fields. Change or remove it there.* Remove t
 and once C5 restarts the card's own **Host** and **Port** apply again. See
 [Local model servers and gateways](/c5/cli/environment#local-model-servers-and-gateways).
 
-### General: how many agents run at once
+Each gateway or provider you turn on here also gets a **Config** tab of its own. For
+OpenClaw and Hermes Agent, that tab checks the provider's own settings and
+suggests fixes; see
+[Config tabs and optimizers](/c5/configuration/model-providers#config-tabs-and-optimizers).
 
-Under **Adaptive Parallel Agents**, two sliders say how many task steps may run at the same
-time:
+### General: motion and animations
 
-- **Concurrent Agents** counts steps served by local models and by gateways (OpenClaw,
-  Hermes Agent, PicoClaw). This is the allowance every C5 has.
-- **Cloud Concurrent Agents** counts steps served by paid providers. It only takes effect
-  while a paid provider is **first** in **Task Priority** (**Settings › Integrations ›
-  Coordinator Priority**); while a paid provider is merely connected, it limits C5's cloud
-  requests but adds no running agents, and the card says so. With a paid provider first,
-  both allowances add up: **1** local and **2** cloud lets three steps run at once.
+**Settings › General** opens with a card of three controls for how much the screen moves.
+They save with the tab's **Save** button.
 
-Each slider has a **Manual** switch. Off, C5 raises and lowers the number itself, backing
-off when a provider slows down or returns errors and probing up again when it recovers;
-the slider then shows the live value. On, your number is the fixed ceiling. Setting the
-cloud allowance to zero stops it adding agents, but does not stop C5 using the paid
-provider for the steps it is first for.
+| Control | What it does |
+| --- | --- |
+| **Reduce Motion** | For comfort, and for slower machines. On, it turns off the 3D animations and the charts' entrance animations, switches the Sidebar and Chat metrics carousels to **Fade**, and slows the indicators that wait for data. **Off** by default |
+| **3D Animations** | The sign-in screen's flock, the chat particles, the Tags page's planets and the Dashboard's Memory Vectors. Turn it off to spare the graphics card. While **Reduce Motion** is on, it is off and greyed out |
+| **Carousel Transition** | How the Sidebar and Chat metrics carousels move from one metric to the next: **None** (the metric disappears for half a second, then the next one appears), **Fade**, or **Slide**, the default. **Slide** cannot be chosen while **Reduce Motion** is on |
 
-Until you save a number (or C5 has measured your machine once a model provider is set
-up), **Concurrent Agents** shows **1**, the number C5 really runs. Saving another tab no
-longer writes a value you never chose.
-
-The **LLM Queue** badge on [Productivity](/c5/using-c5/productivity#the-llm-queue-badge)
-shows both allowances in use, each behind a server or cloud icon.
-
-A queued card's tooltip shows its real place in line: **Next in line.** or **Number 3 in
-line.**
+Turn **Reduce Motion** off again and the carousel goes back to the transition you had
+before.
 
 ### General: the Tasks panel
 
-**Settings › General** opens with a card that now holds only **3D Animations**. Right under
-it, above **Schedules**, is the **Tasks** panel: how orchestration works a task. Everything
-that used to share the top card with **3D Animations** is here now, working as before, and
-it saves with the tab's **Save** button.
+Under that card, above **Schedules**, is the **Tasks** panel: how orchestration works a
+task. It saves with the tab's **Save** button.
 
 The switches, in order:
 
 | Control | What it does |
 | --- | --- |
-| **Create Sub-Tasks** | New. Whether orchestration may split a task into sub-tasks that wait for your approval. **Off** by default (_Off — tasks never split_); on, it reads _On — sub-tasks await approval_. See [Sub-tasks](/c5/using-c5/productivity#sub-tasks) |
+| **Create Sub-Tasks** | Whether orchestration may split a task into sub-tasks that wait for your approval. **Off** by default (_Off — tasks never split_); on, it reads _On — sub-tasks await approval_. See [Sub-tasks](/c5/using-c5/productivity#sub-tasks) |
 | **LLM Preemption** | Whether a chat request may stop long-running background work to free a slot on your hardware, instead of running on top of it |
 | **Human-in-the-Loop (HITL)** | **Require approval for DB writes**: agents ask a person before they write to the database |
 | **Execution Observability** | **Enable Global Telemetry Broadcast**: streams agents' live reasoning to the screen. Turning it off saves bandwidth with many agents running |
@@ -120,6 +113,35 @@ With it off, agents are never offered a way to create sub-tasks while they work 
 Turning it off does not touch sub-tasks that already exist: they stay where they are.
 
 Tasks you create yourself, including from [Chat](/c5/using-c5/chat), are never sub-tasks.
+
+### General: how many agents run at once
+
+Further down **Settings › General**, under **Adaptive Parallel Agents**, two sliders say
+how many task steps may run at the same time:
+
+- **Concurrent Agents** counts steps served by local models and by gateways (OpenClaw,
+  Hermes Agent, PicoClaw). This is the allowance every C5 has.
+- **Cloud Concurrent Agents** counts steps served by paid providers. It only takes effect
+  while a paid provider is **first** in **Task Priority** (**Settings › Integrations ›
+  Coordinator Priority**); while a paid provider is merely connected, it limits C5's cloud
+  requests but adds no running agents, and the card says so. With a paid provider first,
+  both allowances add up: **1** local and **2** cloud lets three steps run at once.
+
+Each slider has a **Manual** switch. Off, C5 raises and lowers the number itself, backing
+off when a provider slows down or returns errors and probing up again when it recovers;
+the slider then shows the live value. On, your number is the fixed ceiling. Setting the
+cloud allowance to zero stops it adding agents, but does not stop C5 using the paid
+provider for the steps it is first for.
+
+Until you save a number (or C5 has measured your machine once a model provider is set
+up), **Concurrent Agents** shows **1**, the number C5 really runs. Saving another tab does
+not write a value you never chose.
+
+The **LLM Queue** badge on [Productivity](/c5/using-c5/productivity#the-llm-queue-badge)
+shows both allowances in use, each behind a server or cloud icon.
+
+A queued card's tooltip shows its real place in line: **Next in line.** or **Number 3 in
+line.**
 
 ### Budget
 
@@ -383,7 +405,7 @@ used*); and the model's notice. While the model is not here, on a machine that w
 download it, a line under the notice says so and why. From there you can open the **Full
 Terms of Service** (<https://growther.si/t=models>) and the **Third-party notices** for
 everything C5 is built from — the same notices as **About › Copyright & Legal** in the
-sidebar's **Options** menu (`⋯`). If you may change settings and the classifier is on, it
+sidebar's **Options** menu (`⋮`). If you may change settings and the classifier is on, it
 also offers **Turn off the local classifier…** (**Turn off the built-in model…** while a
 model from your providers is chosen). Nothing in the dialog asks you to accept anything.
 Section 14 also covers a model from your providers, if you choose one.
@@ -531,8 +553,8 @@ Granular controls over specific high-impact capabilities:
 | **Orchestration Master Pause Button** | — | Toggle | Lets a standard user use **Master Pause**, the pause button in the **Productivity** header, which pauses or resumes all AI orchestration, for everyone. It needs no other setting permission. Without it the button is greyed out. See [Pausing everything](/c5/using-c5/productivity#pausing-everything). |
 | **Sidebar: HITL Button & Modal** | Toggle | Toggle | View opens the HITL (clipboard) window and its lists; off, the sidebar's button does nothing. Edit approves or rejects a paused task, runs the Retrospective Loop, and covers **Mute Noise**, **Unmute** and the cluster merges in **Ops › Errors**, and the Retrospective Loop's own settings; off, the window opens read-only. The **Rules** and **Training** decisions are an administrator's, at the machine, and **Variants** follows the **Variants** row below. See [Human review (HITL)](/c5/using-c5/hitl#who-can-use-it). |
 | **Sidebar: Notifications Button & List** | Toggle | Toggle | View shows notifications; Edit permits acknowledging or deleting individual notifications. |
-| **Sidebar: Remote Control Button** | Toggle | Disabled | Shows the **Remote Control** button in the sidebar `⋯` menu to standard users. Kept in step with **Enable Remote Control for non-admin accounts** in **Settings → Remote Control**. Administrators always see it. |
-| **Sidebar: Restart, Quit, Start C5** | Toggle | Disabled | Controls whether standard users can see and trigger server lifecycle controls in the sidebar `⋯` menu, offline recovery screen, and connection error boundary. Defaults to **Off**. |
+| **Sidebar: Remote Control Button** | Toggle | Disabled | Shows the **Remote Control** button in the sidebar `⋮` menu to standard users. Kept in step with **Enable Remote Control for non-admin accounts** in **Settings → Remote Control**. Administrators always see it. |
+| **Sidebar: Restart, Quit, Start C5** | Toggle | Disabled | Controls whether standard users can see and trigger server lifecycle controls in the sidebar `⋮` menu, offline recovery screen, and connection error boundary. Defaults to **Off**. |
 | ↳ *Remote Control: Restart, Quit* | Toggle | Disabled | Whether Restart and Quit, and the Remote Control launcher, are offered over Remote Control. A standard user needs this row and the row above it. Administrators always have it. |
 | **System Killswitch Execution** | Toggle | Toggle | Grants access to the global Killswitch banner on Settings and Dashboard. |
 | **Teammate Profiles & Roles** | Toggle | Toggle | Permits editing team member permissions and autonomy bounds via Profile modal. |
@@ -540,9 +562,9 @@ Granular controls over specific high-impact capabilities:
 | **Tool Activity Button & List** | Toggle | Toggle | View shows the Tool Activity button and its list; Edit lets a standard user acknowledge and delete the items in it. Approving or denying a tool request, and remembering that choice, is for administrators only; see [When an agent asks](/c5/security/permissions#when-an-agent-asks). |
 
 > **User self-help: Missing Restart, Quit, or Start buttons**
-> If you are a standard user and do not see the **Restart C5**, **Quit C5**, or **Start C5** buttons in your sidebar menu (`⋯`), or the **Start C5** button on connection error screens, your administrator has kept **Sidebar: Restart, Quit, Start C5** in its default **Off** position.
+> If you are a standard user and do not see the **Restart C5**, **Quit C5**, or **Start C5** buttons in your sidebar menu (`⋮`), or the **Start C5** button on connection error screens, your administrator has kept **Sidebar: Restart, Quit, Start C5** in its default **Off** position.
 >
-> When an administrator enables this toggle, the permission automatically synchronizes to your browser (`localStorage`) the next time you sign in, unlocking the server lifecycle controls.
+> When an administrator enables this toggle, your browser picks up the permission the next time you sign in, and the server lifecycle controls appear.
 
 #### 2. Page locks (middle column)
 
@@ -606,12 +628,12 @@ Below the RBAC grid, the Access tab provides direct configuration for the OpenCl
 When an administrator clicks **Save** on the Access tab:
 1. Permissions update immediately in the central configuration database.
 2. Active user sessions update in real time.
-3. For offline-capable controls (like the **Sidebar: Restart, Quit, Start C5** toggle), the client browser automatically synchronizes the permission into local browser storage (`localStorage`) upon sign-in. This ensures offline fallback screens know whether to present server restart buttons even when the backend is unreachable.
+3. For controls that must work while C5 is offline (like the **Sidebar: Restart, Quit, Start C5** toggle), your browser keeps a copy of the permission when you sign in. That way the offline screens know whether to show the **Start C5** button even when C5 cannot be reached.
 
 ## Starting, restarting and quitting C5
 
 **Settings → System** carries the controls that act on the server,
-and the same options sit at the bottom of the sidebar **Options** menu (the `⋯`
+and the same options sit at the bottom of the sidebar **Options** menu (the `⋮`
 button) so you can reach them without leaving what you are doing. Both Restart
 and Quit ask you to confirm first — they act on the server everyone on this
 machine is using.
@@ -646,7 +668,7 @@ Two settings sit beside them and are often confused:
 When the server is stopped or offline, the interface adjusts automatically:
 
 - In **Settings → System**, **Restart** is disabled, and the Quit panel transforms into a green **Start C5** panel.
-- In the sidebar **Options** menu (`⋯`), **Restart** and **Quit** are replaced by a centered green **Start C5** button.
+- In the sidebar **Options** menu (`⋮`), **Restart** and **Quit** are replaced by a centered green **Start C5** button.
 - On the offline fallback page and connection error modal, an emerald **Start C5** button appears below the details view.
 
 Clicking **Start C5** invokes your computer's built-in `growther://start` protocol link to launch C5 (or wake its background service). While it starts, the button shows a spinning indicator with **Starting…**. Once C5 is running, your tab reconnects on its own within a few seconds and the online controls return.

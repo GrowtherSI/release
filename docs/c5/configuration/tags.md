@@ -28,7 +28,7 @@ You can also ask for tags in plain words: "tag this as client-work and urgent."
 
 ## Managing them
 
-The **Tags** page lists every tag you have, with:
+The **Tags** page lists every tag in your workspace, with:
 
 - How many things use it
 - What color it shows in
@@ -57,6 +57,6 @@ Tag filters work in [Productivity](/c5/using-c5/productivity) and
 ## Cleaning up
 
 Every so often, open the Tags page and sort by usage. Tags used once or twice are
-usually mistakes or duplicates. Rename them into an existing tag, or delete them.
+usually mistakes or duplicates. Move their work onto an existing tag, then delete them.
 
 Five minutes of this every few months keeps the whole system useful.

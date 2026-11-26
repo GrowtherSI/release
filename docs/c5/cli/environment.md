@@ -44,6 +44,25 @@ See [When C5 starts at sign-in](#when-c5-starts-at-sign-in) below.
 | `GROWTHER_NO_MODIFY_PATH`  | Set to `1` so C5 never edits your shell files.                      | off      |
 | `GROWTHER_UPDATE_RESTART`  | Set to exactly `0` (or pass `--only`) so C5 does not restart or ask to start after an update. See [`growther update`](/c5/cli/commands#growther-update). | restarts if running, asks to start if stopped |
 | `GROWTHER_ROLLBACK_FORCE`  | Set to `1` to roll back past the keystore check, like `--force`.    | off      |
+| `GROWTHER_NO_BROWSER`      | Set to `1` so C5 never opens a browser tab by itself — at start, or for `growther start`, `activate` and `rekey`. The address is still printed. (`growther login` has its own `--no-open`.) | off |
+| `GROWTHER_NO_SERVICE_AUTOREGISTER` | Set to `1` so C5 does not register itself to start at sign-in when it starts. Without it, C5 registers itself unless you turned that off (see [`growther service`](/c5/cli/commands#growther-service)). | off |
+| `GROWTHER_CLI_CONFIG_PATH` | A different file for your [log filter](/c5/cli/log-filtering) choices. | `<home>/config/cli.yaml` |
+
+**Reaching C5 from other machines**
+
+| Variable                   | What it does                                                        | Default     |
+| -------------------------- | ------------------------------------------------------------------- | ----------- |
+| `GROWTHER_BIND_HOST`       | The network address C5 listens on. The default keeps C5 on this machine only. | `127.0.0.1` |
+| `GROWTHER_ALLOWED_HOSTS`   | Comma-separated host names C5 answers to.                           | loopback names |
+| `GROWTHER_ALLOWED_ORIGINS` | Comma-separated browser origins allowed to call C5. Never a wildcard. | the C5 origin |
+| `GROWTHER_WEBAUTHN_ORIGINS` | Origins a passkey may be registered and used on. | the C5 origin |
+
+Change these only for a deliberate self-hosted setup, and read
+[Making C5 reachable from another machine](/c5/configuration/network#making-c5-reachable-from-another-machine)
+first. `growther doctor` warns about a risky combination on its **Network posture** row (see
+[Network posture and Served origin](/c5/cli/doctor#network-posture-and-served-origin)). To
+use C5 on another machine without exposing it, use
+[`growther connect`](/c5/cli/commands#growther-connect) instead.
 
 **Model downloads**
 

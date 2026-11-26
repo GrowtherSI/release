@@ -6,7 +6,9 @@ order: 9
 
 # Secrets and keys
 
-C5 holds two kinds of secret. Understanding the difference is most of what you need.
+C5 holds two kinds of secret. Understanding the difference is most of what you need. This
+page is for whoever looks after the machine C5 runs on — on a managed fleet, the IT
+administrator.
 
 **Your API keys and tokens** let C5 talk to model providers, GitHub, Slack and the rest.
 By default they sit in `config/c5.yaml`, readable by anyone who can read your files.

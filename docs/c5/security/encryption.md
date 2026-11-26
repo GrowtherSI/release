@@ -7,7 +7,7 @@ order: 1
 # Local encryption
 
 C5 encrypts the databases it stores your work in. This page explains what that protects
-you from — and, just as importantly, what it does not.
+you from — and, just as importantly, what it does not. It applies to everyone who runs C5.
 
 ## What encrypted means here
 
@@ -22,6 +22,21 @@ This covers:
 - API keys and integration settings
 - Your context and settings
 
+**Some API keys are also kept outside the databases.** Keys in `config/c5.yaml` — any you put
+there yourself, and the keys for local model servers and OpenRouter, which C5 copies there —
+are plain values in a file only your user account can read but which is not encrypted. To get
+them out of that file, move them into your operating system's keystore or your organisation's
+vault: see [Secrets and keys](/c5/security/secrets-and-keys).
+
+### Checking it is on
+
+New installs are encrypted from the start. The database that holds your tasks, projects and
+notes has a switch of its own, **Encrypt Repository Database** in **Settings › Storage**, so
+it can be off — on an older install, or because someone turned it off. Open that card to see
+which it is. Changing it takes effect when you press **Save**, and C5 makes a backup of the
+database before converting it. Every change is recorded in the
+[audit trail](/c5/security/audit-trail).
+
 ## Where the key lives
 
 This is the most important thing on the page, so it comes first.
@@ -33,7 +48,10 @@ Your key is a file on your computer:
 ```
 
 It sits **inside the same folder as your data**. Only your user account can read it, but
-it is not locked in a keychain and it is not protected by a password you type.
+it is not locked in a keychain and it is not protected by a password you type. (An
+administrator can move it into the operating system's keystore — see
+[Secrets and keys](/c5/security/secrets-and-keys#then-if-you-want-wrap-the-device-key-itself).
+Until someone does, everything below applies as written.)
 
 That one fact decides everything below. **Whoever has the folder has the key.**
 

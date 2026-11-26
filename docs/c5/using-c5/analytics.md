@@ -33,6 +33,16 @@ angle:
 | **Rework**         | How often work had to be done twice.                            |
 | **Tools**          | Which tools get used most, and which ones fail.                 |
 
+## Whose numbers you see
+
+Analytics shows **your own workspace**: the work done there and how it scored. Someone in
+another [workspace](/c5/configuration/workspaces) on the same install never sees yours.
+
+Administrators have an **All workspaces** switch in the page header (the stacked layers icon
+on a narrower window). Turn it on to see every workspace on this install combined, and off to
+go back to your own. C5 remembers the choice in this browser. The same switch is on
+[Ops](/c5/using-c5/ops#whose-numbers-you-see) and [Labs](/c5/using-c5/labs#whose-results-you-see).
+
 ## Reading the charts
 
 Most charts show a line over time. What matters is the **direction**, not any one day.

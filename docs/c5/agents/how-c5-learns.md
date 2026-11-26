@@ -31,7 +31,7 @@ A variant is retired only when the evidence says, with high confidence, that it 
 than 15% of the time. A newer variant replaces its parent only when it is clearly better
 over at least ten graded trials each.
 
-> **After this update**, existing variants start again as unmeasured, because the old
+> **From v353**, existing variants start again as unmeasured, because the old
 > averages cannot be honestly turned back into counts. For a short while C5 explores more
 > evenly before it settles. Nothing is lost: the variants themselves are all kept.
 
@@ -52,11 +52,11 @@ per decision.
 C5 tracks which skills help which kinds of agent, taking into account which other skills
 were used alongside them, so a skill is not credited for a companion's work.
 
-When a skill is clearly helping an agent role, C5 now **suggests** adding it to that
-role. You get a notification and decide. It no longer adds skills to roles by itself,
+When a skill is clearly helping an agent role, C5 **suggests** adding it to that role.
+You get a notification and decide. Since v353 it no longer adds skills to roles by itself,
 because those assignments are yours to make.
 
-Earlier versions did add some skills to roles automatically. After this update, an
+Earlier versions did add some skills to roles automatically. On updating to v353 or later, an
 administrator gets one notification listing the assignments that look like they were made
 that way, so you can review them. Nothing is removed for you; keep the ones you want.
 
@@ -64,7 +64,7 @@ that way, so you can review them. Nothing is removed for you; keep the ones you 
 
 C5 keeps a trust score for each specialist, built from how its past work was judged. When
 the planner chooses who does a step, specialists are listed most trusted first. Nobody is
-left off the list, and the planner still picks. A small share of tasks keeps the old order
+left off the list, and the planner still picks. About one task in ten keeps the old order
 on purpose, so C5 can tell whether listing by trust actually helps.
 
 ## Every choice is recorded

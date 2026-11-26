@@ -7,7 +7,8 @@ order: 2
 # Chat
 
 Chat is where you tell C5 what you need. You type in plain words. C5 figures out the
-rest.
+rest. For a guided tour, watch the **Agent Chat & Tasks** video (see
+[Video tutorials](/c5/getting-started/quickstart#video-tutorials)).
 
 ## Asking for something
 
@@ -23,7 +24,13 @@ These all work:
 C5 reads your request, makes a plan, and starts working. You will see the plan before
 the work begins, so you always know what is about to happen.
 
-The card that shows it also holds the task's options, such as **Tools**, **Orchestration**,
+The **orchestration** button (the network icon) beside the message box decides what
+**Enter** does. While it is on, which it is to begin with, the box reads _Describe goal to
+orchestrate... (Enter)_ and each message becomes a **Create Task** card for your agents.
+Turn it off to simply talk with your agent. **Ctrl+Enter** sends your message and turns
+orchestration on. Hold **Shift** while you press **Enter** to start a new line.
+
+The **Create Task** card also holds the task's options, such as **Tools**, **Orchestration**,
 **Auto Review**, the task type and the priority. C5 suggests a task type from what you
 wrote. Once you pick one yourself, a suggestion that arrives later leaves your pick alone,
 and the card keeps what you chose if you reload the page or come back to the chat.
@@ -42,6 +49,52 @@ request, sharpen it with the **Intent Wizard** (when the wizard is on and you ha
 never stops you: if it cannot get an answer, the task is created. The task window runs the
 same check on **Create Task**; see
 [The readiness check](/c5/using-c5/productivity#the-readiness-check).
+
+## Sharpening a request with the Intent Wizard
+
+The **Intent Wizard** helps you turn a short request into a clear brief for your agents:
+what to do, how and why, what to leave out, and what a good result looks like. It is on
+to begin with. You can turn it off with **Intent Wizard** in **Settings › Budget**.
+
+1. On the **Create Task** card, click **Intent Wizard**. (**Skip** leaves your request as
+   it is and takes you to **Auto Create** and **User Defined**.)
+2. C5 fills in **Depth (What/How/Why)** and **Exclusions (What to avoid)** from what you
+   wrote. Moving dots show while it reads your request. Change anything you like.
+3. Click **Next**. C5 writes a fuller description into **Enhanced Task Context**; moving
+   dots show while it works. Or click **Skip** to use your answers as they are.
+4. Read it over and edit it if you want. Once you have changed it, **Review** sends your
+   edited text through the wizard again.
+5. Click **Auto Create** or **User Defined**.
+
+The task window has the same wizard; see
+[The Intent Wizard in the task window](/c5/using-c5/productivity#the-intent-wizard-in-the-task-window).
+
+### Images that are still being read
+
+When you attach an image, C5 writes a short description of it, so your agents know what it
+shows. Until every image on a card has its description, **Auto Create** and **User
+Defined** show moving dots and wait. Point at one and it says _Waiting for the image
+analysis to finish_. You do not have to wait to keep chatting: you can send more messages,
+and queue more tasks, meanwhile. If an image cannot be described, the buttons stop
+waiting for it.
+
+### If the wizard is interrupted
+
+Once you click **Next**, the wizard only moves forward, or tells you plainly that it could
+not finish:
+
+- **Reloads and restarts.** If you reload the page, lose your connection, or C5 restarts
+  while the wizard is working, the card picks up where it was. It finishes the job, or
+  says what went wrong and offers **Retry**.
+- **A failed attempt** is tried again on its own. Point at the dots and they say
+  _Retrying intent enhancement..._; **Retry now** skips the wait. If it still fails, the
+  card says why, with **Retry**.
+- **Depth and Exclusions that could not be filled in** show what went wrong, with
+  **Retry**.
+- **A budget cap holding the wizard.** If one of your
+  [spending limits](/c5/using-c5/ops) is holding the work, the dots say _Held by the budget
+  cap — it runs when the cap lifts, or skip enhancement to create the task now._ Click
+  **Skip enhancement** to carry on without it. Your text is kept as you sent it.
 
 ## Bringing back something you sent
 
@@ -130,7 +183,8 @@ As your agents work, Chat shows you what they are doing. You will see:
 - Any question the agent needs you to answer
 
 Nothing is hidden. If you ever wonder why C5 did something, the answer is right there in
-the conversation.
+the conversation. The icon on each row shows the AI provider that actually answered, even
+when C5 had to switch to another one because the first was offline.
 
 ## Sharing files
 
@@ -147,6 +201,9 @@ plain text. Once a file is attached, you can ask questions about it or ask for c
 Images go only to a model that can see them. If the model doing the work cannot read
 images, C5 switches to one that can on the same service when you have one set up;
 otherwise the image is held back rather than sent to a model that would ignore it.
+
+On a **Create Task** card, C5 describes each attached image before the task is created;
+see [Images that are still being read](#images-that-are-still-being-read).
 
 > **Tip**
 > Attach the file first, then ask your question. That way the agent has everything it

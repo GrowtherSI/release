@@ -11,19 +11,24 @@ with it directly.
 
 ## Which services can I connect?
 
-The current list is in the app, under **Settings → Integrations** — it is the accurate
-answer, and it grows between releases, which is why this page does not try to repeat it.
+The current list is in the app — it is the accurate answer, and it grows between
+releases, which is why this page does not try to repeat it. It is spread over three tabs:
 
-If what you need is not listed, it may still be reachable: [MCP servers](/c5/tools/mcp-servers)
-are an open standard for adding abilities, and many services already have one.
+- **Settings › Integrations** — the model providers and agent gateways (OpenClaw, Hermes
+  Agent, PicoClaw) your agents run on, and GitHub for backups. See
+  [Model providers](/c5/configuration/model-providers).
+- **Settings › Communications** — chat platforms such as Slack, Discord, Teams and Telegram.
+- **Settings › Extensions** — everything else, as [MCP servers](/c5/tools/mcp-servers), an
+  open standard for adding abilities. Many services already have one.
 
 ## Setting one up
 
 1. Go to **Settings**.
-2. Open the **Integrations** tab.
+2. Open the tab that holds the service (above).
 3. Pick the service you want.
 4. Follow the steps to connect it.
-5. Choose what C5 is allowed to do with it.
+5. Click **Save** (on **Communications**, **Save Platform**). On **Extensions**, installing the
+   server is the last step.
 
 Most services connect by pasting in a key, or by signing in and approving access.
 
@@ -41,11 +46,10 @@ always add more later.
 
 ## Checking the connection
 
-Each integration shows its state:
-
-- **Connected** — working normally.
-- **Needs attention** — usually an expired key or a changed password.
-- **Failed** — could not connect. C5 explains why.
+Each provider and gateway on **Settings › Integrations** shows whether C5 can reach it:
+**Online** or **Offline**, or **Key rejected** or **No key** when the problem is C5's key for
+it. MCP servers show their own state on **Settings › Extensions**
+(see [Checking it worked](/c5/tools/mcp-servers#checking-it-worked)).
 
 C5 tests the connection when you save, so you find out immediately rather than when a
 task fails at midnight.
@@ -68,12 +72,13 @@ Integrations usually break for boring reasons:
 - **Access was revoked** on the other service's side.
 - **The service is down.** Check its status page.
 
-Open **Settings → Integrations** and reconnect. C5 tests the connection as you save, so
+Open the service's tab in **Settings** and reconnect. C5 tests the connection as you save, so
 you find out immediately rather than when a task fails at midnight.
 
 ## Removing an integration
 
-Open **Integrations**, find it, and remove it. Access stops immediately. Work that
+Open its tab in **Settings**, find it, and turn it off or remove it. Access stops
+immediately. Work that
 already used it stays in your Library.
 
 ## Where to go next

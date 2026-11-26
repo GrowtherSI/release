@@ -52,13 +52,17 @@ In the top-right corner of the app, clicking your avatar opens the profile menu:
 
 ## The sidebar options menu
 
-At the bottom of the left navigation sidebar, the **Options** menu (`⋯`) provides quick access to server lifecycle controls:
+At the bottom of the left navigation sidebar, the **Options** menu (`⋮`) provides quick access to the video tutorials and to server lifecycle controls:
 
 | Option | What it is for |
 | --- | --- |
+| **Tutorials** | Opens the list of video tutorials, so you can watch one again or reset them. See [Video tutorials](/c5/getting-started/quickstart#video-tutorials). |
 | **Restart** | Reboots the C5 backend server cleanly. Dirty buffers are flushed and your browser reconnects automatically without needing a manual reload. |
 | **Quit** | Gracefully shuts down the C5 backend server and closes active connections. |
 | **Start C5** | When the server is offline or shut down, replaces Restart and Quit with a green **Start C5** button to launch or wake the server in one click. |
+
+The same menu also opens **Remote Control** (when it is available to you), **License**
+(administrators only), **Mothership**, **Feedback**, **Docs**, **About** and **Legal**.
 
 Beside it are the **HITL** (clipboard) button, which opens the window where tasks wait for
 your sign-off and C5's self-improvement waits for review (see
@@ -76,6 +80,18 @@ right now?" at a glance:
 
 If something looks wrong, Overview is where you will notice it first. Click any card to
 jump to the full area behind it.
+
+### Arranging your Overview
+
+Overview is your own dashboard, and you can lay it out the way you like. The **Dashboard &
+Layouts** video shows how (see
+[Video tutorials](/c5/getting-started/quickstart#video-tutorials)).
+
+- **Move a panel** by dragging it to a new place.
+- **Resize a panel** from its options menu: pick a **Width** and a **Height**.
+- **Show or hide panels** with the settings button at the top of the page, which opens
+  **Overview Modules**. Its **Reset to default dashboard layout** button puts everything
+  back the way it started.
 
 ## How the areas fit together
 

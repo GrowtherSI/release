@@ -210,7 +210,7 @@ who scans it first is the device that gets paired.
 
 A phone signs in as the account that was signed in at the machine when its code was shown.
 **Settings › Remote Control** is for people who can change settings, so everyone else pairs
-from the sidebar: open the **⋯** menu at the bottom of the sidebar and choose
+from the sidebar: open the **⋮** menu at the bottom of the sidebar and choose
 **Remote Control**. The item is there for an administrator, and for anyone an administrator
 gave **Sidebar: Remote Control Button** on the **Access** tab; it is greyed out while Remote
 Control is off.

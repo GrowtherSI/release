@@ -1,6 +1,6 @@
 ---
 title: Model providers
-description: Connect the SI models your agents think with, including local ones.
+description: Connect the SI models your agents think with, including local ones, and tune OpenClaw and Hermes Agent from their Config tabs.
 order: 2
 ---
 
@@ -77,6 +77,59 @@ connect it like any other provider and C5 will list everything it offers.
 
 This is a simple way to try lots of models without signing up everywhere.
 
+## Config tabs and optimizers
+
+Each gateway or model provider you turn on in **Settings › Integrations** adds a **Config**
+tab at the end of the Settings tab bar, marked with that provider's icon. Hover the icon to
+read its name, such as _OpenClaw Config_, _Hermes Config_ or _LM Studio Config_. A Config tab
+holds that provider's own settings.
+
+On the OpenClaw and Hermes Agent tabs, a row of **optimizer** buttons sits above the
+settings: **Harden**, **Performance**, **Reliability** and **Quality**. Each one checks the
+gateway's configuration for one kind of problem. A number on a button is how many
+suggestions it has; a green tick means every check passes. Hover a button to see what it
+looks for.
+
+To use a suggestion:
+
+1. Open the provider's **Config** tab.
+2. Select an optimizer button that shows a number. Its suggestions open below the buttons.
+3. Every fix starts ticked. Untick any you do not want; **Deselect all** clears them all.
+4. Select **Apply**. The fixes go into the form, but nothing is written yet.
+5. Select **Save** to write the configuration.
+
+Some suggestions have no tick box and say _⚠ Manual action required_: they explain
+something for you to change, and **Apply** never changes it. A few carry a button of their
+own, such as **Archive & Clean**, which acts as soon as you select it. While the raw text
+on the tab does not parse, **Apply** is refused and says why. On the Hermes tab it is also
+refused while the raw text holds edits you have not saved.
+
+### OpenClaw
+
+OpenClaw's suggestions tune the gateway itself, such as its log redaction, web search
+caches, model fallbacks and session upkeep.
+
+C5 can also hand its own tools to OpenClaw agents; see
+[Tools for gateway agents](/c5/tools/what-tools-do#tools-for-gateway-agents).
+
+### Hermes Agent
+
+The **Hermes Config** tab's optimizers look for what most often goes wrong when one Hermes
+gateway serves several profiles: watchdog limits that stop the gateway while it starts up,
+sessions that are never pruned, caches with no limit, and missing fallback providers,
+secret redaction or stall guards.
+
+For an administrator, the tab also looks inside Hermes's own folder and adds what it finds:
+
+| Suggestion | What it means |
+| --- | --- |
+| **Archive & Clean Native-Inputs Media Cache** (**Performance**) | Cached media files that Hermes reads through at every start, which can freeze the gateway and trap it in a restart loop. Its **Archive & Clean** button copies them to the `backups` folder in the Hermes home, then removes them |
+| **Remove Stale Gateway & Update Lock Files** (**Reliability**) | Lock and restart markers left behind. **Remove Stale Files** clears them |
+| **Prune & Compact Oversized Profile Databases** (**Performance**, advice only) | Profile databases over 500 MB, with the `hermes` commands that shrink them |
+| **Recent Watchdog Crash-Loop Fires Detected** (**Reliability**, advice only) | Hermes's watchdog stopped the gateway recently. Apply the watchdog fix and clean the media cache, then restart the Hermes gateway |
+
+The two buttons need permission to change settings.
+
 ## OpenRouter routing settings
 
 While OpenRouter is turned on in **Settings › Integrations**, Settings has a tab for its
@@ -139,6 +192,9 @@ answers C5 reads line by line; such plans now work as with every other provider.
   one off, give it `"enabled": false`. A save from the tab keeps such an entry with its
   options. Its switch shows what requests carry: on, unless the entry says
   `"enabled": false`. Flipping that switch changes only `enabled`, and keeps the options.
+  The `web` plugin, like an `:online` model, searches the web at OpenRouter, outside C5's
+  allowlist and data-loss checks; see
+  [What offline does not cover](/c5/configuration/network#what-offline-does-not-cover).
 
 ### When a save is refused
 

@@ -25,11 +25,12 @@ Each server adds a set of abilities. There are servers for things like:
 ## Adding one
 
 1. Go to **Settings**.
-2. Open the **Integrations** tab.
-3. Choose **Add MCP server**.
-4. Give it a name and the command or address it runs at.
-5. Add any keys or settings it needs.
-6. Save.
+2. Open the **Extensions** tab.
+3. Select **Add Extension**. The **Install MCP Server** card opens.
+4. Pick a server from **Curated Marketplace**, fill in any keys it asks for, and select
+   **Install Server**. Or choose **Custom Config** and fill in **Server Name**, **Command**
+   (such as `npx`, `python` or `docker`), **Arguments** and any **Environment Variables**,
+   then select **Install Custom Server**.
 
 C5 connects and lists the abilities the server offers. You then choose which ones your
 agents may use.
@@ -43,19 +44,22 @@ server never removes your own values for those keys.
 
 ## Checking it worked
 
-After adding a server, C5 shows its state:
+After adding a server, its row under **Settings › Extensions** shows its state:
 
-- **Connected** — working, and its tools are available.
-- **Connecting** — still starting up.
-- **Failed** — could not connect. C5 shows the reason.
+- **CONNECTED** — working, and its tools are available.
+- **OFFLINE** — not connected. The reason is shown beside it.
+- **DISABLED** — you switched it off with its toggle.
 
-If it failed, the usual causes are a wrong command or address, a missing key, or the
-server needing something installed first.
+If it is offline, the usual causes are a wrong command, a missing key, or the server
+needing something installed first.
 
 ## Turning individual abilities on and off
 
-A server might offer ten abilities when you only want two. You can switch them on and
-off one by one, so agents only get what you meant to give them.
+A server might offer ten abilities when you only want two. Each ability is a tool with its
+own rules, so agents only get what you meant to give them: set it to **Prompt** under
+**Master Tool Authorizations**, on the same **Extensions** tab, to be asked every time, or
+answer **Always Deny** when an agent asks for one you never want used. See
+[Permissions](/c5/security/permissions#setting-the-level).
 
 Start with less. Turn on more when you find you need it.
 
@@ -71,8 +75,9 @@ the same permission checks as everything else, and still gets recorded. See
 
 ## Removing one
 
-Open **Integrations**, find the server, and remove it. Its abilities disappear right
-away. Work that already finished is unaffected.
+Open **Settings › Extensions**, find the server, select its delete button and confirm. Its
+abilities disappear right away. Work that already finished is unaffected. To stop using a
+server for a while without removing it, switch its toggle off instead.
 
 ## Where to go next
 

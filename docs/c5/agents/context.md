@@ -26,33 +26,40 @@ Good context is the stuff that is true every time:
 ## What to leave out
 
 - **One-off details.** If it only matters for today's task, just say it in Chat.
-- **Anything secret you would not write down.** Context is stored encrypted, but keys
-  and passwords belong in [Settings](/c5/configuration/settings), which is built for
-  them.
+- **Anything secret you would not write down.** Context is kept as plain text files on
+  your machine, and agents read it every time they work. Keys and passwords belong in
+  [Settings](/c5/configuration/settings), which is built for them.
 - **Long documents.** Attach those to a chat instead. Context is for standing
   instructions, not reference material.
 
 ## Editing it
 
 1. Go to **Context**.
-2. Pick which agent you are editing, or the shared context all agents see.
-3. Write in plain words. Sentences are fine — you do not need a special format.
-4. Save.
+2. Under **Agent**, pick the agent you are editing. It starts at the main agent. If you use
+   more than one local coordinator (OpenClaw and Hermes Agent), choose one under
+   **Coordinator** first.
+3. Open a file from the list. **Context** holds who the agent is and who you are, **Memory**
+   what it has remembered, and **Operational** its working files and skills. Files inside a
+   folder open read-only.
+4. Write in plain words. Sentences are fine — you do not need a special format.
+5. Click **Save**.
 
 Changes apply to new work right away. Work already running keeps the context it started
 with, so nothing changes under its feet mid-task.
+
+Agents are shared by the whole install, so the Context page shows their files only in the
+**Default** [workspace](/c5/configuration/workspaces).
 
 ## Shared and per-agent
 
 There are two levels:
 
-- **Shared context** — everything every agent should know. Most of what you write goes
-  here.
-- **Per-agent context** — extra instructions for one agent doing a particular kind of
-  job.
+- **Shared context** — the files every agent starts from.
+- **Per-agent context** — an agent's own copy of a file, with extra instructions for the
+  kind of job it does.
 
-Start with shared. Only split things out when you find one agent needs to know something
-the others do not.
+The list shows an agent's own copy of a file when it has one, and the shared file when it
+does not. Saving a file writes that agent's own copy, so the other agents are not changed.
 
 ## Writing context that works
 

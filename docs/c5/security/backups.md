@@ -6,7 +6,8 @@ order: 4
 
 # Backups & recovery
 
-C5 backs itself up. You should still keep your own copy.
+C5 backs itself up. You should still keep your own copy. This page is for everyone who
+runs C5 on their own machine; on a shared install, for whoever looks after it.
 
 ## What C5 does on its own
 
@@ -21,14 +22,15 @@ up from there. You do not lose your place.
 
 ## Why you still need your own copy
 
-C5's backups live in the same folder as your data. That protects you from software
-problems. It does **not** protect you from:
+By default, C5's backups live in the same folder as your data. That protects you from
+software problems. It does **not** protect you from:
 
 - A failed hard drive
 - A lost or stolen laptop
 - Deleting the folder by accident
 
-For those, you need a copy somewhere else.
+For those, you need a copy somewhere else. Pointing **Custom Backup Location** (below) at
+another drive helps with the first, but a copy you keep yourself covers all three.
 
 ## Backing up
 
@@ -95,13 +97,21 @@ Treat a repository that holds them like the folder itself: see the warning above
 
 ## Backup settings
 
-Inside the app you can change:
+C5 backs up its databases every night at midnight. In **Settings › Storage** you can change:
 
-- **How often** automatic backups run
-- **How many** old ones are kept
-- **How long** history is kept before old records are trimmed
+| Setting | What it does | Default |
+| --- | --- | --- |
+| **Custom Backup Location** | The folder the backups are written to. Use one on another drive to keep them apart from your data | `data/backups/` in your C5 folder |
+| **Rolling Daily Backups** | How many days of nightly backups to keep. The minimum is 2, so there is always one good backup to fall back on | 2 days |
+| **Grandfather-Father-Sons (GFS)**, under **Extended Backup Scheduling** | Also keeps every Saturday's and every 1st-of-the-month backup, with no end date | Off |
+| **Hourly Backups** | An extra backup every hour, for busy installs. **Hourly Retention** sets how many to keep, up to 72 hours | Off; 24 hours when on |
 
-If disk space is tight, shortening history retention is the biggest lever.
+The retention sliders on the same tab, such as **Audit Trail Retention**, decide how long
+history is kept before old records are trimmed. If disk space is tight, shortening them is
+the biggest lever.
+
+While [legal hold](/c5/security/audit-shipping#retention-and-legal-hold) is on, no backup is
+deleted for its age.
 
 ## Restoring
 

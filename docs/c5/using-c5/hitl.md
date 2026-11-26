@@ -14,7 +14,7 @@ training examples that a person confirms. All of them wait in one place: the **H
 ## Opening it
 
 The window opens from the **clipboard** button at the bottom of the sidebar, between the
-**Options** menu (`⋯`) and the notification bell. Hover it for a summary (_3 pending items
+**Options** menu (`⋮`) and the notification bell. Hover it for a summary (_3 pending items
 require your review._, or _No pending approvals — pipeline is running autonomously._) and a
 row for each tab with something waiting; a row opens its tab. A click on the button opens
 the window, **HITL: Human-in-the-Loop Signoffs**, on its **Tasks** tab. Escape, or a click

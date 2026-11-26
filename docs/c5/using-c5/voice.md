@@ -227,7 +227,7 @@ useful when you change your mind mid-sentence.
 ## Who can use voice
 
 Voice is on for every account to begin with. An administrator can switch it off for a person
-in **Settings → Access**, using the **Voice** row under feature locks. That covers every way
+in **Settings › Access**, using the **Voice** row under feature locks. That covers every way
 C5 is asked to use speech: the microphone, the speaker button, audio attachments and voice
 notes. It does not just hide the button.
 
@@ -261,11 +261,11 @@ Voice keys live in your configuration file rather than being typed into the app:
 ~/.growther/config/c5.yaml
 ```
 
-Open it in a text editor and add the key for the provider you want. The **Voice** tab
-tells you the exact name to use for each one, and shows whether it is set yet.
-
-Save the file, and the Voice tab updates on its own. You do not need to restart C5 or
-reload the page.
+1. Open **Settings › Voice** and find the provider. Its row tells you the exact name to use
+   for its key, and shows whether it is set yet.
+2. Open `c5.yaml` in a text editor and add the key under that name.
+3. Save the file. The **Voice** tab updates on its own; you do not need to restart C5 or
+   reload the page.
 
 See [Configuration files](/c5/configuration/config-files) for more about `c5.yaml`.
 
@@ -303,7 +303,7 @@ out. C5 works out what a request will cost **before** making it and sets that am
 against your voice spending limit. If a paid provider would take you over the limit, C5 skips
 it and tries the next provider in your list, so a free option behind it still answers.
 
-You set the limit in **Settings → Budget**, in the **Voice Spending Limit** panel, alongside
+You set the limit in **Settings › Budget**, in the **Voice Spending Limit** panel, alongside
 C5's other spending controls. It has a switch, an amount, and a choice of whether the
 allowance resets daily, weekly, monthly or yearly, on the day you pick.
 
@@ -315,7 +315,8 @@ allowance resets daily, weekly, monthly or yearly, on the day you pick.
 - **$0 means no paid speech at all.** Only the free options answer. Switch the limit off
   if you want no limit.
 - **You can add a per-person limit.** Fill in **Per-person limit** to stop any one account
-  using up the whole allowance by itself. Leave it blank for none.
+  using up the whole allowance by itself. Leave it blank for none; **0** lets each person use
+  only the free options.
 - **Your organisation can lock it.** On a managed install the amount may be set by policy. A
   locked limit cannot be switched off, and it resets monthly on the 1st.
 
@@ -323,7 +324,7 @@ When the limit is reached, C5 tells you which limit it was:
 
 | The message | What to do |
 | --- | --- |
-| _The voice spending limit for this period has been reached._ | An administrator can raise it in **Settings → Budget**, or you can use the free offline option |
+| _The voice spending limit for this period has been reached._ | An administrator can raise it in **Settings › Budget**, or you can use the free offline option |
 | _Your own voice spending limit for this period has been reached._ | Your account has used its per-person share. An administrator can raise the per-person limit |
 
 Paid speech is also paced, so a stuck key or a runaway script cannot run up a bill in
@@ -331,10 +332,11 @@ minutes. From the microphone and the speaker button, one account can have two pa
 running at once and start thirty a minute. Past that, C5 asks you to try again in a moment.
 Attachments and voice notes are not paced, but they do count against the limit.
 
-To see what speech has cost, open **Ops → Token Budget** and scroll to **Voice Spend**. It shows
-this period against the limit, spend per day, and where the money went: by provider, by
-where it came from (dictation, read-aloud, attachments, voice notes), and, for
-administrators, by person. See [Budgets & costs](/c5/using-c5/ops) for the rest.
+To see what speech has cost, open **Ops › Token Budget**. **Voice Spend** is below the usage
+and cost cards, just above **System Automation Budget**. It shows this period against the limit, spend per day over the last
+7, 30 or 90 days, and where the money went: by provider, by where it came from (dictation,
+read-aloud, attachments, voice notes, agents), and, for administrators, by person. See
+[Voice Spend](/c5/using-c5/ops#voice-spend) for the details.
 
 Two things save you money without any effort:
 
@@ -369,7 +371,7 @@ If someone sends C5 a voice note on a chat platform you have connected, it is
 transcribed the same way, using the same providers and the same budget. There is nothing
 extra to set up.
 
-You can turn this off for a specific platform in **Settings → Communications**, using the
+You can turn this off for a specific platform in **Settings › Communications**, using the
 **Voice/Audio** switch. When it is off, C5 does not download the voice note at all.
 
 > **Note**
@@ -393,17 +395,17 @@ but its model has not arrived yet. C5 will say so rather than this if it knows a
 flight; check the **Voice** tab, which shows the progress. Wait for it to finish and try again.
 
 Otherwise you have turned the built-in option off and have not added a key. Turn it back on in
-**Settings → Voice**, run `growther voice pull`, or add a key to `c5.yaml`.
+**Settings › Voice**, run `growther voice pull`, or add a key to `c5.yaml`.
 
 **C5 says the voice spending limit has been reached.**
 
 Paid providers are skipped until the period resets or an administrator raises the limit in
-**Settings → Budget**. The free offline option keeps working. Put it first in your list if you
+**Settings › Budget**. The free offline option keeps working. Put it first in your list if you
 want dictation that a limit can never interrupt. See [Keeping the cost down](#keeping-the-cost-down).
 
 **C5 says voice isn't switched on for your account.**
 
-An administrator has switched voice off for you. They can turn it back on in **Settings →
+An administrator has switched voice off for you. They can turn it back on in **Settings ›
 Access**. See [Who can use voice](#who-can-use-voice).
 
 **C5 says there are too many voice requests.**

@@ -9,7 +9,10 @@ order: 2
 Permissions decide what your agents may do on their own, and what has to stop and ask
 you first.
 
-This is the most important setting in C5. It is worth ten minutes.
+This is the most important setting in C5. It is worth ten minutes. Everyone who uses C5
+benefits from reading it; many of the switches it describes can be changed only by an
+administrator (see
+[Settings only an administrator can change](#settings-only-an-administrator-can-change)).
 
 > **Human teammate access & user permissions (RBAC)**
 > Looking to control what human team members can see, edit, or execute in the C5 interface?
@@ -35,12 +38,12 @@ case, something is gone or something private went somewhere public.
 > **Note**
 > Writing asks you by default, wherever the file is. A write goes ahead without asking only
 > where you have said so: a folder you listed under the write-allowed paths in
-> **Settings → Extensions** (empty until you add to it), an **Always Allow** you gave that
-> agent for that tool, or the tool set to **On** in **Settings → Extensions**. An
+> **Settings › Extensions** (empty until you add to it), an **Always Allow** you gave that
+> agent for that tool, or the tool set to **On** in **Settings › Extensions**. An
 > orchestrated run you have given filesystem autonomy can also write inside its own task
 > workspace without asking, and only there.
 >
-> **Settings → Locations** is a different setting and does not grant anything. See the
+> **Settings › Locations** is a different setting and does not grant anything. See the
 > warning further down this page.
 
 ## When an agent asks
@@ -140,8 +143,8 @@ and you are not asked — unless the request tool is set to **On** or **Prompt**
 
 ## Setting the level
 
-Which tools ask you first is set per tool, in **Settings → Extensions**, and by your answers
-to the approval prompt above. **Settings → Extensions** gives every tool one of three master
+Which tools ask you first is set per tool, in **Settings › Extensions**, and by your answers
+to the approval prompt above. **Settings › Extensions** gives every tool one of three master
 positions:
 
 | Position   | What it means                                  |
@@ -150,7 +153,7 @@ positions:
 | **Prompt** | Agents must ask you each time, even an agent you gave **Always Allow** for the whole tool. An **Always** answer for one file or address still applies to that file or address. In a task run nobody may be there to answer: once the **Authorize-Use Timeout** in **Settings › Tools** passes, the step is suspended, not refused, and resumes when you approve it. A chat nobody answers is denied at the timeout. |
 | **Off**    | No override: the tool's own per-agent rules decide, and anything you have not answered with an **Always** still asks you. It is not a block. To stop a tool, choose **Always Deny** when it asks. A tool nobody has set is at **Off**, and the panel shows it so. |
 
-**Master Tool Authorizations**, in **Settings → Extensions**, is where those positions are
+**Master Tool Authorizations**, in **Settings › Extensions**, is where those positions are
 set, one switch per tool, listed by the tool's own name. Besides the tools agents already
 have, it lists:
 
@@ -166,7 +169,7 @@ have, it lists:
 System Control included. Only an administrator at the machine can change a switch (see
 [Settings only an administrator can change](#settings-only-an-administrator-can-change)).
 
-**Settings → Autonomy** (headed **Autonomy Policies**) sets how far agents may go without
+**Settings › Autonomy** (headed **Autonomy Policies**) sets how far agents may go without
 you for each type of work: under **Work Type Thresholds**, the minimum autonomy level that
 work needs, from **Level 1 (Tools)** to **Level 5 (Deploy)**, and what happens when an agent's
 level is too low (**Downgrade** or **Block Task**). **Agent Overrides** forces that choice for
@@ -260,15 +263,15 @@ repeat.
 
 ## Hard limits
 
-**Settings → Guardrails** holds the checks that run no matter what any other setting
-says. They cover things like blocking private information from being sent out, refusing
+**Settings › Guardrails** holds the checks that run no matter what any other setting
+says (see [Guardrails](/c5/security/guardrails)). They cover things like blocking private information from being sent out, refusing
 work when the safety checks themselves cannot be reached, and requiring an approved
 budget before an agent spends anything.
 
 Guardrails beat permissions. If the two disagree, the guardrail wins.
 
 > **Warning**
-> Guardrails and the permission ladder are your real controls. **Settings → Locations**
+> Guardrails and the permission ladder are your real controls. **Settings › Locations**
 > is not one of them — it tells C5 which folders to bring documents in from and put
 > results into. It is a convenience setting, not a fence: do not rely on it to keep an
 > agent away from the rest of your disk.
@@ -306,7 +309,7 @@ takes that as permission:
 
 ### Autonomy thresholds apply to every run
 
-The per-work-type thresholds under **Settings → Autonomy** apply to every step C5 runs,
+The per-work-type thresholds under **Settings › Autonomy** apply to every step C5 runs,
 not only to agents that claim work from outside. When a step matches several kinds of
 work (say, both "billing" and "running code"), **every** matching rule is checked and the
 strictest outcome wins. An agent below a rule's level is either stopped or told what it
@@ -348,7 +351,7 @@ your settings match how you actually work.
    screen set to ask you.
 2. Notice which prompts you approve every single time.
 3. Loosen just those — set those specific tools to **On** in
-   **Settings → Extensions**.
+   **Settings › Extensions**.
 4. Leave the rest asking.
 
 You will end up with settings that fit your work instead of someone else's guess.

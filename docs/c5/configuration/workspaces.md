@@ -32,17 +32,30 @@ Each one keeps its own:
 Budgets, model choices and folder access are **not** per-workspace: they are set once for
 your whole install under **Settings**, and apply to every workspace.
 
-Work in one workspace does not show up in another. Switching is like walking to a
-different desk — the same tools, a different set of papers.
+Work in one workspace does not show up in another — the same tools, a different set of
+papers. Each person belongs to one workspace and sees only its work: tasks, chats,
+schedules, the Library, tags and notifications. Agents can be assigned to more than one.
 
 ## Creating one
 
 1. Go to **Workspaces**.
-2. Click **New workspace**.
-3. Give it a name that will still make sense in six months.
-4. Save.
+2. Click **Add Workspace**.
+3. Give it a **Name** that will still make sense in six months, and a **Description** if
+   you like.
+4. Click **Create Workspace**.
 
-Switch between them from the workspace menu.
+## Who is in which workspace
+
+An administrator decides. Select **Edit** on a workspace's card, then choose its people
+under **Human Assignment** and its agents under **Agent Routing (Fleet)**, and click **Save
+Workspace**. Or set
+**Workspace Assignment** in a person's profile. A person
+already in another workspace shows as _Assigned elsewhere_. Nobody can move themselves into
+another workspace.
+
+Administrators, too, see their own workspace's work. On **Ops**, **Labs** and **Analytics**,
+an administrator can switch the **All workspaces** button in the page header on to see every
+workspace together. The choice is remembered for that administrator in that browser.
 
 ## Signing your work
 
@@ -75,10 +88,11 @@ no public key to hand out yet, so a third party cannot verify a deliverable inde
 - **Name them clearly.** "Acme Corp" beats "Work 2".
 - **Budgets and folder access are install-wide**, not per workspace — set them
   once under **Settings › Budget** and **Settings › Locations**.
-- **Archive** finished client workspaces instead of deleting them, so the record
-  survives.
+- **Think before deleting one.** Deleting a workspace is permanent, and unassigns its
+  people and agents.
 
 ## Where to go next
 
-- [Settings](/c5/configuration/settings) — per-workspace configuration.
+- [Settings](/c5/configuration/settings) — the install-wide settings every workspace
+  shares.
 - [Library](/c5/using-c5/library) — where signed deliverables live.

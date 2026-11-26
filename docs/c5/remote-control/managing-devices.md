@@ -6,7 +6,9 @@ order: 3
 
 # Managing devices
 
-Every control on this page lives in C5 on the machine, under **Settings › Remote Control**.
+This page is for anyone who has paired a phone or tablet, and for the administrators who
+look after an install's devices. Every control on it lives in C5 on the machine, under
+**Settings › Remote Control**, or in the sidebar's **Remote Control** window.
 A paired device can see the list but cannot change it — not even when it is signed in as an
 administrator. The one thing a paired device may do for itself is sign out.
 
@@ -18,14 +20,15 @@ revoked. For each one:
 - its name, as given when it was paired;
 - **Lease** — how long each sign-in from it lasts, and how much of the current one is left.
   _(default)_ means it follows the **Default sign-in lease** on the tab;
-- **Last seen** — when it last reached the machine, accurate to a few minutes;
+- **Last seen** — when it last reached the machine, accurate to a few minutes, or
+  **Not seen yet** for a device that has not connected since it was paired;
 - a pencil to change the lease, and **Revoke**.
 
 An administrator at the machine sees **every** user's devices. A device that belongs to
 someone else shows that person's account picture beside its name; hover over it, or tap it,
 for their name. Everyone else sees their own.
 
-Everyone can also see and revoke their own devices from the **⋯** menu at the bottom of the
+Everyone can also see and revoke their own devices from the **⋮** menu at the bottom of the
 sidebar: **Remote Control** opens a window listing the devices paired to your account, each
 with **Revoke**. See
 [Pairing from the sidebar](/c5/remote-control/setup#pairing-from-the-sidebar-for-every-account).

@@ -23,7 +23,7 @@ gives the legal position. This page is the practical side.
 
 ## Read the notices in C5
 
-1. Open the **Options** menu (`⋯`) at the bottom of the left sidebar.
+1. Open the **Options** menu (`⋮`) at the bottom of the left sidebar.
 2. Choose **About**, then **Copyright & Legal** at the bottom of the About window.
    (**Options › Legal** opens the same window directly.)
 3. Under **Third-Party Software and Models**, press **Third-party notices**.

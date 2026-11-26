@@ -35,7 +35,9 @@ developers, analysts, writers, researchers, and small teams who want their own p
 setup instead of someone else's cloud.
 
 You do not need to be an expert to start. The first task you run can be as simple as a
-sentence.
+sentence. Short video tutorials show you around: the first time you open a part of
+the app that has one, C5 offers to play it, and you can watch them again at any time — see
+[Video tutorials](/c5/getting-started/quickstart#video-tutorials).
 
 ## Progress you can see
 
@@ -47,6 +49,8 @@ prompt improvements at 100. The gold star is different: it arrives once recipes 
 planned 25 of your tasks, and unlocks nothing at all. It marks the point where C5 has
 watched those recipes long enough to tell you which ones actually helped. See
 [Self-improvement milestones](/c5/using-c5/ops#self-improvement-milestones).
+
+One more star is yours alone: a teal one for watching every video tutorial.
 
 ## Your data stays yours
 
@@ -67,5 +71,6 @@ dashboards and managed updates. You can read more in [Mothership](/c5/mothership
 ## Where to go next
 
 - [Installation](/c5/getting-started/installation) — get C5 on your computer.
-- [Quickstart](/c5/getting-started/quickstart) — run your first task in a few minutes.
+- [Quickstart](/c5/getting-started/quickstart) — set up your profile and run your first
+  task in a few minutes.
 - [Tour of C5](/c5/using-c5/overview) — see what each part of the app does.

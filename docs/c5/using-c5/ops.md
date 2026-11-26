@@ -7,7 +7,8 @@ order: 6
 # Budgets & costs
 
 **Ops** is where you keep an eye on the money. It answers one question: what is this
-costing me, and where is it going?
+costing me, and where is it going? The limits themselves live in **Settings › Budget**;
+Ops shows what is being spent against them.
 
 ## Why budgets matter
 
@@ -18,15 +19,26 @@ Budgets stop that. You set a ceiling, and C5 will not go past it.
 
 ## Setting a budget
 
+The **Hard Budget Cap** is **on from the start, at $10 a month**, resetting on the 1st. To
+change it:
+
 1. Go to **Settings › Budget**.
-2. In the **Hard Budget Cap** panel, set the amount and the period, and whether reaching
-   it notifies you (**Notify**) or blocks new work (**Block**).
-3. Save.
+2. In the **Hard Budget Cap** panel, set the **Spend Limit** in US dollars, then choose the
+   period — daily, weekly, monthly or yearly — and the day it starts again. **0** means no
+   limit. The switch turns the cap off altogether.
+3. Under **Per-Task Budget Guards**, the button beside **Max Cost per Task** reads
+   **Block** or **Notify**. It decides what the Hard Budget Cap does too: **Block** (the
+   default) pauses new work at the cap, and **Notify** only tells you.
+4. Click **Save**.
 
-**Ops › Token Budget** then shows what is being used and spent against it. Ops itself only
-reports: the limits live in Settings.
+**Ops › Token Budget** then shows what is being used and spent against it.
 
-You can set limits for the whole system, or for one project.
+**Per-Task Budget Guards** also limit each task on its own: **Max Tokens per Task**, **Max
+Duration per Task** and **Max Cost per Task**. A task that passes one is paused (or, set to
+**Notify**, carries on and you get a notification).
+
+The Hard Budget Cap counts the whole install, whichever [workspace](/c5/configuration/workspaces)
+the spending came from.
 
 ### How the cap counts
 
@@ -50,12 +62,13 @@ there, so around midnight a day can hold a little of its neighbour's.
 > versions recorded that way under the right day, so it shows again and counts in the right
 > period.
 
-### The voice budget is separate, and lives elsewhere
+### The voice budget is separate
 
-Speech has its own limit, in the **Voice Spending Limit** panel under **Settings → Budget** —
-not on this page. It is separate on purpose: voice is charged by the minute of audio and by the
-character of speech read aloud, which is a different shape of spending from the work your agents
-do, and most people want a much smaller ceiling on it.
+Speech has its own limit, in the **Voice Spending Limit** panel on **Settings › Budget**,
+below the Hard Budget Cap. Speech spending does not count toward the Hard Budget Cap. It is
+separate on purpose: voice is charged by the minute of audio and by the character of speech
+read aloud, which is a different shape of spending from the work your agents do, and most
+people want a much smaller ceiling on it.
 
 It works the same way as the main cap: a switch, an amount, and a choice of daily, weekly,
 monthly or yearly, resetting on the day you pick. It is **on from the start at $10 a month**,
@@ -65,14 +78,17 @@ making it, and skips a paid provider rather than going over.
 
 ### Voice Spend
 
-The **Voice Spend** section at the foot of **Ops → Token Budget** shows what speech has cost:
+The **Voice Spend** section of **Ops › Token Budget**, below the usage and cost cards and just
+above **System Automation Budget**, shows what speech has cost. Choose **7 days**, **30 days** or **90 days** at its top right.
 
-- **This period against the limit**, as a meter that warns from 80% and says when the limit is
-  reached. If the limit is switched off, it says so.
+- **Spent this period**, against the limit, as a meter that warns from 80% and says when the
+  limit is reached. If the limit is switched off, it says so. The limit counts the whole
+  install; when your workspace spent less than that, the line under the figure says how much
+  was yours.
 - **Spend per day**, split into speech-to-text and read-aloud.
 - **Where it went**: by provider, by where it came from (dictation, read-aloud, attachments,
-  voice notes), and, for administrators, by person. Spend recorded before this tracking
-  existed shows as **Before tracking**.
+  voice notes, agents), and, for administrators, by person. Spend recorded before this
+  tracking existed shows as **Before tracking**.
 
 Two things never count against it:
 
@@ -85,8 +101,8 @@ See [Voice](/c5/using-c5/voice) for the providers themselves.
 
 ## What happens at the limit
 
-C5 does not just stop dead. As you get close, it warns you. At the limit, it pauses new
-work and tells you clearly what happened.
+C5 does not just stop dead. At the limit, it pauses new work and tells you clearly what
+happened (with **Notify** chosen, it only tells you).
 
 Nothing is lost. Paused work waits. Raise the limit or wait for the next period, and it
 picks up again.
@@ -97,20 +113,31 @@ picks up again.
 
 ## Seeing where money went
 
-The Ops charts break spending down by:
+The **Token Budget** tab breaks spending down several ways:
 
-- **Time** — today, this week, this month
-- **Task** — which jobs cost the most
-- **Model** — which SI models you are paying for
+- **Cost Accounting** — **Today's Cost**, the **30-Day Average**, **Month-to-Date Cost** and
+  **YTD Actual Cost**.
+- **Token Usage Heatmap** — use by hour over the past 7 days, so you can see when the busy
+  times are.
+- **Cost Per Task** — the tokens each recent task used.
+- **Coordinator Split** — how much of the use went through each coordinator.
+- **Top Agent Consumers** — which agents use the most.
+- **System Automation Budget** — what C5's own background work used.
+- **Voice Spend** — what speech cost (see above).
 
-If a number looks wrong, click into it. You can follow the cost all the way down to the
-task that caused it.
+## Whose numbers you see
+
+Ops shows **your own workspace**: the spending and history of the work done there.
+Administrators have an **All workspaces** switch in the page header (the stacked layers icon on
+a narrower window). Turn it on to see every workspace on this install combined. It is off until
+you turn it on, and C5 remembers the choice in this browser. The same switch is on
+[Labs](/c5/using-c5/labs#whose-results-you-see) and [Analytics](/c5/using-c5/analytics).
 
 ## Other things in Ops
 
 | Tab          | What it is for                                                     |
 | ------------ | ------------------------------------------------------------------ |
-| **Token Budget** | Daily and weekly token use, spend trends, and a breakdown by coordinator. |
+| **Token Budget** | What is being used and spent, and where it went: by day, task, coordinator and agent, plus voice. See [Seeing where money went](#seeing-where-money-went). |
 | **Triage**   | Queue health at a glance: pending jobs, background jobs waiting for a gap in real work (and how many expired unrun after 7 days), saga rollbacks, how effective triage briefs are, and a forecast of budget impact. |
 | **Memory**   | What C5 has remembered from your past work.                         |
 | **Audit**    | A record of what happened and when, including what C5 did about stuck runs. See [Audit trail](/c5/security/audit-trail). |

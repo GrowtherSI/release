@@ -139,6 +139,15 @@ These connections are not stopped by the offline posture either:
   Azure Blob container or an S3 bucket under **Settings › Enterprise › Enterprise storage**;
   and scheduled backups to GitHub all keep running while offline. Turn those off where you
   configured them if the machine must make no outbound contact.
+- **Tools that run inside an agent gateway, and a provider's own web search.** An
+  OpenClaw or Hermes Agent agent's own web search, web fetch, browser and shell tools
+  connect from the gateway, not from C5. A model provider that searches the web itself —
+  OpenRouter's `web` plugin or an `:online` model, for example — does it at the provider.
+  Neither passes through C5, so the offline posture, the
+  [Network Containment allowlist](../security/guardrails.md) and
+  the [data-loss checks](../security/data-protection.md) never see what they send. C5 does
+  not remove these tools. To keep an agent inside C5's checks, turn them off in the
+  gateway's own configuration, and turn off the provider's web search where you set it.
 
 `growther update` run by hand still contacts the platform. The three model
 `pull` commands do not: the offline posture refuses them too. To get a model

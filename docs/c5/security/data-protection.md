@@ -11,7 +11,8 @@ Every one of those is a moment where something could leave your machine that you
 did not mean to send.
 
 Before any tool runs, C5 reads what it is about to send and looks for things that
-should not be going anywhere.
+should not be going anywhere. It is on for everyone from the start; only an administrator
+can change how it responds.
 
 ## What it looks for
 
@@ -69,6 +70,10 @@ Worth being straight about:
 
 - It checks what agents **send to tools**. It does not scan what tools send back,
   or the agent's own written replies.
+- It checks the tool calls C5 carries out. The built-in tools of an agent gateway C5 drives — OpenClaw's
+  own web search and page fetch, for example — and a model provider's own web search run
+  outside C5, so what they send is not checked here. See
+  [Network and egress](/c5/configuration/network).
 - It looks for recognisable formats. A secret with no distinctive shape — a
   password in a sentence, say — will not be spotted.
 - **Logs are plain text.** Before v327, C5 wrote the start of a task's goal to
@@ -89,3 +94,5 @@ means it works the same in an air-gapped install as anywhere else.
 
 - [Permissions](/c5/security/permissions) — decide what agents may do at all.
 - [Encryption](/c5/security/encryption) — how your data is stored at rest.
+- [Guardrails](/c5/security/guardrails) — where **Block PII Exfiltration** and the web
+  allowlist live.

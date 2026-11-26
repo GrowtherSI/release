@@ -18,6 +18,9 @@ again without you asking.
 
 If you find yourself asking for the same thing over and over, make it a schedule.
 
+Schedules belong to a [workspace](/c5/configuration/workspaces). The Schedules page lists the
+ones in the workspace you are working in, and the work they make is filed there too.
+
 ## Making one
 
 1. Go to **Schedules**.
@@ -25,7 +28,7 @@ If you find yourself asking for the same thing over and over, make it a schedule
 3. Choose what it does — **Use Recipe**, **Create Task** or **Send Request** — and write
    what you want done, the same way you would in Chat.
 4. Pick when it should run.
-5. Save.
+5. Click **Save Schedule**.
 
 That is it. C5 takes it from there.
 
@@ -196,6 +199,16 @@ every run it has made, newest first, with the date and time of each.
 You can pause a schedule and turn it back on later. Pausing keeps the setup and the
 history — it just stops running for now.
 
+To pause every schedule at once, turn off **Run Schedules** in **Settings › General**, under
+**Schedules**. Each schedule's own **Pause** stays as it was. While it is off:
+
+- nothing on the Schedules page starts, the ROI trackers included, and the page says
+  **Schedules are off.**;
+- a repeating schedule skips the runs it misses, so turning it back on does not start them
+  all at once;
+- a one-time schedule that comes due runs as soon as you turn it back on;
+- work that had already started carries on.
+
 Deleting removes the schedule. Work it already finished stays in your Library, in the
 schedule's project. If the schedule never ran and nothing else was put in its project, that
 empty project is removed with it.
@@ -221,9 +234,10 @@ due; versions before v327 could start two or three runs of the same occurrence.
 
 ## ROI Trackers & System Audits
 
-At the top of the Schedules page, C5 includes built-in **ROI Trackers**. These run automated
-audits of your system's productivity, agent performance, and cost savings over regular
-intervals.
+Beside your schedules, in the **ROI Trackers & System Audits** panel, C5 includes built-in
+**ROI Trackers**. These run automated audits of your system's productivity, agent
+performance, and cost savings over regular intervals. You can switch each one on or off in
+**Settings › General**, under **Schedules**.
 
 ### Cadences
 
@@ -248,7 +262,8 @@ an estimate of money saved by running models locally for free.
 - **Costs add up.** A schedule that runs every hour runs 720 times a month. Set a budget
   in [Ops](/c5/using-c5/ops) before you build a busy schedule.
 - **Your computer has to be on.** C5 runs on your machine. If it is asleep, the schedule
-  waits. C5 will catch up when it wakes.
+  waits. When C5 is running again, a schedule that came due runs once, not once for every
+  time it missed.
 - **Start slow.** Run something daily for a week before you move it to hourly.
 
 ## Dictating a schedule
