@@ -193,6 +193,72 @@ step of that role failed one check of its rubric. That usually says the check do
 what the role is asked to do, not that the work is bad. Nothing changes on its own; see
 [When one check fails almost every step](/c5/using-c5/analytics#when-one-check-fails-almost-every-step).
 
+## Gateways and local models
+
+### LM Studio replies are slow to start, or say "Model is unloaded."
+
+LM Studio unloads a model that has been idle for a while, and its idle time can be as short as
+a minute. C5 retries the error by itself, but every reload costs time. Raise LM Studio's idle
+unload time to 15 minutes from the **LM Studio app settings** card on LM Studio's **Config**
+tab, with LM Studio quit while you save. See [LM Studio](/c5/configuration/lm-studio).
+
+### "Hermes has not answered for 10 minutes"
+
+Hermes Agent is turned on as a coordinator but has not answered C5's health checks for ten
+minutes, so work routed to it is going elsewhere or waiting. If the cause is the startup crash
+loop that Hermes's cached media files cause, C5 clears them itself (with a backup in
+`~/.hermes/backups/`) and the notification says so. Otherwise check `~/.hermes/logs/gateway.log`
+and the Hermes **Config** tab's suggestions, then restart Hermes with **Restart** on its card
+in **Settings › Integrations**. The notification closes once Hermes answers. See
+[When Hermes is down](/c5/configuration/agent-gateways#when-hermes-is-down).
+
+### "Gateway Stopped by an Operator"
+
+OpenClaw is down and the last thing that happened to it was someone running
+`openclaw gateway stop`, so C5 does not restart it on its own. Start it with
+`openclaw gateway start`, or **Restart** on the OpenClaw card in **Settings › Integrations**.
+If nobody stopped it on purpose, starting it once clears the notice.
+
+### "Gateway Auto-Restart Circuit Breaker Open"
+
+C5 restarted OpenClaw five times in three hours and it kept failing, so C5 stopped restarting
+it: restarting is not fixing the cause. Check that the model behind it is loaded and answers,
+look at OpenClaw's own logs, and fix what you find; automatic restarts resume once the
+three-hour window clears. See
+[When a gateway stops answering](/c5/configuration/agent-gateways#when-a-gateway-stops-answering).
+
+### OpenClaw ignores its settings file
+
+OpenClaw refuses its whole settings file when it contains a setting it does not know, and then
+keeps running on the old settings or will not start. Earlier versions of some optimizer
+suggestions wrote settings that newer OpenClaw no longer accepts. Run:
+
+```bash
+openclaw config validate
+```
+
+It names the settings it rejects. Remove them from `~/.openclaw/openclaw.json` (or the
+OpenClaw **Config** tab) and save. C5 also runs this check before any restart and, if the file
+is invalid, does not restart OpenClaw onto it; the failure notification lists the settings.
+
+### A command an agent runs cannot connect
+
+Commands agents run are confined to C5's [egress gateway](/c5/security/egress-gateway) by
+default. HTTPS downloads work; `ssh`, `scp` and `git@host:` remotes to other machines do not,
+and the result says the command's network is confined. Use an `https://` remote
+(`git clone https://…`) where you can. If the agent needs a direct connection, an
+administrator can turn off **Settings › Tools › Command network confinement**, accepting that
+its commands then go around your network rules. On Linux, a command cannot reach services
+already running on this machine's `localhost`, only ones it starts itself.
+
+### "C5 could not route the … gateway's network" or "Egress gateway routing"
+
+An administrator has routing through the egress gateway turned on, and C5 could not apply it
+to that gateway, or the egress gateway stopped answering and C5 switched the gateways back to
+direct connections so they keep working. The notification gives the reason. C5 routes them
+again once the egress gateway is back. If C5 says to restart the Hermes gateway, run
+`hermes gateway restart`.
+
 ## Voice
 
 ### The microphone button is greyed out, or voice is unavailable

@@ -68,7 +68,8 @@ The trade-off is that local models are usually less capable than the best paid o
 they need a reasonably powerful computer.
 
 To connect one, choose the local option under **Integrations** and point C5 at where your local
-model is running. C5 checks the connection and lists the models it finds.
+model is running. C5 checks the connection and lists the models it finds. Using LM Studio?
+See [LM Studio](/c5/configuration/lm-studio) to keep its model loaded between turns.
 
 ## Gateways
 
@@ -106,9 +107,11 @@ refused while the raw text holds edits you have not saved.
 
 ### OpenClaw
 
-OpenClaw's suggestions tune the gateway itself, such as its log redaction, web search
-caches, model fallbacks and session upkeep.
+OpenClaw's suggestions tune the gateway itself, such as its web search caches, model
+fallbacks and session upkeep.
 
+Some suggestions are about how OpenClaw works with C5, such as the lean health-ping agent;
+see [OpenClaw and Hermes](/c5/configuration/agent-gateways#suggestions-on-the-openclaw-config-tab).
 C5 can also hand its own tools to OpenClaw agents; see
 [Tools for gateway agents](/c5/tools/what-tools-do#tools-for-gateway-agents).
 
