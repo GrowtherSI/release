@@ -11,8 +11,8 @@ Optionally supercharged by **Mothership**, the Growther.si cloud.
 
 ### 📦 Latest stable :: [`v2026.11.26-v359`](dist/c5/v2026.11.26-v359/)
 
-![build](https://img.shields.io/badge/build-passing-brightgreen?style=plastic)
-![tests](https://img.shields.io/badge/tests-passing-brightgreen?style=plastic)
+![build](dist/c5/badges/build-passing.svg)
+![tests](dist/c5/badges/tests-passing.svg)
 &nbsp;**client** <code>25,089</code> · **server** <code>36,423</code> tests passing
 
 <sub>↻ Written automatically by the C5 Release pipeline on every build.</sub>
