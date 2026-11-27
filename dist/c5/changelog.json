@@ -1,5 +1,46 @@
 [
   {
+    "tag": "v2026.11.26-v359",
+    "version": "2026.11.26-v359",
+    "build": 359,
+    "releasedAt": "2026-11-26T14:58:27-08:00",
+    "bullets": [
+      {
+        "kind": "new",
+        "text": "Add productivity kanban tutorial video."
+      },
+      {
+        "kind": "new",
+        "text": "Reliability optimizer adds C5's lean c5-ping agent."
+      },
+      {
+        "kind": "new",
+        "text": "Alert when Hermes is down 10 minutes and auto-clean its crash-loop cause."
+      },
+      {
+        "kind": "new",
+        "text": "Run the egress gateway while C5's egress policy is on, with admin-only settings."
+      },
+      {
+        "kind": "new",
+        "text": "Manage separate reasoning content, read LM Studio's server config."
+      },
+      {
+        "kind": "new",
+        "text": "The optimizer drawer can say why some checks did not run."
+      },
+      {
+        "kind": "new",
+        "text": "An admin status read for the Egress gateway card."
+      },
+      {
+        "kind": "fixed",
+        "text": "A killed stats query keeps that index's last numbers instead of dropping it."
+      }
+    ],
+    "more": 189
+  },
+  {
     "tag": "v2026.11.25-v358",
     "version": "2026.11.25-v358",
     "build": 358,
