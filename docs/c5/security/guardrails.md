@@ -53,7 +53,7 @@ are allowed to connect.
 > **Warning: What network containment covers**  
 > The allowlist is enforced inside C5's own web tools (`read_url`, `web_search`). It is not a system-level firewall: raw shell commands (`run_command`), MCP servers, and traffic to your configured model providers do not pass through this filter.
 >
-> Nor do the built-in tools of an agent gateway C5 drives, such as OpenClaw's own web search and page fetch, or a model provider's own web search. Those run inside the gateway or at the provider, so C5's allowlist and its [data-loss checks](/c5/security/data-protection) never see what they send. For everything C5 itself contacts, and how to turn it all off, see [Network and egress](/c5/configuration/network).
+> Nor do the built-in tools of an agent gateway C5 drives, such as OpenClaw's own web search and page fetch, or a model provider's own web search. Those run inside the gateway or at the provider, so C5's allowlist and its [data-loss checks](/c5/security/data-protection) never see what they send. For everything C5 itself connects to, and how to turn it all off, see [Network and egress](/c5/configuration/network).
 
 ## 3. System Control guardrails
 
