@@ -1,5 +1,26 @@
 [
   {
+    "tag": "v2026.11.27-v363",
+    "version": "2026.11.27-v363",
+    "build": 363,
+    "releasedAt": "2026-11-27T03:09:19-08:00",
+    "bullets": [
+      {
+        "kind": "fixed",
+        "text": "Fixed C5 not starting on Windows from some install folders."
+      },
+      {
+        "kind": "fixed",
+        "text": "The Linux sandbox now works on more setups and folder names."
+      },
+      {
+        "kind": "fixed",
+        "text": "Network gateway changes now take effect as soon as you save."
+      }
+    ],
+    "more": 4
+  },
+  {
     "tag": "v2026.11.27-v362",
     "version": "2026.11.27-v362",
     "build": 362,
