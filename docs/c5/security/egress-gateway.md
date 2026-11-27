@@ -95,9 +95,10 @@ accept that.
 **Route agent gateways through C5** (Settings › Tools › Egress gateway) has three choices:
 
 - **Auto** (the default): routes OpenClaw, Hermes Agent and PicoClaw through the egress
-  gateway whenever an egress rule is on (data-loss checks, Network Containment or the
-  offline posture), and leaves them direct when none is. The card says what Auto is doing
-  right now and why.
+  gateway whenever an egress rule is on (data-loss checks, Network Containment, the
+  offline posture or the computer-use network allowlist), and leaves them direct when none
+  is. The card says what Auto is doing right now and why; hover or focus its ⓘ for a
+  summary of every choice.
 - **On**: always route them.
 - **Off**: never route them. Their own network tools then bypass your egress rules.
 
