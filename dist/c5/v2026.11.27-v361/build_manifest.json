@@ -1,0 +1,35 @@
+{
+  "version": "2026.11.27-v361",
+  "commitHash": "3314d359294df1b0fab058132126122a49ba0bb4",
+  "branch": "main",
+  "buildTimestamp": "2026-11-27T05:41:34Z",
+  "ciPipelineId": "45941414157",
+  "ciPipelineUrl": "https://github.com/GrowtherSI/growther-c5/actions/runs/45941414157",
+  "checks": {
+    "lint": "pass",
+    "tests": "pass",
+    "testsPassed": 36445,
+    "testsFailed": 0,
+    "clientTests": "pass",
+    "clientPassed": 25107,
+    "clientFailed": 0,
+    "sast": "pass",
+    "sastCritical": 0,
+    "sastHigh": 0,
+    "sastReportSha256": "473744b6af08dfa79831f56f57952410c4d6dc561a878a8361435466cc6b461c",
+    "build": "pass"
+  },
+  "ciRunId": "45937456712",
+  "signature": "A/JjTCRX7EUF13icVcY0hNKmOK/oBLXr32sIRyovhH1LNeZnbeLwfIURfRkxbAwsDgfxZrLpyJdx38g4JpdxAw==",
+  "binaryHash": {
+    "linux-x64": "9064065a690f826c19aa262fe1ef10f8a0fb1d055586da95880701e4c0e6d343",
+    "macos-arm64": "4d2f3a5ada2d2f0cf0e5a0a7722c44b5ef7df62a51903ee91880a4fac93da7a2",
+    "macos-x64": "a8215c757d60759ba57f3fef4749adcd6c74e3b8e64c58fa71a1fff6bb41a22e",
+    "win-arm64": "9aeee5578ea850aa4e71d460bf9372f69c347abbf8a65235f38cc47a0786f031",
+    "win-arm64.dpapi-helper": "e61973c3e0a7a256c088af1ca3faa2c0bbdcf6707292bda7ea75a44f641dd0f7",
+    "win-x64": "c4c1f1ac1bb38d75d108864093a43651f1819b11d5df222a3cc2f9764a9a16eb",
+    "win-x64.dpapi-helper": "6aeb23e48ebb2dc5229f0ae8dd3c3f1d266cea9f982d0f40cd0415b1e57e78cf"
+  },
+  "keyId": "5f4113ab261a9eab",
+  "payloadVersion": 2
+}
