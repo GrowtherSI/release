@@ -253,8 +253,8 @@ already running on this machine's `localhost`, only ones it starts itself.
 
 ### "C5 could not route the … gateway's network" or "Egress gateway routing"
 
-An administrator has routing through the egress gateway turned on, and C5 could not apply it
-to that gateway, or the egress gateway stopped answering and C5 switched the gateways back to
+Routing through the egress gateway is active (it is by default whenever an egress rule is on),
+and C5 could not apply it to that gateway, or the egress gateway stopped answering and C5 switched the gateways back to
 direct connections so they keep working. The notification gives the reason. C5 routes them
 again once the egress gateway is back. If C5 says to restart the Hermes gateway, run
 `hermes gateway restart`.

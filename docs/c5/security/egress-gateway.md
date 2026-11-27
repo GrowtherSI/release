@@ -14,7 +14,8 @@ them:
 
 - **The commands agents run** (`run_command`). These are now **confined by default**.
 - **The agent gateways' own tools** — OpenClaw, Hermes Agent and PicoClaw — and the MCP
-  servers C5 starts, when an administrator chooses to route them through it.
+  servers C5 starts, while they are routed through it. By default (**Auto**) that is
+  whenever an egress rule is on.
 
 It is a small proxy that C5 runs on this machine only (`127.0.0.1`, port `4302`). Nothing
 outside the machine can connect to it, and every program that uses it has its own
@@ -91,10 +92,18 @@ accept that.
 
 ## Routing the agent gateways
 
-Routing OpenClaw, Hermes Agent and PicoClaw through the egress gateway is **off by
-default**. When an administrator turns it on, C5 configures each gateway to use the egress
-gateway for its outgoing connections, and records exactly what it changed, so turning it off
-again restores each gateway as it was.
+**Route agent gateways through C5** (Settings › Tools › Egress gateway) has three choices:
+
+- **Auto** (the default): routes OpenClaw, Hermes Agent and PicoClaw through the egress
+  gateway whenever an egress rule is on (data-loss checks, Network Containment or the
+  offline posture), and leaves them direct when none is. The card says what Auto is doing
+  right now and why.
+- **On**: always route them.
+- **Off**: never route them. Their own network tools then bypass your egress rules.
+
+When routing starts, C5 configures each gateway to use the egress gateway for its outgoing
+connections and records exactly what it changed, so when routing stops each gateway is
+restored as it was. C5 asks before any change that would start or stop routing.
 
 - **OpenClaw** is restarted to pick up the change.
 - **Hermes Agent**: C5 changes the Hermes settings file and notifies you to restart the
@@ -143,7 +152,7 @@ change from anyone else or from a paired phone.
 | --- | --- | --- | --- |
 | **Command network confinement** (`run_command_network_confinement`) | on, off | **on** | Confines commands agents run, as above. |
 | **Egress gateway** (`egress_gateway_mode`) | off, auto, on | **auto** | `auto` runs the gateway while any of your egress rules is on (data-loss checks, Network Containment, the computer-use allowlist or offline). |
-| **Route gateways through the egress gateway** (`egress_gateway_routing`) | off, on | **off** | Routes OpenClaw, Hermes Agent and PicoClaw through it. |
+| **Route agent gateways through C5** (`egress_gateway_routing`) | on, auto, off | **auto** | Routes OpenClaw, Hermes Agent and PicoClaw through it; **auto** routes while an egress rule is on. |
 | **Egress TLS inspection** (`egress_tls_inspection`) | off, auto, on, required | **auto** | Whether HTTPS content is inspected, as above. |
 | **Egress private allowlist** (`egress_gateway_private_allowlist`) | addresses, address ranges, `host:port`, host names, `*.domain` | empty | Private destinations on your network that are allowed, such as an intranet server. |
 | **Egress LLM provider hosts** (`egress_gateway_inference_hosts`) | host names | empty | Extra hosts treated as SI model providers. |

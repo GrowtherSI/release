@@ -112,9 +112,9 @@ A gateway's own tools, such as its web search, browser or command line, run insi
 gateway, so C5's checks on its own tools do not see them. There are two ways to bring them
 under your network rules, both for administrators:
 
-- **Route the gateways through the egress gateway** (off by default). Their tools keep
-  working, and their connections are checked against your rules and recorded. This is the
-  recommended way; see [Egress gateway](/c5/security/egress-gateway), including what it
+- **Route the gateways through the egress gateway** (**Auto** by default: on whenever an
+  egress rule is on). Their tools keep working, and their connections are checked against
+  your rules and recorded. This is the recommended way; see [Egress gateway](/c5/security/egress-gateway), including what it
   cannot cover.
 - **Turn the gateways' network tools off** while an egress rule is on (also off by default).
   C5 then turns off OpenClaw's network tools for every agent, checks that OpenClaw accepts

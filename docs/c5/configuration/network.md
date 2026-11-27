@@ -146,9 +146,10 @@ These connections are not stopped by the offline posture either:
   Neither passes through C5, so the offline posture, the
   [Network Containment allowlist](../security/guardrails.md) and
   the [data-loss checks](../security/data-protection.md) never see what they send, unless
-  an administrator routes the gateways through the
+  the gateways are routed through the
   [egress gateway](../security/egress-gateway.md), which applies offline, the allowlist and
-  the audit trail to their connections. C5 does not remove these tools by default; see
+  the audit trail to their connections. Routing is on **Auto** by default, so it starts by
+  itself whenever one of those rules is on. C5 does not remove these tools by default; see
   [Native network tools](agent-gateways.md#native-network-tools).
 
 `growther update` run by hand still contacts the platform. The three model
