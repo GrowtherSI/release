@@ -1,5 +1,26 @@
 [
   {
+    "tag": "v2026.11.27-v361",
+    "version": "2026.11.27-v361",
+    "build": 361,
+    "releasedAt": "2026-11-26T19:38:21-08:00",
+    "bullets": [
+      {
+        "kind": "new",
+        "text": "You can now choose how C5 routes agent traffic for safety checks."
+      },
+      {
+        "kind": "fixed",
+        "text": "C5 now blocks more container tool connections."
+      },
+      {
+        "kind": "fixed",
+        "text": "C5's Linux protection now starts reliably in more setups."
+      }
+    ],
+    "more": 4
+  },
+  {
     "tag": "v2026.11.26-v359",
     "version": "2026.11.26-v359",
     "build": 359,
