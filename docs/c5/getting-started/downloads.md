@@ -54,6 +54,9 @@ happened.
 On Windows, double-click the program to start it. On Linux, run it from a terminal — your
 file manager will not start it for you.
 
+The first time it runs, C5 copies itself to its own folder and starts from there. Once
+your browser opens C5, you can delete the file you downloaded and the folder you unzipped.
+
 Unzipping on a Mac and double-clicking the program inside **will not work**, which is why
 the Mac download is the `.pkg` instead: macOS treats a double-clicked program file as a
 document and refuses to open it, whoever published it. That is not a sign anything is
