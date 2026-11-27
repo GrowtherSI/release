@@ -9,11 +9,11 @@ Optionally supercharged by **Mothership**, the Growther.si cloud.
 
 <!-- RELEASE-STATUS:START -->
 
-### 📦 Latest stable :: [`v2026.11.27-v362`](dist/c5/v2026.11.27-v362/)
+### 📦 Latest stable :: [`v2026.11.27-v363`](dist/c5/v2026.11.27-v363/)
 
 ![build](dist/c5/badges/build-passing.svg)
 ![tests](dist/c5/badges/tests-passing.svg)
-&nbsp;**client** <code>25,112</code> · **server** <code>36,456</code> tests passing
+&nbsp;**client** <code>25,119</code> · **server** <code>36,479</code> tests passing
 
 <sub>↻ Written automatically by the C5 Release pipeline on every build.</sub>
 
