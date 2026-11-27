@@ -1,5 +1,22 @@
 [
   {
+    "tag": "v2026.11.27-v362",
+    "version": "2026.11.27-v362",
+    "build": 362,
+    "releasedAt": "2026-11-26T22:31:27-08:00",
+    "bullets": [
+      {
+        "kind": "fixed",
+        "text": "Auto routing now stays put when its policy can't be read."
+      },
+      {
+        "kind": "fixed",
+        "text": "On Windows, you can now delete the installer file after running it."
+      }
+    ],
+    "more": 1
+  },
+  {
     "tag": "v2026.11.27-v361",
     "version": "2026.11.27-v361",
     "build": 361,
