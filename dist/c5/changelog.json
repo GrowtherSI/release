@@ -1,5 +1,22 @@
 [
   {
+    "tag": "v2026.11.27-v365",
+    "version": "2026.11.27-v365",
+    "build": 365,
+    "releasedAt": "2026-11-27T11:13:19-08:00",
+    "bullets": [
+      {
+        "kind": "new",
+        "text": "Web traffic from your agent gateway is now checked automatically."
+      },
+      {
+        "kind": "new",
+        "text": "The network settings now show which gateways are fully checked."
+      }
+    ],
+    "more": 3
+  },
+  {
     "tag": "v2026.11.27-v363",
     "version": "2026.11.27-v363",
     "build": 363,
